@@ -7,7 +7,7 @@ import { DatabaseMixin, UserSchema } from './DatabaseMixin.ts';
 export type IgnoreMixin = ReturnType<typeof ignoreMixin>;
 
 export interface IgnorableUserSchema extends UserSchema {
-	ignore: boolean;
+	ignore?: boolean;
 }
 
 export function ignoreMixin(parent: DatabaseMixin) {
@@ -16,7 +16,7 @@ export function ignoreMixin(parent: DatabaseMixin) {
 		protected readonly users!: Collection<IgnorableUserSchema>;
 
 		async ignore({ id }: UserPayload, message: ExtendedMessage) {
-			const user = await this.users.get(id);
+			const user = await this.getOrCreateUser<IgnorableUserSchema>(id);
 			const wasIgnoring = user.ignore;
 
 			user.ignore = !user.ignore;

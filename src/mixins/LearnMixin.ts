@@ -4,17 +4,17 @@ import { DatabaseMixin } from './DatabaseMixin.ts';
 
 type LearnType = string;
 
-export type LearnMixin = ReturnType<typeof learnMixin>;
-
-export interface LearnSchema {
+interface LearnSchema {
 	type: LearnType;
 	nick: string;
 	text: string;
 }
 
+export type LearnMixin = ReturnType<typeof learnMixin>;
+
 export function learnMixin(parent: DatabaseMixin) {
 	return class LearnMixin extends parent {
-		protected readonly _learn = this.db.learn as Collection<LearnSchema>;
+		protected readonly _learn = this.db.collection<LearnSchema>('learn');
 
 		async learn(type: LearnType, nick: string, text: string) {
 			this._learn.push({ type, text, nick });

@@ -26,7 +26,7 @@ export function nicksMixin(parent: DatabaseMixin) {
 				return false;
 			}
 
-			await this.users.set(user.id, { nick });
+			await this.users.save({ id: user.id, nick });
 			this.nickCache.set(user.id, nick);
 			this.log('NICKNAMES', `${user} is "${nick}"`);
 			return true;

@@ -1,92 +1,102 @@
-import {
-	MongoClient,
-	Collection as MongoCollection,
-	Database as MongoDatabase,
-} from 'https://deno.land/x/mongo@v0.7.0/mod.ts';
+import { MongoClient } from 'https://deno.land/x/mongo@v0.7.0/mod.ts';
 
 const client = new MongoClient();
 
 export interface Database {
-	[key: string]: Collection<any>;
+	simple(name: string): SimpleCollection;
+	collection<T>(name: string): Collection<T>;
 }
 
 export interface Collection<T> {
 	find(query: Partial<T>): Promise<T[]>;
-	getOrCreate(id: string): Promise<T>;
-	create(id: string, value: T): Promise<T>;
-	push(value: T): Promise<void>;
-	get(id: string): Promise<T>;
-	set(id: string, value: T): Promise<void>;
+	findOne(query: Partial<T>): Promise<T | null>;
+	create(value: T): Promise<T>;
+	push(value: Omit<T, 'id'>): Promise<T>;
+	get(id: string): Promise<T | null>;
+	save(value: T): Promise<void>;
 	delete(id: string): Promise<void>;
 }
 
-export function connectMongo(mongodbUri: string) {
+export interface SimpleCollection {
+	get(key: string): Promise<string | null>;
+	set(key: string, value: string): Promise<void>;
+	delete(key: string): Promise<void>;
+}
+
+export function connectMongo(mongodbUri: string): Database {
 	client.connectWithUri(mongodbUri);
 	const db = client.database('discord-bots');
 
-	return new Proxy({} as Database, {
-		get(target, prop, receiver) {
-			return typeof prop === 'string'
-				? wrapCollection(db, prop, null)
-				: undefined;
-		},
-	});
-}
-
-function wrapCollection<T>(db: MongoDatabase, name: string, def: T) {
-	const col = db.collection(name);
-
-	function serialize(id: string, value: T) {
-		return {
-			id,
-			value: value && typeof value === 'object' ? { id, ...value } : value,
-		};
-	}
-
-	function deserialize(data: { id: string; value: T | (T & { id: string }) }) {
-		return data.value;
-	}
-
 	return {
-		async find(query: Partial<T>) {
-			return await col.find(query);
+		simple(name: string) {
+			const col = db.collection(name);
+
+			return {
+				async get(key: string) {
+					return col.findOne({ key });
+				},
+
+				async set(key: string, value: string) {
+					const data = { key, value };
+					const result = await col.findOne({ key });
+
+					if (result) {
+						await col.updateOne({ key }, { $set: data });
+					} else {
+						await col.insertOne(data);
+					}
+				},
+
+				async delete(key: string): Promise<void> {
+					await col.deleteOne({ key });
+				},
+			} as SimpleCollection;
 		},
 
-		async getOrCreate(id: string): Promise<T> {
-			const result = await this.get(id);
-			return result || this.create(id, def);
-		},
+		collection<T extends { id: string }>(name: string) {
+			const col = db.collection(name);
 
-		async create(id: string, value: T): Promise<T> {
-			const data = serialize(id, value);
-			await col.insertOne(data);
-			return deserialize(data);
-		},
+			return {
+				async find(query: Partial<T>) {
+					return await col.find(query);
+				},
 
-		async push(value: T) {
-			await this.create(String(Math.random()), value);
-		},
+				async findOne(query: Partial<T>) {
+					return await col.findOne(query);
+				},
 
-		async get(id: string): Promise<T> {
-			const result = await col.findOne({ id });
-			return result && deserialize(result);
-		},
+				async create(value: T): Promise<T> {
+					await col.insertOne(value);
+					return value;
+				},
 
-		async set(id: string, value: T): Promise<void> {
-			const data = serialize(id, value);
-			const result = await col.findOne({ id });
+				async push(value: Omit<T, 'id'>) {
+					const data: T = { ...value, id: String(Math.random()) } as any;
+					await this.create(data);
+					return data;
+				},
 
-			if (result) {
-				await col.updateOne({ id }, { $set: data });
-			} else {
-				await col.insertOne(data);
-			}
-		},
+				async get(id: string): Promise<T> {
+					return col.findOne({ id });
+				},
 
-		async delete(id: string): Promise<void> {
-			await col.deleteOne({ id });
+				async save(value: T) {
+					const { id } = value;
+					const result = await col.findOne({ id });
+
+					if (result) {
+						await col.updateOne({ id }, { $set: value });
+					} else {
+						await col.insertOne(value);
+					}
+				},
+
+				async delete(id: string): Promise<void> {
+					await col.deleteOne({ id });
+				},
+			} as Collection<T>;
 		},
-	} as Collection<T>;
+	};
 }
 
 // function createDb() {

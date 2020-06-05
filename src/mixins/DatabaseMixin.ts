@@ -5,13 +5,9 @@ export type DatabaseMixin = ReturnType<typeof databaseMixin>;
 
 export interface UserSchema {
 	id: string;
-	nick: string;
+	nick?: string;
 }
 
-export interface MemorySchema {
-	id: string;
-	value: string;
-}
 export interface DatabaseMixinOptions extends BotOptions {
 	db: Database;
 }
@@ -22,11 +18,19 @@ export function databaseMixin(parent: typeof Bot) {
 			return this.options.db;
 		}
 
-		protected readonly users = this.db.users as Collection<UserSchema>;
-		protected readonly memory = this.db.memory as Collection<MemorySchema>;
+		protected readonly users = this.db.collection<UserSchema>('users');
+		protected readonly memory = this.db.simple('memory');
 
 		constructor(protected readonly options: DatabaseMixinOptions) {
 			super(options);
+		}
+
+		protected async getOrCreateUser<T extends UserSchema>(
+			id: string,
+		): Promise<T> {
+			const col = this.users;
+			const result = (await col.get(id)) || (await col.create({ id }));
+			return result as T;
 		}
 	};
 }
