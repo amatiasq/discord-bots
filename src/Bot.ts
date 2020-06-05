@@ -1,4 +1,3 @@
-// import { Database } from 'https://deno.land/x/mongo@v0.7.0/mod.ts';
 import { Message } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/structures/message.ts';
 import { UserPayload } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/types/guild.ts';
 
@@ -13,7 +12,6 @@ export interface BotOptions {
 	prefixes: string[];
 	isHearBotEnabled?: boolean;
 	isHearSelfEnabled?: boolean;
-	// db: Database;
 	unhandled?: (bot: Bot, message: ExtendedMessage) => boolean | void;
 }
 
@@ -52,10 +50,6 @@ export class Bot {
 	get prefixes() {
 		return this.options.prefixes;
 	}
-
-	// protected get db() {
-	// 	return this.options.db;
-	// }
 
 	protected get unhandled() {
 		return this.options.unhandled || noop;

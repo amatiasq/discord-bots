@@ -1,6 +1,8 @@
-import { ExtendedMessage } from './../discord/Message.ts';
 import { UserPayload } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/types/guild.ts';
-import { DatabaseMixin, DbUsers, UserSchema } from './DatabaseMixin.ts';
+
+import { ExtendedMessage } from '../discord/Message.ts';
+import { Collection } from '../mongodb.ts';
+import { DatabaseMixin, UserSchema } from './DatabaseMixin.ts';
 
 export type IgnoreMixin = ReturnType<typeof ignoreMixin>;
 
@@ -8,15 +10,13 @@ export interface IgnorableUserSchema extends UserSchema {
 	ignore: boolean;
 }
 
-export type DbIgnorableUsers = DbUsers<IgnorableUserSchema>;
-
 export function ignoreMixin(parent: DatabaseMixin) {
 	return class IgnoreMixin extends parent {
 		private readonly ignoreCache = new Map<string, boolean>();
-		protected readonly users!: DbIgnorableUsers;
+		protected readonly users!: Collection<IgnorableUserSchema>;
 
 		async ignore({ id }: UserPayload, message: ExtendedMessage) {
-			const user = await this.users!.get(id);
+			const user = await this.users.get(id);
 			const wasIgnoring = user.ignore;
 
 			user.ignore = !user.ignore;

@@ -4,9 +4,10 @@ import { Bot } from './Bot.ts';
 import { connectDiscord } from './discord.ts';
 import { mixin } from './mixin.ts';
 import { databaseMixin, DatabaseMixinOptions } from './mixins/DatabaseMixin.ts';
+import { ignoreMixin } from './mixins/IgnoreMixin.ts';
+import { learnMixin } from './mixins/LearnMixin.ts';
 import { messagesMixin, MessagesMixinOptions } from './mixins/MessagesMixin.ts';
 import { nicksMixin } from './mixins/NicksMixin.ts';
-import { ignoreMixin } from './mixins/IgnoreMixin.ts';
 import { connectMongo } from './mongodb.ts';
 
 const env = config();
@@ -17,9 +18,10 @@ const MartiBot = mixin(Bot, [
 	messagesMixin,
 	nicksMixin,
 	ignoreMixin,
+	learnMixin,
 ]);
 
-const marti = new MartiBot({
+const marti = new MartiBot<MartiBotOptions>({
 	id: '718001826200420415',
 	prefixes: ['marti'],
 	isHearSelfEnabled: false,
@@ -34,9 +36,10 @@ const marti = new MartiBot({
 	unhandled(bot, message) {
 		bot.log(`UNHANDLED`, message.clean);
 	},
-} as MartiBotOptions);
+});
 
-// const db = ;
+marti.getLearnt;
+
 const discord = connectDiscord(marti.id, env.MARTI_TOKEN, x =>
 	marti.onMessage(x),
 );
