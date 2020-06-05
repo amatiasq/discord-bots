@@ -1,6 +1,6 @@
 import { config } from 'https://deno.land/x/dotenv/mod.ts';
 
-import { Bot } from './Bot.ts';
+import { Bot, BotOptions } from './Bot.ts';
 import { connectDiscord } from './discord.ts';
 import { mixin } from './mixin.ts';
 import { databaseMixin, DatabaseMixinOptions } from './mixins/DatabaseMixin.ts';
@@ -21,7 +21,7 @@ const MartiBot = mixin(Bot, [
 	learnMixin,
 ]);
 
-const marti = new MartiBot<MartiBotOptions>({
+const marti = new MartiBot({
 	id: '718001826200420415',
 	prefixes: ['marti'],
 	isHearSelfEnabled: false,
@@ -39,6 +39,7 @@ const marti = new MartiBot<MartiBotOptions>({
 });
 
 marti.getLearnt;
+marti.message;
 
 const discord = connectDiscord(marti.id, env.MARTI_TOKEN, x =>
 	marti.onMessage(x),
