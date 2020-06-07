@@ -1,10 +1,12 @@
-import { Collection } from '../mongodb.ts';
+import { Bot } from '../Bot.ts';
+import { Merge } from '../mixin.ts';
 import { randomItem } from '../util/array.ts';
 import { DatabaseMixin } from './DatabaseMixin.ts';
 
 type LearnType = string;
 
 interface LearnSchema {
+	id: string;
 	type: LearnType;
 	nick: string;
 	text: string;
@@ -12,7 +14,7 @@ interface LearnSchema {
 
 export type LearnMixin = ReturnType<typeof learnMixin>;
 
-export function learnMixin(parent: DatabaseMixin) {
+export function learnMixin(parent: Merge<typeof Bot, DatabaseMixin>) {
 	return class LearnMixin extends parent {
 		protected readonly _learn = this.db.collection<LearnSchema>('learn');
 

@@ -27,6 +27,8 @@ type Command = (
 ) => Promise<any>;
 
 export class Bot {
+	constructor(protected readonly options: BotOptions) {}
+
 	protected _middleware: Middleware[] = [];
 	protected _commands = new Map<string, Command>();
 	protected _alias = new Map<string, string>();
@@ -54,8 +56,6 @@ export class Bot {
 	protected get unhandled() {
 		return this.options.unhandled || noop;
 	}
-
-	constructor(protected readonly options: BotOptions) {}
 
 	is(user: UserPayload) {
 		return user.id === this.id;

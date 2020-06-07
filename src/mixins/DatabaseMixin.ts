@@ -14,7 +14,7 @@ export interface DatabaseMixinOptions extends BotOptions {
 
 export function databaseMixin(parent: typeof Bot) {
 	return class DatabaseMixin extends parent {
-		protected get db() {
+		get db() {
 			return this.options.db;
 		}
 
