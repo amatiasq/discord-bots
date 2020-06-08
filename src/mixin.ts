@@ -1,7 +1,20 @@
 type Mixin<T> = (base: any) => T;
 type Ctor<T = any, U = any> = { new (arg: U): T };
 
-export type Merge<
+export type Applied<
+	T0 extends Ctor,
+	T1 extends Ctor = Ctor<{}, {}>,
+	T2 extends Ctor = Ctor<{}, {}>,
+	T3 extends Ctor = Ctor<{}, {}>,
+	T4 extends Ctor = Ctor<{}, {}>,
+	T5 extends Ctor = Ctor<{}, {}>,
+	T6 extends Ctor = Ctor<{}, {}>,
+	T7 extends Ctor = Ctor<{}, {}>,
+	T8 extends Ctor = Ctor<{}, {}>,
+	T9 extends Ctor = Ctor<{}, {}>
+> = InstanceType<Apply<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>>;
+
+export type Apply<
 	T0 extends Ctor,
 	T1 extends Ctor = Ctor<{}, {}>,
 	T2 extends Ctor = Ctor<{}, {}>,
@@ -89,7 +102,7 @@ export function mixin<
 	base: T0,
 	mixins: [Mixin<T1>, Mixin<T2>],
 ): {
-	new (args: T1A[0] & T2A[0]): T1I & T2I;
+	new (args: T1A[0] & T2A[0]): T0I & T1I & T2I;
 };
 
 export function mixin<
@@ -109,7 +122,7 @@ export function mixin<
 	base: T0,
 	mixins: [Mixin<T1>, Mixin<T2>, Mixin<T3>],
 ): {
-	new (args: T1A[0] & T2A[0] & T3A[0]): T1I & T2I & T3I;
+	new (args: T1A[0] & T2A[0] & T3A[0]): T0I & T1I & T2I & T3I;
 };
 
 export function mixin<
@@ -132,7 +145,7 @@ export function mixin<
 	base: T0,
 	mixins: [Mixin<T1>, Mixin<T2>, Mixin<T3>, Mixin<T4>],
 ): {
-	new (args: T1A[0] & T2A[0] & T3A[0] & T4A[0]): T1I & T2I & T3I & T4I;
+	new (args: T1A[0] & T2A[0] & T3A[0] & T4A[0]): T0I & T1I & T2I & T3I & T4I;
 };
 
 export function mixin<
@@ -238,7 +251,7 @@ export function mixin<
 ): {
 	new (
 		args: T1A[0] & T2A[0] & T3A[0] & T4A[0] & T5A[0] & T6A[0] & T7A[0],
-	): T1I & T2I & T3I & T4I & T5I & T6I & T7I;
+	): T0I & T1I & T2I & T3I & T4I & T5I & T6I & T7I;
 };
 
 export function mixin<
@@ -284,7 +297,7 @@ export function mixin<
 ): {
 	new (
 		args: T1A[0] & T2A[0] & T3A[0] & T4A[0] & T5A[0] & T6A[0] & T7A[0] & T8A[0],
-	): T1I & T2I & T3I & T4I & T5I & T6I & T7I & T8I;
+	): T0I & T1I & T2I & T3I & T4I & T5I & T6I & T7I & T8I;
 };
 
 export function mixin<
@@ -342,7 +355,7 @@ export function mixin<
 			T7A[0] &
 			T8A[0] &
 			T9A[0],
-	): T1I & T2I & T3I & T4I & T5I & T6I & T7I & T8I & T9I;
+	): T0I & T1I & T2I & T3I & T4I & T5I & T6I & T7I & T8I & T9I;
 };
 
 export function mixin<T, U>(base: T, mixins: Mixin<U> | Array<Mixin<any>>) {

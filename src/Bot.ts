@@ -18,13 +18,13 @@ export interface BotOptions {
 	unhandled?: (bot: Bot, message: ExtendedMessage) => boolean | void;
 }
 
-type Middleware = (
-	bot: Bot,
+type Middleware<T extends Bot> = (
+	bot: T,
 	message: ExtendedMessage,
 ) => Promise<boolean> | boolean;
 
-type Command = (
-	bot: Bot,
+type Command<T extends Bot> = (
+	bot: T,
 	message: ExtendedMessage,
 	text: string,
 ) => Promise<any>;
@@ -32,8 +32,8 @@ type Command = (
 export class Bot {
 	constructor(protected readonly options: BotOptions) {}
 
-	protected _middleware: Middleware[] = [];
-	protected _commands = new Map<string, Command>();
+	protected _middleware: Array<Middleware<Bot>> = [];
+	protected _commands = new Map<string, Command<Bot>>();
 	protected _alias = new Map<string, string>();
 
 	get id() {
@@ -69,12 +69,12 @@ export class Bot {
 		console.log(`[${upper}][${type}]`, ...message);
 	}
 
-	middleware(handler: Middleware) {
-		this._middleware.push(handler);
+	middleware(handler: Middleware<this>) {
+		this._middleware.push(handler as Middleware<Bot>);
 	}
 
-	command(key: string, action: Command) {
-		this._commands.set(key, action);
+	command(key: string, action: Command<this>) {
+		this._commands.set(key, action as Command<Bot>);
 		this.cleanCommands();
 	}
 
@@ -180,5 +180,17 @@ export class Bot {
 		}
 
 		return false;
+	}
+
+	help() {
+		const aliases = [...this._alias.keys()];
+		const commands = [...this._commands.keys()];
+
+		const list = commands.map(command => {
+			const alias = aliases.filter(alias => this._alias.get(alias) === command);
+			return alias.length ? `${command} (${alias.join(', ')})` : command;
+		});
+
+		return ` - ${list.join('\n - ')}`;
 	}
 }

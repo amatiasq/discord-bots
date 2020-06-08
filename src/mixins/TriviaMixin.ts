@@ -1,7 +1,7 @@
 import { Bot } from '../Bot.ts';
 import { ExtendedMessage } from '../discord/Message.ts';
 import { ExtendedUser } from '../discord/User.ts';
-import { Merge } from '../mixin.ts';
+import { Apply } from '../mixin.ts';
 import { randomItem } from '../util/array.ts';
 import { random } from '../util/math.ts';
 import { DatabaseMixin, DatabaseMixinOptions } from './DatabaseMixin.ts';
@@ -39,7 +39,7 @@ export interface TriviaMixinOptions
 export type TriviaMixin = ReturnType<typeof triviaMixin>;
 
 export function triviaMixin(
-	parent: Merge<typeof Bot, DatabaseMixin, MessagesMixin, PointsMixin>,
+	parent: Apply<typeof Bot, DatabaseMixin, MessagesMixin, PointsMixin>,
 ) {
 	return class TriviaMixin extends parent {
 		protected readonly _trivia = this.db.collection<TriviaSchema>('trivia');

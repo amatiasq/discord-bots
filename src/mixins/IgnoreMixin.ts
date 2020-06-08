@@ -2,7 +2,7 @@ import { UserPayload } from 'https://raw.githubusercontent.com/Skillz4Killz/Disc
 
 import { Bot } from '../Bot.ts';
 import { ExtendedMessage } from '../discord/Message.ts';
-import { Merge } from '../mixin.ts';
+import { Apply } from '../mixin.ts';
 import { Collection } from '../mongodb.ts';
 import { DatabaseMixin, UserSchema } from './DatabaseMixin.ts';
 
@@ -12,13 +12,13 @@ export interface IgnorableUserSchema extends UserSchema {
 	ignore?: boolean;
 }
 
-export function ignoreMixin(parent: Merge<typeof Bot, DatabaseMixin>) {
+export function ignoreMixin(parent: Apply<typeof Bot, DatabaseMixin>) {
 	return class IgnoreMixin extends parent {
 		private readonly ignoreCache = new Map<string, boolean>();
 		protected readonly users!: Collection<IgnorableUserSchema>;
 
 		async ignore({ id }: UserPayload, message: ExtendedMessage) {
-			const user = await this.getOrCreateUser<IgnorableUserSchema>(id);
+			const user = await this.getUser<IgnorableUserSchema>(id);
 			const wasIgnoring = user.ignore;
 
 			user.ignore = !user.ignore;
@@ -33,7 +33,7 @@ export function ignoreMixin(parent: Merge<typeof Bot, DatabaseMixin>) {
 
 		async isIgnoring({ id }: UserPayload) {
 			if (!this.ignoreCache.has(id)) {
-				const user = await this.getOrCreateUser<IgnorableUserSchema>(id);
+				const user = await this.getUser<IgnorableUserSchema>(id);
 				this.ignoreCache.set(id, user.ignore || false);
 			}
 

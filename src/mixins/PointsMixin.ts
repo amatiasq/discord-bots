@@ -1,6 +1,6 @@
 import { Bot } from '../Bot.ts';
 import { ExtendedUser } from '../discord/User.ts';
-import { Merge } from '../mixin.ts';
+import { Apply } from '../mixin.ts';
 import { DatabaseMixin } from './DatabaseMixin.ts';
 
 const MILLISECONDS_IN_SECONDS = 1000;
@@ -19,7 +19,7 @@ interface PointsSchema {
 
 export type PointsMixin = ReturnType<typeof pointsMixin>;
 
-export function pointsMixin(parent: Merge<typeof Bot, DatabaseMixin>) {
+export function pointsMixin(parent: Apply<typeof Bot, DatabaseMixin>) {
 	return class PointsMixin extends parent {
 		protected readonly points = this.db.collection<PointsSchema>('points');
 

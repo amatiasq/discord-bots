@@ -1,12 +1,7 @@
-import { Member } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/structures/member.ts';
 import { random } from './math.ts';
 
 export function array(length: number) {
 	return new Array(length).fill(null);
-}
-
-export function mention(user: Member) {
-	return String(user).replace(/^<@/, '<@!');
 }
 
 export function randomItem<T>(list: T[]) {

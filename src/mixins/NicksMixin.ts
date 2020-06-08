@@ -1,11 +1,11 @@
 import { Bot } from '../Bot.ts';
 import { ExtendedUser } from '../discord/User.ts';
-import { Merge } from '../mixin.ts';
+import { Apply } from '../mixin.ts';
 import { DatabaseMixin } from './DatabaseMixin.ts';
 
 export type NicksMixin = ReturnType<typeof nicksMixin>;
 
-export function nicksMixin(parent: Merge<typeof Bot, DatabaseMixin>) {
+export function nicksMixin(parent: Apply<typeof Bot, DatabaseMixin>) {
 	return class NicksMixin extends parent {
 		protected readonly nickCache = new Map<string, string>();
 

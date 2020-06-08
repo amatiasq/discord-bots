@@ -1,1 +1,1 @@
-import './src/Marti.ts';
+import './bots/Marti.ts';

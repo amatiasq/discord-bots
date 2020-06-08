@@ -1,6 +1,6 @@
 import { Bot, BotOptions } from '../Bot.ts';
+import { Apply } from '../mixin.ts';
 import { Database } from '../mongodb.ts';
-import { Merge } from '../mixin.ts';
 
 export type DatabaseMixin = ReturnType<typeof databaseMixin>;
 
@@ -13,7 +13,7 @@ export interface DatabaseMixinOptions extends BotOptions {
 	db: Database;
 }
 
-export function databaseMixin(parent: Merge<typeof Bot>) {
+export function databaseMixin(parent: Apply<typeof Bot>) {
 	return class DatabaseMixin extends parent {
 		get db() {
 			return this.options.db;
@@ -26,12 +26,17 @@ export function databaseMixin(parent: Merge<typeof Bot>) {
 			super(options);
 		}
 
-		protected async getOrCreateUser<T extends UserSchema>(
+		async getUser<T extends UserSchema>(
 			id: string,
-		): Promise<T> {
+		): Promise<T & { save(): Promise<void> }> {
 			const col = this.users;
-			const result = (await col.get(id)) || (await col.create({ id }));
-			return result as T;
+			const result: T =
+				(await col.col.findOne({ id })) || (await col.col.insertOne({ id }));
+
+			return {
+				...result,
+				save: () => col.col.updateOne({ id }, this) as Promise<never>,
+			};
 		}
 	};
 }
