@@ -93,7 +93,10 @@ function clearMessage(message: Message, bot: Bot | null) {
 		}
 	}
 
-	const botMention = message.mentions().find(mention => bot.is(mention.user));
+	const botMention = message
+		.mentions()
+		.filter(Boolean)
+		.find(mention => bot.is(mention.user));
 
 	if (botMention) {
 		return remove(message.content, wrapUser(botMention.user));

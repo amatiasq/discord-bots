@@ -1,4 +1,4 @@
-import { TellUserSchema } from './../chemas/TellUserSchema.ts';
+import { TellUserSchema } from './../schemas/TellUserSchema.ts';
 import { DatabaseMixin } from '../../src/mixins/DatabaseMixin.ts';
 import { Applied } from '../../src/mixin.ts';
 import { Bot } from '../../src/Bot.ts';

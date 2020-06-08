@@ -9,5 +9,6 @@ export default async function (
 ) {
 	const poll = await message.channel.send(text);
 	await poll.react('✅');
-	return poll.react('⛔');
+	await poll.react('⛔');
+	return true;
 }

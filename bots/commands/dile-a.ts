@@ -4,7 +4,7 @@ import { Applied } from '../../src/mixin.ts';
 import { DatabaseMixin } from '../../src/mixins/DatabaseMixin.ts';
 import { mention } from '../../src/util/discord.ts';
 import { removeStart } from '../../src/util/string.ts';
-import { TellUserSchema } from '../chemas/TellUserSchema.ts';
+import { TellUserSchema } from '../schemas/TellUserSchema.ts';
 
 export default async function (
 	bot: Applied<typeof Bot, DatabaseMixin>,
