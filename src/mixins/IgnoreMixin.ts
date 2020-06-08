@@ -17,18 +17,17 @@ export function ignoreMixin(parent: Apply<typeof Bot, DatabaseMixin>) {
 		private readonly ignoreCache = new Map<string, boolean>();
 		protected readonly users!: Collection<IgnorableUserSchema>;
 
-		async ignore({ id }: UserPayload, message: ExtendedMessage) {
+		async ignore({ id }: UserPayload) {
 			const user = await this.getUser<IgnorableUserSchema>(id);
-			const wasIgnoring = user.ignore;
+			// const wasIgnoring = user.ignore;
 
 			user.ignore = !user.ignore;
 			this.ignoreCache.set(user.id, user.ignore);
 
-			await this.users.save(user);
+			console.log(user);
 
-			if (message) {
-				message.reply(wasIgnoring ? 'vale, le haré caso' : 'eso está hecho');
-			}
+			await this.users.save(user);
+			return user.ignore;
 		}
 
 		async isIgnoring({ id }: UserPayload) {

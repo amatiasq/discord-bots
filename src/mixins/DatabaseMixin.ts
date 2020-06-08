@@ -30,11 +30,13 @@ export function databaseMixin(parent: Apply<typeof Bot>) {
 			id: string,
 		): Promise<T & { save(): Promise<void> }> {
 			const col = this.users;
-			const result: T =
+			const result =
 				(await col.col.findOne({ id })) || (await col.col.insertOne({ id }));
 
+			const { _id, ...user } = result;
+
 			return {
-				...result,
+				...(user as T),
 				save: () => col.col.updateOne({ id }, this) as Promise<never>,
 			};
 		}

@@ -30,6 +30,5 @@ export default async function (
 	}
 
 	await user.save();
-
 	return message.reply(`ok, si veo a ${target} se lo diré`);
 }

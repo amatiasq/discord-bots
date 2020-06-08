@@ -19,5 +19,6 @@ export default async function (
 		return;
 	}
 
-	return bot.ignore(target.user, message);
+	const isIgnoring = await bot.ignore(target.user);
+	return message.reply(isIgnoring ? 'eso está hecho' : 'vale, le haré caso');
 }

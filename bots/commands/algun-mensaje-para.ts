@@ -22,8 +22,7 @@ export default async function (
 
 	if (tell.length === 1) {
 		const [{ author, text }] = tell;
-		await message.reply(`hay un mensaje de ${author}: ${text}`);
-		return;
+		return message.reply(`hay un mensaje de ${author}: ${text}`);
 	}
 
 	const list = tell
