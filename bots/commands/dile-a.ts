@@ -2,7 +2,7 @@ import { Bot } from '../../src/Bot.ts';
 import { ExtendedMessage } from '../../src/discord/Message.ts';
 import { Applied } from '../../src/mixin.ts';
 import { DatabaseMixin } from '../../src/mixins/DatabaseMixin.ts';
-import { mention } from '../../src/util/discord.ts';
+import { mention as mentionUser } from '../../src/util/discord.ts';
 import { removeStart } from '../../src/util/string.ts';
 import { TellUserSchema } from '../schemas/TellUserSchema.ts';
 
@@ -11,16 +11,19 @@ export default async function (
 	message: ExtendedMessage,
 	text: string,
 ) {
-	const target = message.firstMention;
+	const mention = message.firstMention;
 
-	if (!target) {
+	if (!mention) {
 		return;
 	}
 
-	const user = await bot.getUser<TellUserSchema>(target.user.id);
+	const user = await bot.getUser<TellUserSchema>(mention.user.id);
 	const entry = {
 		author: message.author.toString(),
-		text: removeStart(removeStart(text, String(target.user)), mention(target)),
+		text: removeStart(
+			removeStart(text, String(mention.user)),
+			mentionUser(mention),
+		),
 	};
 
 	if (!user.tell) {
@@ -30,5 +33,5 @@ export default async function (
 	}
 
 	await user.save();
-	return message.reply(`ok, si veo a ${target} se lo diré`);
+	return message.reply(`ok, si veo a ${mention.user} se lo diré`);
 }

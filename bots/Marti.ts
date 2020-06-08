@@ -10,7 +10,7 @@ import { nicksMixin } from '../src/mixins/NicksMixin.ts';
 import { pointsMixin } from '../src/mixins/PointsMixin.ts';
 import { triviaMixin } from '../src/mixins/TriviaMixin.ts';
 import { connectMongo } from '../src/mongodb.ts';
-import { applyCommands } from './commands/index.ts';
+import { applyCommands, applyMiddleware } from './util.ts';
 
 const env = config();
 
@@ -42,6 +42,7 @@ const marti = new MartiBot({
 	},
 });
 
+applyMiddleware(marti);
 applyCommands(marti);
 
 marti.connect();

@@ -65,7 +65,7 @@ export class Bot {
 	}
 
 	log(type: string, ...message: stringish[]) {
-		const upper = padLeft(this.name.toUpperCase(), 6, ' ');
+		const upper = padLeft(this.name.toUpperCase(), 5, ' ');
 		console.log(`[${upper}][${type}]`, ...message);
 	}
 
