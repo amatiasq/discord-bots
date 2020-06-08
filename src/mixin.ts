@@ -1,17 +1,17 @@
 type Mixin<T> = (base: any) => T;
-type Ctor<T = any> = { new (arg: any): T };
+type Ctor<T = any, U = any> = { new (arg: U): T };
 
 export type Merge<
 	T0 extends Ctor,
-	T1 extends Ctor = Ctor<{}>,
-	T2 extends Ctor = Ctor<{}>,
-	T3 extends Ctor = Ctor<{}>,
-	T4 extends Ctor = Ctor<{}>,
-	T5 extends Ctor = Ctor<{}>,
-	T6 extends Ctor = Ctor<{}>,
-	T7 extends Ctor = Ctor<{}>,
-	T8 extends Ctor = Ctor<{}>,
-	T9 extends Ctor = Ctor<{}>,
+	T1 extends Ctor = Ctor<{}, {}>,
+	T2 extends Ctor = Ctor<{}, {}>,
+	T3 extends Ctor = Ctor<{}, {}>,
+	T4 extends Ctor = Ctor<{}, {}>,
+	T5 extends Ctor = Ctor<{}, {}>,
+	T6 extends Ctor = Ctor<{}, {}>,
+	T7 extends Ctor = Ctor<{}, {}>,
+	T8 extends Ctor = Ctor<{}, {}>,
+	T9 extends Ctor = Ctor<{}, {}>,
 	T0I = InstanceType<T0>,
 	T1I extends T0I = InstanceType<T1>,
 	T2I extends T0I = InstanceType<T2>,
@@ -22,7 +22,7 @@ export type Merge<
 	T7I extends T0I = InstanceType<T7>,
 	T8I extends T0I = InstanceType<T8>,
 	T9I extends T0I = InstanceType<T9>,
-	T0A extends [{}] = ConstructorParameters<T0>,
+	T0A extends [any] = ConstructorParameters<T0>,
 	T1A extends [T0A[0]] = ConstructorParameters<T1>,
 	T2A extends [T0A[0]] = ConstructorParameters<T2>,
 	T3A extends [T0A[0]] = ConstructorParameters<T3>,
@@ -34,7 +34,8 @@ export type Merge<
 	T9A extends [T0A[0]] = ConstructorParameters<T9>
 > = {
 	new (
-		args: T1A[0] &
+		args: T0A[0] &
+			T1A[0] &
 			T2A[0] &
 			T3A[0] &
 			T4A[0] &
@@ -43,7 +44,7 @@ export type Merge<
 			T7A[0] &
 			T8A[0] &
 			T9A[0],
-	): T1I & T2I & T3I & T4I & T5I & T6I & T7I & T8I & T9I;
+	): T0I & T1I & T2I & T3I & T4I & T5I & T6I & T7I & T8I & T9I;
 };
 
 export function mixin<

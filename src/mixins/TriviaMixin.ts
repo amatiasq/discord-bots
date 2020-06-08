@@ -30,10 +30,10 @@ interface Question {
 export interface TriviaMixinOptions
 	extends DatabaseMixinOptions,
 		MessagesMixinOptions {
-	MAX_ANSWERS: number;
-	MIN_ANSWERS: number;
-	MAX_SECONDS: number;
-	MIN_SECONDS: number;
+	MAX_ANSWERS?: number;
+	MIN_ANSWERS?: number;
+	MAX_SECONDS?: number;
+	MIN_SECONDS?: number;
 }
 
 export type TriviaMixin = ReturnType<typeof triviaMixin>;
@@ -63,8 +63,6 @@ export function triviaMixin(
 		constructor(protected readonly options: TriviaMixinOptions) {
 			super(options);
 		}
-
-		// TRIVIA
 
 		async trivia(
 			message: ExtendedMessage,

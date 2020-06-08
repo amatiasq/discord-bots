@@ -1,5 +1,6 @@
 import { Bot, BotOptions } from '../Bot.ts';
-import { Collection, Database } from '../mongodb.ts';
+import { Database } from '../mongodb.ts';
+import { Merge } from '../mixin.ts';
 
 export type DatabaseMixin = ReturnType<typeof databaseMixin>;
 
@@ -12,7 +13,7 @@ export interface DatabaseMixinOptions extends BotOptions {
 	db: Database;
 }
 
-export function databaseMixin(parent: typeof Bot) {
+export function databaseMixin(parent: Merge<typeof Bot>) {
 	return class DatabaseMixin extends parent {
 		get db() {
 			return this.options.db;

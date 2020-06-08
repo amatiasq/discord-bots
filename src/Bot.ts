@@ -1,5 +1,7 @@
+import Client from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/module/client.ts';
 import { Message } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/structures/message.ts';
 import { UserPayload } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/types/guild.ts';
+import { Intents } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/types/options.ts';
 
 import { ExtendedMessage, wrapMessage } from './discord/Message.ts';
 import { logOnce } from './util/log.ts';
@@ -9,6 +11,7 @@ const noop = () => {};
 
 export interface BotOptions {
 	id: string;
+	token: string;
 	prefixes: string[];
 	isHearBotEnabled?: boolean;
 	isHearSelfEnabled?: boolean;
@@ -84,6 +87,21 @@ export class Bot {
 		for (const [command] of this._commands) {
 			this._alias.delete(command);
 		}
+	}
+
+	connect() {
+		return Client({
+			token: this.options.token,
+			intents: [
+				Intents.GUILDS,
+				Intents.GUILD_MESSAGES,
+				Intents.GUILD_MESSAGE_REACTIONS,
+			],
+			eventHandlers: {
+				ready: () => this.log('Ready!'),
+				messageCreate: x => this.onMessage(x),
+			},
+		});
 	}
 
 	onMessage(raw: Message) {

@@ -3,7 +3,6 @@ import { pointsMixin } from './mixins/PointsMixin.ts';
 import { config } from 'https://deno.land/x/dotenv/mod.ts';
 
 import { Bot } from './Bot.ts';
-import { connectDiscord } from './discord.ts';
 import { mixin } from './mixin.ts';
 import { databaseMixin } from './mixins/DatabaseMixin.ts';
 import { ignoreMixin } from './mixins/IgnoreMixin.ts';
@@ -26,6 +25,7 @@ const MartiBot = mixin(Bot, [
 
 const marti = new MartiBot({
 	id: '718001826200420415',
+	token: env.MARTI_TOKEN,
 	prefixes: ['marti'],
 	isHearSelfEnabled: false,
 	isHearBotEnabled: true,
@@ -41,9 +41,4 @@ const marti = new MartiBot({
 	},
 });
 
-marti.getLearnt;
-marti.message;
-
-const discord = connectDiscord(marti.id, env.MARTI_TOKEN, x =>
-	marti.onMessage(x),
-);
+marti.connect();
