@@ -28,5 +28,5 @@ export default async function (
 
 	user.tell = [];
 	user.save();
-	return true;
+	return false;
 }

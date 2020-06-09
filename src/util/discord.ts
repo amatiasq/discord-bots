@@ -1,5 +1,5 @@
-import { Member } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/structures/member.ts';
+import { ExtendedUser } from '../discord/User.ts';
 
-export function mention(user: Member) {
-	return String(user).replace(/^<@/, '<@!');
+export function mention(user: ExtendedUser) {
+	return String(user).replace(/^<@([^!])/, '<@!$1');
 }

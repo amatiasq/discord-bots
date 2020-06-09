@@ -37,7 +37,9 @@ export function databaseMixin(parent: Apply<typeof Bot>) {
 
 			return {
 				...(user as T),
-				save: () => col.col.updateOne({ id }, this) as Promise<never>,
+				save() {
+					return col.col.updateOne({ id }, this) as Promise<never>;
+				},
 			};
 		}
 	};

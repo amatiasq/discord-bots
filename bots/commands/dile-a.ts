@@ -20,10 +20,12 @@ export default async function (
 	const user = await bot.getUser<TellUserSchema>(mention.user.id);
 	const entry = {
 		author: message.author.toString(),
-		text: removeStart(
-			removeStart(text, String(mention.user)),
-			mentionUser(mention),
-		),
+		text: removeStart(text, String(mention.user)),
+
+		// text: removeStart(
+		// 	removeStart(text, String(mention.user)),
+		// 	mentionUser(mention.user),
+		// ),
 	};
 
 	if (!user.tell) {
