@@ -2,7 +2,6 @@ import { Bot } from '../../src/Bot.ts';
 import { ExtendedMessage } from '../../src/discord/Message.ts';
 import { Applied } from '../../src/mixin.ts';
 import { DatabaseMixin } from '../../src/mixins/DatabaseMixin.ts';
-import { mention as mentionUser } from '../../src/util/discord.ts';
 import { removeStart } from '../../src/util/string.ts';
 import { TellUserSchema } from '../schemas/TellUserSchema.ts';
 
