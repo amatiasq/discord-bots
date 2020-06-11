@@ -1,8 +1,8 @@
-import { Bot } from '../src/Bot.ts';
-import { Applied } from '../src/mixin.ts';
-import { DatabaseMixin } from '../src/mixins/DatabaseMixin.ts';
-import { IgnoreMixin } from '../src/mixins/IgnoreMixin.ts';
-import { NicksMixin } from '../src/mixins/NicksMixin.ts';
+import { Bot } from '../discord-bot/Bot.ts';
+import { Applied } from '../discord-bot/mixin.ts';
+import { DatabaseMixin } from '../discord-bot/mixins/DatabaseMixin.ts';
+import { IgnoreMixin } from '../discord-bot/mixins/IgnoreMixin.ts';
+import { NicksMixin } from '../discord-bot/mixins/NicksMixin.ts';
 import algunMensajePara from './commands/algun-mensaje-para.ts';
 import ayuda from './commands/ayuda.ts';
 import dileA from './commands/dile-a.ts';
@@ -19,6 +19,9 @@ export function applyCommands(
 
 	bot.alias('help', 'ayuda');
 	bot.alias('hay algun mensaje para', 'algun mensaje para');
+	bot.command('hola', async (bot, message) =>
+		message.channel.send(`Hola, soy ${bot.name}`),
+	);
 
 	bot.command('ignora a', ignoraA);
 	bot.command('ayuda', ayuda);
