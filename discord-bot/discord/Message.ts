@@ -22,11 +22,6 @@ export function wrapMessage(message: Message, bot: Bot | null = null) {
 		author: wrapUser(message.author),
 		channel: wrapChannel(message.channel),
 
-		// author: {
-		// 	...message.author,
-		// 	nick: message.author.username
-		// }
-
 		// sendImage(url) {
 		// 	self.log('IMG', url);
 		// 	return this.channel.send({ embed: { image: { url }}});
@@ -93,10 +88,20 @@ function clearMessage(message: Message, bot: Bot | null) {
 		}
 	}
 
+	debugger;
+
+	const mentions = message.mentions();
+	console.log(mentions);
+
 	const botMention = message
 		.mentions()
-		.filter(Boolean)
-		.find(mention => bot.is(mention.user));
+		// .filter(Boolean)
+		.find(mention => {
+			console.log(mention);
+			return bot.is(mention ? mention.user : ({ id: 'potato' } as any));
+		});
+
+	console.log(botMention);
 
 	if (botMention) {
 		return remove(message.content, wrapUser(botMention.user));
