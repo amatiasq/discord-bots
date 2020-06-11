@@ -1,4 +1,4 @@
-import { PermissionInteger, UserId, RoleId } from '../type-aliases.ts';
+import { PermissionInteger, UserId, RoleId } from '../../type-aliases.ts';
 
 interface OverwriteRaw_Role {
 	/** role or user id */

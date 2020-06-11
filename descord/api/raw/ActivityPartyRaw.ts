@@ -1,4 +1,4 @@
-import { PartyId } from '../type-aliases.ts';
+import { PartyId } from '../../type-aliases.ts';
 
 export interface ActivityPartyRaw {
 	/** the id of the party */

@@ -1,5 +1,5 @@
 import { UserRaw } from './UserRaw.ts';
-import { RoleId, SerializedDate } from '../type-aliases.ts';
+import { RoleId, SerializedDate } from '../../type-aliases.ts';
 
 export interface GuildMemberRaw {
 	/** the user this guild member represents */

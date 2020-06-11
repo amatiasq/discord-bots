@@ -1,4 +1,4 @@
-import { integer } from '../type-aliases.ts';
+import { integer } from '../../type-aliases.ts';
 
 export interface EmbedThumbnailRaw {
 	/** source url of thumbnail (only supports http(s) and attachments) */

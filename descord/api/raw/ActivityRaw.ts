@@ -1,10 +1,10 @@
-import { SerializedUnixTimestamp, ApplicationId } from '../type-aliases.ts';
-import { ActivityTimestampsRaw } from './ActivityTimestampsRaw.ts';
+import { ApplicationId, SerializedUnixTimestamp } from '../../type-aliases.ts';
+import { ActivityFlag } from '../ActivityFlag.ts';
+import { ActivityAssetsRaw } from './ActivityAssetsRaw.ts';
 import { ActivityEmojiRaw } from './ActivityEmojiRaw.ts';
 import { ActivityPartyRaw } from './ActivityPartyRaw.ts';
-import { ActivityAssetsRaw } from './ActivityAssetsRaw.ts';
 import { ActivitySecretsRaw } from './ActivitySecretsRaw.ts';
-import { ActivityFlag } from './ActivityFlag.ts';
+import { ActivityTimestampsRaw } from './ActivityTimestampsRaw.ts';
 
 export interface ActivityRaw {
 	/** the activity's name */

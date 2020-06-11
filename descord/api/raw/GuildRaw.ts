@@ -5,9 +5,9 @@ import {
 	snowflake,
 	UserId,
 	ApplicationId,
-} from '../type-aliases.ts';
+} from '../../type-aliases.ts';
 import { EmojiRaw } from './EmojiRaw.ts';
-import { GuildFeature } from './GuildFeature.ts';
+import { GuildFeature } from '../GuildFeature.ts';
 import { RoleRaw } from './RoleRaw.ts';
 
 export interface GuildRaw {

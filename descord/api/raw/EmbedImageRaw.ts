@@ -1,4 +1,4 @@
-import { integer } from '../type-aliases.ts';
+import { integer } from '../../type-aliases.ts';
 
 export interface EmbedImageRaw {
 	/** source url of image (only supports http(s) and attachments) */

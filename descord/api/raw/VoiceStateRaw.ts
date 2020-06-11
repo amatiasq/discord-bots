@@ -1,4 +1,4 @@
-import { GuildId, ChannelId, UserId } from '../type-aliases.ts';
+import { GuildId, ChannelId, UserId } from '../../type-aliases.ts';
 import { GuildMemberRaw } from './GuildMemberRaw.ts';
 
 export interface VoiceStateRaw {

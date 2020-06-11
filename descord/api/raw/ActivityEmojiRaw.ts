@@ -1,4 +1,4 @@
-import { EmojiId } from '../type-aliases.ts';
+import { EmojiId } from '../../type-aliases.ts';
 
 export interface ActivityEmojiRaw {
 	/** the name of the emoji */

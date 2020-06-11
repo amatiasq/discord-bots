@@ -1,5 +1,5 @@
-import { RoleId, UserId } from '../type-aliases.ts';
-import { AllowedMentionType } from './AllowedMentionType.ts';
+import { RoleId, UserId } from '../../type-aliases.ts';
+import { AllowedMentionType } from '../AllowedMentionType.ts';
 
 export interface AllowedMentionsRaw {
 	/** An array of allowed mention types to parse from the content. */
