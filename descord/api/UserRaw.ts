@@ -1,6 +1,6 @@
 import { UserId } from '../type-aliases.ts';
 
-export interface UserStructure {
+export interface UserRaw {
 	/** the user's id	identify */
 	id: UserId;
 	/** the user's username, not unique across the platform	identify */

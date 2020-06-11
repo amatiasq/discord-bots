@@ -1,6 +1,6 @@
 import { PermissionInteger, UserId, RoleId } from '../type-aliases.ts';
 
-interface OverwriteStructure_Role {
+interface OverwriteRaw_Role {
 	/** role or user id */
 	id: RoleId;
 	/** either "role" or "member" */
@@ -11,7 +11,7 @@ interface OverwriteStructure_Role {
 	deny: PermissionInteger;
 }
 
-interface OverwriteStructure_Member {
+interface OverwriteRaw_Member {
 	/** role or user id */
 	id: UserId;
 	/** either "role" or "member" */
@@ -22,6 +22,6 @@ interface OverwriteStructure_Member {
 	deny: PermissionInteger;
 }
 
-export type OverwriteStructure =
-	| OverwriteStructure_Role
-	| OverwriteStructure_Member;
+export type OverwriteRaw =
+	| OverwriteRaw_Role
+	| OverwriteRaw_Member;

@@ -1,9 +1,9 @@
-import { UserStructure } from './UserStructure.ts';
+import { UserRaw } from './UserRaw.ts';
 import { RoleId, SerializedDate } from '../type-aliases.ts';
 
-export interface GuildMemberStructure {
+export interface GuildMemberRaw {
 	/** the user this guild member represents */
-	user?: UserStructure;
+	user?: UserRaw;
 	/** this users guild nickname */
 	nick: string;
 	/** array of role object ids */

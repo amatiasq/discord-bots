@@ -1,4 +1,4 @@
-export interface ActivitySecretsStructure {
+export interface ActivitySecretsRaw {
 	/** the secret for joining a party */
 	join?: string;
 	/** the secret for spectating a game */

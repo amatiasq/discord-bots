@@ -5,10 +5,10 @@ import {
 	SerializedDate,
 	snowflake,
 } from '../type-aliases.ts';
-import { OverwriteStructure } from './OverwriteStructure.ts';
-import { UserStructure } from './UserStructure.ts';
+import { OverwriteRaw } from './OverwriteRaw.ts';
+import { UserRaw } from './UserRaw.ts';
 
-export interface ChannelStructure {
+export interface ChannelRaw {
 	/** the id of this channel */
 	id: ChannelId;
 	/** the type of channel */
@@ -18,7 +18,7 @@ export interface ChannelStructure {
 	/** sorting position of the channel */
 	position?: number;
 	/** explicit permission overwrites for members and roles */
-	permission_overwrites?: OverwriteStructure[];
+	permission_overwrites?: OverwriteRaw[];
 	/** the name of the channel (2-100 characters) */
 	name?: string;
 	/** the channel topic (0-1024 characters) */
@@ -34,7 +34,7 @@ export interface ChannelStructure {
 	/** amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected */
 	rate_limit_per_user?: number;
 	/** the recipients of the DM */
-	recipients?: UserStructure[];
+	recipients?: UserRaw[];
 	/** icon hash */
 	icon?: string;
 	/** id of the DM creator */

@@ -1,12 +1,12 @@
 import { snowflake } from '../type-aliases.ts';
-import { ActivityTimestampsStructure } from './ActivityTimestampsStructure.ts';
-import { ActivityEmojiStructure } from './ActivityEmojiStructure.ts';
-import { ActivityPartyStructure } from './ActivityPartyStructure.ts';
-import { ActivityAssetsStructure } from './ActivityAssetsStructure.ts';
-import { ActivitySecretsStructure } from './ActivitySecretsStructure.ts';
+import { ActivityTimestampsRaw } from './ActivityTimestampsRaw.ts';
+import { ActivityEmojiRaw } from './ActivityEmojiRaw.ts';
+import { ActivityPartyRaw } from './ActivityPartyRaw.ts';
+import { ActivityAssetsRaw } from './ActivityAssetsRaw.ts';
+import { ActivitySecretsRaw } from './ActivitySecretsRaw.ts';
 import { ActivityFlags } from './ActivityFlags.ts';
 
-export interface ActivityStructure {
+export interface ActivityRaw {
 	/** the activity's name */
 	name: string;
 	/** activity type */
@@ -16,7 +16,7 @@ export interface ActivityStructure {
 	/** unix timestamp of when the activity was added to the user's session */
 	created_at: number;
 	/** unix timestamps for start and/or end of the game */
-	timestamps?: ActivityTimestampsStructure;
+	timestamps?: ActivityTimestampsRaw;
 	/** application id for the game */
 	application_id?: snowflake;
 	/** what the player is currently doing */
@@ -24,13 +24,13 @@ export interface ActivityStructure {
 	/** the user's current party status */
 	state?: string;
 	/** the emoji used for a custom status */
-	emoji?: ActivityEmojiStructure;
+	emoji?: ActivityEmojiRaw;
 	/** information for the current party of the player */
-	party?: ActivityPartyStructure;
+	party?: ActivityPartyRaw;
 	/** images for the presence and their hover texts */
-	assets?: ActivityAssetsStructure;
+	assets?: ActivityAssetsRaw;
 	/** secrets for Rich Presence joining and spectating */
-	secrets?: ActivitySecretsStructure;
+	secrets?: ActivitySecretsRaw;
 	/** whether or not the activity is an instanced game session */
 	instance?: boolean;
 	/** activity flags ORd together, describes what the payload includes */

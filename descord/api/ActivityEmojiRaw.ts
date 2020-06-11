@@ -1,6 +1,6 @@
 import { snowflake } from '../type-aliases.ts';
 
-export interface ActivityEmojiStructure {
+export interface ActivityEmojiRaw {
 	/** the name of the emoji */
 	name: string;
 	/** the id of the emoji */

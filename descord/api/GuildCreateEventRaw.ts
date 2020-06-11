@@ -1,11 +1,11 @@
 import { SerializedDate } from '../type-aliases.ts';
-import { ChannelStructure } from './ChannelStructure.ts';
-import { GuildMemberStructure } from './GuildMemberStructure.ts';
-import { GuildStructure } from './GuildStructure.ts';
-import { PresenceUpdateEventStructure } from './PresenceUpdateEventStructure.ts';
-import { VoiceStateStructure } from './VoiceStateStructure.ts';
+import { ChannelRaw } from './ChannelRaw.ts';
+import { GuildMemberRaw } from './GuildMemberRaw.ts';
+import { GuildRaw } from './GuildRaw.ts';
+import { PresenceUpdateEventRaw } from './PresenceUpdateEventRaw.ts';
+import { VoiceStateRaw } from './VoiceStateRaw.ts';
 
-export interface GuildCreateEventStructure extends GuildStructure {
+export interface GuildCreateEventRaw extends GuildRaw {
 	/** when this guild was joined at (ISO8601 timestamp) */
 	joined_at?: SerializedDate;
 	/** true if this is considered a large guild */
@@ -15,11 +15,11 @@ export interface GuildCreateEventStructure extends GuildStructure {
 	/** total number of members in this guild */
 	member_count?: number;
 	/** states of members currently in voice channels; lacks the guild_id key */
-	voice_states?: VoiceStateStructure[];
+	voice_states?: VoiceStateRaw[];
 	/** users in the guild */
-	members?: GuildMemberStructure[];
+	members?: GuildMemberRaw[];
 	/** channels in the guild */
-	channels?: ChannelStructure[];
+	channels?: ChannelRaw[];
 	/** presences of the members in the guild, will only include non-offline members if the size is greater than large threshold */
-	presences?: PresenceUpdateEventStructure[];
+	presences?: PresenceUpdateEventRaw[];
 }

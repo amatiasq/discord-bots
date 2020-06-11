@@ -5,11 +5,11 @@ import {
 	snowflake,
 	UserId,
 } from '../type-aliases.ts';
-import { EmojiStructure } from './EmojiStructure.ts';
+import { EmojiRaw } from './EmojiRaw.ts';
 import { GuildFeature } from './GuildFeatures.ts';
-import { RoleStructure } from './RoleStructure.ts';
+import { RoleRaw } from './RoleRaw.ts';
 
-export interface GuildStructure {
+export interface GuildRaw {
 	/** guild id */
 	id: GuildId;
 	/** guild name (2-100 characters, excluding trailing and leading whitespace) */
@@ -43,9 +43,9 @@ export interface GuildStructure {
 	/** explicit content filter level */
 	explicit_content_filter: number;
 	/** roles in the guild */
-	roles: RoleStructure[];
+	roles: RoleRaw[];
 	/** custom guild emojis */
-	emojis: EmojiStructure[];
+	emojis: EmojiRaw[];
 	/** enabled guild features */
 	features: GuildFeature[];
 	/** required MFA level for the guild */

@@ -1,6 +1,6 @@
 import { RoleId, PermissionInteger } from '../type-aliases.ts';
 
-export interface RoleStructure {
+export interface RoleRaw {
 	/** role id */
 	id: RoleId;
 	/** role name */
