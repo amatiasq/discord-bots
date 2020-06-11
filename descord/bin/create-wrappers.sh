@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# cp -r api transformers
+# cp -r api wrappers
 
-cd transformers
+cd wrappers
 
 for i in *.ts
 do
-    file=$(echo $i | sed -e 's/.ts//g')
+    file=$(echo $i | sed -e 's/\.ts$//')
 
     echo "import { omit } from '../util/omit.ts'
 import { ${file}Raw } from '../api/${file}Raw.ts';
 
-export type I$file = ReturnType<typeof wrap$i>;
+export type I$file = ReturnType<typeof wrap$file>;
 
 export function wrap$file(json: ${file}Raw) {
     return {

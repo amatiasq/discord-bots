@@ -1,4 +1,4 @@
-import { snowflake } from '../type-aliases.ts';
+import { SerializedUnixTimestamp, ApplicationId } from '../type-aliases.ts';
 import { ActivityTimestampsRaw } from './ActivityTimestampsRaw.ts';
 import { ActivityEmojiRaw } from './ActivityEmojiRaw.ts';
 import { ActivityPartyRaw } from './ActivityPartyRaw.ts';
@@ -14,11 +14,11 @@ export interface ActivityRaw {
 	/** stream url, is validated when type is 1 */
 	url?: string;
 	/** unix timestamp of when the activity was added to the user's session */
-	created_at: number;
+	created_at: SerializedUnixTimestamp;
 	/** unix timestamps for start and/or end of the game */
 	timestamps?: ActivityTimestampsRaw;
 	/** application id for the game */
-	application_id?: snowflake;
+	application_id?: ApplicationId;
 	/** what the player is currently doing */
 	details?: string;
 	/** the user's current party status */

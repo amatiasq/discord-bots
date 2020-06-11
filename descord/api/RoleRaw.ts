@@ -1,4 +1,4 @@
-import { RoleId, PermissionInteger } from '../type-aliases.ts';
+import { RoleId, PermissionsInteger } from '../type-aliases.ts';
 
 export interface RoleRaw {
 	/** role id */
@@ -12,7 +12,7 @@ export interface RoleRaw {
 	/** position of this role */
 	position: number;
 	/** permission bit set */
-	permissions: PermissionInteger;
+	permissions: PermissionsInteger;
 	/** whether this role is managed by an integration */
 	managed: boolean;
 	/** whether this role is mentionable */

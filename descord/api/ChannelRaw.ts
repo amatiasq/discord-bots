@@ -4,6 +4,8 @@ import {
 	MessageId,
 	SerializedDate,
 	snowflake,
+	ApplicationId,
+	CategoryId,
 } from '../type-aliases.ts';
 import { OverwriteRaw } from './OverwriteRaw.ts';
 import { UserRaw } from './UserRaw.ts';
@@ -40,9 +42,9 @@ export interface ChannelRaw {
 	/** id of the DM creator */
 	owner_id?: snowflake;
 	/** application id of the group DM creator if it is bot-created */
-	application_id?: snowflake;
+	application_id?: ApplicationId;
 	/** id of the parent category for a channel (each parent category can contain up to 50 channels) */
-	parent_id?: snowflake;
+	parent_id?: CategoryId;
 	/** when the last pinned message was pinned (ISO8601 timestamp) */
 	last_pin_timestamp?: SerializedDate;
 }

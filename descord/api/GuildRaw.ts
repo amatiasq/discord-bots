@@ -1,9 +1,10 @@
 import {
 	ChannelId,
 	GuildId,
-	PermissionInteger,
+	PermissionsInteger,
 	snowflake,
 	UserId,
+	ApplicationId,
 } from '../type-aliases.ts';
 import { EmojiRaw } from './EmojiRaw.ts';
 import { GuildFeature } from './GuildFeatures.ts';
@@ -25,7 +26,7 @@ export interface GuildRaw {
 	/** id of owner */
 	owner_id: UserId;
 	/** total permissions for the user in the guild (excludes overrides) */
-	permissions?: PermissionInteger;
+	permissions?: PermissionsInteger;
 	/** voice region id for the guild */
 	region: string;
 	/** id of afk channel */
@@ -51,7 +52,7 @@ export interface GuildRaw {
 	/** required MFA level for the guild */
 	mfa_level: number;
 	/** application id of the guild creator if it is bot-created */
-	application_id: snowflake;
+	application_id: ApplicationId;
 	/** true if the server widget is enabled */
 	widget_enabled?: boolean;
 	/** the channel id that the widget will generate an invite to, or null if set to no invite */
