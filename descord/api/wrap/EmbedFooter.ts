@@ -3,12 +3,22 @@ import { EmbedFooterRaw } from '../raw/EmbedFooterRaw.ts';
 
 export type EmbedFooter = ReturnType<typeof wrapEmbedFooter>;
 
-export function wrapEmbedFooter(json: EmbedFooterRaw) {
+export function wrapEmbedFooter(x: EmbedFooterRaw) {
 	return {
-		...omit(json, 'icon_url', 'proxy_icon_url'),
+		...omit(x, 'icon_url', 'proxy_icon_url'),
 
 		// Casing
-		iconUrl: json.icon_url,
-		proxyIconUrl: json.proxy_icon_url,
+		iconUrl: x.icon_url,
+		proxyIconUrl: x.proxy_icon_url,
+	};
+}
+
+export function unwrapEmbedFooter(x: EmbedFooter): EmbedFooterRaw {
+	return {
+		...omit(x, 'iconUrl', 'proxyIconUrl'),
+
+		// Casing
+		icon_url: x.proxyIconUrl,
+		proxy_icon_url: x.proxyIconUrl,
 	};
 }

@@ -1,27 +1,46 @@
-import { parseSerializedDate } from '../../type-aliases.ts';
+import {
+	parseSerializedDate,
+	unparseSerializedDate,
+} from '../../type-aliases.ts';
 import { EmbedRaw } from '../raw/EmbedRaw.ts';
-import { wrapEmbedAuthor } from './EmbedAuthor.ts';
-import { wrapEmbedField } from './EmbedField.ts';
-import { wrapEmbedFooter } from './EmbedFooter.ts';
-import { wrapEmbedImage } from './EmbedImage.ts';
-import { wrapEmbedProvider } from './EmbedProvider.ts';
-import { wrapEmbedThumbnail } from './EmbedThumbnail.ts';
-import { wrapEmbedVideo } from './EmbedVideo.ts';
+import { wrapEmbedAuthor, unwrapEmbedAuthor } from './EmbedAuthor.ts';
+import { wrapEmbedField, unwrapEmbedField } from './EmbedField.ts';
+import { wrapEmbedFooter, unwrapEmbedFooter } from './EmbedFooter.ts';
+import { wrapEmbedImage, unwrapEmbedImage } from './EmbedImage.ts';
+import { wrapEmbedProvider, unwrapEmbedProvider } from './EmbedProvider.ts';
+import { wrapEmbedThumbnail, unwrapEmbedThumbnail } from './EmbedThumbnail.ts';
+import { wrapEmbedVideo, unwrapEmbedVideo } from './EmbedVideo.ts';
 
-export type IEmbed = ReturnType<typeof wrapEmbed>;
+export type Embed = ReturnType<typeof wrapEmbed>;
 
-export function wrapEmbed(json: EmbedRaw) {
+export function wrapEmbed(x: EmbedRaw) {
 	return {
-		...json,
+		...x,
 
 		// Deserialization
-		timestamp: json.timestamp && parseSerializedDate(json.timestamp),
-		footer: json.footer && wrapEmbedFooter(json.footer),
-		image: json.image && wrapEmbedImage(json.image),
-		thumbnail: json.thumbnail && wrapEmbedThumbnail(json.thumbnail),
-		video: json.video && wrapEmbedVideo(json.video),
-		provider: json.provider && wrapEmbedProvider(json.provider),
-		author: json.author && wrapEmbedAuthor(json.author),
-		fields: json.fields?.map(wrapEmbedField),
+		timestamp: x.timestamp && parseSerializedDate(x.timestamp),
+		footer: x.footer && wrapEmbedFooter(x.footer),
+		image: x.image && wrapEmbedImage(x.image),
+		thumbnail: x.thumbnail && wrapEmbedThumbnail(x.thumbnail),
+		video: x.video && wrapEmbedVideo(x.video),
+		provider: x.provider && wrapEmbedProvider(x.provider),
+		author: x.author && wrapEmbedAuthor(x.author),
+		fields: x.fields?.map(wrapEmbedField),
+	};
+}
+
+export function unwrapEmbed(x: Embed) {
+	return {
+		...x,
+
+		// Deserialization
+		timestamp: x.timestamp && unparseSerializedDate(x.timestamp),
+		footer: x.footer && unwrapEmbedFooter(x.footer),
+		image: x.image && unwrapEmbedImage(x.image),
+		thumbnail: x.thumbnail && unwrapEmbedThumbnail(x.thumbnail),
+		video: x.video && unwrapEmbedVideo(x.video),
+		provider: x.provider && unwrapEmbedProvider(x.provider),
+		author: x.author && unwrapEmbedAuthor(x.author),
+		fields: x.fields?.map(unwrapEmbedField),
 	};
 }

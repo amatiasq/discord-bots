@@ -1,13 +1,13 @@
 import {
+	ApplicationId,
 	ChannelId,
 	GuildId,
 	PermissionInteger,
 	snowflake,
 	UserId,
-	ApplicationId,
 } from '../../type-aliases.ts';
+import { GuildFeature } from '../enum/GuildFeature.ts';
 import { EmojiRaw } from './EmojiRaw.ts';
-import { GuildFeature } from '../GuildFeature.ts';
 import { RoleRaw } from './RoleRaw.ts';
 
 export interface GuildRaw {

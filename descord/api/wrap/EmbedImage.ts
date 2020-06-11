@@ -3,11 +3,20 @@ import { EmbedImageRaw } from '../raw/EmbedImageRaw.ts';
 
 export type EmbedImage = ReturnType<typeof wrapEmbedImage>;
 
-export function wrapEmbedImage(json: EmbedImageRaw) {
+export function wrapEmbedImage(x: EmbedImageRaw) {
 	return {
-		...omit(json, 'proxy_url'),
+		...omit(x, 'proxy_url'),
 
 		// Casing
-		proxyUrl: json.proxy_url,
+		proxyUrl: x.proxy_url,
+	};
+}
+
+export function unwrapEmbedImage(x: EmbedImage): EmbedImageRaw {
+	return {
+		...omit(x, 'proxyUrl'),
+
+		// Casing
+		proxy_url: x.proxyUrl,
 	};
 }

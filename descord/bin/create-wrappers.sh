@@ -14,14 +14,14 @@ do
         continue
     fi
 
-    echo "import { omit } from '../util/omit.ts'
-import { ${type}Raw } from '../api/${type}Raw.ts';
+    echo "import { omit } from '../../util/omit.ts'
+import { ${type}Raw } from '../raw/${type}Raw.ts';
 
 export type $type = ReturnType<typeof wrap$type>;
 
-export function wrap$type(json: ${type}Raw) {
+export function wrap$type(x: ${type}Raw) {
     return {
-        ...omit(json, ''),
+        ...omit(x, ''),
 
         // Casing
         // TODO:
@@ -29,6 +29,18 @@ export function wrap$type(json: ${type}Raw) {
         // Deserialization
         // TODO:
     };
+}
+
+export function unwrap$type(x: $type): ${type}Raw {
+    return {
+        ...omit(x, ''),
+
+        // Casing
+        // TODO:
+
+        // Serialize
+        // TODO:
+    }
 }
 " > $target
 done

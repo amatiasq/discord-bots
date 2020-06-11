@@ -1,5 +1,5 @@
 import { ApplicationId, SerializedUnixTimestamp } from '../../type-aliases.ts';
-import { ActivityFlag } from '../ActivityFlag.ts';
+import { ActivityFlag } from '../enum/ActivityFlag.ts';
 import { ActivityAssetsRaw } from './ActivityAssetsRaw.ts';
 import { ActivityEmojiRaw } from './ActivityEmojiRaw.ts';
 import { ActivityPartyRaw } from './ActivityPartyRaw.ts';

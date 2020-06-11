@@ -1,7 +1,7 @@
 import { GuildId, RoleId, SerializedDate } from '../../type-aliases.ts';
+import { PresenceStatus } from '../enum/PresenceStatus.ts';
 import { ActivityRaw } from './ActivityRaw.ts';
 import { ClientStatusRaw } from './ClientStatusRaw.ts';
-import { PresenceStatus } from '../PresenceStatus.ts';
 import { UserRaw } from './UserRaw.ts';
 
 export interface PresenceUpdateEventRaw {

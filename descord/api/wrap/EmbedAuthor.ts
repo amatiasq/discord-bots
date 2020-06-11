@@ -3,12 +3,22 @@ import { EmbedAuthorRaw } from '../raw/EmbedAuthorRaw.ts';
 
 export type EmbedAuthor = ReturnType<typeof wrapEmbedAuthor>;
 
-export function wrapEmbedAuthor(json: EmbedAuthorRaw) {
+export function wrapEmbedAuthor(x: EmbedAuthorRaw) {
 	return {
-		...omit(json, 'icon_url', 'proxy_icon_url'),
+		...omit(x, 'icon_url', 'proxy_icon_url'),
 
 		// Casing
-		iconUrl: json.icon_url,
-		proxyIconUrl: json.proxy_icon_url,
+		iconUrl: x.icon_url,
+		proxyIconUrl: x.proxy_icon_url,
+	};
+}
+
+export function unwrapEmbedAuthor(x: EmbedAuthor): EmbedAuthorRaw {
+	return {
+		...omit(x, 'iconUrl', 'proxyIconUrl'),
+
+		// Casing
+		icon_url: x.proxyIconUrl,
+		proxy_icon_url: x.proxyIconUrl,
 	};
 }
