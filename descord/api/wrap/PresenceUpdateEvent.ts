@@ -1,6 +1,6 @@
-import { PresenceUpdateEventRaw } from '../api/PresenceUpdateEventRaw.ts';
-import { parseSerializedDate } from '../type-aliases.ts';
-import { omit } from '../util/omit.ts';
+import { parseSerializedDate } from '../../type-aliases.ts';
+import { omit } from '../../util/omit.ts';
+import { PresenceUpdateEventRaw } from '../raw/PresenceUpdateEventRaw.ts';
 import { wrapActivity } from './Activity.ts';
 import { wrapClientStatus } from './ClientStatus.ts';
 import { wrapUser } from './User.ts';

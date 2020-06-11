@@ -1,6 +1,6 @@
-import { omit } from '../util/omit.ts';
-import { GuildMemberRaw } from '../api/GuildMemberRaw.ts';
-import { parseSerializedDate } from '../type-aliases.ts';
+import { parseSerializedDate } from '../../type-aliases.ts';
+import { omit } from '../../util/omit.ts';
+import { GuildMemberRaw } from '../raw/GuildMemberRaw.ts';
 import { wrapUser } from './User.ts';
 
 export type GuildMember = ReturnType<typeof wrapGuildMember>;

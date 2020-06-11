@@ -1,5 +1,5 @@
-import { RoleRaw } from '../api/RoleRaw.ts';
-import { parsePermissionInteger } from '../type-aliases.ts';
+import { parsePermissionInteger } from '../../type-aliases.ts';
+import { RoleRaw } from '../raw/RoleRaw.ts';
 
 export type Role = ReturnType<typeof wrapRole>;
 

@@ -1,4 +1,4 @@
-import { ActivityAssetsRaw } from '../api/ActivityAssetsRaw.ts';
+import { ActivityAssetsRaw } from '../raw/ActivityAssetsRaw.ts';
 
 export type ActivityAssets = ReturnType<typeof wrapActivityAssets>;
 

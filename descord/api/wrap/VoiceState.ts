@@ -1,5 +1,5 @@
-import { omit } from '../util/omit.ts';
-import { VoiceStateRaw } from '../api/VoiceStateRaw.ts';
+import { omit } from '../../util/omit.ts';
+import { VoiceStateRaw } from '../raw/VoiceStateRaw.ts';
 import { wrapGuildMember } from './GuildMember.ts';
 
 export type VoiceState = ReturnType<typeof wrapVoiceState>;

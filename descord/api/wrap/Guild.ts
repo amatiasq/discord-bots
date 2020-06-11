@@ -1,8 +1,8 @@
-import { omit } from '../util/omit.ts';
-import { GuildRaw } from '../api/GuildRaw.ts';
-import { parsePermissionInteger } from '../type-aliases.ts';
-import { wrapRole } from './Role.ts';
+import { parsePermissionInteger } from '../../type-aliases.ts';
+import { omit } from '../../util/omit.ts';
+import { GuildRaw } from '../raw/GuildRaw.ts';
 import { wrapEmoji } from './Emoji.ts';
+import { wrapRole } from './Role.ts';
 
 export type Guild = ReturnType<typeof wrapGuild>;
 

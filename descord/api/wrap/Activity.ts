@@ -1,11 +1,11 @@
-import { omit } from '../util/omit.ts';
-import { ActivityRaw } from '../api/ActivityRaw.ts';
+import { omit } from '../../util/omit.ts';
+import { ActivityRaw } from '../raw/ActivityRaw.ts';
 import { wrapActivityTimestamps } from './ActivityTimestamps.ts';
 import { wrapActivityEmoji } from './ActivityEmoji.ts';
 import { wrapActivityParty } from './ActivityParty.ts';
 import { wrapActivityAssets } from './ActivityAssets.ts';
 import { wrapActivitySecrets } from './ActivitySecrets.ts';
-import { parseSerializedUnixTimestamp } from '../type-aliases.ts';
+import { parseSerializedUnixTimestamp } from '../../type-aliases.ts';
 
 export type Activity = ReturnType<typeof wrapActivity>;
 

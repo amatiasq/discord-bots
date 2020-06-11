@@ -1,4 +1,4 @@
-import { ActivityEmojiRaw } from '../api/ActivityEmojiRaw.ts';
+import { ActivityEmojiRaw } from '../raw/ActivityEmojiRaw.ts';
 
 export type ActivityEmoji = ReturnType<typeof wrapActivityEmoji>;
 

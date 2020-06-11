@@ -1,5 +1,5 @@
-import { ActivityTimestampsRaw } from '../api/ActivityTimestampsRaw.ts';
-import { parseSerializedUnixTimestamp } from '../type-aliases.ts';
+import { parseSerializedUnixTimestamp } from '../../type-aliases.ts';
+import { ActivityTimestampsRaw } from '../raw/ActivityTimestampsRaw.ts';
 
 export type ActivityTimestamps = ReturnType<typeof wrapActivityTimestamps>;
 

@@ -1,5 +1,5 @@
-import { omit } from '../util/omit.ts';
-import { EmojiRaw } from '../api/EmojiRaw.ts';
+import { omit } from '../../util/omit.ts';
+import { EmojiRaw } from '../raw/EmojiRaw.ts';
 import { wrapRole } from './Role.ts';
 import { wrapUser } from './User.ts';
 

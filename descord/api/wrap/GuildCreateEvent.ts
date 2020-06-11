@@ -1,10 +1,10 @@
-import { GuildCreateEventRaw } from '../api/GuildCreateEventRaw.ts';
-import { wrapGuild } from './Guild.ts';
-import { parseSerializedDate } from '../type-aliases.ts';
-import { wrapVoiceState } from './VoiceState.ts';
-import { wrapGuildMember } from './GuildMember.ts';
+import { parseSerializedDate } from '../../type-aliases.ts';
+import { GuildCreateEventRaw } from '../raw/GuildCreateEventRaw.ts';
 import { wrapChannel } from './Channel.ts';
+import { wrapGuild } from './Guild.ts';
+import { wrapGuildMember } from './GuildMember.ts';
 import { wrapPresenceUpdateEvent } from './PresenceUpdateEvent.ts';
+import { wrapVoiceState } from './VoiceState.ts';
 
 export type GuildCreateEvent = ReturnType<typeof wrapGuildCreateEvent>;
 

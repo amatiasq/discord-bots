@@ -1,5 +1,5 @@
-import { omit } from '../util/omit.ts';
-import { UserRaw } from '../api/UserRaw.ts';
+import { omit } from '../../util/omit.ts';
+import { UserRaw } from '../raw/UserRaw.ts';
 
 export type User = ReturnType<typeof wrapUser>;
 

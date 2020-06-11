@@ -1,4 +1,4 @@
-import { ClientStatusRaw } from '../api/ClientStatusRaw.ts';
+import { ClientStatusRaw } from '../raw/ClientStatusRaw.ts';
 
 export type ClientStatus = ReturnType<typeof wrapClientStatus>;
 

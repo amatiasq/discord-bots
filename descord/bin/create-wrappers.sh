@@ -2,12 +2,12 @@
 
 # cp -r api wrappers
 
-cd api
+cd api/raw
 
 for i in *Raw.ts
 do
     type=$(echo $i | sed -e 's/Raw\.ts$//')
-    target="../wrappers/$type.ts"
+    target="../wrap/$type.ts"
 
     if [ -f "$target" ]
     then
