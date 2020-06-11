@@ -1,6 +1,6 @@
 import { ActivityAssetsRaw } from '../api/ActivityAssetsRaw.ts';
 
-export type IActivityAssets = ReturnType<typeof wrapActivityAssets>;
+export type ActivityAssets = ReturnType<typeof wrapActivityAssets>;
 
 export function wrapActivityAssets(json: ActivityAssetsRaw) {
 	return {

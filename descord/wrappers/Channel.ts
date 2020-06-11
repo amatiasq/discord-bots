@@ -4,7 +4,7 @@ import { wrapOverwrite } from './Overwrite.ts';
 import { wrapUser } from './User.ts';
 import { parseSerializedDate } from '../type-aliases.ts';
 
-export type IChannel = ReturnType<typeof wrapChannel>;
+export type Channel = ReturnType<typeof wrapChannel>;
 
 export function wrapChannel(json: ChannelRaw) {
 	return {

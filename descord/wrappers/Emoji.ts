@@ -3,7 +3,7 @@ import { EmojiRaw } from '../api/EmojiRaw.ts';
 import { wrapRole } from './Role.ts';
 import { wrapUser } from './User.ts';
 
-export type IEmoji = ReturnType<typeof wrapEmoji>;
+export type Emoji = ReturnType<typeof wrapEmoji>;
 
 export function wrapEmoji(json: EmojiRaw) {
 	return {

@@ -7,7 +7,7 @@ import { wrapActivityAssets } from './ActivityAssets.ts';
 import { wrapActivitySecrets } from './ActivitySecrets.ts';
 import { parseSerializedUnixTimestamp } from '../type-aliases.ts';
 
-export type IActivity = ReturnType<typeof wrapActivity>;
+export type Activity = ReturnType<typeof wrapActivity>;
 
 export function wrapActivity(json: ActivityRaw) {
 	return {

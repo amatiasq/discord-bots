@@ -6,7 +6,7 @@ import { wrapGuildMember } from './GuildMember.ts';
 import { wrapChannel } from './Channel.ts';
 import { wrapPresenceUpdateEvent } from './PresenceUpdateEvent.ts';
 
-export type IGuildCreateEvent = ReturnType<typeof wrapGuildCreateEvent>;
+export type GuildCreateEvent = ReturnType<typeof wrapGuildCreateEvent>;
 
 export function wrapGuildCreateEvent(json: GuildCreateEventRaw) {
 	const {

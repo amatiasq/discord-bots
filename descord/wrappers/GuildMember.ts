@@ -3,7 +3,7 @@ import { GuildMemberRaw } from '../api/GuildMemberRaw.ts';
 import { parseSerializedDate } from '../type-aliases.ts';
 import { wrapUser } from './User.ts';
 
-export type IGuildMember = ReturnType<typeof wrapGuildMember>;
+export type GuildMember = ReturnType<typeof wrapGuildMember>;
 
 export function wrapGuildMember(json: GuildMemberRaw) {
 	return {

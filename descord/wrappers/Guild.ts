@@ -4,7 +4,7 @@ import { parsePermissionsInteger } from '../type-aliases.ts';
 import { wrapRole } from './Role.ts';
 import { wrapEmoji } from './Emoji.ts';
 
-export type IGuild = ReturnType<typeof wrapGuild>;
+export type Guild = ReturnType<typeof wrapGuild>;
 
 export function wrapGuild(json: GuildRaw) {
 	return {

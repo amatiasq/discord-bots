@@ -5,7 +5,7 @@ import { wrapActivity } from './Activity.ts';
 import { wrapClientStatus } from './ClientStatus.ts';
 import { wrapUser } from './User.ts';
 
-export type IPresenceUpdateEvent = ReturnType<typeof wrapPresenceUpdateEvent>;
+export type PresenceUpdateEvent = ReturnType<typeof wrapPresenceUpdateEvent>;
 
 export function wrapPresenceUpdateEvent(json: PresenceUpdateEventRaw) {
 	return {

@@ -1,7 +1,7 @@
 import { omit } from '../util/omit.ts';
 import { UserRaw } from '../api/UserRaw.ts';
 
-export type IUser = ReturnType<typeof wrapUser>;
+export type User = ReturnType<typeof wrapUser>;
 
 export function wrapUser(json: UserRaw) {
 	return {

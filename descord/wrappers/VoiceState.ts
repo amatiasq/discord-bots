@@ -2,7 +2,7 @@ import { omit } from '../util/omit.ts';
 import { VoiceStateRaw } from '../api/VoiceStateRaw.ts';
 import { wrapGuildMember } from './GuildMember.ts';
 
-export type IVoiceState = ReturnType<typeof wrapVoiceState>;
+export type VoiceState = ReturnType<typeof wrapVoiceState>;
 
 export function wrapVoiceState(json: VoiceStateRaw) {
 	return {
