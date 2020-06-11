@@ -2,21 +2,32 @@
 
 # cp -r api wrappers
 
-cd wrappers
+cd api
 
-for i in *.ts
+for i in *Raw.ts
 do
-    file=$(echo $i | sed -e 's/\.ts$//')
+    type=$(echo $i | sed -e 's/Raw\.ts$//')
+    target="../wrappers/$type.ts"
+
+    if [ -f "$target" ]
+    then
+        continue
+    fi
 
     echo "import { omit } from '../util/omit.ts'
-import { ${file}Raw } from '../api/${file}Raw.ts';
+import { ${type}Raw } from '../api/${type}Raw.ts';
 
-export type I$file = ReturnType<typeof wrap$file>;
+export type I$type = ReturnType<typeof wrap$type>;
 
-export function wrap$file(json: ${file}Raw) {
+export function wrap$type(json: ${type}Raw) {
     return {
         ...omit(json, ''),
 
+        // Casing
+        // TODO:
+
+        // Deserialization
+        // TODO:
     };
 }
 " > $i
