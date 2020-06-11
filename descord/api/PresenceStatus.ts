@@ -1,1 +1,6 @@
-export type PresenceStatus = 'idle' | 'dnd' | 'online' | 'offline';
+export enum PresenceStatus {
+	IDLE = 'idle',
+	DND = 'dnd',
+	ONLINE = 'online',
+	OFFLINE = 'offline',
+}

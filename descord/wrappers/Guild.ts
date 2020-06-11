@@ -1,6 +1,6 @@
 import { omit } from '../util/omit.ts';
 import { GuildRaw } from '../api/GuildRaw.ts';
-import { parsePermissionsInteger } from '../type-aliases.ts';
+import { parsePermissionInteger } from '../type-aliases.ts';
 import { wrapRole } from './Role.ts';
 import { wrapEmoji } from './Emoji.ts';
 
@@ -67,7 +67,7 @@ export function wrapGuild(json: GuildRaw) {
 		approximatePresenceCount: json.approximate_presence_count,
 
 		// Deserialization
-		permissions: json.permissions && parsePermissionsInteger(json.permissions),
+		permissions: json.permissions && parsePermissionInteger(json.permissions),
 		roles: json.roles.map(wrapRole),
 		emojis: json.emojis.map(wrapEmoji),
 	};

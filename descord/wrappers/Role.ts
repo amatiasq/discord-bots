@@ -1,5 +1,5 @@
 import { RoleRaw } from '../api/RoleRaw.ts';
-import { parsePermissionsInteger } from '../type-aliases.ts';
+import { parsePermissionInteger } from '../type-aliases.ts';
 
 export type Role = ReturnType<typeof wrapRole>;
 
@@ -8,6 +8,6 @@ export function wrapRole(json: RoleRaw) {
 		...json,
 
 		// Deserialization
-		permissions: parsePermissionsInteger(json.permissions),
+		permissions: parsePermissionInteger(json.permissions),
 	};
 }

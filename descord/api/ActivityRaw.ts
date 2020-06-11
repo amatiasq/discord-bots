@@ -4,7 +4,7 @@ import { ActivityEmojiRaw } from './ActivityEmojiRaw.ts';
 import { ActivityPartyRaw } from './ActivityPartyRaw.ts';
 import { ActivityAssetsRaw } from './ActivityAssetsRaw.ts';
 import { ActivitySecretsRaw } from './ActivitySecretsRaw.ts';
-import { ActivityFlags } from './ActivityFlags.ts';
+import { ActivityFlag } from './ActivityFlag.ts';
 
 export interface ActivityRaw {
 	/** the activity's name */
@@ -34,5 +34,5 @@ export interface ActivityRaw {
 	/** whether or not the activity is an instanced game session */
 	instance?: boolean;
 	/** activity flags ORd together, describes what the payload includes */
-	flags?: ActivityFlags;
+	flags?: ActivityFlag;
 }

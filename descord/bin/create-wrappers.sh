@@ -17,7 +17,7 @@ do
     echo "import { omit } from '../util/omit.ts'
 import { ${type}Raw } from '../api/${type}Raw.ts';
 
-export type I$type = ReturnType<typeof wrap$type>;
+export type $type = ReturnType<typeof wrap$type>;
 
 export function wrap$type(json: ${type}Raw) {
     return {
@@ -30,5 +30,5 @@ export function wrap$type(json: ${type}Raw) {
         // TODO:
     };
 }
-" > $i
+" > $target
 done

@@ -1,13 +1,13 @@
 import {
 	ChannelId,
 	GuildId,
-	PermissionsInteger,
+	PermissionInteger,
 	snowflake,
 	UserId,
 	ApplicationId,
 } from '../type-aliases.ts';
 import { EmojiRaw } from './EmojiRaw.ts';
-import { GuildFeature } from './GuildFeatures.ts';
+import { GuildFeature } from './GuildFeature.ts';
 import { RoleRaw } from './RoleRaw.ts';
 
 export interface GuildRaw {
@@ -26,7 +26,7 @@ export interface GuildRaw {
 	/** id of owner */
 	owner_id: UserId;
 	/** total permissions for the user in the guild (excludes overrides) */
-	permissions?: PermissionsInteger;
+	permissions?: PermissionInteger;
 	/** voice region id for the guild */
 	region: string;
 	/** id of afk channel */

@@ -22,6 +22,4 @@ interface OverwriteRaw_Member {
 	deny: PermissionInteger;
 }
 
-export type OverwriteRaw =
-	| OverwriteRaw_Role
-	| OverwriteRaw_Member;
+export type OverwriteRaw = OverwriteRaw_Role | OverwriteRaw_Member;
