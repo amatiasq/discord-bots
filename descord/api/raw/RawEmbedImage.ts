@@ -1,6 +1,6 @@
 import { integer } from '../../type-aliases.ts';
 
-export interface EmbedImageRaw {
+export interface RawEmbedImage {
 	/** source url of image (only supports http(s) and attachments) */
 	url?: string;
 	/** a proxied url of the image */
@@ -10,3 +10,4 @@ export interface EmbedImageRaw {
 	/** width of image */
 	width?: integer;
 }
+

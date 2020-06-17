@@ -1,12 +1,12 @@
 import { ApplicationId, SerializedUnixTimestamp } from '../../type-aliases.ts';
 import { ActivityFlag } from '../enum/ActivityFlag.ts';
-import { ActivityAssetsRaw } from './ActivityAssetsRaw.ts';
-import { ActivityEmojiRaw } from './ActivityEmojiRaw.ts';
-import { ActivityPartyRaw } from './ActivityPartyRaw.ts';
-import { ActivitySecretsRaw } from './ActivitySecretsRaw.ts';
-import { ActivityTimestampsRaw } from './ActivityTimestampsRaw.ts';
+import { RawActivityAssets } from './RawActivityAssets.ts';
+import { RawActivityEmoji } from './RawActivityEmoji.ts';
+import { RawActivityParty } from './RawActivityParty.ts';
+import { RawActivitySecrets } from './RawActivitySecrets.ts';
+import { RawActivityTimestamps } from './RawActivityTimestamps.ts';
 
-export interface ActivityRaw {
+export interface RawActivity {
 	/** the activity's name */
 	name: string;
 	/** activity type */
@@ -16,7 +16,7 @@ export interface ActivityRaw {
 	/** unix timestamp of when the activity was added to the user's session */
 	created_at: SerializedUnixTimestamp;
 	/** unix timestamps for start and/or end of the game */
-	timestamps?: ActivityTimestampsRaw;
+	timestamps?: RawActivityTimestamps;
 	/** application id for the game */
 	application_id?: ApplicationId;
 	/** what the player is currently doing */
@@ -24,15 +24,16 @@ export interface ActivityRaw {
 	/** the user's current party status */
 	state?: string;
 	/** the emoji used for a custom status */
-	emoji?: ActivityEmojiRaw;
+	emoji?: RawActivityEmoji;
 	/** information for the current party of the player */
-	party?: ActivityPartyRaw;
+	party?: RawActivityParty;
 	/** images for the presence and their hover texts */
-	assets?: ActivityAssetsRaw;
+	assets?: RawActivityAssets;
 	/** secrets for Rich Presence joining and spectating */
-	secrets?: ActivitySecretsRaw;
+	secrets?: RawActivitySecrets;
 	/** whether or not the activity is an instanced game session */
 	instance?: boolean;
 	/** activity flags ORd together, describes what the payload includes */
 	flags?: ActivityFlag;
 }
+

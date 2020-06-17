@@ -1,6 +1,6 @@
 import { integer } from '../../type-aliases.ts';
 
-export interface EmbedThumbnailRaw {
+export interface RawEmbedThumbnail {
 	/** source url of thumbnail (only supports http(s) and attachments) */
 	url?: string;
 	/** a proxied url of the thumbnail */
@@ -10,3 +10,4 @@ export interface EmbedThumbnailRaw {
 	/** width of thumbnail */
 	width?: integer;
 }
+

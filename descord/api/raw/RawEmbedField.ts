@@ -1,4 +1,4 @@
-export interface EmbedFieldRaw {
+export interface RawEmbedField {
 	/** name of the field */
 	name: string;
 	/** value of the field */
@@ -6,3 +6,4 @@ export interface EmbedFieldRaw {
 	/** whether or not this field should display inline */
 	inline?: boolean;
 }
+

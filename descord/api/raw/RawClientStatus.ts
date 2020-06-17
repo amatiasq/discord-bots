@@ -1,4 +1,4 @@
-export interface ClientStatusRaw {
+export interface RawClientStatus {
 	/** the user's status set for an active desktop (Windows, Linux, Mac) application session */
 	desktop?: string;
 	/** the user's status set for an active mobile (iOS, Android) application session */
@@ -6,3 +6,4 @@ export interface ClientStatusRaw {
 	/** the user's status set for an active web (browser, bot account) application session */
 	web?: string;
 }
+

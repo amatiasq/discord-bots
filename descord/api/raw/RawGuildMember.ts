@@ -1,9 +1,9 @@
 import { RoleId, SerializedDate } from '../../type-aliases.ts';
-import { UserRaw } from './UserRaw.ts';
+import { RawUser } from './RawUser.ts';
 
-export interface GuildMemberRaw {
+export interface RawGuildMember {
 	/** the user this guild member represents */
-	user?: UserRaw;
+	user?: RawUser;
 	/** this users guild nickname */
 	nick: string;
 	/** array of role object ids */
@@ -17,3 +17,4 @@ export interface GuildMemberRaw {
 	/** whether the user is muted in voice channels */
 	mute: boolean;
 }
+

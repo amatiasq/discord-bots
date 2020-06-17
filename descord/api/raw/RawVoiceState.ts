@@ -1,7 +1,7 @@
 import { GuildId, ChannelId, UserId } from '../../type-aliases.ts';
-import { GuildMemberRaw } from './GuildMemberRaw.ts';
+import { RawGuildMember } from './RawGuildMember.ts';
 
-export interface VoiceStateRaw {
+export interface RawVoiceState {
 	/** the guild id this voice state is for */
 	guild_id?: GuildId;
 	/** the channel id this user is connected to */
@@ -9,7 +9,7 @@ export interface VoiceStateRaw {
 	/** the user id this voice state is for */
 	user_id: UserId;
 	/** the guild member this voice state is for */
-	member?: GuildMemberRaw;
+	member?: RawGuildMember;
 	/** the session id for this voice state */
 	session_id: string;
 	/** whether this user is deafened by the server */
@@ -25,3 +25,4 @@ export interface VoiceStateRaw {
 	/** whether this user is muted by the current user */
 	suppress: boolean;
 }
+

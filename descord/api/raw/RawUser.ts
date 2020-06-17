@@ -1,6 +1,6 @@
 import { UserId } from '../../type-aliases.ts';
 
-export interface UserRaw {
+export interface RawUser {
 	/** the user's id	identify */
 	id: UserId;
 	/** the user's username, not unique across the platform	identify */
@@ -28,3 +28,4 @@ export interface UserRaw {
 	/** the public flags on a user's account	identify */
 	public_flags?: number;
 }
+

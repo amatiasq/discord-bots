@@ -7,10 +7,10 @@ import {
 	ApplicationId,
 	CategoryId,
 } from '../../type-aliases.ts';
-import { OverwriteRaw } from './OverwriteRaw.ts';
-import { UserRaw } from './UserRaw.ts';
+import { RawOverwrite } from './RawOverwrite.ts';
+import { RawUser } from './RawUser.ts';
 
-export interface ChannelRaw {
+export interface RawChannel {
 	/** the id of this channel */
 	id: ChannelId;
 	/** the type of channel */
@@ -20,7 +20,7 @@ export interface ChannelRaw {
 	/** sorting position of the channel */
 	position?: number;
 	/** explicit permission overwrites for members and roles */
-	permission_overwrites?: OverwriteRaw[];
+	permission_overwrites?: RawOverwrite[];
 	/** the name of the channel (2-100 characters) */
 	name?: string;
 	/** the channel topic (0-1024 characters) */
@@ -36,7 +36,7 @@ export interface ChannelRaw {
 	/** amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected */
 	rate_limit_per_user?: number;
 	/** the recipients of the DM */
-	recipients?: UserRaw[];
+	recipients?: RawUser[];
 	/** icon hash */
 	icon?: string;
 	/** id of the DM creator */
@@ -48,3 +48,4 @@ export interface ChannelRaw {
 	/** when the last pinned message was pinned (ISO8601 timestamp) */
 	last_pin_timestamp?: SerializedDate;
 }
+

@@ -1,4 +1,4 @@
-export interface EmbedAuthorRaw {
+export interface RawEmbedAuthor {
 	/** name of author */
 	name?: string;
 	/** url of author */
@@ -8,3 +8,4 @@ export interface EmbedAuthorRaw {
 	/** a proxied url of author icon */
 	proxy_icon_url?: string;
 }
+

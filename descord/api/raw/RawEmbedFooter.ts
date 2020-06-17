@@ -1,4 +1,4 @@
-export interface EmbedFooterRaw {
+export interface RawEmbedFooter {
 	/** footer text */
 	text: string;
 	/** url of footer icon (only supports http(s) and attachments) */
@@ -6,3 +6,4 @@ export interface EmbedFooterRaw {
 	/** a proxied url of footer icon */
 	proxy_icon_url?: string;
 }
+

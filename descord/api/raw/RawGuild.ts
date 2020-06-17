@@ -7,10 +7,10 @@ import {
 	UserId,
 } from '../../type-aliases.ts';
 import { GuildFeature } from '../enum/GuildFeature.ts';
-import { EmojiRaw } from './EmojiRaw.ts';
-import { RoleRaw } from './RoleRaw.ts';
+import { RawEmoji } from './RawEmoji.ts';
+import { RawRole } from './RawRole.ts';
 
-export interface GuildRaw {
+export interface RawGuild {
 	/** guild id */
 	id: GuildId;
 	/** guild name (2-100 characters, excluding trailing and leading whitespace) */
@@ -44,9 +44,9 @@ export interface GuildRaw {
 	/** explicit content filter level */
 	explicit_content_filter: number;
 	/** roles in the guild */
-	roles: RoleRaw[];
+	roles: RawRole[];
 	/** custom guild emojis */
-	emojis: EmojiRaw[];
+	emojis: RawEmoji[];
 	/** enabled guild features */
 	features: GuildFeature[];
 	/** required MFA level for the guild */
@@ -88,3 +88,4 @@ export interface GuildRaw {
 	/** approximate number of non-offline members in this guild, returned from the GET /guild/<id> endpoint when with_counts is true */
 	approximate_presence_count?: number;
 }
+

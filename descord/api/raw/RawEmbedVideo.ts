@@ -1,6 +1,6 @@
 import { integer } from '../../type-aliases.ts';
 
-export interface EmbedVideoRaw {
+export interface RawEmbedVideo {
 	/** source url of video */
 	url?: string;
 	/** height of video */
@@ -8,3 +8,4 @@ export interface EmbedVideoRaw {
 	/** width of video */
 	width?: integer;
 }
+

@@ -1,16 +1,16 @@
 import { EmojiId } from '../../type-aliases.ts';
-import { RoleRaw } from './RoleRaw.ts';
-import { UserRaw } from './UserRaw.ts';
+import { RawRole } from './RawRole.ts';
+import { RawUser } from './RawUser.ts';
 
-export interface EmojiRaw {
+export interface RawEmoji {
 	/** emoji id */
 	id: EmojiId;
 	/** emoji name (can be null only in reaction emoji objects) */
 	name: string | null;
 	/** roles this emoji is whitelisted to */
-	roles?: RoleRaw[];
+	roles?: RawRole[];
 	/** user that created this emoji */
-	user?: UserRaw;
+	user?: RawUser;
 	/** whether this emoji must be wrapped in colons */
 	require_colons?: boolean;
 	/** whether this emoji is managed */
@@ -20,3 +20,4 @@ export interface EmojiRaw {
 	/** whether this emoji can be used, may be false due to loss of Server Boosts */
 	available?: boolean;
 }
+

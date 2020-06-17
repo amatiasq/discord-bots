@@ -1,4 +1,4 @@
-export interface ActivitySecretsRaw {
+export interface RawActivitySecrets {
 	/** the secret for joining a party */
 	join?: string;
 	/** the secret for spectating a game */
@@ -6,3 +6,4 @@ export interface ActivitySecretsRaw {
 	/** the secret for a specific instanced ma */
 	match?: string;
 }
+

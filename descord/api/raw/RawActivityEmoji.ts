@@ -1,6 +1,6 @@
 import { EmojiId } from '../../type-aliases.ts';
 
-export interface ActivityEmojiRaw {
+export interface RawActivityEmoji {
 	/** the name of the emoji */
 	name: string;
 	/** the id of the emoji */
@@ -8,3 +8,4 @@ export interface ActivityEmojiRaw {
 	/** whether this emoji is animated    */
 	animated?: boolean;
 }
+
