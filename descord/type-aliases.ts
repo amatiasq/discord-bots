@@ -18,6 +18,8 @@ export type PermissionInteger = '%PermissionInteger%';
 export type SerializedDate = '%SerializedDate%';
 export type SerializedUnixTimestamp = '%SerializedUnixTimestamp%';
 
+export { Permission };
+
 export function parsePermissionInteger(value: PermissionInteger): Permission[] {
 	const flags = (value as any) as number;
 	const keys = Object.keys(Permission) as Array<keyof typeof Permission>;

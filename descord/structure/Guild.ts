@@ -3,7 +3,7 @@ import {
 	ApplicationId,
 	ChannelId,
 	GuildId,
-	parsePermissionInteger, unparsePermissionInteger,
+	Permission, parsePermissionInteger, unparsePermissionInteger,
 	snowflake,
 	UserId,
 } from '../type-aliases.ts';

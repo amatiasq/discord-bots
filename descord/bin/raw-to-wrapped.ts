@@ -3,6 +3,7 @@ const PARSEABLE = [
 	'SerializedDate',
 	'SerializedUnixTimestamp',
 ];
+const PARSEABLE_IMPORT = ['Permission, ', '', ''];
 const PARSED = ['Permission[]', 'Date', 'Date'];
 
 console.log(await main());
@@ -37,7 +38,7 @@ export ${writeUnwrap(name, properties, hasCasing)};
 
 function adaptImports(name: string, imports: string, hasCasing: boolean) {
 	const list = PARSEABLE.reduce(
-		(x, y) => x.replace(y, `parse${y}, unparse${y}`),
+		(x, y, i) => x.replace(y, `${PARSEABLE_IMPORT[i]}parse${y}, unparse${y}`),
 		imports,
 	)
 		.replace(/import\s*\{\s*Raw(\w+)\s*\}/g, 'import { $1, wrap$1, unwrap$1 }')
