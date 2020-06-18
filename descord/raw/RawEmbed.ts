@@ -1,4 +1,4 @@
-import { SerializedDate } from '../../type-aliases.ts';
+import { SerializedDate } from '../type-aliases.ts';
 import { RawEmbedAuthor } from './RawEmbedAuthor.ts';
 import { RawEmbedField } from './RawEmbedField.ts';
 import { RawEmbedFooter } from './RawEmbedFooter.ts';

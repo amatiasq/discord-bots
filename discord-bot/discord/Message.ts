@@ -1,7 +1,3 @@
-import { sendMessage } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/handlers/channel.ts';
-import { addReaction } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/handlers/message.ts';
-import { Message } from 'https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v5/structures/message.ts';
-
 import { Bot } from '../Bot.ts';
 import { datetime } from '../util/datetime.ts';
 import { containsWord, normalize, remove, trim } from '../util/string.ts';

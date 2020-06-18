@@ -1,4 +1,4 @@
-import { RoleId, PermissionInteger } from '../../type-aliases.ts';
+import { RoleId, PermissionInteger } from '../type-aliases.ts';
 
 export interface RawRole {
 	/** role id */

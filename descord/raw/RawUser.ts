@@ -1,4 +1,4 @@
-import { UserId } from '../../type-aliases.ts';
+import { UserId } from '../type-aliases.ts';
 
 export interface RawUser {
 	/** the user's id	identify */

@@ -1,4 +1,4 @@
-import { RoleId, UserId } from '../../type-aliases.ts';
+import { RoleId, UserId } from '../type-aliases.ts';
 import { AllowedMentionType } from '../enum/AllowedMentionType.ts';
 
 export interface RawAllowedMentions {

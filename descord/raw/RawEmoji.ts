@@ -1,4 +1,4 @@
-import { EmojiId } from '../../type-aliases.ts';
+import { EmojiId } from '../type-aliases.ts';
 import { RawRole } from './RawRole.ts';
 import { RawUser } from './RawUser.ts';
 

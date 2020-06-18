@@ -1,5 +1,5 @@
 import { RawPresenceUpdateEvent } from '../raw/RawPresenceUpdateEvent.ts';
-import { GuildId, RoleId, parseSerializedDate, unparseSerializedDate } from '../../type-aliases.ts';
+import { GuildId, RoleId, parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
 import { PresenceStatus } from '../enum/PresenceStatus.ts';
 import { Activity, wrapActivity, unwrapActivity } from './Activity.ts';
 import { ClientStatus, wrapClientStatus, unwrapClientStatus } from './ClientStatus.ts';

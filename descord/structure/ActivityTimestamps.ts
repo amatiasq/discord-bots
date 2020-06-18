@@ -1,5 +1,5 @@
 import { RawActivityTimestamps } from '../raw/RawActivityTimestamps.ts';
-import { parseSerializedUnixTimestamp, unparseSerializedUnixTimestamp } from '../../type-aliases.ts';
+import { parseSerializedUnixTimestamp, unparseSerializedUnixTimestamp } from '../type-aliases.ts';
 
 export interface ActivityTimestamps {
 	/** unix time (in milliseconds) of when the activity started */

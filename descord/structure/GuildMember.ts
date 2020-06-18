@@ -1,5 +1,5 @@
 import { RawGuildMember } from '../raw/RawGuildMember.ts';
-import { RoleId, parseSerializedDate, unparseSerializedDate } from '../../type-aliases.ts';
+import { RoleId, parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 

@@ -1,5 +1,5 @@
 import { RawActivityParty } from '../raw/RawActivityParty.ts';
-import { PartyId } from '../../type-aliases.ts';
+import { PartyId } from '../type-aliases.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface ActivityParty {

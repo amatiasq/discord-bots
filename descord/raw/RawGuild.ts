@@ -5,7 +5,7 @@ import {
 	PermissionInteger,
 	snowflake,
 	UserId,
-} from '../../type-aliases.ts';
+} from '../type-aliases.ts';
 import { GuildFeature } from '../enum/GuildFeature.ts';
 import { RawEmoji } from './RawEmoji.ts';
 import { RawRole } from './RawRole.ts';

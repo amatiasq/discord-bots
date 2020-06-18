@@ -1,4 +1,4 @@
-import { integer } from '../../type-aliases.ts';
+import { integer } from '../type-aliases.ts';
 
 export interface RawEmbedVideo {
 	/** source url of video */

@@ -1,4 +1,4 @@
-import { SerializedDate } from '../../type-aliases.ts';
+import { SerializedDate } from '../type-aliases.ts';
 import { RawChannel } from './RawChannel.ts';
 import { RawGuildMember } from './RawGuildMember.ts';
 import { RawGuild } from './RawGuild.ts';

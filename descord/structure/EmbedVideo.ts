@@ -1,5 +1,5 @@
 import { RawEmbedVideo } from '../raw/RawEmbedVideo.ts';
-import { integer } from '../../type-aliases.ts';
+import { integer } from '../type-aliases.ts';
 
 export interface EmbedVideo {
 	/** source url of video */

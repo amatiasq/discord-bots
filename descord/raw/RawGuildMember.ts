@@ -1,4 +1,4 @@
-import { RoleId, SerializedDate } from '../../type-aliases.ts';
+import { RoleId, SerializedDate } from '../type-aliases.ts';
 import { RawUser } from './RawUser.ts';
 
 export interface RawGuildMember {

@@ -1,5 +1,5 @@
 import { RawEmbedThumbnail } from '../raw/RawEmbedThumbnail.ts';
-import { integer } from '../../type-aliases.ts';
+import { integer } from '../type-aliases.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface EmbedThumbnail {

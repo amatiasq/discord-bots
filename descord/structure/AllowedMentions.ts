@@ -1,5 +1,5 @@
 import { RawAllowedMentions } from '../raw/RawAllowedMentions.ts';
-import { RoleId, UserId } from '../../type-aliases.ts';
+import { RoleId, UserId } from '../type-aliases.ts';
 import { AllowedMentionType } from '../enum/AllowedMentionType.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 

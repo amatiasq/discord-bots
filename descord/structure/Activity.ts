@@ -1,36 +1,12 @@
-import {
-	ApplicationId,
-	parseSerializedUnixTimestamp,
-	unparseSerializedUnixTimestamp,
-} from '../../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
-import { ActivityFlag } from '../enum/ActivityFlag.ts';
 import { RawActivity } from '../raw/RawActivity.ts';
-import {
-	ActivityAssets,
-	unwrapActivityAssets,
-	wrapActivityAssets,
-} from './ActivityAssets.ts';
-import {
-	ActivityEmoji,
-	unwrapActivityEmoji,
-	wrapActivityEmoji,
-} from './ActivityEmoji.ts';
-import {
-	ActivityParty,
-	unwrapActivityParty,
-	wrapActivityParty,
-} from './ActivityParty.ts';
-import {
-	ActivitySecrets,
-	unwrapActivitySecrets,
-	wrapActivitySecrets,
-} from './ActivitySecrets.ts';
-import {
-	ActivityTimestamps,
-	unwrapActivityTimestamps,
-	wrapActivityTimestamps,
-} from './ActivityTimestamps.ts';
+import { ApplicationId, parseSerializedUnixTimestamp, unparseSerializedUnixTimestamp } from '../type-aliases.ts';
+import { ActivityFlag } from '../enum/ActivityFlag.ts';
+import { ActivityAssets, wrapActivityAssets, unwrapActivityAssets } from './ActivityAssets.ts';
+import { ActivityEmoji, wrapActivityEmoji, unwrapActivityEmoji } from './ActivityEmoji.ts';
+import { ActivityParty, wrapActivityParty, unwrapActivityParty } from './ActivityParty.ts';
+import { ActivitySecrets, wrapActivitySecrets, unwrapActivitySecrets } from './ActivitySecrets.ts';
+import { ActivityTimestamps, wrapActivityTimestamps, unwrapActivityTimestamps } from './ActivityTimestamps.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Activity {
 	/** the activity's name */
@@ -63,6 +39,7 @@ export interface Activity {
 	flags?: ActivityFlag;
 }
 
+
 export function wrapActivity(x: RawActivity): Activity {
 	return {
 		...fromApiCasing(x),
@@ -73,7 +50,7 @@ export function wrapActivity(x: RawActivity): Activity {
 		assets: x.assets && wrapActivityAssets(x.assets),
 		secrets: x.secrets && wrapActivitySecrets(x.secrets),
 	};
-}
+};
 
 export function unwrapActivity(x: Activity): RawActivity {
 	return {
@@ -85,4 +62,5 @@ export function unwrapActivity(x: Activity): RawActivity {
 		assets: x.assets && unwrapActivityAssets(x.assets),
 		secrets: x.secrets && unwrapActivitySecrets(x.secrets),
 	};
-}
+};
+

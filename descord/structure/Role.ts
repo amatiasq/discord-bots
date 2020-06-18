@@ -1,5 +1,5 @@
 import { RawRole } from '../raw/RawRole.ts';
-import { RoleId, parsePermissionInteger, unparsePermissionInteger } from '../../type-aliases.ts';
+import { RoleId, parsePermissionInteger, unparsePermissionInteger } from '../type-aliases.ts';
 
 export interface Role {
 	/** role id */

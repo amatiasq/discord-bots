@@ -1,5 +1,5 @@
 import { RawVoiceState } from '../raw/RawVoiceState.ts';
-import { GuildId, ChannelId, UserId } from '../../type-aliases.ts';
+import { GuildId, ChannelId, UserId } from '../type-aliases.ts';
 import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 

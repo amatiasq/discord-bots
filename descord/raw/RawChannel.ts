@@ -6,7 +6,7 @@ import {
 	snowflake,
 	ApplicationId,
 	CategoryId,
-} from '../../type-aliases.ts';
+} from '../type-aliases.ts';
 import { RawOverwrite } from './RawOverwrite.ts';
 import { RawUser } from './RawUser.ts';
 

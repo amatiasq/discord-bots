@@ -7,7 +7,7 @@ import {
 	snowflake,
 	ApplicationId,
 	CategoryId,
-} from '../../type-aliases.ts';
+} from '../type-aliases.ts';
 import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';

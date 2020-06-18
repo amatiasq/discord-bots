@@ -1,5 +1,5 @@
 import { RawUser } from '../raw/RawUser.ts';
-import { UserId } from '../../type-aliases.ts';
+import { UserId } from '../type-aliases.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface User {

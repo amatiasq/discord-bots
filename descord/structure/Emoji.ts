@@ -1,5 +1,5 @@
 import { RawEmoji } from '../raw/RawEmoji.ts';
-import { EmojiId } from '../../type-aliases.ts';
+import { EmojiId } from '../type-aliases.ts';
 import { Role, wrapRole, unwrapRole } from './Role.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';

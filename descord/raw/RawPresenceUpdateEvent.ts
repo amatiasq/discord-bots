@@ -1,4 +1,4 @@
-import { GuildId, RoleId, SerializedDate } from '../../type-aliases.ts';
+import { GuildId, RoleId, SerializedDate } from '../type-aliases.ts';
 import { PresenceStatus } from '../enum/PresenceStatus.ts';
 import { RawActivity } from './RawActivity.ts';
 import { RawClientStatus } from './RawClientStatus.ts';

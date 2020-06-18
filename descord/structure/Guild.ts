@@ -6,7 +6,7 @@ import {
 	parsePermissionInteger, unparsePermissionInteger,
 	snowflake,
 	UserId,
-} from '../../type-aliases.ts';
+} from '../type-aliases.ts';
 import { GuildFeature } from '../enum/GuildFeature.ts';
 import { Emoji, wrapEmoji, unwrapEmoji } from './Emoji.ts';
 import { Role, wrapRole, unwrapRole } from './Role.ts';

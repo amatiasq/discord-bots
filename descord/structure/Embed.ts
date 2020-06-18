@@ -1,5 +1,5 @@
 import { RawEmbed } from '../raw/RawEmbed.ts';
-import { parseSerializedDate, unparseSerializedDate } from '../../type-aliases.ts';
+import { parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
 import { EmbedAuthor, wrapEmbedAuthor, unwrapEmbedAuthor } from './EmbedAuthor.ts';
 import { EmbedField, wrapEmbedField, unwrapEmbedField } from './EmbedField.ts';
 import { EmbedFooter, wrapEmbedFooter, unwrapEmbedFooter } from './EmbedFooter.ts';

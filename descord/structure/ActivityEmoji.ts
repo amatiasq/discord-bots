@@ -1,5 +1,5 @@
 import { RawActivityEmoji } from '../raw/RawActivityEmoji.ts';
-import { EmojiId } from '../../type-aliases.ts';
+import { EmojiId } from '../type-aliases.ts';
 
 export interface ActivityEmoji {
 	/** the name of the emoji */
