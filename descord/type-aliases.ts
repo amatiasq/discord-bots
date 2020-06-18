@@ -1,4 +1,4 @@
-import { Permission } from './api/Permission.ts';
+import { Permission } from './api/enum/Permission.ts';
 
 export type integer = number;
 export type snowflake = '%snowflake%';

@@ -1,32 +1,45 @@
-import { omit } from '../../util/omit.ts';
-import { VoiceStateRaw } from '../raw/VoiceStateRaw.ts';
-import { wrapGuildMember } from './GuildMember.ts';
+import { RawVoiceState } from '../raw/RawVoiceState.ts';
+import { GuildId, ChannelId, UserId } from '../../type-aliases.ts';
+import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type VoiceState = ReturnType<typeof wrapVoiceState>;
-
-export function wrapVoiceState(json: VoiceStateRaw) {
-	return {
-		...omit(
-			json,
-			'guild_id',
-			'channel_id',
-			'user_id',
-			'session_id',
-			'self_deaf',
-			'self_mute',
-			'self_stream',
-		),
-
-		// Casing
-		guildId: json.guild_id,
-		channelId: json.channel_id,
-		userId: json.user_id,
-		sessionId: json.session_id,
-		selfDeaf: json.self_deaf,
-		selfMute: json.self_mute,
-		selfStream: json.self_stream,
-
-		// Deserialization
-		member: json.member && wrapGuildMember(json.member),
-	};
+export interface VoiceState {
+	/** the guild id this voice state is for */
+	guildId?: GuildId;
+	/** the channel id this user is connected to */
+	channelId: ChannelId;
+	/** the user id this voice state is for */
+	userId: UserId;
+	/** the guild member this voice state is for */
+	member?: GuildMember;
+	/** the session id for this voice state */
+	sessionId: string;
+	/** whether this user is deafened by the server */
+	deaf: boolean;
+	/** whether this user is muted by the server */
+	mute: boolean;
+	/** whether this user is locally deafened */
+	selfDeaf: boolean;
+	/** whether this user is locally muted */
+	selfMute: boolean;
+	/** whether this user is streaming using "Go Live" */
+	selfStream?: boolean;
+	/** whether this user is muted by the current user */
+	suppress: boolean;
 }
+
+
+export function wrapVoiceState(x: RawVoiceState): VoiceState {
+	return {
+		...fromApiCasing(x),
+		member: x.member && wrapGuildMember(x.member),
+	};
+};
+
+export function unwrapVoiceState(x: VoiceState): RawVoiceState {
+	return {
+		...toApiCasing(x),
+		member: x.member && unwrapGuildMember(x.member),
+	};
+};
+

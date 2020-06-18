@@ -1,11 +1,27 @@
-import { parseSerializedUnixTimestamp } from '../../type-aliases.ts';
-import { ActivityTimestampsRaw } from '../raw/ActivityTimestampsRaw.ts';
+import { RawActivityTimestamps } from '../raw/RawActivityTimestamps.ts';
+import { parseSerializedUnixTimestamp, unparseSerializedUnixTimestamp } from '../../type-aliases.ts';
 
-export type ActivityTimestamps = ReturnType<typeof wrapActivityTimestamps>;
-
-export function wrapActivityTimestamps(json: ActivityTimestampsRaw) {
-	return {
-		start: json.start && parseSerializedUnixTimestamp(json.start),
-		end: json.end && parseSerializedUnixTimestamp(json.end),
-	};
+export interface ActivityTimestamps {
+	/** unix time (in milliseconds) of when the activity started */
+	start?: Date;
+	/** unix time (in milliseconds) of when the activity ends */
+	end?: SerializedUnixTimestamp;
 }
+
+
+export function wrapActivityTimestamps(x: RawActivityTimestamps): ActivityTimestamps {
+	return {
+		...x,
+		start: x.start && parseSerializedUnixTimestamp(x.start),
+		end: x.end && parseSerializedUnixTimestamp(x.end),
+	};
+};
+
+export function unwrapActivityTimestamps(x: ActivityTimestamps): RawActivityTimestamps {
+	return {
+		...x,
+		start: x.start && unparseSerializedUnixTimestamp(x.start),
+		end: x.end && unparseSerializedUnixTimestamp(x.end),
+	};
+};
+

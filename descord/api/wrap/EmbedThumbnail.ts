@@ -1,22 +1,24 @@
-import { omit } from '../../util/omit.ts';
-import { EmbedThumbnailRaw } from '../raw/EmbedThumbnailRaw.ts';
+import { RawEmbedThumbnail } from '../raw/RawEmbedThumbnail.ts';
+import { integer } from '../../type-aliases.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type EmbedThumbnail = ReturnType<typeof wrapEmbedThumbnail>;
-
-export function wrapEmbedThumbnail(x: EmbedThumbnailRaw) {
-	return {
-		...omit(x, 'proxy_url'),
-
-		// Casing
-		proxyUrl: x.proxy_url,
-	};
+export interface EmbedThumbnail {
+	/** source url of thumbnail (only supports http(s) and attachments) */
+	url?: string;
+	/** a proxied url of the thumbnail */
+	proxyUrl?: string;
+	/** height of thumbnail */
+	height?: integer;
+	/** width of thumbnail */
+	width?: integer;
 }
 
-export function unwrapEmbedThumbnail(x: EmbedThumbnail): EmbedThumbnailRaw {
-	return {
-		...omit(x, 'proxyUrl'),
 
-		// Casing
-		proxy_url: x.proxyUrl,
-	};
-}
+export function wrapEmbedThumbnail(x: RawEmbedThumbnail): EmbedThumbnail {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedThumbnail(x: EmbedThumbnail): RawEmbedThumbnail {
+	return toApiCasing(x);
+};
+

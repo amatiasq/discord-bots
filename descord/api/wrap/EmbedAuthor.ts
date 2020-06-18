@@ -1,24 +1,23 @@
-import { omit } from '../../util/omit.ts';
-import { EmbedAuthorRaw } from '../raw/EmbedAuthorRaw.ts';
+import { RawEmbedAuthor } from '../raw/RawEmbedAuthor.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type EmbedAuthor = ReturnType<typeof wrapEmbedAuthor>;
-
-export function wrapEmbedAuthor(x: EmbedAuthorRaw) {
-	return {
-		...omit(x, 'icon_url', 'proxy_icon_url'),
-
-		// Casing
-		iconUrl: x.icon_url,
-		proxyIconUrl: x.proxy_icon_url,
-	};
+export interface EmbedAuthor {
+	/** name of author */
+	name?: string;
+	/** url of author */
+	url?: string;
+	/** url of author icon (only supports http(s) and attachments) */
+	iconUrl?: string;
+	/** a proxied url of author icon */
+	proxyIconUrl?: string;
 }
 
-export function unwrapEmbedAuthor(x: EmbedAuthor): EmbedAuthorRaw {
-	return {
-		...omit(x, 'iconUrl', 'proxyIconUrl'),
 
-		// Casing
-		icon_url: x.proxyIconUrl,
-		proxy_icon_url: x.proxyIconUrl,
-	};
-}
+export function wrapEmbedAuthor(x: RawEmbedAuthor): EmbedAuthor {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedAuthor(x: EmbedAuthor): RawEmbedAuthor {
+	return toApiCasing(x);
+};
+

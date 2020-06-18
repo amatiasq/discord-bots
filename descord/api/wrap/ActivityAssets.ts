@@ -1,12 +1,23 @@
-import { ActivityAssetsRaw } from '../raw/ActivityAssetsRaw.ts';
+import { RawActivityAssets } from '../raw/RawActivityAssets.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type ActivityAssets = ReturnType<typeof wrapActivityAssets>;
-
-export function wrapActivityAssets(json: ActivityAssetsRaw) {
-	return {
-		largeImage: json.large_image,
-		largeText: json.large_text,
-		smallImage: json.small_image,
-		smallText: json.small_text,
-	};
+export interface ActivityAssets {
+	/** the id for a large asset of the activity, usually a snowflake */
+	largeImage?: string;
+	/** text displayed when hovering over the large image of the activity */
+	largeText?: string;
+	/** the id for a small asset of the activity, usually a snowflake */
+	smallImage?: string;
+	/** text displayed when hovering over the small image of the activity */
+	smallText?: string;
 }
+
+
+export function wrapActivityAssets(x: RawActivityAssets): ActivityAssets {
+	return fromApiCasing(x);
+};
+
+export function unwrapActivityAssets(x: ActivityAssets): RawActivityAssets {
+	return toApiCasing(x);
+};
+

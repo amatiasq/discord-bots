@@ -1,21 +1,41 @@
-import { parseSerializedDate } from '../../type-aliases.ts';
-import { omit } from '../../util/omit.ts';
-import { GuildMemberRaw } from '../raw/GuildMemberRaw.ts';
-import { wrapUser } from './User.ts';
+import { RawGuildMember } from '../raw/RawGuildMember.ts';
+import { RoleId, parseSerializedDate, unparseSerializedDate } from '../../type-aliases.ts';
+import { User, wrapUser, unwrapUser } from './User.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type GuildMember = ReturnType<typeof wrapGuildMember>;
-
-export function wrapGuildMember(json: GuildMemberRaw) {
-	return {
-		...omit(json, 'joined_at', 'premium_since'),
-
-		// Casing
-		// joinedAt: json.joined_at,
-		// premiumSince: json.premium_since,
-
-		// Deserialization
-		user: json.user && wrapUser(json.user),
-		joinedAt: parseSerializedDate(json.joined_at),
-		premiumSince: json.premium_since && parseSerializedDate(json.premium_since),
-	};
+export interface GuildMember {
+	/** the user this guild member represents */
+	user?: User;
+	/** this users guild nickname */
+	nick: string;
+	/** array of role object ids */
+	roles: RoleId[];
+	/** when the user joined the guild (ISO8601 timestamp) */
+	joinedAt: Date;
+	/** when the user started boosting the guild (ISO8601 timestamp) */
+	premiumSince?: SerializedDate;
+	/** whether the user is deafened in voice channels */
+	deaf: boolean;
+	/** whether the user is muted in voice channels */
+	mute: boolean;
 }
+
+
+export function wrapGuildMember(x: RawGuildMember): GuildMember {
+	return {
+		...fromApiCasing(x),
+		user: x.user && wrapUser(x.user),
+		joinedAt: parseSerializedDate(x.joined_at),
+		premiumSince: x.premium_since && parseSerializedDate(x.premium_since),
+	};
+};
+
+export function unwrapGuildMember(x: GuildMember): RawGuildMember {
+	return {
+		...toApiCasing(x),
+		user: x.user && unwrapUser(x.user),
+		joined_at: unparseSerializedDate(x.joinedAt),
+		premium_since: x.premiumSince && unparseSerializedDate(x.premiumSince),
+	};
+};
+

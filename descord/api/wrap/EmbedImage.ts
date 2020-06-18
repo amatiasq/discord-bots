@@ -1,22 +1,24 @@
-import { omit } from '../../util/omit.ts';
-import { EmbedImageRaw } from '../raw/EmbedImageRaw.ts';
+import { RawEmbedImage } from '../raw/RawEmbedImage.ts';
+import { integer } from '../../type-aliases.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type EmbedImage = ReturnType<typeof wrapEmbedImage>;
-
-export function wrapEmbedImage(x: EmbedImageRaw) {
-	return {
-		...omit(x, 'proxy_url'),
-
-		// Casing
-		proxyUrl: x.proxy_url,
-	};
+export interface EmbedImage {
+	/** source url of image (only supports http(s) and attachments) */
+	url?: string;
+	/** a proxied url of the image */
+	proxyUrl?: string;
+	/** height of image */
+	height?: integer;
+	/** width of image */
+	width?: integer;
 }
 
-export function unwrapEmbedImage(x: EmbedImage): EmbedImageRaw {
-	return {
-		...omit(x, 'proxyUrl'),
 
-		// Casing
-		proxy_url: x.proxyUrl,
-	};
-}
+export function wrapEmbedImage(x: RawEmbedImage): EmbedImage {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedImage(x: EmbedImage): RawEmbedImage {
+	return toApiCasing(x);
+};
+

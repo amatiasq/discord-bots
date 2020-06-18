@@ -1,7 +1,21 @@
-import { ActivitySecretsRaw } from '../raw/ActivitySecretsRaw.ts';
+import { RawActivitySecrets } from '../raw/RawActivitySecrets.ts';
 
-export type ActivitySecrets = ReturnType<typeof wrapActivitySecrets>;
 
-export function wrapActivitySecrets(json: ActivitySecretsRaw) {
-	return json;
+export interface ActivitySecrets {
+	/** the secret for joining a party */
+	join?: string;
+	/** the secret for spectating a game */
+	spectate?: string;
+	/** the secret for a specific instanced ma */
+	match?: string;
 }
+
+
+export function wrapActivitySecrets(x: RawActivitySecrets): ActivitySecrets {
+	return x;
+};
+
+export function unwrapActivitySecrets(x: ActivitySecrets): RawActivitySecrets {
+	return x;
+};
+

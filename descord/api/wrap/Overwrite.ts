@@ -1,12 +1,28 @@
-import { parsePermissionInteger } from '../../type-aliases.ts';
-import { OverwriteRaw } from '../raw/OverwriteRaw.ts';
+Interface not found in:
 
-export type Overwrite = ReturnType<typeof wrapOverwrite>;
+ import { PermissionInteger, UserId, RoleId } from '../../type-aliases.ts';
 
-export function wrapOverwrite(json: OverwriteRaw) {
-	return {
-		...json,
-		allow: parsePermissionInteger(json.allow),
-		deny: parsePermissionInteger(json.deny),
-	};
+interface RawOverwrite_Role {
+	/** role or user id */
+	id: RoleId;
+	/** either "role" or "member" */
+	type: 'role';
+	/** permission bit set */
+	allow: PermissionInteger;
+	/** permission bit set */
+	deny: PermissionInteger;
 }
+
+interface RawOverwrite_Member {
+	/** role or user id */
+	id: UserId;
+	/** either "role" or "member" */
+	type: 'member';
+	/** permission bit set */
+	allow: PermissionInteger;
+	/** permission bit set */
+	deny: PermissionInteger;
+}
+
+export type RawOverwrite = RawOverwrite_Role | RawOverwrite_Member;
+

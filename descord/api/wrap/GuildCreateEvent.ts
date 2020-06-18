@@ -1,39 +1,28 @@
-import { parseSerializedDate } from '../../type-aliases.ts';
-import { GuildCreateEventRaw } from '../raw/GuildCreateEventRaw.ts';
-import { wrapChannel } from './Channel.ts';
-import { wrapGuild } from './Guild.ts';
-import { wrapGuildMember } from './GuildMember.ts';
-import { wrapPresenceUpdateEvent } from './PresenceUpdateEvent.ts';
-import { wrapVoiceState } from './VoiceState.ts';
+Interface not found in:
 
-export type GuildCreateEvent = ReturnType<typeof wrapGuildCreateEvent>;
+ import { SerializedDate } from '../../type-aliases.ts';
+import { RawChannel } from './RawChannel.ts';
+import { RawGuildMember } from './RawGuildMember.ts';
+import { RawGuild } from './RawGuild.ts';
+import { RawPresenceUpdateEvent } from './RawPresenceUpdateEvent.ts';
+import { RawVoiceState } from './RawVoiceState.ts';
 
-export function wrapGuildCreateEvent(json: GuildCreateEventRaw) {
-	const {
-		joined_at,
-		large,
-		unavailable,
-		member_count,
-		voice_states,
-		members,
-		channels,
-		presences,
-		...guild
-	} = json;
-
-	return {
-		...wrapGuild(guild),
-
-		// Casing
-		// joinedAt: joined_at,
-		memberCount: member_count,
-		// voiceStates: voice_states,
-
-		// Deserialization
-		joinedAt: joined_at && parseSerializedDate(joined_at),
-		voiceStates: voice_states?.map(wrapVoiceState),
-		members: members?.map(wrapGuildMember),
-		channels: channels?.map(wrapChannel),
-		presences: presences?.map(wrapPresenceUpdateEvent),
-	};
+export interface RawGuildCreateEvent extends RawGuild {
+	/** when this guild was joined at (ISO8601 timestamp) */
+	joined_at?: SerializedDate;
+	/** true if this is considered a large guild */
+	large?: boolean;
+	/** true if this guild is unavailable due to an outage */
+	unavailable?: boolean;
+	/** total number of members in this guild */
+	member_count?: number;
+	/** states of members currently in voice channels; lacks the guild_id key */
+	voice_states?: RawVoiceState[];
+	/** users in the guild */
+	members?: RawGuildMember[];
+	/** channels in the guild */
+	channels?: RawChannel[];
+	/** presences of the members in the guild, will only include non-offline members if the size is greater than large threshold */
+	presences?: RawPresenceUpdateEvent[];
 }
+

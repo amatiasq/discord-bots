@@ -1,44 +1,72 @@
-import { parseSerializedDate } from '../../type-aliases.ts';
-import { omit } from '../../util/omit.ts';
-import { ChannelRaw } from '../raw/ChannelRaw.ts';
-import { wrapOverwrite } from './Overwrite.ts';
-import { wrapUser } from './User.ts';
+import { RawChannel } from '../raw/RawChannel.ts';
+import {
+	ChannelId,
+	GuildId,
+	MessageId,
+	parseSerializedDate, unparseSerializedDate,
+	snowflake,
+	ApplicationId,
+	CategoryId,
+} from '../../type-aliases.ts';
+import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
+import { User, wrapUser, unwrapUser } from './User.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
-export type Channel = ReturnType<typeof wrapChannel>;
-
-export function wrapChannel(json: ChannelRaw) {
-	return {
-		...omit(
-			json,
-
-			'guild_id',
-			'permission_overwrites',
-			'last_message_id',
-			'user_limit',
-			'rate_limit_per_user',
-			'owner_id',
-			'application_id',
-			'parent_id',
-			'last_pin_timestamp',
-		),
-
-		// Casing
-		guildId: json.guild_id,
-		// permissionOverwrites: json.permission_overwrites,
-		lastMessageId: json.last_message_id,
-		userLimit: json.user_limit,
-		rateLimitPerUser: json.rate_limit_per_user,
-		ownerId: json.owner_id,
-		applicationId: json.application_id,
-		parentId: json.parent_id,
-		// lastPinTimestamp: json.last_pin_timestamp,
-
-		// Deserialization
-		permissionOverwrites:
-			json.permission_overwrites &&
-			json.permission_overwrites.map(wrapOverwrite),
-		recipients: json.recipients?.map(wrapUser),
-		lastPinTimestamp:
-			json.last_pin_timestamp && parseSerializedDate(json.last_pin_timestamp),
-	};
+export interface Channel {
+	/** the id of this channel */
+	id: ChannelId;
+	/** the type of channel */
+	type: number;
+	/** the id of the guild */
+	guildId?: GuildId;
+	/** sorting position of the channel */
+	position?: number;
+	/** explicit permission overwrites for members and roles */
+	permissionOverwrites?: Overwrite[];
+	/** the name of the channel (2-100 characters) */
+	name?: string;
+	/** the channel topic (0-1024 characters) */
+	topic?: string;
+	/** whether the channel is nsfw */
+	nsfw?: boolean;
+	/** the id of the last message sent in this channel (may not point to an existing or valid message) */
+	lastMessageId?: MessageId;
+	/** the bitrate (in bits) of the voice channel */
+	bitrate?: number;
+	/** the user limit of the voice channel */
+	userLimit?: number;
+	/** amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manageMessages or manageChannel, are unaffected */
+	rateLimitPerUser?: number;
+	/** the recipients of the DM */
+	recipients?: User[];
+	/** icon hash */
+	icon?: string;
+	/** id of the DM creator */
+	ownerId?: snowflake;
+	/** application id of the group DM creator if it is bot-created */
+	applicationId?: ApplicationId;
+	/** id of the parent category for a channel (each parent category can contain up to 50 channels) */
+	parentId?: CategoryId;
+	/** when the last pinned message was pinned (ISO8601 timestamp) */
+	lastPinTimestamp?: Date;
 }
+
+
+export function wrapChannel(x: RawChannel): Channel {
+	return {
+		...fromApiCasing(x),
+		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
+		recipients: x.recipients && x.recipients.map(wrapUser),
+		lastPinTimestamp: x.last_pin_timestamp && parseSerializedDate(x.last_pin_timestamp),
+	};
+};
+
+export function unwrapChannel(x: Channel): RawChannel {
+	return {
+		...toApiCasing(x),
+		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
+		recipients: x.recipients && x.recipients.map(unwrapUser),
+		last_pin_timestamp: x.lastPinTimestamp && unparseSerializedDate(x.lastPinTimestamp),
+	};
+};
+

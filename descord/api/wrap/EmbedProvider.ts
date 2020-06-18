@@ -1,11 +1,19 @@
-import { EmbedProviderRaw } from '../raw/EmbedProviderRaw.ts';
+import { RawEmbedProvider } from '../raw/RawEmbedProvider.ts';
 
-export type EmbedProvider = ReturnType<typeof wrapEmbedProvider>;
 
-export function wrapEmbedProvider(x: EmbedProviderRaw) {
-	return x;
+export interface EmbedProvider {
+	/** name of provider */
+	name?: string;
+	/** url of provider */
+	url?: string;
 }
 
-export function unwrapEmbedProvider(x: EmbedProvider): EmbedProviderRaw {
+
+export function wrapEmbedProvider(x: RawEmbedProvider): EmbedProvider {
 	return x;
-}
+};
+
+export function unwrapEmbedProvider(x: EmbedProvider): RawEmbedProvider {
+	return x;
+};
+
