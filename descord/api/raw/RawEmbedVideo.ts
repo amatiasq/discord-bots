@@ -8,4 +8,3 @@ export interface RawEmbedVideo {
 	/** width of video */
 	width?: integer;
 }
-

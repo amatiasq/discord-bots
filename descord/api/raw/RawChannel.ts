@@ -48,4 +48,3 @@ export interface RawChannel {
 	/** when the last pinned message was pinned (ISO8601 timestamp) */
 	last_pin_timestamp?: SerializedDate;
 }
-

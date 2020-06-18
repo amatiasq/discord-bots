@@ -23,4 +23,3 @@ export interface RawGuildCreateEvent extends RawGuild {
 	/** presences of the members in the guild, will only include non-offline members if the size is greater than large threshold */
 	presences?: RawPresenceUpdateEvent[];
 }
-

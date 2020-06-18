@@ -6,4 +6,3 @@ export interface RawClientStatus {
 	/** the user's status set for an active web (browser, bot account) application session */
 	web?: string;
 }
-

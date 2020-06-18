@@ -28,4 +28,3 @@ export interface RawUser {
 	/** the public flags on a user's account	identify */
 	public_flags?: number;
 }
-

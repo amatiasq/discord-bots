@@ -8,4 +8,3 @@ export interface RawEmbedAuthor {
 	/** a proxied url of author icon */
 	proxy_icon_url?: string;
 }
-

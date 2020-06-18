@@ -25,4 +25,3 @@ export interface RawVoiceState {
 	/** whether this user is muted by the current user */
 	suppress: boolean;
 }
-

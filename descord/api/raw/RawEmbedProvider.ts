@@ -4,4 +4,3 @@ export interface RawEmbedProvider {
 	/** url of provider */
 	url?: string;
 }
-

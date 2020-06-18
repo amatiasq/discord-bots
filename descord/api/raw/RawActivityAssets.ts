@@ -8,4 +8,3 @@ export interface RawActivityAssets {
 	/** text displayed when hovering over the small image of the activity */
 	small_text?: string;
 }
-

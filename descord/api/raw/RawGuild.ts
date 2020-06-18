@@ -88,4 +88,3 @@ export interface RawGuild {
 	/** approximate number of non-offline members in this guild, returned from the GET /guild/<id> endpoint when with_counts is true */
 	approximate_presence_count?: number;
 }
-

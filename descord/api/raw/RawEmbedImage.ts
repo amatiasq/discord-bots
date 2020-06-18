@@ -10,4 +10,3 @@ export interface RawEmbedImage {
 	/** width of image */
 	width?: integer;
 }
-

@@ -23,4 +23,3 @@ interface RawOverwrite_Member {
 }
 
 export type RawOverwrite = RawOverwrite_Role | RawOverwrite_Member;
-

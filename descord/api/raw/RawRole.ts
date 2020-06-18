@@ -18,4 +18,3 @@ export interface RawRole {
 	/** whether this role is mentionable */
 	mentionable: boolean;
 }
-

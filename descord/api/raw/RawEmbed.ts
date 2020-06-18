@@ -35,4 +35,3 @@ export interface RawEmbed {
 	/** fields information */
 	fields?: RawEmbedField[];
 }
-

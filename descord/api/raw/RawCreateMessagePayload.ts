@@ -19,4 +19,3 @@ export interface RawCreateMessagePayload {
 	/** JSON encoded body of any additional request fields. */
 	payload_json?: string;
 }
-

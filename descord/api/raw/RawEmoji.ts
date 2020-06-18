@@ -20,4 +20,3 @@ export interface RawEmoji {
 	/** whether this emoji can be used, may be false due to loss of Server Boosts */
 	available?: boolean;
 }
-

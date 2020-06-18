@@ -36,4 +36,3 @@ export interface RawActivity {
 	/** activity flags ORd together, describes what the payload includes */
 	flags?: ActivityFlag;
 }
-

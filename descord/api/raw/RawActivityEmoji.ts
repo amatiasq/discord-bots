@@ -8,4 +8,3 @@ export interface RawActivityEmoji {
 	/** whether this emoji is animated    */
 	animated?: boolean;
 }
-

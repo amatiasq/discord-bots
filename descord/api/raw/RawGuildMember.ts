@@ -17,4 +17,3 @@ export interface RawGuildMember {
 	/** whether the user is muted in voice channels */
 	mute: boolean;
 }
-

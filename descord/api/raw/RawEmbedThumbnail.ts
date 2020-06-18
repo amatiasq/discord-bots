@@ -10,4 +10,3 @@ export interface RawEmbedThumbnail {
 	/** width of thumbnail */
 	width?: integer;
 }
-

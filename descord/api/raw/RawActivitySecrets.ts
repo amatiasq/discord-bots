@@ -6,4 +6,3 @@ export interface RawActivitySecrets {
 	/** the secret for a specific instanced ma */
 	match?: string;
 }
-

@@ -6,4 +6,3 @@ export interface RawEmbedField {
 	/** whether or not this field should display inline */
 	inline?: boolean;
 }
-

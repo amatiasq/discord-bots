@@ -24,4 +24,3 @@ export interface RawPresenceUpdateEvent {
 	/** this users guild nickname (if one is set) */
 	nick?: string;
 }
-

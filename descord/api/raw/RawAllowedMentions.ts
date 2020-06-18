@@ -9,4 +9,3 @@ export interface RawAllowedMentions {
 	/** Array of user_ids to mention (Max size of 100) */
 	users: UserId[];
 }
-
