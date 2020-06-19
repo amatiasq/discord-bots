@@ -1,5 +1,5 @@
 import { RawGuildCreateEvent } from '../raw/RawGuildCreateEvent.ts';
-import { parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
+import { parseISO8601Timestamp, unparseISO8601Timestamp, integer } from '../type-aliases.ts';
 import { Channel, wrapChannel, unwrapChannel } from './Channel.ts';
 import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.ts';
 import { Guild, wrapGuild, unwrapGuild } from './Guild.ts';
@@ -15,7 +15,7 @@ export interface GuildCreateEvent extends Guild {
 	/** true if this guild is unavailable due to an outage */
 	unavailable?: boolean;
 	/** total number of members in this guild */
-	memberCount?: number;
+	memberCount?: integer;
 	/** states of members currently in voice channels; lacks the guildId key */
 	voiceStates?: VoiceState[];
 	/** users in the guild */

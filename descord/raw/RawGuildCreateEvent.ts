@@ -1,4 +1,4 @@
-import { ISO8601Timestamp } from '../type-aliases.ts';
+import { ISO8601Timestamp, integer } from '../type-aliases.ts';
 import { RawChannel } from './RawChannel.ts';
 import { RawGuildMember } from './RawGuildMember.ts';
 import { RawGuild } from './RawGuild.ts';
@@ -13,7 +13,7 @@ export interface RawGuildCreateEvent extends RawGuild {
 	/** true if this guild is unavailable due to an outage */
 	unavailable?: boolean;
 	/** total number of members in this guild */
-	member_count?: number;
+	member_count?: integer;
 	/** states of members currently in voice channels; lacks the guild_id key */
 	voice_states?: RawVoiceState[];
 	/** users in the guild */
