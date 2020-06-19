@@ -2,6 +2,7 @@
 
 declare -a skip=(
     "DiscordPayload"
+    "Message"
     "Overwrite"
 )
 

@@ -4,21 +4,43 @@ import {
 	ChannelId,
 	GuildId,
 	integer,
-	parseISO8601Timestamp, unparseISO8601Timestamp,
+	parseISO8601Timestamp,
+	unparseISO8601Timestamp,
 	MessageId,
 	RoleId,
 	WebhookId,
 } from '../type-aliases.ts';
 import { Attachment, wrapAttachment, unwrapAttachment } from './Attachment.ts';
-import { ChannelMention, wrapChannelMention, unwrapChannelMention } from './ChannelMention.ts';
+import {
+	ChannelMention,
+	wrapChannelMention,
+	unwrapChannelMention,
+} from './ChannelMention.ts';
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
-import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.ts';
-import { MessageActivity, wrapMessageActivity, unwrapMessageActivity } from './MessageActivity.ts';
-import { MessageApplication, wrapMessageApplication, unwrapMessageApplication } from './MessageApplication.ts';
-import { MessageReference, wrapMessageReference, unwrapMessageReference } from './MessageReference.ts';
+import {
+	GuildMember,
+	wrapGuildMember,
+	unwrapGuildMember,
+} from './GuildMember.ts';
+import {
+	MessageActivity,
+	wrapMessageActivity,
+	unwrapMessageActivity,
+} from './MessageActivity.ts';
+import {
+	MessageApplication,
+	wrapMessageApplication,
+	unwrapMessageApplication,
+} from './MessageApplication.ts';
+import {
+	MessageReference,
+	wrapMessageReference,
+	unwrapMessageReference,
+} from './MessageReference.ts';
 import { Reaction, wrapReaction, unwrapReaction } from './Reaction.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
+import { RawGuildMember } from '../raw/RawGuildMember.ts';
 
 export interface Message {
 	/** id of the message */
@@ -100,23 +122,28 @@ export interface Message {
 	flags?: MessageFlag;
 }
 
-
 export function wrapMessage(x: RawMessage): Message {
 	return {
 		...fromApiCasing(x),
 		author: wrapUser(x.author), // webhook
 		timestamp: parseISO8601Timestamp(x.timestamp),
 		editedTimestamp: parseISO8601Timestamp(x.edited_timestamp),
-		mentions: Array<RawUser & { member: RawGuildMember }>;
-		mentionChannels: x.mention_channels && x.mention_channels.map(wrapChannelMention),
+		member: x.member && wrapGuildMember(x.member as RawGuildMember),
+		mentions: x.mentions.map(y => ({
+			...wrapUser(y),
+			member: wrapGuildMember(y.member),
+		})),
+		mentionChannels:
+			x.mention_channels && x.mention_channels.map(wrapChannelMention),
 		attachments: x.attachments.map(wrapAttachment),
 		embeds: x.embeds.map(wrapEmbed),
 		reactions: x.reactions && x.reactions.map(wrapReaction),
 		activity: x.activity && wrapMessageActivity(x.activity),
 		application: x.application && wrapMessageApplication(x.application),
-		messageReference: x.message_reference && wrapMessageReference(x.message_reference),
+		messageReference:
+			x.message_reference && wrapMessageReference(x.message_reference),
 	};
-};
+}
 
 export function unwrapMessage(x: Message): RawMessage {
 	return {
@@ -124,14 +151,19 @@ export function unwrapMessage(x: Message): RawMessage {
 		author: unwrapUser(x.author), // webhook
 		timestamp: unparseISO8601Timestamp(x.timestamp),
 		edited_timestamp: unparseISO8601Timestamp(x.editedTimestamp),
-		mentions: Array<RawUser & { member: RawGuildMember }>;
-		mention_channels: x.mentionChannels && x.mentionChannels.map(unwrapChannelMention),
+		member: x.member && unwrapGuildMember(x.member as GuildMember),
+		mentions: x.mentions.map(y => ({
+			...unwrapUser(y),
+			member: unwrapGuildMember(y.member),
+		})),
+		mention_channels:
+			x.mentionChannels && x.mentionChannels.map(unwrapChannelMention),
 		attachments: x.attachments.map(unwrapAttachment),
 		embeds: x.embeds.map(unwrapEmbed),
 		reactions: x.reactions && x.reactions.map(unwrapReaction),
 		activity: x.activity && unwrapMessageActivity(x.activity),
 		application: x.application && unwrapMessageApplication(x.application),
-		message_reference: x.messageReference && unwrapMessageReference(x.messageReference),
+		message_reference:
+			x.messageReference && unwrapMessageReference(x.messageReference),
 	};
-};
-
+}
