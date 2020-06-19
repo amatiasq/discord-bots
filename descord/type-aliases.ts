@@ -13,9 +13,11 @@ export type IntegrationId = '%IntegrationId%';
 export type PartyId = '%PartyId%';
 export type ApplicationId = '%ApplicationId%';
 export type CategoryId = '%CategoryId%';
+export type AttachmentId = '%AttachmentId%';
+export type WebhookId = '%WebhookId%';
 
 export type PermissionInteger = '%PermissionInteger%';
-export type SerializedDate = '%SerializedDate%';
+export type ISO8601Timestamp = '%ISO8601Timestamp%';
 export type SerializedUnixTimestamp = '%SerializedUnixTimestamp%';
 
 export { Permission };
@@ -32,11 +34,11 @@ export function unparsePermissionInteger(
 	throw new Error();
 }
 
-export function parseSerializedDate(value: SerializedDate) {
+export function parseSerializedISO8601Date(value: ISO8601Timestamp) {
 	return new Date(value);
 }
 
-export function unparseSerializedDate(value: Date): SerializedDate {
+export function unparseSerializedISO8601Date(value: Date): ISO8601Timestamp {
 	throw new Error();
 }
 

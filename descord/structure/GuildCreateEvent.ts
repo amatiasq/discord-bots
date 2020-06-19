@@ -1,9 +1,17 @@
 import { RawGuildCreateEvent } from '../raw/RawGuildCreateEvent.ts';
 import { parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
 import { Channel, wrapChannel, unwrapChannel } from './Channel.ts';
-import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.ts';
+import {
+	GuildMember,
+	wrapGuildMember,
+	unwrapGuildMember,
+} from './GuildMember.ts';
 import { Guild, wrapGuild, unwrapGuild } from './Guild.ts';
-import { PresenceUpdateEvent, wrapPresenceUpdateEvent, unwrapPresenceUpdateEvent } from './PresenceUpdateEvent.ts';
+import {
+	PresenceUpdateEvent,
+	wrapPresenceUpdateEvent,
+	unwrapPresenceUpdateEvent,
+} from './PresenceUpdateEvent.ts';
 import { VoiceState, wrapVoiceState, unwrapVoiceState } from './VoiceState.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
@@ -26,26 +34,26 @@ export interface GuildCreateEvent extends Guild {
 	presences?: PresenceUpdateEvent[];
 }
 
-
 export function wrapGuildCreateEvent(x: RawGuildCreateEvent): GuildCreateEvent {
 	return {
-		...fromApiCasing(wrapRawGuild(x)),
+		...fromApiCasing(wrapGuild(x)),
 		joinedAt: x.joined_at && parseSerializedDate(x.joined_at),
 		voiceStates: x.voice_states && x.voice_states.map(wrapVoiceState),
 		members: x.members && x.members.map(wrapGuildMember),
 		channels: x.channels && x.channels.map(wrapChannel),
 		presences: x.presences && x.presences.map(wrapPresenceUpdateEvent),
 	};
-};
+}
 
-export function unwrapGuildCreateEvent(x: GuildCreateEvent): RawGuildCreateEvent {
+export function unwrapGuildCreateEvent(
+	x: GuildCreateEvent,
+): RawGuildCreateEvent {
 	return {
-		...toApiCasing(unwrapRawGuild(x)),
+		...toApiCasing(unwrapGuild(x)),
 		joined_at: x.joinedAt && unparseSerializedDate(x.joinedAt),
 		voice_states: x.voiceStates && x.voiceStates.map(unwrapVoiceState),
 		members: x.members && x.members.map(unwrapGuildMember),
 		channels: x.channels && x.channels.map(unwrapChannel),
 		presences: x.presences && x.presences.map(unwrapPresenceUpdateEvent),
 	};
-};
-
+}

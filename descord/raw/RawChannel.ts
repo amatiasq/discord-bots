@@ -1,20 +1,21 @@
+import { ChannelType } from '../enum/ChannelType.ts';
 import {
+	ApplicationId,
+	CategoryId,
 	ChannelId,
 	GuildId,
 	MessageId,
-	SerializedDate,
+	ISO8601Timestamp,
 	snowflake,
-	ApplicationId,
-	CategoryId,
 } from '../type-aliases.ts';
-import { RawOverwrite } from '../raw/composed/RawOverwrite.ts';
+import { RawOverwrite } from './composed/RawOverwrite.ts';
 import { RawUser } from './RawUser.ts';
 
 export interface RawChannel {
 	/** the id of this channel */
 	id: ChannelId;
 	/** the type of channel */
-	type: number;
+	type: ChannelType;
 	/** the id of the guild */
 	guild_id?: GuildId;
 	/** sorting position of the channel */
@@ -46,5 +47,5 @@ export interface RawChannel {
 	/** id of the parent category for a channel (each parent category can contain up to 50 channels) */
 	parent_id?: CategoryId;
 	/** when the last pinned message was pinned (ISO8601 timestamp) */
-	last_pin_timestamp?: SerializedDate;
+	last_pin_timestamp?: ISO8601Timestamp;
 }

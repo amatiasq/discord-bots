@@ -1,4 +1,4 @@
-import { RoleId, SerializedDate } from '../type-aliases.ts';
+import { RoleId, ISO8601Timestamp } from '../type-aliases.ts';
 import { RawUser } from './RawUser.ts';
 
 export interface RawGuildMember {
@@ -9,9 +9,9 @@ export interface RawGuildMember {
 	/** array of role object ids */
 	roles: RoleId[];
 	/** when the user joined the guild (ISO8601 timestamp) */
-	joined_at: SerializedDate;
+	joined_at: ISO8601Timestamp;
 	/** when the user started boosting the guild (ISO8601 timestamp) */
-	premium_since?: SerializedDate;
+	premium_since?: ISO8601Timestamp;
 	/** whether the user is deafened in voice channels */
 	deaf: boolean;
 	/** whether the user is muted in voice channels */
