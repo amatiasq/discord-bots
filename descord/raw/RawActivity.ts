@@ -1,4 +1,4 @@
-import { ApplicationId, SerializedUnixTimestamp } from '../type-aliases.ts';
+import { ApplicationId, UnixTimestamp } from '../type-aliases.ts';
 import { ActivityFlag } from '../enum/ActivityFlag.ts';
 import { RawActivityAssets } from './RawActivityAssets.ts';
 import { RawActivityEmoji } from './RawActivityEmoji.ts';
@@ -14,7 +14,7 @@ export interface RawActivity {
 	/** stream url, is validated when type is 1 */
 	url?: string;
 	/** unix timestamp of when the activity was added to the user's session */
-	created_at: SerializedUnixTimestamp;
+	created_at: UnixTimestamp;
 	/** unix timestamps for start and/or end of the game */
 	timestamps?: RawActivityTimestamps;
 	/** application id for the game */

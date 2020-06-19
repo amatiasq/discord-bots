@@ -1,5 +1,5 @@
 import { RawActivity } from '../raw/RawActivity.ts';
-import { ApplicationId, parseSerializedUnixTimestamp, unparseSerializedUnixTimestamp } from '../type-aliases.ts';
+import { ApplicationId, parseUnixTimestamp, unparseUnixTimestamp } from '../type-aliases.ts';
 import { ActivityFlag } from '../enum/ActivityFlag.ts';
 import { ActivityAssets, wrapActivityAssets, unwrapActivityAssets } from './ActivityAssets.ts';
 import { ActivityEmoji, wrapActivityEmoji, unwrapActivityEmoji } from './ActivityEmoji.ts';
@@ -43,7 +43,7 @@ export interface Activity {
 export function wrapActivity(x: RawActivity): Activity {
 	return {
 		...fromApiCasing(x),
-		createdAt: parseSerializedUnixTimestamp(x.created_at),
+		createdAt: parseUnixTimestamp(x.created_at),
 		timestamps: x.timestamps && wrapActivityTimestamps(x.timestamps),
 		emoji: x.emoji && wrapActivityEmoji(x.emoji),
 		party: x.party && wrapActivityParty(x.party),
@@ -55,7 +55,7 @@ export function wrapActivity(x: RawActivity): Activity {
 export function unwrapActivity(x: Activity): RawActivity {
 	return {
 		...toApiCasing(x),
-		created_at: unparseSerializedUnixTimestamp(x.createdAt),
+		created_at: unparseUnixTimestamp(x.createdAt),
 		timestamps: x.timestamps && unwrapActivityTimestamps(x.timestamps),
 		emoji: x.emoji && unwrapActivityEmoji(x.emoji),
 		party: x.party && unwrapActivityParty(x.party),

@@ -1,8 +1,4 @@
-const PARSEABLE = [
-	'PermissionInteger',
-	'ISO8601Timestamp',
-	'SerializedUnixTimestamp',
-];
+const PARSEABLE = ['PermissionInteger', 'ISO8601Timestamp', 'UnixTimestamp'];
 const PARSEABLE_IMPORT = ['Permission, ', '', ''];
 const PARSED = ['Permission[]', 'Date', 'Date'];
 

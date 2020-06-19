@@ -18,7 +18,7 @@ export type WebhookId = '%WebhookId%';
 
 export type PermissionInteger = '%PermissionInteger%';
 export type ISO8601Timestamp = '%ISO8601Timestamp%';
-export type SerializedUnixTimestamp = '%SerializedUnixTimestamp%';
+export type UnixTimestamp = '%UnixTimestamp%';
 
 export { Permission };
 
@@ -42,13 +42,11 @@ export function unparseISO8601Timestamp(value: Date): ISO8601Timestamp {
 	throw new Error();
 }
 
-export function parseSerializedUnixTimestamp(value: SerializedUnixTimestamp) {
+export function parseUnixTimestamp(value: UnixTimestamp) {
 	const asNumber = (value as any) as number;
 	return new Date(asNumber * 1000);
 }
 
-export function unparseSerializedUnixTimestamp(
-	value: Date,
-): SerializedUnixTimestamp {
-	throw new Error();
+export function unparseUnixTimestamp(value: Date): UnixTimestamp {
+	return (Number(value) * 1000) as any;
 }
