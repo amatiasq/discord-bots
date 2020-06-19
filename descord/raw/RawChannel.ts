@@ -7,7 +7,7 @@ import {
 	ApplicationId,
 	CategoryId,
 } from '../type-aliases.ts';
-import { RawOverwrite } from '../raw-composed/RawOverwrite.ts';
+import { RawOverwrite } from '../raw/composed/RawOverwrite.ts';
 import { RawUser } from './RawUser.ts';
 
 export interface RawChannel {

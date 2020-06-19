@@ -15,7 +15,7 @@ async function main() {
 }
 
 function transform(content: string) {
-	const { name, imports, properties } = parse(content);
+	const { name, parent, imports, properties } = parse(content);
 	const hasCasing = /_/.test(properties);
 
 	const newImports = adaptImports(name, imports, hasCasing);
@@ -30,9 +30,9 @@ function transform(content: string) {
 	return `import { Raw${name} } from '../raw/Raw${name}.ts';
 ${toCamelCase(result)}
 
-export ${writeWrap(name, properties, hasCasing)};
+export ${writeWrap(name, parent, properties, hasCasing)};
 
-export ${writeUnwrap(name, properties, hasCasing)};
+export ${writeUnwrap(name, parent, properties, hasCasing)};
 `;
 }
 
@@ -41,6 +41,7 @@ function adaptImports(name: string, imports: string, hasCasing: boolean) {
 		(x, y, i) => x.replace(y, `${PARSEABLE_IMPORT[i]}parse${y}, unparse${y}`),
 		imports,
 	)
+		.replace(/raw\/composed/g, 'raw')
 		.replace(/import\s*\{\s*Raw(\w+)\s*\}/g, 'import { $1, wrap$1, unwrap$1 }')
 		.split('\n')
 		.filter(Boolean);
@@ -54,22 +55,28 @@ function adaptImports(name: string, imports: string, hasCasing: boolean) {
 
 function parse(content: string) {
 	const match = content.match(
-		/((?:.|\n)*)export interface Raw(\w+)(?: extends \w+)? \{((?:.|\n)*)\}/m,
+		/((?:.|\n)*)export interface Raw(\w+)(?: extends (\w+))? \{((?:.|\n)*)\}/m,
 	);
 
 	if (!match) {
-		console.log('Interface not found in:\n\n', content);
+		console.error('Interface not found in:\n\n', content);
 		Deno.exit(1);
 	}
 
 	return {
 		imports: match[1],
 		name: match[2],
-		properties: match[3],
+		parent: match[3],
+		properties: match[4],
 	};
 }
 
-function writeWrap(name: string, properties: string, hasCasing: boolean) {
+function writeWrap(
+	name: string,
+	parent: string,
+	properties: string,
+	hasCasing: boolean,
+) {
 	const props = serialization(
 		properties,
 		(_, key, opt, value) =>
@@ -87,11 +94,19 @@ function writeWrap(name: string, properties: string, hasCasing: boolean) {
 			}x.${key}.map(wrap${value}),`,
 	);
 
-	const body = buildBody(hasCasing ? 'fromApiCasing(x)' : 'x', props);
+	const json = 'x';
+	const child = parent ? `wrap${parent}(${json})` : json;
+	const cased = hasCasing ? `fromApiCasing(${child})` : child;
+	const body = buildBody(cased, props);
 	return `function wrap${name}(x: Raw${name}): ${name} {\n\t${body}\n}`;
 }
 
-function writeUnwrap(name: string, properties: string, hasCasing: boolean) {
+function writeUnwrap(
+	name: string,
+	parent: string,
+	properties: string,
+	hasCasing: boolean,
+) {
 	const props = serialization(
 		properties,
 		(_, key, opt, value) =>
@@ -109,7 +124,10 @@ function writeUnwrap(name: string, properties: string, hasCasing: boolean) {
 			)}.map(unwrap${value}),`,
 	);
 
-	const body = buildBody(hasCasing ? 'toApiCasing(x)' : 'x', props);
+	const json = 'x';
+	const child = parent ? `unwrap${parent}(${json})` : json;
+	const cased = hasCasing ? `toApiCasing(${child})` : child;
+	const body = buildBody(cased, props);
 	return `function unwrap${name}(x: ${name}): Raw${name} {\n\t${body}\n}`;
 }
 
@@ -121,14 +139,9 @@ function buildBody(base: string, props: string) {
 
 function serialization(
 	properties: string,
-	onSerializable: (
-		_: string,
-		key: string,
-		opt: '?' | '',
-		value: string,
-	) => string,
-	onEntity: (_: string, key: string, opt: '?' | '', value: string) => string,
-	onArray: (_: string, key: string, opt: '?' | '', value: string) => string,
+	onSerializable: Conversor,
+	onEntity: Conversor,
+	onArray: Conversor,
 ) {
 	return properties
 		.split('\n')
@@ -150,3 +163,10 @@ function serialization(
 function toCamelCase(value: string) {
 	return value.replace(/_(\w)/g, (_, x) => x.toUpperCase());
 }
+
+type Conversor = (
+	_: string,
+	key: string,
+	opt: '?' | '',
+	value: string,
+) => string;

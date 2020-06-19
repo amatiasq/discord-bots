@@ -1,9 +1,9 @@
-import { DiscordEvent } from '../enum/DiscordEvent.ts';
-import { GatewayOpCode } from '../enum/GatewayOpCode.ts';
-import { RawGuildCreateEvent } from '../raw/RawGuildCreateEvent.ts';
-import { RawHeartbeatPayload } from '../raw/RawHeartbeatPayload.ts';
-import { RawReadyEvent } from '../raw/RawReadyEvent.ts';
-import { integer } from '../type-aliases.ts';
+import { DiscordEvent } from '../../enum/DiscordEvent.ts';
+import { GatewayOpCode } from '../../enum/GatewayOpCode.ts';
+import { RawGuildCreateEvent } from '../../raw/RawGuildCreateEvent.ts';
+import { RawHeartbeatPayload } from '../../raw/RawHeartbeatPayload.ts';
+import { RawReadyEvent } from '../../raw/RawReadyEvent.ts';
+import { integer } from '../../type-aliases.ts';
 
 interface RawDiscordPayload_Dispatch_HELLO {
 	op: GatewayOpCode.Dispatch;

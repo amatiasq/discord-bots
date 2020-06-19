@@ -1,4 +1,4 @@
-import { RawOverwrite } from '../raw-composed/RawOverwrite.ts';
+import { RawOverwrite } from '../raw/composed/RawOverwrite.ts';
 import {
 	parsePermissionInteger,
 	Permission,

@@ -1,9 +1,5 @@
 import { RawGuildMember } from '../raw/RawGuildMember.ts';
-import {
-	RoleId,
-	parseSerializedDate,
-	unparseSerializedDate,
-} from '../type-aliases.ts';
+import { RoleId, parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
@@ -24,6 +20,7 @@ export interface GuildMember {
 	mute: boolean;
 }
 
+
 export function wrapGuildMember(x: RawGuildMember): GuildMember {
 	return {
 		...fromApiCasing(x),
@@ -31,7 +28,7 @@ export function wrapGuildMember(x: RawGuildMember): GuildMember {
 		joinedAt: parseSerializedDate(x.joined_at),
 		premiumSince: x.premium_since && parseSerializedDate(x.premium_since),
 	};
-}
+};
 
 export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 	return {
@@ -40,4 +37,5 @@ export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 		joined_at: unparseSerializedDate(x.joinedAt),
 		premium_since: x.premiumSince && unparseSerializedDate(x.premiumSince),
 	};
-}
+};
+

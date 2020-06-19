@@ -8,7 +8,7 @@ import {
 	ApplicationId,
 	CategoryId,
 } from '../type-aliases.ts';
-import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
+import { Overwrite, wrapOverwrite, unwrapOverwrite } from '../raw/composed/Overwrite.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
