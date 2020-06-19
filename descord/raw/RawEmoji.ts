@@ -1,14 +1,13 @@
-import { EmojiId } from '../type-aliases.ts';
-import { RawRole } from './RawRole.ts';
+import { EmojiId, RoleId } from '../type-aliases.ts';
 import { RawUser } from './RawUser.ts';
 
 export interface RawEmoji {
 	/** emoji id */
-	id: EmojiId;
+	id?: EmojiId;
 	/** emoji name (can be null only in reaction emoji objects) */
-	name: string | null;
+	name?: string;
 	/** roles this emoji is whitelisted to */
-	roles?: RawRole[];
+	roles?: RoleId[];
 	/** user that created this emoji */
 	user?: RawUser;
 	/** whether this emoji must be wrapped in colons */
