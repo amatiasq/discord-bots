@@ -7,12 +7,12 @@ export interface GuildMember {
 	/** the user this guild member represents */
 	user?: User;
 	/** this users guild nickname */
-	nick: string;
+	nick?: string;
 	/** array of role object ids */
 	roles: RoleId[];
-	/** when the user joined the guild (ISO8601 timestamp) */
+	/** when the user joined the guild */
 	joinedAt: Date;
-	/** when the user started boosting the guild (ISO8601 timestamp) */
+	/** when the user started boosting the guild */
 	premiumSince?: Date;
 	/** whether the user is deafened in voice channels */
 	deaf: boolean;
