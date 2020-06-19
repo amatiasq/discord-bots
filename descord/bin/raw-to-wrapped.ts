@@ -21,7 +21,7 @@ function transform(content: string) {
 	const newImports = adaptImports(name, imports, hasCasing);
 
 	const result = PARSEABLE.reduce(
-		(x, y, i) => x.replace(`: ${y}`, `: ${PARSED[i]}`),
+		(x, y, i) => x.replace(new RegExp(`: ${y}`, 'g'), `: ${PARSED[i]}`),
 		content,
 	)
 		.replace(imports, newImports)
@@ -54,7 +54,7 @@ function adaptImports(name: string, imports: string, hasCasing: boolean) {
 
 function parse(content: string) {
 	const match = content.match(
-		/((?:.|\n)*)export interface Raw(\w+) \{((?:.|\n)*)\}/m,
+		/((?:.|\n)*)export interface Raw(\w+)(?: extends \w+)? \{((?:.|\n)*)\}/m,
 	);
 
 	if (!match) {

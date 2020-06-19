@@ -1,28 +1,48 @@
-Interface not found in:
+import { RawOverwrite } from '../raw-composed/RawOverwrite.ts';
+import {
+	parsePermissionInteger,
+	Permission,
+	RoleId,
+	unparsePermissionInteger,
+	UserId,
+} from '../type-aliases.ts';
 
- import { PermissionInteger, UserId, RoleId } from '../type-aliases.ts';
-
-interface RawOverwrite_Role {
+interface Overwrite_Role {
 	/** role or user id */
 	id: RoleId;
 	/** either "role" or "member" */
 	type: 'role';
 	/** permission bit set */
-	allow: PermissionInteger;
+	allow: Permission[];
 	/** permission bit set */
-	deny: PermissionInteger;
+	deny: Permission[];
 }
 
-interface RawOverwrite_Member {
+interface Overwrite_Member {
 	/** role or user id */
 	id: UserId;
 	/** either "role" or "member" */
 	type: 'member';
 	/** permission bit set */
-	allow: PermissionInteger;
+	allow: Permission[];
 	/** permission bit set */
-	deny: PermissionInteger;
+	deny: Permission[];
 }
 
-export type RawOverwrite = RawOverwrite_Role | RawOverwrite_Member;
+export type Overwrite = Overwrite_Role | Overwrite_Member;
 
+export function wrapOverwrite(x: RawOverwrite): Overwrite {
+	return {
+		...x,
+		allow: parsePermissionInteger(x.allow),
+		deny: parsePermissionInteger(x.deny),
+	};
+}
+
+export function unwrapOverwrite(x: Overwrite): RawOverwrite {
+	return {
+		...x,
+		allow: unparsePermissionInteger(x.allow),
+		deny: unparsePermissionInteger(x.deny),
+	};
+}

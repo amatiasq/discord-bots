@@ -7,7 +7,7 @@ import {
 	IntegrationId,
 	MemberId,
 	RoleId,
-} from '../../type-aliases.ts';
+} from '../type-aliases.ts';
 
 /** Although, the version can be defaulted, keep the v6 as it can be changed to test newer versions when necessary. */
 const BASE_URL = 'https://discord.com/api/v6';

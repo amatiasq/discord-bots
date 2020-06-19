@@ -1,26 +1,37 @@
 import { Intent } from './enum/Intent.ts';
+import { DiscordSocket } from './connection/DiscordSocket.ts';
 
 import { DiscordEndpoints } from './request/DiscordEndpoints.ts';
 
-// export async function connect(token: string, botId: string, intent: Intent) {
-// 	const instance = new Client(token, botId, intent);
-// 	const gateway = instance.get(GATEWAY_BOT);
-// 	// TODO: gateway
-// 	return instance;
-// }
-
 export class Client {
-	private gateway: any;
-
-	readonly api = new DiscordEndpoints(this.token);
+	private readonly identity = getIdentityPayload(this.token, this.intents);
+	private readonly api = new DiscordEndpoints(this.token);
+	private socket: DiscordSocket | null = null;
 
 	constructor(
-		readonly token: string,
 		readonly botId: string,
-		readonly intent: Intent,
+		readonly token: string,
+		readonly intents: Intent[],
 	) {}
 
 	async init() {
-		this.gateway = await this.api.gatewayBot();
+		const gateway = await this.api.gatewayBot();
+		this.socket = new DiscordSocket(this.token, this.intents, gateway);
+		this.socket.connect();
 	}
+}
+
+function getIdentityPayload(token: string, intents: Intent[]) {
+	const intents2 = intents.reduce((bits, next) => (bits |= next), 0);
+
+	return {
+		token,
+		compress: false,
+		properties: {
+			$os: 'linux',
+			$browser: 'Discordeno',
+			$device: 'Discordeno',
+		},
+		intents: intents2,
+	};
 }
