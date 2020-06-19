@@ -8,7 +8,7 @@ import {
 	ISO8601Timestamp,
 	snowflake,
 } from '../type-aliases.ts';
-import { RawOverwrite } from './composed/RawOverwrite.ts';
+import { RawOverwrite } from './RawOverwrite.ts';
 import { RawUser } from './RawUser.ts';
 
 export interface RawChannel {

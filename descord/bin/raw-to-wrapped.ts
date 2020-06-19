@@ -41,7 +41,6 @@ function adaptImports(name: string, imports: string, hasCasing: boolean) {
 		(x, y, i) => x.replace(y, `${PARSEABLE_IMPORT[i]}parse${y}, unparse${y}`),
 		imports,
 	)
-		.replace(/\/composed\//g, '/')
 		.replace(/import\s*\{\s*Raw(\w+)\s*\}/g, 'import { $1, wrap$1, unwrap$1 }')
 		.split('\n')
 		.filter(Boolean);

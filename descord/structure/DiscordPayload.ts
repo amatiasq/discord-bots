@@ -1,5 +1,5 @@
 import { wrapHeartbeatPayload, HeartbeatPayload } from './HeartbeatPayload.ts';
-import { RawDiscordPayload } from '../raw/composed/RawDiscordPayload.ts';
+import { RawDiscordPayload } from '../raw/RawDiscordPayload.ts';
 
 import { integer } from '../type-aliases.ts';
 import { GatewayOpCode } from '../enum/GatewayOpCode.ts';
