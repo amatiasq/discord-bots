@@ -34,11 +34,11 @@ export function unparsePermissionInteger(
 	throw new Error();
 }
 
-export function parseSerializedISO8601Date(value: ISO8601Timestamp) {
+export function parseISO8601Timestamp(value: ISO8601Timestamp) {
 	return new Date(value);
 }
 
-export function unparseSerializedISO8601Date(value: Date): ISO8601Timestamp {
+export function unparseISO8601Timestamp(value: Date): ISO8601Timestamp {
 	throw new Error();
 }
 

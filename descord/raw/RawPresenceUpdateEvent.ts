@@ -1,4 +1,4 @@
-import { GuildId, RoleId, SerializedDate } from '../type-aliases.ts';
+import { GuildId, RoleId, ISO8601Timestamp } from '../type-aliases.ts';
 import { PresenceStatus } from '../enum/PresenceStatus.ts';
 import { RawActivity } from './RawActivity.ts';
 import { RawClientStatus } from './RawClientStatus.ts';
@@ -20,7 +20,7 @@ export interface RawPresenceUpdateEvent {
 	/** user's platform-dependent status */
 	client_status: RawClientStatus;
 	/** when the user started boosting the guild (ISO8601 timestamp) */
-	premium_since?: SerializedDate;
+	premium_since?: ISO8601Timestamp;
 	/** this users guild nickname (if one is set) */
 	nick?: string;
 }

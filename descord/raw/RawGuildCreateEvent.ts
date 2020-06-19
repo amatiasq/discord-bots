@@ -1,4 +1,4 @@
-import { SerializedDate } from '../type-aliases.ts';
+import { ISO8601Timestamp } from '../type-aliases.ts';
 import { RawChannel } from './RawChannel.ts';
 import { RawGuildMember } from './RawGuildMember.ts';
 import { RawGuild } from './RawGuild.ts';
@@ -7,7 +7,7 @@ import { RawVoiceState } from './RawVoiceState.ts';
 
 export interface RawGuildCreateEvent extends RawGuild {
 	/** when this guild was joined at (ISO8601 timestamp) */
-	joined_at?: SerializedDate;
+	joined_at?: ISO8601Timestamp;
 	/** true if this is considered a large guild */
 	large?: boolean;
 	/** true if this guild is unavailable due to an outage */

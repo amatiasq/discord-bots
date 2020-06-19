@@ -1,4 +1,4 @@
-import { SerializedDate } from '../type-aliases.ts';
+import { ISO8601Timestamp } from '../type-aliases.ts';
 import { RawEmbedAuthor } from './RawEmbedAuthor.ts';
 import { RawEmbedField } from './RawEmbedField.ts';
 import { RawEmbedFooter } from './RawEmbedFooter.ts';
@@ -17,7 +17,7 @@ export interface RawEmbed {
 	/** url of embed */
 	url?: string;
 	/** timestamp of embed content (ISO8601 timestamp) */
-	timestamp?: SerializedDate;
+	timestamp?: ISO8601Timestamp;
 	/** color code of the embed */
 	color?: number;
 	/** footer information */

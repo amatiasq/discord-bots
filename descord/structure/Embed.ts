@@ -1,5 +1,5 @@
 import { RawEmbed } from '../raw/RawEmbed.ts';
-import { parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
+import { parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 import { EmbedAuthor, wrapEmbedAuthor, unwrapEmbedAuthor } from './EmbedAuthor.ts';
 import { EmbedField, wrapEmbedField, unwrapEmbedField } from './EmbedField.ts';
 import { EmbedFooter, wrapEmbedFooter, unwrapEmbedFooter } from './EmbedFooter.ts';
@@ -41,7 +41,7 @@ export interface Embed {
 export function wrapEmbed(x: RawEmbed): Embed {
 	return {
 		...x,
-		timestamp: x.timestamp && parseSerializedDate(x.timestamp),
+		timestamp: x.timestamp && parseISO8601Timestamp(x.timestamp),
 		footer: x.footer && wrapEmbedFooter(x.footer),
 		image: x.image && wrapEmbedImage(x.image),
 		thumbnail: x.thumbnail && wrapEmbedThumbnail(x.thumbnail),
@@ -55,7 +55,7 @@ export function wrapEmbed(x: RawEmbed): Embed {
 export function unwrapEmbed(x: Embed): RawEmbed {
 	return {
 		...x,
-		timestamp: x.timestamp && unparseSerializedDate(x.timestamp),
+		timestamp: x.timestamp && unparseISO8601Timestamp(x.timestamp),
 		footer: x.footer && unwrapEmbedFooter(x.footer),
 		image: x.image && unwrapEmbedImage(x.image),
 		thumbnail: x.thumbnail && unwrapEmbedThumbnail(x.thumbnail),

@@ -1,5 +1,5 @@
 import { RawGuildMember } from '../raw/RawGuildMember.ts';
-import { RoleId, parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
+import { RoleId, parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
@@ -25,8 +25,8 @@ export function wrapGuildMember(x: RawGuildMember): GuildMember {
 	return {
 		...fromApiCasing(x),
 		user: x.user && wrapUser(x.user),
-		joinedAt: parseSerializedDate(x.joined_at),
-		premiumSince: x.premium_since && parseSerializedDate(x.premium_since),
+		joinedAt: parseISO8601Timestamp(x.joined_at),
+		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
 	};
 };
 
@@ -34,8 +34,8 @@ export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 	return {
 		...toApiCasing(x),
 		user: x.user && unwrapUser(x.user),
-		joined_at: unparseSerializedDate(x.joinedAt),
-		premium_since: x.premiumSince && unparseSerializedDate(x.premiumSince),
+		joined_at: unparseISO8601Timestamp(x.joinedAt),
+		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
 };
 

@@ -1,5 +1,5 @@
 import { RawPresenceUpdateEvent } from '../raw/RawPresenceUpdateEvent.ts';
-import { GuildId, RoleId, parseSerializedDate, unparseSerializedDate } from '../type-aliases.ts';
+import { GuildId, RoleId, parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 import { PresenceStatus } from '../enum/PresenceStatus.ts';
 import { Activity, wrapActivity, unwrapActivity } from './Activity.ts';
 import { ClientStatus, wrapClientStatus, unwrapClientStatus } from './ClientStatus.ts';
@@ -35,7 +35,7 @@ export function wrapPresenceUpdateEvent(x: RawPresenceUpdateEvent): PresenceUpda
 		game: wrapActivity(x.game),
 		activities: x.activities.map(wrapActivity),
 		clientStatus: wrapClientStatus(x.client_status),
-		premiumSince: x.premium_since && parseSerializedDate(x.premium_since),
+		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
 	};
 };
 
@@ -46,7 +46,7 @@ export function unwrapPresenceUpdateEvent(x: PresenceUpdateEvent): RawPresenceUp
 		game: unwrapActivity(x.game),
 		activities: x.activities.map(unwrapActivity),
 		client_status: unwrapClientStatus(x.clientStatus),
-		premium_since: x.premiumSince && unparseSerializedDate(x.premiumSince),
+		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
 };
 
