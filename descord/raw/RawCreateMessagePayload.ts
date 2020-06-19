@@ -17,5 +17,5 @@ export interface RawCreateMessagePayload {
 
 	// TODO: This should only be used if sending FormData
 	/** JSON encoded body of any additional request fields. */
-	payload_json?: string;
+	// payload_json?: string;
 }
