@@ -19,7 +19,7 @@ export interface CreateMessagePayload {
 
 	// TODO: This should only be used if sending FormData
 	/** JSON encoded body of any additional request fields. */
-	payloadJson?: string;
+	// payloadJson?: string;
 }
 
 

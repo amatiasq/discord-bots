@@ -3,7 +3,6 @@ import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.t
 import { GuildFeature } from '../enum/GuildFeature.ts';
 import { MfaLevel } from '../enum/MfaLevel.ts';
 import { PremiumTier } from '../enum/PremiumTier.ts';
-import { SystemChannelFlag } from '../enum/SystemChannelFlag.ts';
 import { VerificationLevel } from '../enum/VerificationLevel.ts';
 import {
 	ApplicationId,
@@ -12,6 +11,7 @@ import {
 	ImageData,
 	integer,
 	PermissionInteger,
+	SystemChannelFlagInteger,
 	UserId,
 	VoiceRegionId,
 } from '../type-aliases.ts';
@@ -68,7 +68,7 @@ export interface RawGuild {
 	/** the id of the channel where guild notices such as welcome messages and boost events are posted */
 	system_channel_id: ChannelId;
 	/** system channel flags */
-	system_channel_flags: SystemChannelFlag;
+	system_channel_flags: SystemChannelFlagInteger;
 	/** the id of the channel where guilds with the "PUBLIC" feature can display rules and/or guidelines */
 	rules_channel_id: ChannelId;
 	/** the maximum number of presences for the guild (the default value, currently 25000, is in effect when null is returned) */

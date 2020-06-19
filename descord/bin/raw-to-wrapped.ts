@@ -1,6 +1,11 @@
-const PARSEABLE = ['PermissionInteger', 'ISO8601Timestamp', 'UnixTimestamp'];
-const PARSEABLE_IMPORT = ['Permission, ', '', ''];
-const PARSED = ['Permission[]', 'Date', 'Date'];
+const PARSEABLE = [
+	'PermissionInteger',
+	'SystemChannelFlagInteger',
+	'ISO8601Timestamp',
+	'UnixTimestamp',
+];
+const PARSEABLE_IMPORT = ['Permission, ', 'SystemChannelFlag, ', '', ''];
+const PARSED = ['Permission[]', 'SystemChannelFlag[]', 'Date', 'Date'];
 
 console.log(await main());
 
