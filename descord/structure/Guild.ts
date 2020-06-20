@@ -1,5 +1,5 @@
 import { RawGuild } from '../raw/RawGuild.ts';
-import { DefaultMessageNotificationLevel } from '../enum/DefaultMessageNotificationLevel.ts';
+import { MessageNotificationLevel } from '../enum/MessageNotificationLevel.ts';
 import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.ts';
 import { GuildFeature } from '../enum/GuildFeature.ts';
 import { MfaLevel } from '../enum/MfaLevel.ts';
@@ -50,7 +50,7 @@ export interface Guild {
 	/** verification level required for the guild */
 	verificationLevel: VerificationLevel;
 	/** default message notifications level */
-	defaultMessageNotifications: DefaultMessageNotificationLevel;
+	defaultMessageNotifications: MessageNotificationLevel;
 	/** explicit content filter level */
 	explicitContentFilter: ExplicitContentFilterLevel;
 	/** roles in the guild */
