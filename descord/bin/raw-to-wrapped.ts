@@ -1,6 +1,7 @@
 const PARSEABLE = [
 	'PermissionInteger',
 	'SystemChannelFlagInteger',
+	'UserFlagInteger',
 	'ISO8601Timestamp',
 	'UnixTimestamp',
 ];

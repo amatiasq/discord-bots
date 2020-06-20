@@ -1,5 +1,6 @@
 import { Permission } from './enum/Permission.ts';
 import { SystemChannelFlag } from './enum/SystemChannelFlag.ts';
+import { UserFlag } from './enum/UserFlag.ts';
 
 export type integer = number;
 export type snowflake = '%snowflake%';
@@ -22,29 +23,27 @@ export type InviteId = '%InviteId%';
 
 export type ImageData = '%ImageData%';
 export type PermissionInteger = '%PermissionInteger%';
-export type SystemChannelFlagInteger = '%SystemChannelFlag%';
+export type SystemChannelFlagInteger = '%SystemChannelFlagInteger%';
+export type UserFlagInteger = '%UserFlagInteger%';
 export type ISO8601Timestamp = '%ISO8601Timestamp%';
 export type UnixTimestamp = '%UnixTimestamp%';
 
 export { Permission, SystemChannelFlag };
 
-export const parsePermissionInteger = parseBitFlags<
-	Permission,
-	PermissionInteger
->(Permission);
-export const unparsePermissionInteger = unparseBitFlags<
-	Permission,
-	PermissionInteger
->(Permission);
+export const {
+	parse: parsePermissionInteger,
+	unparse: unparsePermissionInteger,
+} = bitFlags<Permission, PermissionInteger>(Permission);
 
-export const parseSystemChannelFlagInteger = parseBitFlags<
-	SystemChannelFlag,
-	SystemChannelFlagInteger
->(SystemChannelFlag);
-export const unparseSystemChannelFlagInteger = unparseBitFlags<
-	SystemChannelFlag,
-	SystemChannelFlagInteger
->(SystemChannelFlag);
+export const {
+	parse: parseSystemChannelFlagInteger,
+	unparse: unparseSystemChannelFlagInteger,
+} = bitFlags<SystemChannelFlag, SystemChannelFlagInteger>(SystemChannelFlag);
+
+export const {
+	parse: parseUserFlagInteger,
+	unparse: unparseUserFlagInteger,
+} = bitFlags<UserFlag, UserFlagInteger>(UserFlag);
 
 export function parseISO8601Timestamp(value: ISO8601Timestamp) {
 	return new Date(value);
@@ -63,16 +62,15 @@ export function unparseUnixTimestamp(value: Date): UnixTimestamp {
 	return (Number(value) * 1000) as any;
 }
 
-function parseBitFlags<T, U>(Enum: any) {
-	return (value: U): T[] => {
-		const flags = (value as any) as number;
-		const keys = Object.keys(Enum);
-		return keys.filter(x => flags & Enum[x]).map(x => Enum[x]);
-	};
-}
-
-function unparseBitFlags<T, U>(Enum: any) {
-	return (value: T[]): U => {
-		throw new Error();
+function bitFlags<T, U>(Enum: any) {
+	return {
+		parse: (value: U): T[] => {
+			const flags = (value as any) as number;
+			const keys = Object.keys(Enum);
+			return keys.filter(x => flags & Enum[x]).map(x => Enum[x]);
+		},
+		unparse: (value: T[]): U => {
+			throw new Error();
+		},
 	};
 }

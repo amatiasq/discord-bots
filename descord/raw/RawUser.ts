@@ -1,4 +1,5 @@
-import { UserId } from '../type-aliases.ts';
+import { UserId, ImageData, UserFlagInteger } from '../type-aliases.ts';
+import { PremiumType } from '../enum/PremiumType.ts';
 
 export interface RawUser {
 	/** the user's id	identify */
@@ -8,7 +9,7 @@ export interface RawUser {
 	/** the user's 4-digit discord-tag	identify */
 	discriminator: string;
 	/** the user's avatar hash	identify */
-	avatar: string;
+	avatar: ImageData;
 	/** whether the user belongs to an OAuth2 application	identify */
 	bot?: boolean;
 	/** whether the user is an Official Discord System user (part of the urgent message system)	identify */
@@ -22,9 +23,9 @@ export interface RawUser {
 	/** the user's email	email */
 	email?: string;
 	/** the flags on a user's account	identify */
-	flags?: number;
+	flags?: UserFlagInteger;
 	/** the type of Nitro subscription on a user's account	identify */
-	premium_type?: number;
+	premium_type?: PremiumType;
 	/** the public flags on a user's account	identify */
-	public_flags?: number;
+	public_flags?: UserFlagInteger;
 }

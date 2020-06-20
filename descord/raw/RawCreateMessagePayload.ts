@@ -8,14 +8,14 @@ export interface RawCreateMessagePayload {
 	nonce?: number | string;
 	/** true if this is a TTS message */
 	tts?: boolean;
-	/** the contents of the file being sent */
-	file?: string;
 	/** embedded rich content */
 	embed?: RawEmbed;
 	/** allowed mentions for a message */
 	allowed_mentions?: RawAllowedMentions;
 
 	// TODO: This should only be used if sending FormData
-	/** JSON encoded body of any additional request fields. */
+	// /** the contents of the file being sent */
+	// file?: string;
+	// /** JSON encoded body of any additional request fields. */
 	// payload_json?: string;
 }
