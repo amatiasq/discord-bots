@@ -1,6 +1,7 @@
 #!/bin/bash
 
 declare -a skip=(
+    "AuditLogChange"
     "DiscordPayload"
     "Message"
     "Overwrite"
