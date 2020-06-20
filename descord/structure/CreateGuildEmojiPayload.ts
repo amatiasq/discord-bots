@@ -19,3 +19,11 @@ export function unwrapCreateGuildEmojiPayload(x: CreateGuildEmojiPayload): RawCr
 	return x;
 };
 
+export function wrapCreateGuildEmojiPayloadPartial(x: Partial<RawCreateGuildEmojiPayload>): Partial<CreateGuildEmojiPayload> {
+	return x;
+};
+
+export function unwrapCreateGuildEmojiPayloadPartial(x: Partial<CreateGuildEmojiPayload>): Partial<RawCreateGuildEmojiPayload> {
+	return x;
+};
+

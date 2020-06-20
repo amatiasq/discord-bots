@@ -17,3 +17,11 @@ export function unwrapIntegrationAccount(x: IntegrationAccount): RawIntegrationA
 	return x;
 };
 
+export function wrapIntegrationAccountPartial(x: Partial<RawIntegrationAccount>): Partial<IntegrationAccount> {
+	return x;
+};
+
+export function unwrapIntegrationAccountPartial(x: Partial<IntegrationAccount>): Partial<RawIntegrationAccount> {
+	return x;
+};
+

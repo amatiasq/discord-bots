@@ -50,3 +50,25 @@ export function unwrapPresenceUpdateEvent(x: PresenceUpdateEvent): RawPresenceUp
 	};
 };
 
+export function wrapPresenceUpdateEventPartial(x: Partial<RawPresenceUpdateEvent>): Partial<PresenceUpdateEvent> {
+	return {
+		...fromApiCasing(x),
+		user: x.user && wrapUser(x.user),
+		game: x.game && wrapActivity(x.game),
+		activities: x.activities && x.activities.map(wrapActivity),
+		clientStatus: x.client_status && wrapClientStatus(x.client_status),
+		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
+	};
+};
+
+export function unwrapPresenceUpdateEventPartial(x: Partial<PresenceUpdateEvent>): Partial<RawPresenceUpdateEvent> {
+	return {
+		...toApiCasing(x),
+		user: x.user && unwrapUser(x.user),
+		game: x.game && unwrapActivity(x.game),
+		activities: x.activities && x.activities.map(unwrapActivity),
+		client_status: x.clientStatus && unwrapClientStatus(x.clientStatus),
+		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
+	};
+};
+

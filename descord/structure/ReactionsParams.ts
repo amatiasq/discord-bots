@@ -19,3 +19,11 @@ export function unwrapReactionsParams(x: ReactionsParams): RawReactionsParams {
 	return x;
 };
 
+export function wrapReactionsParamsPartial(x: Partial<RawReactionsParams>): Partial<ReactionsParams> {
+	return x;
+};
+
+export function unwrapReactionsParamsPartial(x: Partial<ReactionsParams>): Partial<RawReactionsParams> {
+	return x;
+};
+

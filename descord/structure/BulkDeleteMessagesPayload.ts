@@ -15,3 +15,11 @@ export function unwrapBulkDeleteMessagesPayload(x: BulkDeleteMessagesPayload): R
 	return x;
 };
 
+export function wrapBulkDeleteMessagesPayloadPartial(x: Partial<RawBulkDeleteMessagesPayload>): Partial<BulkDeleteMessagesPayload> {
+	return x;
+};
+
+export function unwrapBulkDeleteMessagesPayloadPartial(x: Partial<BulkDeleteMessagesPayload>): Partial<RawBulkDeleteMessagesPayload> {
+	return x;
+};
+

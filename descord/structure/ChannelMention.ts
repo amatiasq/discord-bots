@@ -23,3 +23,11 @@ export function unwrapChannelMention(x: ChannelMention): RawChannelMention {
 	return toApiCasing(x);
 };
 
+export function wrapChannelMentionPartial(x: Partial<RawChannelMention>): Partial<ChannelMention> {
+	return fromApiCasing(x);
+};
+
+export function unwrapChannelMentionPartial(x: Partial<ChannelMention>): Partial<RawChannelMention> {
+	return toApiCasing(x);
+};
+

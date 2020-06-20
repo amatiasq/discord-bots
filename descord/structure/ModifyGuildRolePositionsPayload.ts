@@ -17,3 +17,11 @@ export function unwrapModifyGuildRolePositionsPayload(x: ModifyGuildRolePosition
 	return x;
 };
 
+export function wrapModifyGuildRolePositionsPayloadPartial(x: Partial<RawModifyGuildRolePositionsPayload>): Partial<ModifyGuildRolePositionsPayload> {
+	return x;
+};
+
+export function unwrapModifyGuildRolePositionsPayloadPartial(x: Partial<ModifyGuildRolePositionsPayload>): Partial<RawModifyGuildRolePositionsPayload> {
+	return x;
+};
+

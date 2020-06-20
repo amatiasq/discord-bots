@@ -25,3 +25,19 @@ export function unwrapActivityTimestamps(x: ActivityTimestamps): RawActivityTime
 	};
 };
 
+export function wrapActivityTimestampsPartial(x: Partial<RawActivityTimestamps>): Partial<ActivityTimestamps> {
+	return {
+		...x,
+		start: x.start && parseUnixTimestamp(x.start),
+		end: x.end && parseUnixTimestamp(x.end),
+	};
+};
+
+export function unwrapActivityTimestampsPartial(x: Partial<ActivityTimestamps>): Partial<RawActivityTimestamps> {
+	return {
+		...x,
+		start: x.start && unparseUnixTimestamp(x.start),
+		end: x.end && unparseUnixTimestamp(x.end),
+	};
+};
+

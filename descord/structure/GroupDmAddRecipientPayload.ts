@@ -17,3 +17,11 @@ export function unwrapGroupDmAddRecipientPayload(x: GroupDmAddRecipientPayload):
 	return toApiCasing(x);
 };
 
+export function wrapGroupDmAddRecipientPayloadPartial(x: Partial<RawGroupDmAddRecipientPayload>): Partial<GroupDmAddRecipientPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapGroupDmAddRecipientPayloadPartial(x: Partial<GroupDmAddRecipientPayload>): Partial<RawGroupDmAddRecipientPayload> {
+	return toApiCasing(x);
+};
+

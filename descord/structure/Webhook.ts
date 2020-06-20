@@ -38,3 +38,17 @@ export function unwrapWebhook(x: Webhook): RawWebhook {
 	};
 };
 
+export function wrapWebhookPartial(x: Partial<RawWebhook>): Partial<Webhook> {
+	return {
+		...fromApiCasing(x),
+		user: x.user && wrapUser(x.user),
+	};
+};
+
+export function unwrapWebhookPartial(x: Partial<Webhook>): Partial<RawWebhook> {
+	return {
+		...toApiCasing(x),
+		user: x.user && unwrapUser(x.user),
+	};
+};
+

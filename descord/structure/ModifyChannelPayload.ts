@@ -42,3 +42,17 @@ export function unwrapModifyChannelPayload(x: ModifyChannelPayload): RawModifyCh
 	};
 };
 
+export function wrapModifyChannelPayloadPartial(x: Partial<RawModifyChannelPayload>): Partial<ModifyChannelPayload> {
+	return {
+		...fromApiCasing(x),
+		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
+	};
+};
+
+export function unwrapModifyChannelPayloadPartial(x: Partial<ModifyChannelPayload>): Partial<RawModifyChannelPayload> {
+	return {
+		...toApiCasing(x),
+		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
+	};
+};
+

@@ -11,5 +11,5 @@ export interface RawAuditLog {
 	/** list of audit log entries */
 	audit_log_entries: RawAuditLogEntry[];
 	/** list of partial integration objects */
-	integrations: Array<Partial<RawIntegration>>;
+	integrations: Partial<RawIntegration>[];
 }

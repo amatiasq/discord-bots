@@ -138,8 +138,8 @@ interface AuditLogChange_VANITY_URL_CODE {
  */
 interface AuditLogChange_$ADD {
 	key: AuditLogChangeKey.$ADD;
-	newValue?: Array<Partial<Role>>;
-	oldValue?: Array<Partial<Role>>;
+	newValue?: Partial<Role>[];
+	oldValue?: Partial<Role>[];
 }
 
 /**
@@ -148,8 +148,8 @@ interface AuditLogChange_$ADD {
  */
 interface AuditLogChange_$REMOVE {
 	key: AuditLogChangeKey.$REMOVE;
-	newValue?: Array<Partial<Role>>;
-	oldValue?: Array<Partial<Role>>;
+	newValue?: Partial<Role>[];
+	oldValue?: Partial<Role>[];
 }
 
 /**

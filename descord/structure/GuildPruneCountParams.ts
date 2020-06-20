@@ -18,3 +18,11 @@ export function unwrapGuildPruneCountParams(x: GuildPruneCountParams): RawGuildP
 	return toApiCasing(x);
 };
 
+export function wrapGuildPruneCountParamsPartial(x: Partial<RawGuildPruneCountParams>): Partial<GuildPruneCountParams> {
+	return fromApiCasing(x);
+};
+
+export function unwrapGuildPruneCountParamsPartial(x: Partial<GuildPruneCountParams>): Partial<RawGuildPruneCountParams> {
+	return toApiCasing(x);
+};
+

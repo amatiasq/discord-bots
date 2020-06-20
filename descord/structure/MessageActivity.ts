@@ -18,3 +18,11 @@ export function unwrapMessageActivity(x: MessageActivity): RawMessageActivity {
 	return toApiCasing(x);
 };
 
+export function wrapMessageActivityPartial(x: Partial<RawMessageActivity>): Partial<MessageActivity> {
+	return fromApiCasing(x);
+};
+
+export function unwrapMessageActivityPartial(x: Partial<MessageActivity>): Partial<RawMessageActivity> {
+	return toApiCasing(x);
+};
+

@@ -19,3 +19,11 @@ export function unwrapActivityEmoji(x: ActivityEmoji): RawActivityEmoji {
 	return x;
 };
 
+export function wrapActivityEmojiPartial(x: Partial<RawActivityEmoji>): Partial<ActivityEmoji> {
+	return x;
+};
+
+export function unwrapActivityEmojiPartial(x: Partial<ActivityEmoji>): Partial<RawActivityEmoji> {
+	return x;
+};
+

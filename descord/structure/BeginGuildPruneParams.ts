@@ -1,6 +1,5 @@
 import { RawBeginGuildPruneParams } from '../raw/RawBeginGuildPruneParams.ts';
-import { RoleId } from '../type-aliases';
-import { integer } from '../type-aliases';
+import { RoleId, integer } from '../type-aliases.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface BeginGuildPruneParams {
@@ -18,6 +17,14 @@ export function wrapBeginGuildPruneParams(x: RawBeginGuildPruneParams): BeginGui
 };
 
 export function unwrapBeginGuildPruneParams(x: BeginGuildPruneParams): RawBeginGuildPruneParams {
+	return toApiCasing(x);
+};
+
+export function wrapBeginGuildPruneParamsPartial(x: Partial<RawBeginGuildPruneParams>): Partial<BeginGuildPruneParams> {
+	return fromApiCasing(x);
+};
+
+export function unwrapBeginGuildPruneParamsPartial(x: Partial<BeginGuildPruneParams>): Partial<RawBeginGuildPruneParams> {
 	return toApiCasing(x);
 };
 

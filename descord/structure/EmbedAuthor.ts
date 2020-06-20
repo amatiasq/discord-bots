@@ -21,3 +21,11 @@ export function unwrapEmbedAuthor(x: EmbedAuthor): RawEmbedAuthor {
 	return toApiCasing(x);
 };
 
+export function wrapEmbedAuthorPartial(x: Partial<RawEmbedAuthor>): Partial<EmbedAuthor> {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedAuthorPartial(x: Partial<EmbedAuthor>): Partial<RawEmbedAuthor> {
+	return toApiCasing(x);
+};
+

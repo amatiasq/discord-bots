@@ -20,3 +20,11 @@ export function unwrapMessageReference(x: MessageReference): RawMessageReference
 	return toApiCasing(x);
 };
 
+export function wrapMessageReferencePartial(x: Partial<RawMessageReference>): Partial<MessageReference> {
+	return fromApiCasing(x);
+};
+
+export function unwrapMessageReferencePartial(x: Partial<MessageReference>): Partial<RawMessageReference> {
+	return toApiCasing(x);
+};
+

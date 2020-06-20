@@ -30,3 +30,17 @@ export function unwrapInviteMetadata(x: InviteMetadata): RawInviteMetadata {
 	};
 };
 
+export function wrapInviteMetadataPartial(x: Partial<RawInviteMetadata>): Partial<InviteMetadata> {
+	return {
+		...fromApiCasing(x),
+		createdAt: x.created_at && parseISO8601Timestamp(x.created_at),
+	};
+};
+
+export function unwrapInviteMetadataPartial(x: Partial<InviteMetadata>): Partial<RawInviteMetadata> {
+	return {
+		...toApiCasing(x),
+		created_at: x.createdAt && unparseISO8601Timestamp(x.createdAt),
+	};
+};
+

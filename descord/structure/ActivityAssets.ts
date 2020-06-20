@@ -21,3 +21,11 @@ export function unwrapActivityAssets(x: ActivityAssets): RawActivityAssets {
 	return toApiCasing(x);
 };
 
+export function wrapActivityAssetsPartial(x: Partial<RawActivityAssets>): Partial<ActivityAssets> {
+	return fromApiCasing(x);
+};
+
+export function unwrapActivityAssetsPartial(x: Partial<ActivityAssets>): Partial<RawActivityAssets> {
+	return toApiCasing(x);
+};
+

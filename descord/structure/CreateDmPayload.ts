@@ -16,3 +16,11 @@ export function unwrapCreateDmPayload(x: CreateDmPayload): RawCreateDmPayload {
 	return toApiCasing(x);
 };
 
+export function wrapCreateDmPayloadPartial(x: Partial<RawCreateDmPayload>): Partial<CreateDmPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapCreateDmPayloadPartial(x: Partial<CreateDmPayload>): Partial<RawCreateDmPayload> {
+	return toApiCasing(x);
+};
+

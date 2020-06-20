@@ -26,3 +26,17 @@ export function unwrapBotGatewayData(x: BotGatewayData): RawBotGatewayData {
 	};
 };
 
+export function wrapBotGatewayDataPartial(x: Partial<RawBotGatewayData>): Partial<BotGatewayData> {
+	return {
+		...fromApiCasing(x),
+		sessionStartLimit: x.session_start_limit && wrapGatewaySessionStartLimit(x.session_start_limit),
+	};
+};
+
+export function unwrapBotGatewayDataPartial(x: Partial<BotGatewayData>): Partial<RawBotGatewayData> {
+	return {
+		...toApiCasing(x),
+		session_start_limit: x.sessionStartLimit && unwrapGatewaySessionStartLimit(x.sessionStartLimit),
+	};
+};
+

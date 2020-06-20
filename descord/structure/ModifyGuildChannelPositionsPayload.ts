@@ -17,3 +17,11 @@ export function unwrapModifyGuildChannelPositionsPayload(x: ModifyGuildChannelPo
 	return x;
 };
 
+export function wrapModifyGuildChannelPositionsPayloadPartial(x: Partial<RawModifyGuildChannelPositionsPayload>): Partial<ModifyGuildChannelPositionsPayload> {
+	return x;
+};
+
+export function unwrapModifyGuildChannelPositionsPayloadPartial(x: Partial<ModifyGuildChannelPositionsPayload>): Partial<RawModifyGuildChannelPositionsPayload> {
+	return x;
+};
+

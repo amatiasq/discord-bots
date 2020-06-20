@@ -15,3 +15,11 @@ export function unwrapGuildWidgetImageParams(x: GuildWidgetImageParams): RawGuil
 	return x;
 };
 
+export function wrapGuildWidgetImageParamsPartial(x: Partial<RawGuildWidgetImageParams>): Partial<GuildWidgetImageParams> {
+	return x;
+};
+
+export function unwrapGuildWidgetImageParamsPartial(x: Partial<GuildWidgetImageParams>): Partial<RawGuildWidgetImageParams> {
+	return x;
+};
+

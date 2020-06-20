@@ -37,3 +37,17 @@ export function unwrapEmoji(x: Emoji): RawEmoji {
 	};
 };
 
+export function wrapEmojiPartial(x: Partial<RawEmoji>): Partial<Emoji> {
+	return {
+		...fromApiCasing(x),
+		user: x.user && wrapUser(x.user),
+	};
+};
+
+export function unwrapEmojiPartial(x: Partial<Emoji>): Partial<RawEmoji> {
+	return {
+		...toApiCasing(x),
+		user: x.user && unwrapUser(x.user),
+	};
+};
+

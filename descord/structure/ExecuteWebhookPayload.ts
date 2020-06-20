@@ -41,3 +41,19 @@ export function unwrapExecuteWebhookPayload(x: ExecuteWebhookPayload): RawExecut
 	};
 };
 
+export function wrapExecuteWebhookPayloadPartial(x: Partial<RawExecuteWebhookPayload>): Partial<ExecuteWebhookPayload> {
+	return {
+		...fromApiCasing(x),
+		embeds: x.embeds && x.embeds.map(wrapEmbed),
+		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
+	};
+};
+
+export function unwrapExecuteWebhookPayloadPartial(x: Partial<ExecuteWebhookPayload>): Partial<RawExecuteWebhookPayload> {
+	return {
+		...toApiCasing(x),
+		embeds: x.embeds && x.embeds.map(unwrapEmbed),
+		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
+	};
+};
+

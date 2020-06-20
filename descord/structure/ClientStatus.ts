@@ -19,3 +19,11 @@ export function unwrapClientStatus(x: ClientStatus): RawClientStatus {
 	return x;
 };
 
+export function wrapClientStatusPartial(x: Partial<RawClientStatus>): Partial<ClientStatus> {
+	return x;
+};
+
+export function unwrapClientStatusPartial(x: Partial<ClientStatus>): Partial<RawClientStatus> {
+	return x;
+};
+

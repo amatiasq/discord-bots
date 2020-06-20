@@ -26,7 +26,7 @@ export interface RawCreateGuildPayload {
 	/** new guild roles */
 	roles?: RawRole[];
 	/** new guild's channels */
-	channels?: Array<Partial<RawChannel>>;
+	channels?: Partial<RawChannel>[];
 	/** id for afk channel */
 	afk_channel_id?: ChannelId;
 	/** afk timeout in seconds */

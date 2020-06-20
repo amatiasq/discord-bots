@@ -24,3 +24,11 @@ export function unwrapModifyGuildMemberPayload(x: ModifyGuildMemberPayload): Raw
 	return toApiCasing(x);
 };
 
+export function wrapModifyGuildMemberPayloadPartial(x: Partial<RawModifyGuildMemberPayload>): Partial<ModifyGuildMemberPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapModifyGuildMemberPayloadPartial(x: Partial<ModifyGuildMemberPayload>): Partial<RawModifyGuildMemberPayload> {
+	return toApiCasing(x);
+};
+

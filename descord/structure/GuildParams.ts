@@ -15,3 +15,11 @@ export function unwrapGuildParams(x: GuildParams): RawGuildParams {
 	return toApiCasing(x);
 };
 
+export function wrapGuildParamsPartial(x: Partial<RawGuildParams>): Partial<GuildParams> {
+	return fromApiCasing(x);
+};
+
+export function unwrapGuildParamsPartial(x: Partial<GuildParams>): Partial<RawGuildParams> {
+	return toApiCasing(x);
+};
+

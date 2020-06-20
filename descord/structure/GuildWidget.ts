@@ -18,3 +18,11 @@ export function unwrapGuildWidget(x: GuildWidget): RawGuildWidget {
 	return toApiCasing(x);
 };
 
+export function wrapGuildWidgetPartial(x: Partial<RawGuildWidget>): Partial<GuildWidget> {
+	return fromApiCasing(x);
+};
+
+export function unwrapGuildWidgetPartial(x: Partial<GuildWidget>): Partial<RawGuildWidget> {
+	return toApiCasing(x);
+};
+

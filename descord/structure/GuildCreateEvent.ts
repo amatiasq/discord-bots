@@ -49,3 +49,25 @@ export function unwrapGuildCreateEvent(x: GuildCreateEvent): RawGuildCreateEvent
 	};
 };
 
+export function wrapGuildCreateEventPartial(x: Partial<RawGuildCreateEvent>): Partial<GuildCreateEvent> {
+	return {
+		...fromApiCasing(wrapGuild(x)),
+		joinedAt: x.joined_at && parseISO8601Timestamp(x.joined_at),
+		voiceStates: x.voice_states && x.voice_states.map(wrapVoiceState),
+		members: x.members && x.members.map(wrapGuildMember),
+		channels: x.channels && x.channels.map(wrapChannel),
+		presences: x.presences && x.presences.map(wrapPresenceUpdateEvent),
+	};
+};
+
+export function unwrapGuildCreateEventPartial(x: Partial<GuildCreateEvent>): Partial<RawGuildCreateEvent> {
+	return {
+		...toApiCasing(unwrapGuild(x)),
+		joined_at: x.joinedAt && unparseISO8601Timestamp(x.joinedAt),
+		voice_states: x.voiceStates && x.voiceStates.map(unwrapVoiceState),
+		members: x.members && x.members.map(unwrapGuildMember),
+		channels: x.channels && x.channels.map(unwrapChannel),
+		presences: x.presences && x.presences.map(unwrapPresenceUpdateEvent),
+	};
+};
+

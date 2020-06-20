@@ -36,3 +36,19 @@ export function unwrapReadyEvent(x: ReadyEvent): RawReadyEvent {
 	};
 };
 
+export function wrapReadyEventPartial(x: Partial<RawReadyEvent>): Partial<ReadyEvent> {
+	return {
+		...fromApiCasing(x),
+		user: x.user && wrapUser(x.user),
+		guilds: x.guilds && x.guilds.map(wrapUnavailableGuild),
+	};
+};
+
+export function unwrapReadyEventPartial(x: Partial<ReadyEvent>): Partial<RawReadyEvent> {
+	return {
+		...toApiCasing(x),
+		user: x.user && unwrapUser(x.user),
+		guilds: x.guilds && x.guilds.map(unwrapUnavailableGuild),
+	};
+};
+

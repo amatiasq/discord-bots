@@ -1,5 +1,5 @@
 import { RawConnection } from '../raw/RawConnection.ts';
-import { Integration, wrapIntegrationPartial } from './Integration.ts';
+import { Integration, wrapIntegrationPartial, unwrapIntegrationPartial } from './Integration.ts';
 import { VisibilityType } from '../enum/VisibilityType.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
@@ -13,7 +13,7 @@ export interface Connection {
 	/** whether the connection is revoked */
 	revoked?: boolean;
 	/** an array of partial server integrations */
-	integrations?: Array<Partial<Integration>>;
+	integrations?: Partial<Integration>[];
 	/** whether the connection is verified */
 	verified: boolean;
 	/** whether friend sync is enabled for this connection */
@@ -24,15 +24,32 @@ export interface Connection {
 	visibility: VisibilityType;
 }
 
+
 export function wrapConnection(x: RawConnection): Connection {
 	return {
 		...fromApiCasing(x),
-
-		// Ad-hoc
 		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
 	};
-}
+};
 
 export function unwrapConnection(x: Connection): RawConnection {
-	return toApiCasing(x);
-}
+	return {
+		...toApiCasing(x),
+		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
+	};
+};
+
+export function wrapConnectionPartial(x: Partial<RawConnection>): Partial<Connection> {
+	return {
+		...fromApiCasing(x),
+		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
+	};
+};
+
+export function unwrapConnectionPartial(x: Partial<Connection>): Partial<RawConnection> {
+	return {
+		...toApiCasing(x),
+		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
+	};
+};
+

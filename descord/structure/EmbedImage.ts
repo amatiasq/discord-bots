@@ -22,3 +22,11 @@ export function unwrapEmbedImage(x: EmbedImage): RawEmbedImage {
 	return toApiCasing(x);
 };
 
+export function wrapEmbedImagePartial(x: Partial<RawEmbedImage>): Partial<EmbedImage> {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedImagePartial(x: Partial<EmbedImage>): Partial<RawEmbedImage> {
+	return toApiCasing(x);
+};
+

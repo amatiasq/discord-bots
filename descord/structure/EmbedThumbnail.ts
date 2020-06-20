@@ -22,3 +22,11 @@ export function unwrapEmbedThumbnail(x: EmbedThumbnail): RawEmbedThumbnail {
 	return toApiCasing(x);
 };
 
+export function wrapEmbedThumbnailPartial(x: Partial<RawEmbedThumbnail>): Partial<EmbedThumbnail> {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedThumbnailPartial(x: Partial<EmbedThumbnail>): Partial<RawEmbedThumbnail> {
+	return toApiCasing(x);
+};
+

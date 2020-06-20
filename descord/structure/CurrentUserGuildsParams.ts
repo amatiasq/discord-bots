@@ -19,3 +19,11 @@ export function unwrapCurrentUserGuildsParams(x: CurrentUserGuildsParams): RawCu
 	return x;
 };
 
+export function wrapCurrentUserGuildsParamsPartial(x: Partial<RawCurrentUserGuildsParams>): Partial<CurrentUserGuildsParams> {
+	return x;
+};
+
+export function unwrapCurrentUserGuildsParamsPartial(x: Partial<CurrentUserGuildsParams>): Partial<RawCurrentUserGuildsParams> {
+	return x;
+};
+

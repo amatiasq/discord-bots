@@ -11,7 +11,7 @@ export interface RawConnection {
 	/** whether the connection is revoked */
 	revoked?: boolean;
 	/** an array of partial server integrations */
-	integrations?: Array<Partial<RawIntegration>>;
+	integrations?: Partial<RawIntegration>[];
 	/** whether the connection is verified */
 	verified: boolean;
 	/** whether friend sync is enabled for this connection */

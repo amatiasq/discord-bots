@@ -11,12 +11,8 @@ import {
 	GuildId,
 	ImageData,
 	integer,
-	Permission,
-	parsePermissionInteger,
-	unparsePermissionInteger,
-	SystemChannelFlag,
-	parseSystemChannelFlagInteger,
-	unparseSystemChannelFlagInteger,
+	Permission, parsePermissionInteger, unparsePermissionInteger,
+	SystemChannelFlag, parseSystemChannelFlagInteger, unparseSystemChannelFlagInteger,
 	UserId,
 	VoiceRegionId,
 } from '../type-aliases.ts';
@@ -103,25 +99,6 @@ export interface Guild {
 	approximatePresenceCount?: integer;
 }
 
-export function wrapGuild(x: RawGuild): Guild {
-	return {
-		...fromApiCasing(x),
-		permissions: x.permissions && parsePermissionInteger(x.permissions),
-		roles: x.roles.map(wrapRole),
-		emojis: x.emojis.map(wrapEmoji),
-		systemChannelFlags: parseSystemChannelFlagInteger(x.system_channel_flags),
-	};
-}
-
-export function unwrapGuild(x: Guild): RawGuild {
-	return {
-		...toApiCasing(x),
-		permissions: x.permissions && unparsePermissionInteger(x.permissions),
-		roles: x.roles.map(unwrapRole),
-		emojis: x.emojis.map(unwrapEmoji),
-		system_channel_flags: unparseSystemChannelFlagInteger(x.systemChannelFlags),
-	};
-}
 
 export function wrapGuild(x: RawGuild): Guild {
 	return {
@@ -131,7 +108,7 @@ export function wrapGuild(x: RawGuild): Guild {
 		emojis: x.emojis.map(wrapEmoji),
 		systemChannelFlags: parseSystemChannelFlagInteger(x.system_channel_flags),
 	};
-}
+};
 
 export function unwrapGuild(x: Guild): RawGuild {
 	return {
@@ -141,4 +118,25 @@ export function unwrapGuild(x: Guild): RawGuild {
 		emojis: x.emojis.map(unwrapEmoji),
 		system_channel_flags: unparseSystemChannelFlagInteger(x.systemChannelFlags),
 	};
-}
+};
+
+export function wrapGuildPartial(x: Partial<RawGuild>): Partial<Guild> {
+	return {
+		...fromApiCasing(x),
+		permissions: x.permissions && parsePermissionInteger(x.permissions),
+		roles: x.roles && x.roles.map(wrapRole),
+		emojis: x.emojis && x.emojis.map(wrapEmoji),
+		systemChannelFlags: x.system_channel_flags && parseSystemChannelFlagInteger(x.system_channel_flags),
+	};
+};
+
+export function unwrapGuildPartial(x: Partial<Guild>): Partial<RawGuild> {
+	return {
+		...toApiCasing(x),
+		permissions: x.permissions && unparsePermissionInteger(x.permissions),
+		roles: x.roles && x.roles.map(unwrapRole),
+		emojis: x.emojis && x.emojis.map(unwrapEmoji),
+		system_channel_flags: x.systemChannelFlags && unparseSystemChannelFlagInteger(x.systemChannelFlags),
+	};
+};
+

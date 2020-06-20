@@ -1,10 +1,5 @@
 import { RawRole } from '../raw/RawRole.ts';
-import {
-	parsePermissionInteger,
-	Permission,
-	RoleId,
-	unparsePermissionInteger,
-} from '../type-aliases.ts';
+import { RoleId, Permission, parsePermissionInteger, unparsePermissionInteger } from '../type-aliases.ts';
 
 export interface Role {
 	/** role id */
@@ -25,24 +20,32 @@ export interface Role {
 	mentionable: boolean;
 }
 
+
 export function wrapRole(x: RawRole): Role {
 	return {
 		...x,
 		permissions: parsePermissionInteger(x.permissions),
 	};
-}
+};
 
 export function unwrapRole(x: Role): RawRole {
 	return {
 		...x,
 		permissions: unparsePermissionInteger(x.permissions),
 	};
-}
+};
 
-// Ad-hoc
 export function wrapRolePartial(x: Partial<RawRole>): Partial<Role> {
 	return {
 		...x,
 		permissions: x.permissions && parsePermissionInteger(x.permissions),
 	};
-}
+};
+
+export function unwrapRolePartial(x: Partial<Role>): Partial<RawRole> {
+	return {
+		...x,
+		permissions: x.permissions && unparsePermissionInteger(x.permissions),
+	};
+};
+

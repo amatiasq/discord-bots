@@ -1,5 +1,5 @@
 import { RawCreateGuildBanParams } from '../raw/RawCreateGuildBanParams.ts';
-import { integer } from '../type-aliases';
+import { integer } from '../type-aliases.ts';
 
 export interface CreateGuildBanParams {
 	/** number of days to delete messages for (0-7) */
@@ -14,6 +14,14 @@ export function wrapCreateGuildBanParams(x: RawCreateGuildBanParams): CreateGuil
 };
 
 export function unwrapCreateGuildBanParams(x: CreateGuildBanParams): RawCreateGuildBanParams {
+	return x;
+};
+
+export function wrapCreateGuildBanParamsPartial(x: Partial<RawCreateGuildBanParams>): Partial<CreateGuildBanParams> {
+	return x;
+};
+
+export function unwrapCreateGuildBanParamsPartial(x: Partial<CreateGuildBanParams>): Partial<RawCreateGuildBanParams> {
 	return x;
 };
 

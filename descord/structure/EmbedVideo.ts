@@ -19,3 +19,11 @@ export function unwrapEmbedVideo(x: EmbedVideo): RawEmbedVideo {
 	return x;
 };
 
+export function wrapEmbedVideoPartial(x: Partial<RawEmbedVideo>): Partial<EmbedVideo> {
+	return x;
+};
+
+export function unwrapEmbedVideoPartial(x: Partial<EmbedVideo>): Partial<RawEmbedVideo> {
+	return x;
+};
+

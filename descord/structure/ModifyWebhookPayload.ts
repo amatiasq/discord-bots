@@ -20,3 +20,11 @@ export function unwrapModifyWebhookPayload(x: ModifyWebhookPayload): RawModifyWe
 	return toApiCasing(x);
 };
 
+export function wrapModifyWebhookPayloadPartial(x: Partial<RawModifyWebhookPayload>): Partial<ModifyWebhookPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapModifyWebhookPayloadPartial(x: Partial<ModifyWebhookPayload>): Partial<RawModifyWebhookPayload> {
+	return toApiCasing(x);
+};
+

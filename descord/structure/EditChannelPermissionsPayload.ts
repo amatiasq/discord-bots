@@ -27,3 +27,19 @@ export function unwrapEditChannelPermissionsPayload(x: EditChannelPermissionsPay
 	};
 };
 
+export function wrapEditChannelPermissionsPayloadPartial(x: Partial<RawEditChannelPermissionsPayload>): Partial<EditChannelPermissionsPayload> {
+	return {
+		...x,
+		allow: x.allow && parsePermissionInteger(x.allow),
+		deny: x.deny && parsePermissionInteger(x.deny),
+	};
+};
+
+export function unwrapEditChannelPermissionsPayloadPartial(x: Partial<EditChannelPermissionsPayload>): Partial<RawEditChannelPermissionsPayload> {
+	return {
+		...x,
+		allow: x.allow && unparsePermissionInteger(x.allow),
+		deny: x.deny && unparsePermissionInteger(x.deny),
+	};
+};
+

@@ -25,3 +25,11 @@ export function unwrapVoiceRegion(x: VoiceRegion): RawVoiceRegion {
 	return x;
 };
 
+export function wrapVoiceRegionPartial(x: Partial<RawVoiceRegion>): Partial<VoiceRegion> {
+	return x;
+};
+
+export function unwrapVoiceRegionPartial(x: Partial<VoiceRegion>): Partial<RawVoiceRegion> {
+	return x;
+};
+

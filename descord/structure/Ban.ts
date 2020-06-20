@@ -23,3 +23,17 @@ export function unwrapBan(x: Ban): RawBan {
 	};
 };
 
+export function wrapBanPartial(x: Partial<RawBan>): Partial<Ban> {
+	return {
+		...x,
+		user: x.user && wrapUser(x.user),
+	};
+};
+
+export function unwrapBanPartial(x: Partial<Ban>): Partial<RawBan> {
+	return {
+		...x,
+		user: x.user && unwrapUser(x.user),
+	};
+};
+

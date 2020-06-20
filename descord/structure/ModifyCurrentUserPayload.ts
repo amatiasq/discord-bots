@@ -17,3 +17,11 @@ export function unwrapModifyCurrentUserPayload(x: ModifyCurrentUserPayload): Raw
 	return x;
 };
 
+export function wrapModifyCurrentUserPayloadPartial(x: Partial<RawModifyCurrentUserPayload>): Partial<ModifyCurrentUserPayload> {
+	return x;
+};
+
+export function unwrapModifyCurrentUserPayloadPartial(x: Partial<ModifyCurrentUserPayload>): Partial<RawModifyCurrentUserPayload> {
+	return x;
+};
+

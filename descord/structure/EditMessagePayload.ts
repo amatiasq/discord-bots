@@ -27,3 +27,17 @@ export function unwrapEditMessagePayload(x: EditMessagePayload): RawEditMessageP
 	};
 };
 
+export function wrapEditMessagePayloadPartial(x: Partial<RawEditMessagePayload>): Partial<EditMessagePayload> {
+	return {
+		...fromApiCasing(x),
+		embed: x.embed && wrapEmbed(x.embed),
+	};
+};
+
+export function unwrapEditMessagePayloadPartial(x: Partial<EditMessagePayload>): Partial<RawEditMessagePayload> {
+	return {
+		...toApiCasing(x),
+		embed: x.embed && unwrapEmbed(x.embed),
+	};
+};
+

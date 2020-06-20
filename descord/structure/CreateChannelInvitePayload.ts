@@ -38,3 +38,11 @@ export function unwrapCreateChannelInvitePayload(x: CreateChannelInvitePayload):
 	return toApiCasing(x);
 };
 
+export function wrapCreateChannelInvitePayloadPartial(x: Partial<RawCreateChannelInvitePayload>): Partial<CreateChannelInvitePayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapCreateChannelInvitePayloadPartial(x: Partial<CreateChannelInvitePayload>): Partial<RawCreateChannelInvitePayload> {
+	return toApiCasing(x);
+};
+

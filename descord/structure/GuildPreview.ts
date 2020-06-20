@@ -42,3 +42,17 @@ export function unwrapGuildPreview(x: GuildPreview): RawGuildPreview {
 	};
 };
 
+export function wrapGuildPreviewPartial(x: Partial<RawGuildPreview>): Partial<GuildPreview> {
+	return {
+		...fromApiCasing(x),
+		emojis: x.emojis && x.emojis.map(wrapEmoji),
+	};
+};
+
+export function unwrapGuildPreviewPartial(x: Partial<GuildPreview>): Partial<RawGuildPreview> {
+	return {
+		...toApiCasing(x),
+		emojis: x.emojis && x.emojis.map(unwrapEmoji),
+	};
+};
+

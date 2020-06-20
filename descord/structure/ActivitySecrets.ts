@@ -19,3 +19,11 @@ export function unwrapActivitySecrets(x: ActivitySecrets): RawActivitySecrets {
 	return x;
 };
 
+export function wrapActivitySecretsPartial(x: Partial<RawActivitySecrets>): Partial<ActivitySecrets> {
+	return x;
+};
+
+export function unwrapActivitySecretsPartial(x: Partial<ActivitySecrets>): Partial<RawActivitySecrets> {
+	return x;
+};
+

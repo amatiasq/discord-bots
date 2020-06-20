@@ -17,3 +17,11 @@ export function unwrapCreateGroupDmPayload(x: CreateGroupDmPayload): RawCreateGr
 	return toApiCasing(x);
 };
 
+export function wrapCreateGroupDmPayloadPartial(x: Partial<RawCreateGroupDmPayload>): Partial<CreateGroupDmPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapCreateGroupDmPayloadPartial(x: Partial<CreateGroupDmPayload>): Partial<RawCreateGroupDmPayload> {
+	return toApiCasing(x);
+};
+

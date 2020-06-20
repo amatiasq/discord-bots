@@ -39,3 +39,19 @@ export function unwrapCreateMessagePayload(x: CreateMessagePayload): RawCreateMe
 	};
 };
 
+export function wrapCreateMessagePayloadPartial(x: Partial<RawCreateMessagePayload>): Partial<CreateMessagePayload> {
+	return {
+		...fromApiCasing(x),
+		embed: x.embed && wrapEmbed(x.embed),
+		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
+	};
+};
+
+export function unwrapCreateMessagePayloadPartial(x: Partial<CreateMessagePayload>): Partial<RawCreateMessagePayload> {
+	return {
+		...toApiCasing(x),
+		embed: x.embed && unwrapEmbed(x.embed),
+		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
+	};
+};
+

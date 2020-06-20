@@ -17,3 +17,11 @@ export function unwrapGuildMembersParams(x: GuildMembersParams): RawGuildMembers
 	return x;
 };
 
+export function wrapGuildMembersParamsPartial(x: Partial<RawGuildMembersParams>): Partial<GuildMembersParams> {
+	return x;
+};
+
+export function unwrapGuildMembersParamsPartial(x: Partial<GuildMembersParams>): Partial<RawGuildMembersParams> {
+	return x;
+};
+

@@ -15,3 +15,11 @@ export function unwrapModifyCurrentUserNickPayload(x: ModifyCurrentUserNickPaylo
 	return toApiCasing(x);
 };
 
+export function wrapModifyCurrentUserNickPayloadPartial(x: Partial<RawModifyCurrentUserNickPayload>): Partial<ModifyCurrentUserNickPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapModifyCurrentUserNickPayloadPartial(x: Partial<ModifyCurrentUserNickPayload>): Partial<RawModifyCurrentUserNickPayload> {
+	return toApiCasing(x);
+};
+

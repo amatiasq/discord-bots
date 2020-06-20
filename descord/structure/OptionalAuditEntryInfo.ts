@@ -30,3 +30,11 @@ export function unwrapOptionalAuditEntryInfo(x: OptionalAuditEntryInfo): RawOpti
 	return toApiCasing(x);
 };
 
+export function wrapOptionalAuditEntryInfoPartial(x: Partial<RawOptionalAuditEntryInfo>): Partial<OptionalAuditEntryInfo> {
+	return fromApiCasing(x);
+};
+
+export function unwrapOptionalAuditEntryInfoPartial(x: Partial<OptionalAuditEntryInfo>): Partial<RawOptionalAuditEntryInfo> {
+	return toApiCasing(x);
+};
+

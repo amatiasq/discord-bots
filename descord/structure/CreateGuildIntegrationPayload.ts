@@ -17,3 +17,11 @@ export function unwrapCreateGuildIntegrationPayload(x: CreateGuildIntegrationPay
 	return x;
 };
 
+export function wrapCreateGuildIntegrationPayloadPartial(x: Partial<RawCreateGuildIntegrationPayload>): Partial<CreateGuildIntegrationPayload> {
+	return x;
+};
+
+export function unwrapCreateGuildIntegrationPayloadPartial(x: Partial<CreateGuildIntegrationPayload>): Partial<RawCreateGuildIntegrationPayload> {
+	return x;
+};
+

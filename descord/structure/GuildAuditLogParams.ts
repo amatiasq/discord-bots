@@ -23,3 +23,11 @@ export function unwrapGuildAuditLogParams(x: GuildAuditLogParams): RawGuildAudit
 	return toApiCasing(x);
 };
 
+export function wrapGuildAuditLogParamsPartial(x: Partial<RawGuildAuditLogParams>): Partial<GuildAuditLogParams> {
+	return fromApiCasing(x);
+};
+
+export function unwrapGuildAuditLogParamsPartial(x: Partial<GuildAuditLogParams>): Partial<RawGuildAuditLogParams> {
+	return toApiCasing(x);
+};
+

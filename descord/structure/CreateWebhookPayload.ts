@@ -17,3 +17,11 @@ export function unwrapCreateWebhookPayload(x: CreateWebhookPayload): RawCreateWe
 	return x;
 };
 
+export function wrapCreateWebhookPayloadPartial(x: Partial<RawCreateWebhookPayload>): Partial<CreateWebhookPayload> {
+	return x;
+};
+
+export function unwrapCreateWebhookPayloadPartial(x: Partial<CreateWebhookPayload>): Partial<RawCreateWebhookPayload> {
+	return x;
+};
+

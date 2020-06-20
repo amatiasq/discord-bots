@@ -21,3 +21,11 @@ export function unwrapChannelMessagesParams(x: ChannelMessagesParams): RawChanne
 	return x;
 };
 
+export function wrapChannelMessagesParamsPartial(x: Partial<RawChannelMessagesParams>): Partial<ChannelMessagesParams> {
+	return x;
+};
+
+export function unwrapChannelMessagesParamsPartial(x: Partial<ChannelMessagesParams>): Partial<RawChannelMessagesParams> {
+	return x;
+};
+

@@ -21,3 +21,11 @@ export function unwrapAllowedMentions(x: AllowedMentions): RawAllowedMentions {
 	return toApiCasing(x);
 };
 
+export function wrapAllowedMentionsPartial(x: Partial<RawAllowedMentions>): Partial<AllowedMentions> {
+	return fromApiCasing(x);
+};
+
+export function unwrapAllowedMentionsPartial(x: Partial<AllowedMentions>): Partial<RawAllowedMentions> {
+	return toApiCasing(x);
+};
+

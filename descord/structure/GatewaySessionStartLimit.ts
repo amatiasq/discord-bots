@@ -19,3 +19,11 @@ export function unwrapGatewaySessionStartLimit(x: GatewaySessionStartLimit): Raw
 	return toApiCasing(x);
 };
 
+export function wrapGatewaySessionStartLimitPartial(x: Partial<RawGatewaySessionStartLimit>): Partial<GatewaySessionStartLimit> {
+	return fromApiCasing(x);
+};
+
+export function unwrapGatewaySessionStartLimitPartial(x: Partial<GatewaySessionStartLimit>): Partial<RawGatewaySessionStartLimit> {
+	return toApiCasing(x);
+};
+

@@ -24,3 +24,11 @@ export function unwrapAddGuildMemberPayload(x: AddGuildMemberPayload): RawAddGui
 	return toApiCasing(x);
 };
 
+export function wrapAddGuildMemberPayloadPartial(x: Partial<RawAddGuildMemberPayload>): Partial<AddGuildMemberPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapAddGuildMemberPayloadPartial(x: Partial<AddGuildMemberPayload>): Partial<RawAddGuildMemberPayload> {
+	return toApiCasing(x);
+};
+

@@ -29,10 +29,10 @@ async function main() {
 }
 
 function transform(content: string) {
-	const { name, parent, imports, properties } = parse(content);
+	const { name, parent, imports, properties, partials } = parse(content);
 	const hasCasing = /_/.test(properties);
 
-	const newImports = adaptImports(name, imports, hasCasing);
+	const newImports = adaptImports(name, imports, hasCasing, partials);
 
 	const result = PARSEABLE.reduce(
 		(x, y, i) => x.replace(new RegExp(`: ${y}`, 'g'), `: ${PARSED[i]}`),
@@ -47,10 +47,21 @@ ${toCamelCase(result)}
 export ${writeWrap(name, parent, properties, hasCasing)};
 
 export ${writeUnwrap(name, parent, properties, hasCasing)};
+
+export ${writeWrapPartial(name, parent, properties, hasCasing)};
+
+export ${writeUnwrapPartial(name, parent, properties, hasCasing)};
 `;
 }
 
-function adaptImports(name: string, imports: string, hasCasing: boolean) {
+function writeFunctions() {}
+
+function adaptImports(
+	name: string,
+	imports: string,
+	hasCasing: boolean,
+	partials: string[],
+) {
 	const list = PARSEABLE.reduce(
 		(x, y, i) => x.replace(y, `${PARSEABLE_IMPORT[i]}parse${y}, unparse${y}`),
 		imports,
@@ -63,7 +74,13 @@ function adaptImports(name: string, imports: string, hasCasing: boolean) {
 		list.push("import { fromApiCasing, toApiCasing } from '../casing.ts';");
 	}
 
-	return list.join('\n') + '\n\n';
+	const finish = partials.reduce(
+		(x, partial) =>
+			x.replace(new RegExp(`wrap${partial}`, 'g'), `wrap${partial}Partial`),
+		list.join('\n'),
+	);
+
+	return `${finish}\n\n`;
 }
 
 function parse(content: string) {
@@ -76,11 +93,14 @@ function parse(content: string) {
 		Deno.exit(1);
 	}
 
+	const partials = content.matchAll(/Partial<Raw(\w+)>/g);
+
 	return {
 		imports: match[1],
 		name: match[2],
 		parent: match[3],
 		properties: match[4],
+		partials: [...partials].map(x => x[1]),
 	};
 }
 
@@ -100,11 +120,6 @@ function writeWrap(
 			`${toCamelCase(key)}: ${
 				opt ? `x.${key} && ` : ''
 			}wrap${value}(x.${key}),`,
-
-		(_, key, opt, value) =>
-			`${toCamelCase(key)}: ${
-				opt ? `x.${key} && ` : ''
-			}x.${key}.map(wrap${value}),`,
 	);
 
 	const json = 'x';
@@ -130,11 +145,6 @@ function writeUnwrap(
 			`${key}: ${
 				opt ? `x.${toCamelCase(key)} && ` : ''
 			}unwrap${value}(x.${toCamelCase(key)}),`,
-
-		(_, key, opt, value) =>
-			`${key}: ${opt ? `x.${toCamelCase(key)} && ` : ''}x.${toCamelCase(
-				key,
-			)}.map(unwrap${value}),`,
 	);
 
 	const json = 'x';
@@ -142,6 +152,50 @@ function writeUnwrap(
 	const cased = hasCasing ? `toApiCasing(${child})` : child;
 	const body = buildBody(cased, props);
 	return `function unwrap${name}(x: ${name}): Raw${name} {\n\t${body}\n}`;
+}
+
+function writeWrapPartial(
+	name: string,
+	parent: string,
+	properties: string,
+	hasCasing: boolean,
+) {
+	const props = serialization(
+		properties,
+		(_, key, opt, value) =>
+			`${toCamelCase(key)}: x.${key} && parse${value}(x.${key}),`,
+		(_, key, opt, value) =>
+			`${toCamelCase(key)}: x.${key} && wrap${value}(x.${key}),`,
+	);
+
+	const json = 'x';
+	const child = parent ? `wrap${parent}(${json})` : json;
+	const cased = hasCasing ? `fromApiCasing(${child})` : child;
+	const body = buildBody(cased, props);
+	return `function wrap${name}Partial(x: Partial<Raw${name}>): Partial<${name}> {\n\t${body}\n}`;
+}
+
+function writeUnwrapPartial(
+	name: string,
+	parent: string,
+	properties: string,
+	hasCasing: boolean,
+) {
+	const props = serialization(
+		properties,
+		(_, key, opt, value) =>
+			`${key}: x.${toCamelCase(key)} && unparse${value}(x.${toCamelCase(
+				key,
+			)}),`,
+		(_, key, opt, value) =>
+			`${key}: x.${toCamelCase(key)} && unwrap${value}(x.${toCamelCase(key)}),`,
+	);
+
+	const json = 'x';
+	const child = parent ? `unwrap${parent}(${json})` : json;
+	const cased = hasCasing ? `toApiCasing(${child})` : child;
+	const body = buildBody(cased, props);
+	return `function unwrap${name}Partial(x: Partial<${name}>): Partial<Raw${name}> {\n\t${body}\n}`;
 }
 
 function buildBody(base: string, props: string) {
@@ -154,7 +208,6 @@ function serialization(
 	properties: string,
 	onSerializable: Conversor,
 	onEntity: Conversor,
-	onArray: Conversor,
 ) {
 	return properties
 		.split('\n')
@@ -166,11 +219,28 @@ function serialization(
 			if (/: Raw/.test(line)) {
 				return line
 					.replace(/((?:\w|_)+)(\??): Raw(\w+);/g, onEntity)
-					.replace(/((?:\w|_)+)(\??): Raw(\w+)\[\];/g, onArray);
+					.replace(/((?:\w|_)+)(\??): Raw(\w+)\[\];/g, doArrays(onEntity));
+			}
+
+			if (/: Partial<Raw/.test(line)) {
+				return line
+					.replace(/((?:\w|_)+)(\??): Partial<Raw(\w+)>;/g, doPartial(onEntity))
+					.replace(
+						/((?:\w|_)+)(\??): Partial<Raw(\w+)>\[\];/g,
+						doPartial(doArrays(onEntity)),
+					);
 			}
 		})
 		.filter(Boolean)
 		.join('\n');
+}
+
+function doPartial(fn: Conversor): Conversor {
+	return (...args) => fn(...args).replace(/(wrap\w+)/, '$1Partial');
+}
+
+function doArrays(fn: Conversor): Conversor {
+	return (...args) => fn(...args).replace(/(\w+)\((x\..*)\)/, '$2.map($1)');
 }
 
 function toCamelCase(value: string) {

@@ -1,13 +1,9 @@
-import { fromApiCasing, toApiCasing } from '../casing.ts';
-import { AuditLogEvent } from '../enum/AuditLogEvent.ts';
 import { RawAuditLogEntry } from '../raw/RawAuditLogEntry.ts';
+import { AuditLogEvent } from '../enum/AuditLogEvent.ts';
 import { AuditLogEntryId, UserId } from '../type-aliases.ts';
-import { AuditLogChange, wrapAuditLogChange } from './AuditLogChange.ts';
-import {
-	OptionalAuditEntryInfo,
-	unwrapOptionalAuditEntryInfo,
-	wrapOptionalAuditEntryInfo,
-} from './OptionalAuditEntryInfo.ts';
+import { OptionalAuditEntryInfo, wrapOptionalAuditEntryInfo, unwrapOptionalAuditEntryInfo } from './OptionalAuditEntryInfo.ts';
+import { AuditLogChange, wrapAuditLogChange, unwrapAuditLogChange } from './AuditLogChange.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface AuditLogEntry {
 	/** id of the affected entity (webhook, user, role, etc.) */
@@ -26,21 +22,36 @@ export interface AuditLogEntry {
 	reason?: string;
 }
 
+
 export function wrapAuditLogEntry(x: RawAuditLogEntry): AuditLogEntry {
 	return {
 		...fromApiCasing(x),
 		changes: x.changes && x.changes.map(wrapAuditLogChange),
 		options: x.options && wrapOptionalAuditEntryInfo(x.options),
 	};
-}
+};
 
 export function unwrapAuditLogEntry(x: AuditLogEntry): RawAuditLogEntry {
 	return {
 		...toApiCasing(x),
-
-		// Ad-hoc
-		// changes: x.changes && x.changes.map(unwrapAuditLogChange),
-
+		changes: x.changes && x.changes.map(unwrapAuditLogChange),
 		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
 	};
-}
+};
+
+export function wrapAuditLogEntryPartial(x: Partial<RawAuditLogEntry>): Partial<AuditLogEntry> {
+	return {
+		...fromApiCasing(x),
+		changes: x.changes && x.changes.map(wrapAuditLogChange),
+		options: x.options && wrapOptionalAuditEntryInfo(x.options),
+	};
+};
+
+export function unwrapAuditLogEntryPartial(x: Partial<AuditLogEntry>): Partial<RawAuditLogEntry> {
+	return {
+		...toApiCasing(x),
+		changes: x.changes && x.changes.map(unwrapAuditLogChange),
+		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
+	};
+};
+

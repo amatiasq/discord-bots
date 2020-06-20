@@ -29,3 +29,17 @@ export function unwrapCreateGuildRolePayload(x: CreateGuildRolePayload): RawCrea
 	};
 };
 
+export function wrapCreateGuildRolePayloadPartial(x: Partial<RawCreateGuildRolePayload>): Partial<CreateGuildRolePayload> {
+	return {
+		...x,
+		permissions: x.permissions && parsePermissionInteger(x.permissions),
+	};
+};
+
+export function unwrapCreateGuildRolePayloadPartial(x: Partial<CreateGuildRolePayload>): Partial<RawCreateGuildRolePayload> {
+	return {
+		...x,
+		permissions: x.permissions && unparsePermissionInteger(x.permissions),
+	};
+};
+

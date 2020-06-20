@@ -24,3 +24,11 @@ export function unwrapMessageApplication(x: MessageApplication): RawMessageAppli
 	return toApiCasing(x);
 };
 
+export function wrapMessageApplicationPartial(x: Partial<RawMessageApplication>): Partial<MessageApplication> {
+	return fromApiCasing(x);
+};
+
+export function unwrapMessageApplicationPartial(x: Partial<MessageApplication>): Partial<RawMessageApplication> {
+	return toApiCasing(x);
+};
+

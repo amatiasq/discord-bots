@@ -17,3 +17,11 @@ export function unwrapModifyGuildEmojiPayload(x: ModifyGuildEmojiPayload): RawMo
 	return x;
 };
 
+export function wrapModifyGuildEmojiPayloadPartial(x: Partial<RawModifyGuildEmojiPayload>): Partial<ModifyGuildEmojiPayload> {
+	return x;
+};
+
+export function unwrapModifyGuildEmojiPayloadPartial(x: Partial<ModifyGuildEmojiPayload>): Partial<RawModifyGuildEmojiPayload> {
+	return x;
+};
+

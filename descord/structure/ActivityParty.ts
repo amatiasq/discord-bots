@@ -18,3 +18,11 @@ export function unwrapActivityParty(x: ActivityParty): RawActivityParty {
 	return toApiCasing(x);
 };
 
+export function wrapActivityPartyPartial(x: Partial<RawActivityParty>): Partial<ActivityParty> {
+	return fromApiCasing(x);
+};
+
+export function unwrapActivityPartyPartial(x: Partial<ActivityParty>): Partial<RawActivityParty> {
+	return toApiCasing(x);
+};
+

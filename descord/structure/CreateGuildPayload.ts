@@ -8,9 +8,9 @@ import {
 import { VerificationLevel } from '../enum/VerificationLevel.ts';
 import { MessageNotificationLevel } from '../enum/MessageNotificationLevel.ts';
 import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.ts';
-import { Role, unwrapRole } from './Role.ts';
-import { Channel, unwrapChannelPartial } from './Channel.ts';
-import { toApiCasing } from '../casing.ts';
+import { Role, wrapRole, unwrapRole } from './Role.ts';
+import { Channel, wrapChannelPartial, unwrapChannelPartial } from './Channel.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface CreateGuildPayload {
 	/** name of the guild (2-100 characters) */
@@ -28,7 +28,7 @@ export interface CreateGuildPayload {
 	/** new guild roles */
 	roles?: Role[];
 	/** new guild's channels */
-	channels?: Array<Partial<Channel>>;
+	channels?: Partial<Channel>[];
 	/** id for afk channel */
 	afkChannelId?: ChannelId;
 	/** afk timeout in seconds */
@@ -37,23 +37,36 @@ export interface CreateGuildPayload {
 	systemChannelId?: ChannelId;
 }
 
-// export function wrapCreateGuildPayload(
-// 	x: RawCreateGuildPayload,
-// ): CreateGuildPayload {
-// 	return {
-// 		...fromApiCasing(x),
-// 		roles: x.roles && x.roles.map(wrapRole),
-// 	};
-// }
 
-export function unwrapCreateGuildPayload(
-	x: CreateGuildPayload,
-): RawCreateGuildPayload {
+export function wrapCreateGuildPayload(x: RawCreateGuildPayload): CreateGuildPayload {
+	return {
+		...fromApiCasing(x),
+		roles: x.roles && x.roles.map(wrapRole),
+		channels: x.channels && x.channels.map(wrapChannelPartial),
+	};
+};
+
+export function unwrapCreateGuildPayload(x: CreateGuildPayload): RawCreateGuildPayload {
 	return {
 		...toApiCasing(x),
 		roles: x.roles && x.roles.map(unwrapRole),
-
-		// Ad-hoc
 		channels: x.channels && x.channels.map(unwrapChannelPartial),
 	};
-}
+};
+
+export function wrapCreateGuildPayloadPartial(x: Partial<RawCreateGuildPayload>): Partial<CreateGuildPayload> {
+	return {
+		...fromApiCasing(x),
+		roles: x.roles && x.roles.map(wrapRole),
+		channels: x.channels && x.channels.map(wrapChannelPartial),
+	};
+};
+
+export function unwrapCreateGuildPayloadPartial(x: Partial<CreateGuildPayload>): Partial<RawCreateGuildPayload> {
+	return {
+		...toApiCasing(x),
+		roles: x.roles && x.roles.map(unwrapRole),
+		channels: x.channels && x.channels.map(unwrapChannelPartial),
+	};
+};
+

@@ -136,8 +136,8 @@ interface RawAuditLogChange_VANITY_URL_CODE {
  */
 interface RawAuditLogChange_$ADD {
 	key: AuditLogChangeKey.$ADD;
-	new_value?: Array<Partial<RawRole>>;
-	old_value?: Array<Partial<RawRole>>;
+	new_value?: Partial<RawRole>[];
+	old_value?: Partial<RawRole>[];
 }
 
 /**
@@ -146,8 +146,8 @@ interface RawAuditLogChange_$ADD {
  */
 interface RawAuditLogChange_$REMOVE {
 	key: AuditLogChangeKey.$REMOVE;
-	new_value?: Array<Partial<RawRole>>;
-	old_value?: Array<Partial<RawRole>>;
+	new_value?: Partial<RawRole>[];
+	old_value?: Partial<RawRole>[];
 }
 
 /**

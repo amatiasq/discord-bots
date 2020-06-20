@@ -26,3 +26,17 @@ export function unwrapReaction(x: Reaction): RawReaction {
 	};
 };
 
+export function wrapReactionPartial(x: Partial<RawReaction>): Partial<Reaction> {
+	return {
+		...x,
+		emoji: x.emoji && wrapEmoji(x.emoji),
+	};
+};
+
+export function unwrapReactionPartial(x: Partial<Reaction>): Partial<RawReaction> {
+	return {
+		...x,
+		emoji: x.emoji && unwrapEmoji(x.emoji),
+	};
+};
+

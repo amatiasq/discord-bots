@@ -21,3 +21,11 @@ export function unwrapModifyGuildIntegrationPayload(x: ModifyGuildIntegrationPay
 	return toApiCasing(x);
 };
 
+export function wrapModifyGuildIntegrationPayloadPartial(x: Partial<RawModifyGuildIntegrationPayload>): Partial<ModifyGuildIntegrationPayload> {
+	return fromApiCasing(x);
+};
+
+export function unwrapModifyGuildIntegrationPayloadPartial(x: Partial<ModifyGuildIntegrationPayload>): Partial<RawModifyGuildIntegrationPayload> {
+	return toApiCasing(x);
+};
+

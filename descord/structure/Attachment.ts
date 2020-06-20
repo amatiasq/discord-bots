@@ -28,3 +28,11 @@ export function unwrapAttachment(x: Attachment): RawAttachment {
 	return toApiCasing(x);
 };
 
+export function wrapAttachmentPartial(x: Partial<RawAttachment>): Partial<Attachment> {
+	return fromApiCasing(x);
+};
+
+export function unwrapAttachmentPartial(x: Partial<Attachment>): Partial<RawAttachment> {
+	return toApiCasing(x);
+};
+

@@ -19,3 +19,11 @@ export function unwrapEmbedFooter(x: EmbedFooter): RawEmbedFooter {
 	return toApiCasing(x);
 };
 
+export function wrapEmbedFooterPartial(x: Partial<RawEmbedFooter>): Partial<EmbedFooter> {
+	return fromApiCasing(x);
+};
+
+export function unwrapEmbedFooterPartial(x: Partial<EmbedFooter>): Partial<RawEmbedFooter> {
+	return toApiCasing(x);
+};
+

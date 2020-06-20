@@ -66,3 +66,31 @@ export function unwrapEmbed(x: Embed): RawEmbed {
 	};
 };
 
+export function wrapEmbedPartial(x: Partial<RawEmbed>): Partial<Embed> {
+	return {
+		...x,
+		timestamp: x.timestamp && parseISO8601Timestamp(x.timestamp),
+		footer: x.footer && wrapEmbedFooter(x.footer),
+		image: x.image && wrapEmbedImage(x.image),
+		thumbnail: x.thumbnail && wrapEmbedThumbnail(x.thumbnail),
+		video: x.video && wrapEmbedVideo(x.video),
+		provider: x.provider && wrapEmbedProvider(x.provider),
+		author: x.author && wrapEmbedAuthor(x.author),
+		fields: x.fields && x.fields.map(wrapEmbedField),
+	};
+};
+
+export function unwrapEmbedPartial(x: Partial<Embed>): Partial<RawEmbed> {
+	return {
+		...x,
+		timestamp: x.timestamp && unparseISO8601Timestamp(x.timestamp),
+		footer: x.footer && unwrapEmbedFooter(x.footer),
+		image: x.image && unwrapEmbedImage(x.image),
+		thumbnail: x.thumbnail && unwrapEmbedThumbnail(x.thumbnail),
+		video: x.video && unwrapEmbedVideo(x.video),
+		provider: x.provider && unwrapEmbedProvider(x.provider),
+		author: x.author && unwrapEmbedAuthor(x.author),
+		fields: x.fields && x.fields.map(unwrapEmbedField),
+	};
+};
+
