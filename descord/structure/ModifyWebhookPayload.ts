@@ -14,17 +14,14 @@ export interface ModifyWebhookPayload {
 
 export function wrapModifyWebhookPayload(x: RawModifyWebhookPayload): ModifyWebhookPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapModifyWebhookPayload(x: ModifyWebhookPayload): RawModifyWebhookPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapModifyWebhookPayloadPartial(x: Partial<RawModifyWebhookPayload>): Partial<ModifyWebhookPayload> {
-	return fromApiCasing(x);
-};
+export const wrapModifyWebhookPayloadPartial = wrapModifyWebhookPayload as (x: Partial<RawModifyWebhookPayload>) => Partial<ModifyWebhookPayload>;
 
-export function unwrapModifyWebhookPayloadPartial(x: Partial<ModifyWebhookPayload>): Partial<RawModifyWebhookPayload> {
-	return toApiCasing(x);
-};
+export const unwrapModifyWebhookPayloadPartial = unwrapModifyWebhookPayload as (x: Partial<ModifyWebhookPayload>) => Partial<RawModifyWebhookPayload>;
+
 

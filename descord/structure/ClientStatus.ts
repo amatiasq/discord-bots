@@ -13,17 +13,14 @@ export interface ClientStatus {
 
 export function wrapClientStatus(x: RawClientStatus): ClientStatus {
 	return x;
-};
+}
 
 export function unwrapClientStatus(x: ClientStatus): RawClientStatus {
 	return x;
-};
+}
 
-export function wrapClientStatusPartial(x: Partial<RawClientStatus>): Partial<ClientStatus> {
-	return x;
-};
+export const wrapClientStatusPartial = wrapClientStatus as (x: Partial<RawClientStatus>) => Partial<ClientStatus>;
 
-export function unwrapClientStatusPartial(x: Partial<ClientStatus>): Partial<RawClientStatus> {
-	return x;
-};
+export const unwrapClientStatusPartial = unwrapClientStatus as (x: Partial<ClientStatus>) => Partial<RawClientStatus>;
+
 

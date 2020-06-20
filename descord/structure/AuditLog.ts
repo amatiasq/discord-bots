@@ -25,7 +25,7 @@ export function wrapAuditLog(x: RawAuditLog): AuditLog {
 		auditLogEntries: x.audit_log_entries.map(wrapAuditLogEntry),
 		integrations: x.integrations.map(wrapIntegrationPartial),
 	};
-};
+}
 
 export function unwrapAuditLog(x: AuditLog): RawAuditLog {
 	return {
@@ -35,7 +35,7 @@ export function unwrapAuditLog(x: AuditLog): RawAuditLog {
 		audit_log_entries: x.auditLogEntries.map(unwrapAuditLogEntry),
 		integrations: x.integrations.map(unwrapIntegrationPartial),
 	};
-};
+}
 
 export function wrapAuditLogPartial(x: Partial<RawAuditLog>): Partial<AuditLog> {
 	return {
@@ -45,7 +45,7 @@ export function wrapAuditLogPartial(x: Partial<RawAuditLog>): Partial<AuditLog> 
 		auditLogEntries: x.audit_log_entries && x.audit_log_entries.map(wrapAuditLogEntry),
 		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
 	};
-};
+}
 
 export function unwrapAuditLogPartial(x: Partial<AuditLog>): Partial<RawAuditLog> {
 	return {
@@ -55,5 +55,6 @@ export function unwrapAuditLogPartial(x: Partial<AuditLog>): Partial<RawAuditLog
 		audit_log_entries: x.auditLogEntries && x.auditLogEntries.map(unwrapAuditLogEntry),
 		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
 	};
-};
+}
+
 

@@ -13,17 +13,14 @@ export interface EmbedVideo {
 
 export function wrapEmbedVideo(x: RawEmbedVideo): EmbedVideo {
 	return x;
-};
+}
 
 export function unwrapEmbedVideo(x: EmbedVideo): RawEmbedVideo {
 	return x;
-};
+}
 
-export function wrapEmbedVideoPartial(x: Partial<RawEmbedVideo>): Partial<EmbedVideo> {
-	return x;
-};
+export const wrapEmbedVideoPartial = wrapEmbedVideo as (x: Partial<RawEmbedVideo>) => Partial<EmbedVideo>;
 
-export function unwrapEmbedVideoPartial(x: Partial<EmbedVideo>): Partial<RawEmbedVideo> {
-	return x;
-};
+export const unwrapEmbedVideoPartial = unwrapEmbedVideo as (x: Partial<EmbedVideo>) => Partial<RawEmbedVideo>;
+
 

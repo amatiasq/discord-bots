@@ -9,17 +9,14 @@ export interface GuildParams {
 
 export function wrapGuildParams(x: RawGuildParams): GuildParams {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapGuildParams(x: GuildParams): RawGuildParams {
 	return toApiCasing(x);
-};
+}
 
-export function wrapGuildParamsPartial(x: Partial<RawGuildParams>): Partial<GuildParams> {
-	return fromApiCasing(x);
-};
+export const wrapGuildParamsPartial = wrapGuildParams as (x: Partial<RawGuildParams>) => Partial<GuildParams>;
 
-export function unwrapGuildParamsPartial(x: Partial<GuildParams>): Partial<RawGuildParams> {
-	return toApiCasing(x);
-};
+export const unwrapGuildParamsPartial = unwrapGuildParams as (x: Partial<GuildParams>) => Partial<RawGuildParams>;
+
 

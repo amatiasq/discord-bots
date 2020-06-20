@@ -17,17 +17,14 @@ export interface GuildAuditLogParams {
 
 export function wrapGuildAuditLogParams(x: RawGuildAuditLogParams): GuildAuditLogParams {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapGuildAuditLogParams(x: GuildAuditLogParams): RawGuildAuditLogParams {
 	return toApiCasing(x);
-};
+}
 
-export function wrapGuildAuditLogParamsPartial(x: Partial<RawGuildAuditLogParams>): Partial<GuildAuditLogParams> {
-	return fromApiCasing(x);
-};
+export const wrapGuildAuditLogParamsPartial = wrapGuildAuditLogParams as (x: Partial<RawGuildAuditLogParams>) => Partial<GuildAuditLogParams>;
 
-export function unwrapGuildAuditLogParamsPartial(x: Partial<GuildAuditLogParams>): Partial<RawGuildAuditLogParams> {
-	return toApiCasing(x);
-};
+export const unwrapGuildAuditLogParamsPartial = unwrapGuildAuditLogParams as (x: Partial<GuildAuditLogParams>) => Partial<RawGuildAuditLogParams>;
+
 

@@ -12,17 +12,14 @@ export interface ActivityParty {
 
 export function wrapActivityParty(x: RawActivityParty): ActivityParty {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapActivityParty(x: ActivityParty): RawActivityParty {
 	return toApiCasing(x);
-};
+}
 
-export function wrapActivityPartyPartial(x: Partial<RawActivityParty>): Partial<ActivityParty> {
-	return fromApiCasing(x);
-};
+export const wrapActivityPartyPartial = wrapActivityParty as (x: Partial<RawActivityParty>) => Partial<ActivityParty>;
 
-export function unwrapActivityPartyPartial(x: Partial<ActivityParty>): Partial<RawActivityParty> {
-	return toApiCasing(x);
-};
+export const unwrapActivityPartyPartial = unwrapActivityParty as (x: Partial<ActivityParty>) => Partial<RawActivityParty>;
+
 

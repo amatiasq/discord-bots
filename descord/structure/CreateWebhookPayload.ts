@@ -11,17 +11,14 @@ export interface CreateWebhookPayload {
 
 export function wrapCreateWebhookPayload(x: RawCreateWebhookPayload): CreateWebhookPayload {
 	return x;
-};
+}
 
 export function unwrapCreateWebhookPayload(x: CreateWebhookPayload): RawCreateWebhookPayload {
 	return x;
-};
+}
 
-export function wrapCreateWebhookPayloadPartial(x: Partial<RawCreateWebhookPayload>): Partial<CreateWebhookPayload> {
-	return x;
-};
+export const wrapCreateWebhookPayloadPartial = wrapCreateWebhookPayload as (x: Partial<RawCreateWebhookPayload>) => Partial<CreateWebhookPayload>;
 
-export function unwrapCreateWebhookPayloadPartial(x: Partial<CreateWebhookPayload>): Partial<RawCreateWebhookPayload> {
-	return x;
-};
+export const unwrapCreateWebhookPayloadPartial = unwrapCreateWebhookPayload as (x: Partial<CreateWebhookPayload>) => Partial<RawCreateWebhookPayload>;
+
 

@@ -30,26 +30,17 @@ export function wrapConnection(x: RawConnection): Connection {
 		...fromApiCasing(x),
 		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
 	};
-};
+}
 
 export function unwrapConnection(x: Connection): RawConnection {
 	return {
 		...toApiCasing(x),
 		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
 	};
-};
+}
 
-export function wrapConnectionPartial(x: Partial<RawConnection>): Partial<Connection> {
-	return {
-		...fromApiCasing(x),
-		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
-	};
-};
+export const wrapConnectionPartial = wrapConnection as (x: Partial<RawConnection>) => Partial<Connection>;
 
-export function unwrapConnectionPartial(x: Partial<Connection>): Partial<RawConnection> {
-	return {
-		...toApiCasing(x),
-		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
-	};
-};
+export const unwrapConnectionPartial = unwrapConnection as (x: Partial<Connection>) => Partial<RawConnection>;
+
 

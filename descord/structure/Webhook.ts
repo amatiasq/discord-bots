@@ -29,26 +29,17 @@ export function wrapWebhook(x: RawWebhook): Webhook {
 		...fromApiCasing(x),
 		user: x.user && wrapUser(x.user),
 	};
-};
+}
 
 export function unwrapWebhook(x: Webhook): RawWebhook {
 	return {
 		...toApiCasing(x),
 		user: x.user && unwrapUser(x.user),
 	};
-};
+}
 
-export function wrapWebhookPartial(x: Partial<RawWebhook>): Partial<Webhook> {
-	return {
-		...fromApiCasing(x),
-		user: x.user && wrapUser(x.user),
-	};
-};
+export const wrapWebhookPartial = wrapWebhook as (x: Partial<RawWebhook>) => Partial<Webhook>;
 
-export function unwrapWebhookPartial(x: Partial<Webhook>): Partial<RawWebhook> {
-	return {
-		...toApiCasing(x),
-		user: x.user && unwrapUser(x.user),
-	};
-};
+export const unwrapWebhookPartial = unwrapWebhook as (x: Partial<Webhook>) => Partial<RawWebhook>;
+
 

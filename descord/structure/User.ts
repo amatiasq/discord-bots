@@ -39,7 +39,7 @@ export function wrapUser(x: RawUser): User {
 		flags: x.flags && parseUserFlagInteger(x.flags),
 		publicFlags: x.public_flags && parseUserFlagInteger(x.public_flags),
 	};
-};
+}
 
 export function unwrapUser(x: User): RawUser {
 	return {
@@ -47,21 +47,10 @@ export function unwrapUser(x: User): RawUser {
 		flags: x.flags && unparseUserFlagInteger(x.flags),
 		public_flags: x.publicFlags && unparseUserFlagInteger(x.publicFlags),
 	};
-};
+}
 
-export function wrapUserPartial(x: Partial<RawUser>): Partial<User> {
-	return {
-		...fromApiCasing(x),
-		flags: x.flags && parseUserFlagInteger(x.flags),
-		publicFlags: x.public_flags && parseUserFlagInteger(x.public_flags),
-	};
-};
+export const wrapUserPartial = wrapUser as (x: Partial<RawUser>) => Partial<User>;
 
-export function unwrapUserPartial(x: Partial<User>): Partial<RawUser> {
-	return {
-		...toApiCasing(x),
-		flags: x.flags && unparseUserFlagInteger(x.flags),
-		public_flags: x.publicFlags && unparseUserFlagInteger(x.publicFlags),
-	};
-};
+export const unwrapUserPartial = unwrapUser as (x: Partial<User>) => Partial<RawUser>;
+
 

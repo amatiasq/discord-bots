@@ -37,7 +37,7 @@ export function wrapPresenceUpdateEvent(x: RawPresenceUpdateEvent): PresenceUpda
 		clientStatus: wrapClientStatus(x.client_status),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
 	};
-};
+}
 
 export function unwrapPresenceUpdateEvent(x: PresenceUpdateEvent): RawPresenceUpdateEvent {
 	return {
@@ -48,7 +48,7 @@ export function unwrapPresenceUpdateEvent(x: PresenceUpdateEvent): RawPresenceUp
 		client_status: unwrapClientStatus(x.clientStatus),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
-};
+}
 
 export function wrapPresenceUpdateEventPartial(x: Partial<RawPresenceUpdateEvent>): Partial<PresenceUpdateEvent> {
 	return {
@@ -59,7 +59,7 @@ export function wrapPresenceUpdateEventPartial(x: Partial<RawPresenceUpdateEvent
 		clientStatus: x.client_status && wrapClientStatus(x.client_status),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
 	};
-};
+}
 
 export function unwrapPresenceUpdateEventPartial(x: Partial<PresenceUpdateEvent>): Partial<RawPresenceUpdateEvent> {
 	return {
@@ -70,5 +70,6 @@ export function unwrapPresenceUpdateEventPartial(x: Partial<PresenceUpdateEvent>
 		client_status: x.clientStatus && unwrapClientStatus(x.clientStatus),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
-};
+}
+
 

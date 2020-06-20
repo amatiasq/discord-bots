@@ -12,17 +12,14 @@ export interface GuildWidget {
 
 export function wrapGuildWidget(x: RawGuildWidget): GuildWidget {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapGuildWidget(x: GuildWidget): RawGuildWidget {
 	return toApiCasing(x);
-};
+}
 
-export function wrapGuildWidgetPartial(x: Partial<RawGuildWidget>): Partial<GuildWidget> {
-	return fromApiCasing(x);
-};
+export const wrapGuildWidgetPartial = wrapGuildWidget as (x: Partial<RawGuildWidget>) => Partial<GuildWidget>;
 
-export function unwrapGuildWidgetPartial(x: Partial<GuildWidget>): Partial<RawGuildWidget> {
-	return toApiCasing(x);
-};
+export const unwrapGuildWidgetPartial = unwrapGuildWidget as (x: Partial<GuildWidget>) => Partial<RawGuildWidget>;
+
 

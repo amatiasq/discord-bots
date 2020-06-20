@@ -11,17 +11,14 @@ export interface CreateGuildIntegrationPayload {
 
 export function wrapCreateGuildIntegrationPayload(x: RawCreateGuildIntegrationPayload): CreateGuildIntegrationPayload {
 	return x;
-};
+}
 
 export function unwrapCreateGuildIntegrationPayload(x: CreateGuildIntegrationPayload): RawCreateGuildIntegrationPayload {
 	return x;
-};
+}
 
-export function wrapCreateGuildIntegrationPayloadPartial(x: Partial<RawCreateGuildIntegrationPayload>): Partial<CreateGuildIntegrationPayload> {
-	return x;
-};
+export const wrapCreateGuildIntegrationPayloadPartial = wrapCreateGuildIntegrationPayload as (x: Partial<RawCreateGuildIntegrationPayload>) => Partial<CreateGuildIntegrationPayload>;
 
-export function unwrapCreateGuildIntegrationPayloadPartial(x: Partial<CreateGuildIntegrationPayload>): Partial<RawCreateGuildIntegrationPayload> {
-	return x;
-};
+export const unwrapCreateGuildIntegrationPayloadPartial = unwrapCreateGuildIntegrationPayload as (x: Partial<CreateGuildIntegrationPayload>) => Partial<RawCreateGuildIntegrationPayload>;
+
 

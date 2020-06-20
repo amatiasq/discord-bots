@@ -13,17 +13,14 @@ export interface ReactionsParams {
 
 export function wrapReactionsParams(x: RawReactionsParams): ReactionsParams {
 	return x;
-};
+}
 
 export function unwrapReactionsParams(x: ReactionsParams): RawReactionsParams {
 	return x;
-};
+}
 
-export function wrapReactionsParamsPartial(x: Partial<RawReactionsParams>): Partial<ReactionsParams> {
-	return x;
-};
+export const wrapReactionsParamsPartial = wrapReactionsParams as (x: Partial<RawReactionsParams>) => Partial<ReactionsParams>;
 
-export function unwrapReactionsParamsPartial(x: Partial<ReactionsParams>): Partial<RawReactionsParams> {
-	return x;
-};
+export const unwrapReactionsParamsPartial = unwrapReactionsParams as (x: Partial<ReactionsParams>) => Partial<RawReactionsParams>;
+
 

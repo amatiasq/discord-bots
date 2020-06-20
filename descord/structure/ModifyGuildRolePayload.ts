@@ -20,26 +20,17 @@ export function wrapModifyGuildRolePayload(x: RawModifyGuildRolePayload): Modify
 		...x,
 		permissions: x.permissions && parsePermissionInteger(x.permissions),
 	};
-};
+}
 
 export function unwrapModifyGuildRolePayload(x: ModifyGuildRolePayload): RawModifyGuildRolePayload {
 	return {
 		...x,
 		permissions: x.permissions && unparsePermissionInteger(x.permissions),
 	};
-};
+}
 
-export function wrapModifyGuildRolePayloadPartial(x: Partial<RawModifyGuildRolePayload>): Partial<ModifyGuildRolePayload> {
-	return {
-		...x,
-		permissions: x.permissions && parsePermissionInteger(x.permissions),
-	};
-};
+export const wrapModifyGuildRolePayloadPartial = wrapModifyGuildRolePayload as (x: Partial<RawModifyGuildRolePayload>) => Partial<ModifyGuildRolePayload>;
 
-export function unwrapModifyGuildRolePayloadPartial(x: Partial<ModifyGuildRolePayload>): Partial<RawModifyGuildRolePayload> {
-	return {
-		...x,
-		permissions: x.permissions && unparsePermissionInteger(x.permissions),
-	};
-};
+export const unwrapModifyGuildRolePayloadPartial = unwrapModifyGuildRolePayload as (x: Partial<ModifyGuildRolePayload>) => Partial<RawModifyGuildRolePayload>;
+
 

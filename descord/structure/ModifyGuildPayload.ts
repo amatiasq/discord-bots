@@ -41,17 +41,14 @@ export interface ModifyGuildPayload {
 
 export function wrapModifyGuildPayload(x: RawModifyGuildPayload): ModifyGuildPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapModifyGuildPayload(x: ModifyGuildPayload): RawModifyGuildPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapModifyGuildPayloadPartial(x: Partial<RawModifyGuildPayload>): Partial<ModifyGuildPayload> {
-	return fromApiCasing(x);
-};
+export const wrapModifyGuildPayloadPartial = wrapModifyGuildPayload as (x: Partial<RawModifyGuildPayload>) => Partial<ModifyGuildPayload>;
 
-export function unwrapModifyGuildPayloadPartial(x: Partial<ModifyGuildPayload>): Partial<RawModifyGuildPayload> {
-	return toApiCasing(x);
-};
+export const unwrapModifyGuildPayloadPartial = unwrapModifyGuildPayload as (x: Partial<ModifyGuildPayload>) => Partial<RawModifyGuildPayload>;
+
 

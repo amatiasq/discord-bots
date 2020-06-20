@@ -12,17 +12,14 @@ export interface GuildPruneCountParams {
 
 export function wrapGuildPruneCountParams(x: RawGuildPruneCountParams): GuildPruneCountParams {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapGuildPruneCountParams(x: GuildPruneCountParams): RawGuildPruneCountParams {
 	return toApiCasing(x);
-};
+}
 
-export function wrapGuildPruneCountParamsPartial(x: Partial<RawGuildPruneCountParams>): Partial<GuildPruneCountParams> {
-	return fromApiCasing(x);
-};
+export const wrapGuildPruneCountParamsPartial = wrapGuildPruneCountParams as (x: Partial<RawGuildPruneCountParams>) => Partial<GuildPruneCountParams>;
 
-export function unwrapGuildPruneCountParamsPartial(x: Partial<GuildPruneCountParams>): Partial<RawGuildPruneCountParams> {
-	return toApiCasing(x);
-};
+export const unwrapGuildPruneCountParamsPartial = unwrapGuildPruneCountParams as (x: Partial<GuildPruneCountParams>) => Partial<RawGuildPruneCountParams>;
+
 

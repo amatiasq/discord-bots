@@ -18,17 +18,14 @@ export interface ModifyGuildMemberPayload {
 
 export function wrapModifyGuildMemberPayload(x: RawModifyGuildMemberPayload): ModifyGuildMemberPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapModifyGuildMemberPayload(x: ModifyGuildMemberPayload): RawModifyGuildMemberPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapModifyGuildMemberPayloadPartial(x: Partial<RawModifyGuildMemberPayload>): Partial<ModifyGuildMemberPayload> {
-	return fromApiCasing(x);
-};
+export const wrapModifyGuildMemberPayloadPartial = wrapModifyGuildMemberPayload as (x: Partial<RawModifyGuildMemberPayload>) => Partial<ModifyGuildMemberPayload>;
 
-export function unwrapModifyGuildMemberPayloadPartial(x: Partial<ModifyGuildMemberPayload>): Partial<RawModifyGuildMemberPayload> {
-	return toApiCasing(x);
-};
+export const unwrapModifyGuildMemberPayloadPartial = unwrapModifyGuildMemberPayload as (x: Partial<ModifyGuildMemberPayload>) => Partial<RawModifyGuildMemberPayload>;
+
 

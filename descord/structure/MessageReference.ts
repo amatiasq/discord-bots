@@ -14,17 +14,14 @@ export interface MessageReference {
 
 export function wrapMessageReference(x: RawMessageReference): MessageReference {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapMessageReference(x: MessageReference): RawMessageReference {
 	return toApiCasing(x);
-};
+}
 
-export function wrapMessageReferencePartial(x: Partial<RawMessageReference>): Partial<MessageReference> {
-	return fromApiCasing(x);
-};
+export const wrapMessageReferencePartial = wrapMessageReference as (x: Partial<RawMessageReference>) => Partial<MessageReference>;
 
-export function unwrapMessageReferencePartial(x: Partial<MessageReference>): Partial<RawMessageReference> {
-	return toApiCasing(x);
-};
+export const unwrapMessageReferencePartial = unwrapMessageReference as (x: Partial<MessageReference>) => Partial<RawMessageReference>;
+
 

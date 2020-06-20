@@ -24,17 +24,14 @@ export interface OptionalAuditEntryInfo {
 
 export function wrapOptionalAuditEntryInfo(x: RawOptionalAuditEntryInfo): OptionalAuditEntryInfo {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapOptionalAuditEntryInfo(x: OptionalAuditEntryInfo): RawOptionalAuditEntryInfo {
 	return toApiCasing(x);
-};
+}
 
-export function wrapOptionalAuditEntryInfoPartial(x: Partial<RawOptionalAuditEntryInfo>): Partial<OptionalAuditEntryInfo> {
-	return fromApiCasing(x);
-};
+export const wrapOptionalAuditEntryInfoPartial = wrapOptionalAuditEntryInfo as (x: Partial<RawOptionalAuditEntryInfo>) => Partial<OptionalAuditEntryInfo>;
 
-export function unwrapOptionalAuditEntryInfoPartial(x: Partial<OptionalAuditEntryInfo>): Partial<RawOptionalAuditEntryInfo> {
-	return toApiCasing(x);
-};
+export const unwrapOptionalAuditEntryInfoPartial = unwrapOptionalAuditEntryInfo as (x: Partial<OptionalAuditEntryInfo>) => Partial<RawOptionalAuditEntryInfo>;
+
 

@@ -13,17 +13,14 @@ export interface EmbedField {
 
 export function wrapEmbedField(x: RawEmbedField): EmbedField {
 	return x;
-};
+}
 
 export function unwrapEmbedField(x: EmbedField): RawEmbedField {
 	return x;
-};
+}
 
-export function wrapEmbedFieldPartial(x: Partial<RawEmbedField>): Partial<EmbedField> {
-	return x;
-};
+export const wrapEmbedFieldPartial = wrapEmbedField as (x: Partial<RawEmbedField>) => Partial<EmbedField>;
 
-export function unwrapEmbedFieldPartial(x: Partial<EmbedField>): Partial<RawEmbedField> {
-	return x;
-};
+export const unwrapEmbedFieldPartial = unwrapEmbedField as (x: Partial<EmbedField>) => Partial<RawEmbedField>;
+
 

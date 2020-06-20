@@ -29,7 +29,7 @@ export function wrapCreateMessagePayload(x: RawCreateMessagePayload): CreateMess
 		embed: x.embed && wrapEmbed(x.embed),
 		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
 	};
-};
+}
 
 export function unwrapCreateMessagePayload(x: CreateMessagePayload): RawCreateMessagePayload {
 	return {
@@ -37,21 +37,10 @@ export function unwrapCreateMessagePayload(x: CreateMessagePayload): RawCreateMe
 		embed: x.embed && unwrapEmbed(x.embed),
 		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
 	};
-};
+}
 
-export function wrapCreateMessagePayloadPartial(x: Partial<RawCreateMessagePayload>): Partial<CreateMessagePayload> {
-	return {
-		...fromApiCasing(x),
-		embed: x.embed && wrapEmbed(x.embed),
-		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
-	};
-};
+export const wrapCreateMessagePayloadPartial = wrapCreateMessagePayload as (x: Partial<RawCreateMessagePayload>) => Partial<CreateMessagePayload>;
 
-export function unwrapCreateMessagePayloadPartial(x: Partial<CreateMessagePayload>): Partial<RawCreateMessagePayload> {
-	return {
-		...toApiCasing(x),
-		embed: x.embed && unwrapEmbed(x.embed),
-		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
-	};
-};
+export const unwrapCreateMessagePayloadPartial = unwrapCreateMessagePayload as (x: Partial<CreateMessagePayload>) => Partial<RawCreateMessagePayload>;
+
 

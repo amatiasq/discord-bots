@@ -43,18 +43,44 @@ function transform(content: string) {
 
 	return `import { Raw${name} } from '../raw/Raw${name}.ts';
 ${toCamelCase(result)}
-
-export ${writeWrap(name, parent, properties, hasCasing)};
-
-export ${writeUnwrap(name, parent, properties, hasCasing)};
-
-export ${writeWrapPartial(name, parent, properties, hasCasing)};
-
-export ${writeUnwrapPartial(name, parent, properties, hasCasing)};
+${writeFunctions(name, parent, properties, hasCasing)}
 `;
 }
 
-function writeFunctions() {}
+function writeFunctions(
+	name: string,
+	parent: string,
+	properties: string,
+	hasCasing: boolean,
+) {
+	const wrapBody = writeWrap(name, parent, properties, hasCasing);
+	const unwrapBody = writeUnwrap(name, parent, properties, hasCasing);
+	const wrapPartialBody = writeWrapPartial(name, parent, properties, hasCasing);
+	const unwrapPartialBody = writeUnwrapPartial(
+		name,
+		parent,
+		properties,
+		hasCasing,
+	);
+
+	return `
+export function wrap${name}(x: Raw${name}): ${name} {\n\t${wrapBody}\n}
+
+export function unwrap${name}(x: ${name}): Raw${name} {\n\t${unwrapBody}\n}
+
+export ${
+		wrapPartialBody === wrapBody
+			? `const wrap${name}Partial = wrap${name} as (x: Partial<Raw${name}>) => Partial<${name}>;`
+			: `function wrap${name}Partial(x: Partial<Raw${name}>): Partial<${name}> {\n\t${wrapPartialBody}\n}`
+	}
+
+export ${
+		unwrapPartialBody === unwrapBody
+			? `const unwrap${name}Partial = unwrap${name} as (x: Partial<${name}>) => Partial<Raw${name}>;`
+			: `function unwrap${name}Partial(x: Partial<${name}>): Partial<Raw${name}> {\n\t${unwrapPartialBody}\n}`
+	}
+`;
+}
 
 function adaptImports(
 	name: string,
@@ -125,8 +151,7 @@ function writeWrap(
 	const json = 'x';
 	const child = parent ? `wrap${parent}(${json})` : json;
 	const cased = hasCasing ? `fromApiCasing(${child})` : child;
-	const body = buildBody(cased, props);
-	return `function wrap${name}(x: Raw${name}): ${name} {\n\t${body}\n}`;
+	return buildBody(cased, props);
 }
 
 function writeUnwrap(
@@ -150,8 +175,7 @@ function writeUnwrap(
 	const json = 'x';
 	const child = parent ? `unwrap${parent}(${json})` : json;
 	const cased = hasCasing ? `toApiCasing(${child})` : child;
-	const body = buildBody(cased, props);
-	return `function unwrap${name}(x: ${name}): Raw${name} {\n\t${body}\n}`;
+	return buildBody(cased, props);
 }
 
 function writeWrapPartial(
@@ -171,8 +195,7 @@ function writeWrapPartial(
 	const json = 'x';
 	const child = parent ? `wrap${parent}(${json})` : json;
 	const cased = hasCasing ? `fromApiCasing(${child})` : child;
-	const body = buildBody(cased, props);
-	return `function wrap${name}Partial(x: Partial<Raw${name}>): Partial<${name}> {\n\t${body}\n}`;
+	return buildBody(cased, props);
 }
 
 function writeUnwrapPartial(
@@ -194,8 +217,7 @@ function writeUnwrapPartial(
 	const json = 'x';
 	const child = parent ? `unwrap${parent}(${json})` : json;
 	const cased = hasCasing ? `toApiCasing(${child})` : child;
-	const body = buildBody(cased, props);
-	return `function unwrap${name}Partial(x: Partial<${name}>): Partial<Raw${name}> {\n\t${body}\n}`;
+	return buildBody(cased, props);
 }
 
 function buildBody(base: string, props: string) {

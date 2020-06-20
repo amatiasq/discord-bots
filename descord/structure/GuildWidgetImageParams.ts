@@ -9,17 +9,14 @@ export interface GuildWidgetImageParams {
 
 export function wrapGuildWidgetImageParams(x: RawGuildWidgetImageParams): GuildWidgetImageParams {
 	return x;
-};
+}
 
 export function unwrapGuildWidgetImageParams(x: GuildWidgetImageParams): RawGuildWidgetImageParams {
 	return x;
-};
+}
 
-export function wrapGuildWidgetImageParamsPartial(x: Partial<RawGuildWidgetImageParams>): Partial<GuildWidgetImageParams> {
-	return x;
-};
+export const wrapGuildWidgetImageParamsPartial = wrapGuildWidgetImageParams as (x: Partial<RawGuildWidgetImageParams>) => Partial<GuildWidgetImageParams>;
 
-export function unwrapGuildWidgetImageParamsPartial(x: Partial<GuildWidgetImageParams>): Partial<RawGuildWidgetImageParams> {
-	return x;
-};
+export const unwrapGuildWidgetImageParamsPartial = unwrapGuildWidgetImageParams as (x: Partial<GuildWidgetImageParams>) => Partial<RawGuildWidgetImageParams>;
+
 

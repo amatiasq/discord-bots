@@ -45,7 +45,7 @@ export function wrapIntegration(x: RawIntegration): Integration {
 		account: wrapIntegrationAccount(x.account),
 		syncedAt: parseISO8601Timestamp(x.synced_at),
 	};
-};
+}
 
 export function unwrapIntegration(x: Integration): RawIntegration {
 	return {
@@ -54,7 +54,7 @@ export function unwrapIntegration(x: Integration): RawIntegration {
 		account: unwrapIntegrationAccount(x.account),
 		synced_at: unparseISO8601Timestamp(x.syncedAt),
 	};
-};
+}
 
 export function wrapIntegrationPartial(x: Partial<RawIntegration>): Partial<Integration> {
 	return {
@@ -63,7 +63,7 @@ export function wrapIntegrationPartial(x: Partial<RawIntegration>): Partial<Inte
 		account: x.account && wrapIntegrationAccount(x.account),
 		syncedAt: x.synced_at && parseISO8601Timestamp(x.synced_at),
 	};
-};
+}
 
 export function unwrapIntegrationPartial(x: Partial<Integration>): Partial<RawIntegration> {
 	return {
@@ -72,5 +72,6 @@ export function unwrapIntegrationPartial(x: Partial<Integration>): Partial<RawIn
 		account: x.account && unwrapIntegrationAccount(x.account),
 		synced_at: x.syncedAt && unparseISO8601Timestamp(x.syncedAt),
 	};
-};
+}
+
 

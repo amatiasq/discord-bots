@@ -13,17 +13,14 @@ export interface ActivitySecrets {
 
 export function wrapActivitySecrets(x: RawActivitySecrets): ActivitySecrets {
 	return x;
-};
+}
 
 export function unwrapActivitySecrets(x: ActivitySecrets): RawActivitySecrets {
 	return x;
-};
+}
 
-export function wrapActivitySecretsPartial(x: Partial<RawActivitySecrets>): Partial<ActivitySecrets> {
-	return x;
-};
+export const wrapActivitySecretsPartial = wrapActivitySecrets as (x: Partial<RawActivitySecrets>) => Partial<ActivitySecrets>;
 
-export function unwrapActivitySecretsPartial(x: Partial<ActivitySecrets>): Partial<RawActivitySecrets> {
-	return x;
-};
+export const unwrapActivitySecretsPartial = unwrapActivitySecrets as (x: Partial<ActivitySecrets>) => Partial<RawActivitySecrets>;
+
 

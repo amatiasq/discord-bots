@@ -31,7 +31,7 @@ export function wrapExecuteWebhookPayload(x: RawExecuteWebhookPayload): ExecuteW
 		embeds: x.embeds.map(wrapEmbed),
 		allowedMentions: wrapAllowedMentions(x.allowed_mentions),
 	};
-};
+}
 
 export function unwrapExecuteWebhookPayload(x: ExecuteWebhookPayload): RawExecuteWebhookPayload {
 	return {
@@ -39,7 +39,7 @@ export function unwrapExecuteWebhookPayload(x: ExecuteWebhookPayload): RawExecut
 		embeds: x.embeds.map(unwrapEmbed),
 		allowed_mentions: unwrapAllowedMentions(x.allowedMentions),
 	};
-};
+}
 
 export function wrapExecuteWebhookPayloadPartial(x: Partial<RawExecuteWebhookPayload>): Partial<ExecuteWebhookPayload> {
 	return {
@@ -47,7 +47,7 @@ export function wrapExecuteWebhookPayloadPartial(x: Partial<RawExecuteWebhookPay
 		embeds: x.embeds && x.embeds.map(wrapEmbed),
 		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
 	};
-};
+}
 
 export function unwrapExecuteWebhookPayloadPartial(x: Partial<ExecuteWebhookPayload>): Partial<RawExecuteWebhookPayload> {
 	return {
@@ -55,5 +55,6 @@ export function unwrapExecuteWebhookPayloadPartial(x: Partial<ExecuteWebhookPayl
 		embeds: x.embeds && x.embeds.map(unwrapEmbed),
 		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
 	};
-};
+}
+
 

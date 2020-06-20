@@ -13,17 +13,14 @@ export interface GatewaySessionStartLimit {
 
 export function wrapGatewaySessionStartLimit(x: RawGatewaySessionStartLimit): GatewaySessionStartLimit {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapGatewaySessionStartLimit(x: GatewaySessionStartLimit): RawGatewaySessionStartLimit {
 	return toApiCasing(x);
-};
+}
 
-export function wrapGatewaySessionStartLimitPartial(x: Partial<RawGatewaySessionStartLimit>): Partial<GatewaySessionStartLimit> {
-	return fromApiCasing(x);
-};
+export const wrapGatewaySessionStartLimitPartial = wrapGatewaySessionStartLimit as (x: Partial<RawGatewaySessionStartLimit>) => Partial<GatewaySessionStartLimit>;
 
-export function unwrapGatewaySessionStartLimitPartial(x: Partial<GatewaySessionStartLimit>): Partial<RawGatewaySessionStartLimit> {
-	return toApiCasing(x);
-};
+export const unwrapGatewaySessionStartLimitPartial = unwrapGatewaySessionStartLimit as (x: Partial<GatewaySessionStartLimit>) => Partial<RawGatewaySessionStartLimit>;
+
 

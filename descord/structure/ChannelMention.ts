@@ -17,17 +17,14 @@ export interface ChannelMention {
 
 export function wrapChannelMention(x: RawChannelMention): ChannelMention {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapChannelMention(x: ChannelMention): RawChannelMention {
 	return toApiCasing(x);
-};
+}
 
-export function wrapChannelMentionPartial(x: Partial<RawChannelMention>): Partial<ChannelMention> {
-	return fromApiCasing(x);
-};
+export const wrapChannelMentionPartial = wrapChannelMention as (x: Partial<RawChannelMention>) => Partial<ChannelMention>;
 
-export function unwrapChannelMentionPartial(x: Partial<ChannelMention>): Partial<RawChannelMention> {
-	return toApiCasing(x);
-};
+export const unwrapChannelMentionPartial = unwrapChannelMention as (x: Partial<ChannelMention>) => Partial<RawChannelMention>;
+
 

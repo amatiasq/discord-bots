@@ -32,17 +32,14 @@ export interface CreateChannelInvitePayload {
 
 export function wrapCreateChannelInvitePayload(x: RawCreateChannelInvitePayload): CreateChannelInvitePayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapCreateChannelInvitePayload(x: CreateChannelInvitePayload): RawCreateChannelInvitePayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapCreateChannelInvitePayloadPartial(x: Partial<RawCreateChannelInvitePayload>): Partial<CreateChannelInvitePayload> {
-	return fromApiCasing(x);
-};
+export const wrapCreateChannelInvitePayloadPartial = wrapCreateChannelInvitePayload as (x: Partial<RawCreateChannelInvitePayload>) => Partial<CreateChannelInvitePayload>;
 
-export function unwrapCreateChannelInvitePayloadPartial(x: Partial<CreateChannelInvitePayload>): Partial<RawCreateChannelInvitePayload> {
-	return toApiCasing(x);
-};
+export const unwrapCreateChannelInvitePayloadPartial = unwrapCreateChannelInvitePayload as (x: Partial<CreateChannelInvitePayload>) => Partial<RawCreateChannelInvitePayload>;
+
 

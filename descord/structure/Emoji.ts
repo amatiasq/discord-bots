@@ -28,26 +28,17 @@ export function wrapEmoji(x: RawEmoji): Emoji {
 		...fromApiCasing(x),
 		user: x.user && wrapUser(x.user),
 	};
-};
+}
 
 export function unwrapEmoji(x: Emoji): RawEmoji {
 	return {
 		...toApiCasing(x),
 		user: x.user && unwrapUser(x.user),
 	};
-};
+}
 
-export function wrapEmojiPartial(x: Partial<RawEmoji>): Partial<Emoji> {
-	return {
-		...fromApiCasing(x),
-		user: x.user && wrapUser(x.user),
-	};
-};
+export const wrapEmojiPartial = wrapEmoji as (x: Partial<RawEmoji>) => Partial<Emoji>;
 
-export function unwrapEmojiPartial(x: Partial<Emoji>): Partial<RawEmoji> {
-	return {
-		...toApiCasing(x),
-		user: x.user && unwrapUser(x.user),
-	};
-};
+export const unwrapEmojiPartial = unwrapEmoji as (x: Partial<Emoji>) => Partial<RawEmoji>;
+
 

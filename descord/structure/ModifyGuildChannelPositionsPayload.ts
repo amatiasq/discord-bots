@@ -11,17 +11,14 @@ export interface ModifyGuildChannelPositionsPayload {
 
 export function wrapModifyGuildChannelPositionsPayload(x: RawModifyGuildChannelPositionsPayload): ModifyGuildChannelPositionsPayload {
 	return x;
-};
+}
 
 export function unwrapModifyGuildChannelPositionsPayload(x: ModifyGuildChannelPositionsPayload): RawModifyGuildChannelPositionsPayload {
 	return x;
-};
+}
 
-export function wrapModifyGuildChannelPositionsPayloadPartial(x: Partial<RawModifyGuildChannelPositionsPayload>): Partial<ModifyGuildChannelPositionsPayload> {
-	return x;
-};
+export const wrapModifyGuildChannelPositionsPayloadPartial = wrapModifyGuildChannelPositionsPayload as (x: Partial<RawModifyGuildChannelPositionsPayload>) => Partial<ModifyGuildChannelPositionsPayload>;
 
-export function unwrapModifyGuildChannelPositionsPayloadPartial(x: Partial<ModifyGuildChannelPositionsPayload>): Partial<RawModifyGuildChannelPositionsPayload> {
-	return x;
-};
+export const unwrapModifyGuildChannelPositionsPayloadPartial = unwrapModifyGuildChannelPositionsPayload as (x: Partial<ModifyGuildChannelPositionsPayload>) => Partial<RawModifyGuildChannelPositionsPayload>;
+
 

@@ -11,17 +11,14 @@ export interface ModifyCurrentUserPayload {
 
 export function wrapModifyCurrentUserPayload(x: RawModifyCurrentUserPayload): ModifyCurrentUserPayload {
 	return x;
-};
+}
 
 export function unwrapModifyCurrentUserPayload(x: ModifyCurrentUserPayload): RawModifyCurrentUserPayload {
 	return x;
-};
+}
 
-export function wrapModifyCurrentUserPayloadPartial(x: Partial<RawModifyCurrentUserPayload>): Partial<ModifyCurrentUserPayload> {
-	return x;
-};
+export const wrapModifyCurrentUserPayloadPartial = wrapModifyCurrentUserPayload as (x: Partial<RawModifyCurrentUserPayload>) => Partial<ModifyCurrentUserPayload>;
 
-export function unwrapModifyCurrentUserPayloadPartial(x: Partial<ModifyCurrentUserPayload>): Partial<RawModifyCurrentUserPayload> {
-	return x;
-};
+export const unwrapModifyCurrentUserPayloadPartial = unwrapModifyCurrentUserPayload as (x: Partial<ModifyCurrentUserPayload>) => Partial<RawModifyCurrentUserPayload>;
+
 

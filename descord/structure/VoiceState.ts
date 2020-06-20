@@ -34,26 +34,17 @@ export function wrapVoiceState(x: RawVoiceState): VoiceState {
 		...fromApiCasing(x),
 		member: x.member && wrapGuildMember(x.member),
 	};
-};
+}
 
 export function unwrapVoiceState(x: VoiceState): RawVoiceState {
 	return {
 		...toApiCasing(x),
 		member: x.member && unwrapGuildMember(x.member),
 	};
-};
+}
 
-export function wrapVoiceStatePartial(x: Partial<RawVoiceState>): Partial<VoiceState> {
-	return {
-		...fromApiCasing(x),
-		member: x.member && wrapGuildMember(x.member),
-	};
-};
+export const wrapVoiceStatePartial = wrapVoiceState as (x: Partial<RawVoiceState>) => Partial<VoiceState>;
 
-export function unwrapVoiceStatePartial(x: Partial<VoiceState>): Partial<RawVoiceState> {
-	return {
-		...toApiCasing(x),
-		member: x.member && unwrapGuildMember(x.member),
-	};
-};
+export const unwrapVoiceStatePartial = unwrapVoiceState as (x: Partial<VoiceState>) => Partial<RawVoiceState>;
+
 

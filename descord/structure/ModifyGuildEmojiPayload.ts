@@ -11,17 +11,14 @@ export interface ModifyGuildEmojiPayload {
 
 export function wrapModifyGuildEmojiPayload(x: RawModifyGuildEmojiPayload): ModifyGuildEmojiPayload {
 	return x;
-};
+}
 
 export function unwrapModifyGuildEmojiPayload(x: ModifyGuildEmojiPayload): RawModifyGuildEmojiPayload {
 	return x;
-};
+}
 
-export function wrapModifyGuildEmojiPayloadPartial(x: Partial<RawModifyGuildEmojiPayload>): Partial<ModifyGuildEmojiPayload> {
-	return x;
-};
+export const wrapModifyGuildEmojiPayloadPartial = wrapModifyGuildEmojiPayload as (x: Partial<RawModifyGuildEmojiPayload>) => Partial<ModifyGuildEmojiPayload>;
 
-export function unwrapModifyGuildEmojiPayloadPartial(x: Partial<ModifyGuildEmojiPayload>): Partial<RawModifyGuildEmojiPayload> {
-	return x;
-};
+export const unwrapModifyGuildEmojiPayloadPartial = unwrapModifyGuildEmojiPayload as (x: Partial<ModifyGuildEmojiPayload>) => Partial<RawModifyGuildEmojiPayload>;
+
 

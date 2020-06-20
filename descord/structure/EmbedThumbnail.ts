@@ -16,17 +16,14 @@ export interface EmbedThumbnail {
 
 export function wrapEmbedThumbnail(x: RawEmbedThumbnail): EmbedThumbnail {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapEmbedThumbnail(x: EmbedThumbnail): RawEmbedThumbnail {
 	return toApiCasing(x);
-};
+}
 
-export function wrapEmbedThumbnailPartial(x: Partial<RawEmbedThumbnail>): Partial<EmbedThumbnail> {
-	return fromApiCasing(x);
-};
+export const wrapEmbedThumbnailPartial = wrapEmbedThumbnail as (x: Partial<RawEmbedThumbnail>) => Partial<EmbedThumbnail>;
 
-export function unwrapEmbedThumbnailPartial(x: Partial<EmbedThumbnail>): Partial<RawEmbedThumbnail> {
-	return toApiCasing(x);
-};
+export const unwrapEmbedThumbnailPartial = unwrapEmbedThumbnail as (x: Partial<EmbedThumbnail>) => Partial<RawEmbedThumbnail>;
+
 

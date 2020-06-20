@@ -14,17 +14,14 @@ export interface BeginGuildPruneParams {
 
 export function wrapBeginGuildPruneParams(x: RawBeginGuildPruneParams): BeginGuildPruneParams {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapBeginGuildPruneParams(x: BeginGuildPruneParams): RawBeginGuildPruneParams {
 	return toApiCasing(x);
-};
+}
 
-export function wrapBeginGuildPruneParamsPartial(x: Partial<RawBeginGuildPruneParams>): Partial<BeginGuildPruneParams> {
-	return fromApiCasing(x);
-};
+export const wrapBeginGuildPruneParamsPartial = wrapBeginGuildPruneParams as (x: Partial<RawBeginGuildPruneParams>) => Partial<BeginGuildPruneParams>;
 
-export function unwrapBeginGuildPruneParamsPartial(x: Partial<BeginGuildPruneParams>): Partial<RawBeginGuildPruneParams> {
-	return toApiCasing(x);
-};
+export const unwrapBeginGuildPruneParamsPartial = unwrapBeginGuildPruneParams as (x: Partial<BeginGuildPruneParams>) => Partial<RawBeginGuildPruneParams>;
+
 

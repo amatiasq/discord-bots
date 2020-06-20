@@ -11,17 +11,14 @@ export interface CreateGroupDmPayload {
 
 export function wrapCreateGroupDmPayload(x: RawCreateGroupDmPayload): CreateGroupDmPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapCreateGroupDmPayload(x: CreateGroupDmPayload): RawCreateGroupDmPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapCreateGroupDmPayloadPartial(x: Partial<RawCreateGroupDmPayload>): Partial<CreateGroupDmPayload> {
-	return fromApiCasing(x);
-};
+export const wrapCreateGroupDmPayloadPartial = wrapCreateGroupDmPayload as (x: Partial<RawCreateGroupDmPayload>) => Partial<CreateGroupDmPayload>;
 
-export function unwrapCreateGroupDmPayloadPartial(x: Partial<CreateGroupDmPayload>): Partial<RawCreateGroupDmPayload> {
-	return toApiCasing(x);
-};
+export const unwrapCreateGroupDmPayloadPartial = unwrapCreateGroupDmPayload as (x: Partial<CreateGroupDmPayload>) => Partial<RawCreateGroupDmPayload>;
+
 

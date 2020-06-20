@@ -50,7 +50,7 @@ export function wrapActivity(x: RawActivity): Activity {
 		assets: x.assets && wrapActivityAssets(x.assets),
 		secrets: x.secrets && wrapActivitySecrets(x.secrets),
 	};
-};
+}
 
 export function unwrapActivity(x: Activity): RawActivity {
 	return {
@@ -62,7 +62,7 @@ export function unwrapActivity(x: Activity): RawActivity {
 		assets: x.assets && unwrapActivityAssets(x.assets),
 		secrets: x.secrets && unwrapActivitySecrets(x.secrets),
 	};
-};
+}
 
 export function wrapActivityPartial(x: Partial<RawActivity>): Partial<Activity> {
 	return {
@@ -74,7 +74,7 @@ export function wrapActivityPartial(x: Partial<RawActivity>): Partial<Activity> 
 		assets: x.assets && wrapActivityAssets(x.assets),
 		secrets: x.secrets && wrapActivitySecrets(x.secrets),
 	};
-};
+}
 
 export function unwrapActivityPartial(x: Partial<Activity>): Partial<RawActivity> {
 	return {
@@ -86,5 +86,6 @@ export function unwrapActivityPartial(x: Partial<Activity>): Partial<RawActivity
 		assets: x.assets && unwrapActivityAssets(x.assets),
 		secrets: x.secrets && unwrapActivitySecrets(x.secrets),
 	};
-};
+}
+
 

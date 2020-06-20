@@ -15,7 +15,7 @@ export function wrapActivityTimestamps(x: RawActivityTimestamps): ActivityTimest
 		start: x.start && parseUnixTimestamp(x.start),
 		end: x.end && parseUnixTimestamp(x.end),
 	};
-};
+}
 
 export function unwrapActivityTimestamps(x: ActivityTimestamps): RawActivityTimestamps {
 	return {
@@ -23,21 +23,10 @@ export function unwrapActivityTimestamps(x: ActivityTimestamps): RawActivityTime
 		start: x.start && unparseUnixTimestamp(x.start),
 		end: x.end && unparseUnixTimestamp(x.end),
 	};
-};
+}
 
-export function wrapActivityTimestampsPartial(x: Partial<RawActivityTimestamps>): Partial<ActivityTimestamps> {
-	return {
-		...x,
-		start: x.start && parseUnixTimestamp(x.start),
-		end: x.end && parseUnixTimestamp(x.end),
-	};
-};
+export const wrapActivityTimestampsPartial = wrapActivityTimestamps as (x: Partial<RawActivityTimestamps>) => Partial<ActivityTimestamps>;
 
-export function unwrapActivityTimestampsPartial(x: Partial<ActivityTimestamps>): Partial<RawActivityTimestamps> {
-	return {
-		...x,
-		start: x.start && unparseUnixTimestamp(x.start),
-		end: x.end && unparseUnixTimestamp(x.end),
-	};
-};
+export const unwrapActivityTimestampsPartial = unwrapActivityTimestamps as (x: Partial<ActivityTimestamps>) => Partial<RawActivityTimestamps>;
+
 

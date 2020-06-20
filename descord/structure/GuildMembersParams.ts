@@ -11,17 +11,14 @@ export interface GuildMembersParams {
 
 export function wrapGuildMembersParams(x: RawGuildMembersParams): GuildMembersParams {
 	return x;
-};
+}
 
 export function unwrapGuildMembersParams(x: GuildMembersParams): RawGuildMembersParams {
 	return x;
-};
+}
 
-export function wrapGuildMembersParamsPartial(x: Partial<RawGuildMembersParams>): Partial<GuildMembersParams> {
-	return x;
-};
+export const wrapGuildMembersParamsPartial = wrapGuildMembersParams as (x: Partial<RawGuildMembersParams>) => Partial<GuildMembersParams>;
 
-export function unwrapGuildMembersParamsPartial(x: Partial<GuildMembersParams>): Partial<RawGuildMembersParams> {
-	return x;
-};
+export const unwrapGuildMembersParamsPartial = unwrapGuildMembersParams as (x: Partial<GuildMembersParams>) => Partial<RawGuildMembersParams>;
+
 

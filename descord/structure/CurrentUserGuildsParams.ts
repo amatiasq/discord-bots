@@ -13,17 +13,14 @@ export interface CurrentUserGuildsParams {
 
 export function wrapCurrentUserGuildsParams(x: RawCurrentUserGuildsParams): CurrentUserGuildsParams {
 	return x;
-};
+}
 
 export function unwrapCurrentUserGuildsParams(x: CurrentUserGuildsParams): RawCurrentUserGuildsParams {
 	return x;
-};
+}
 
-export function wrapCurrentUserGuildsParamsPartial(x: Partial<RawCurrentUserGuildsParams>): Partial<CurrentUserGuildsParams> {
-	return x;
-};
+export const wrapCurrentUserGuildsParamsPartial = wrapCurrentUserGuildsParams as (x: Partial<RawCurrentUserGuildsParams>) => Partial<CurrentUserGuildsParams>;
 
-export function unwrapCurrentUserGuildsParamsPartial(x: Partial<CurrentUserGuildsParams>): Partial<RawCurrentUserGuildsParams> {
-	return x;
-};
+export const unwrapCurrentUserGuildsParamsPartial = unwrapCurrentUserGuildsParams as (x: Partial<CurrentUserGuildsParams>) => Partial<RawCurrentUserGuildsParams>;
+
 

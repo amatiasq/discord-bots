@@ -13,17 +13,14 @@ export interface ActivityEmoji {
 
 export function wrapActivityEmoji(x: RawActivityEmoji): ActivityEmoji {
 	return x;
-};
+}
 
 export function unwrapActivityEmoji(x: ActivityEmoji): RawActivityEmoji {
 	return x;
-};
+}
 
-export function wrapActivityEmojiPartial(x: Partial<RawActivityEmoji>): Partial<ActivityEmoji> {
-	return x;
-};
+export const wrapActivityEmojiPartial = wrapActivityEmoji as (x: Partial<RawActivityEmoji>) => Partial<ActivityEmoji>;
 
-export function unwrapActivityEmojiPartial(x: Partial<ActivityEmoji>): Partial<RawActivityEmoji> {
-	return x;
-};
+export const unwrapActivityEmojiPartial = unwrapActivityEmoji as (x: Partial<ActivityEmoji>) => Partial<RawActivityEmoji>;
+
 

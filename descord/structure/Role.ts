@@ -26,26 +26,27 @@ export function wrapRole(x: RawRole): Role {
 		...x,
 		permissions: parsePermissionInteger(x.permissions),
 	};
-};
+}
 
 export function unwrapRole(x: Role): RawRole {
 	return {
 		...x,
 		permissions: unparsePermissionInteger(x.permissions),
 	};
-};
+}
 
 export function wrapRolePartial(x: Partial<RawRole>): Partial<Role> {
 	return {
 		...x,
 		permissions: x.permissions && parsePermissionInteger(x.permissions),
 	};
-};
+}
 
 export function unwrapRolePartial(x: Partial<Role>): Partial<RawRole> {
 	return {
 		...x,
 		permissions: x.permissions && unparsePermissionInteger(x.permissions),
 	};
-};
+}
+
 

@@ -22,17 +22,14 @@ export interface Attachment {
 
 export function wrapAttachment(x: RawAttachment): Attachment {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapAttachment(x: Attachment): RawAttachment {
 	return toApiCasing(x);
-};
+}
 
-export function wrapAttachmentPartial(x: Partial<RawAttachment>): Partial<Attachment> {
-	return fromApiCasing(x);
-};
+export const wrapAttachmentPartial = wrapAttachment as (x: Partial<RawAttachment>) => Partial<Attachment>;
 
-export function unwrapAttachmentPartial(x: Partial<Attachment>): Partial<RawAttachment> {
-	return toApiCasing(x);
-};
+export const unwrapAttachmentPartial = unwrapAttachment as (x: Partial<Attachment>) => Partial<RawAttachment>;
+
 

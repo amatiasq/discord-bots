@@ -28,7 +28,7 @@ export function wrapGuildMember(x: RawGuildMember): GuildMember {
 		joinedAt: parseISO8601Timestamp(x.joined_at),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
 	};
-};
+}
 
 export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 	return {
@@ -37,7 +37,7 @@ export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 		joined_at: unparseISO8601Timestamp(x.joinedAt),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
-};
+}
 
 export function wrapGuildMemberPartial(x: Partial<RawGuildMember>): Partial<GuildMember> {
 	return {
@@ -46,7 +46,7 @@ export function wrapGuildMemberPartial(x: Partial<RawGuildMember>): Partial<Guil
 		joinedAt: x.joined_at && parseISO8601Timestamp(x.joined_at),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
 	};
-};
+}
 
 export function unwrapGuildMemberPartial(x: Partial<GuildMember>): Partial<RawGuildMember> {
 	return {
@@ -55,5 +55,6 @@ export function unwrapGuildMemberPartial(x: Partial<GuildMember>): Partial<RawGu
 		joined_at: x.joinedAt && unparseISO8601Timestamp(x.joinedAt),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
-};
+}
+
 

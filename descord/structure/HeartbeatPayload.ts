@@ -9,17 +9,14 @@ export interface HeartbeatPayload {
 
 export function wrapHeartbeatPayload(x: RawHeartbeatPayload): HeartbeatPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapHeartbeatPayload(x: HeartbeatPayload): RawHeartbeatPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapHeartbeatPayloadPartial(x: Partial<RawHeartbeatPayload>): Partial<HeartbeatPayload> {
-	return fromApiCasing(x);
-};
+export const wrapHeartbeatPayloadPartial = wrapHeartbeatPayload as (x: Partial<RawHeartbeatPayload>) => Partial<HeartbeatPayload>;
 
-export function unwrapHeartbeatPayloadPartial(x: Partial<HeartbeatPayload>): Partial<RawHeartbeatPayload> {
-	return toApiCasing(x);
-};
+export const unwrapHeartbeatPayloadPartial = unwrapHeartbeatPayload as (x: Partial<HeartbeatPayload>) => Partial<RawHeartbeatPayload>;
+
 

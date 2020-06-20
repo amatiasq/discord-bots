@@ -19,17 +19,14 @@ export interface VoiceRegion {
 
 export function wrapVoiceRegion(x: RawVoiceRegion): VoiceRegion {
 	return x;
-};
+}
 
 export function unwrapVoiceRegion(x: VoiceRegion): RawVoiceRegion {
 	return x;
-};
+}
 
-export function wrapVoiceRegionPartial(x: Partial<RawVoiceRegion>): Partial<VoiceRegion> {
-	return x;
-};
+export const wrapVoiceRegionPartial = wrapVoiceRegion as (x: Partial<RawVoiceRegion>) => Partial<VoiceRegion>;
 
-export function unwrapVoiceRegionPartial(x: Partial<VoiceRegion>): Partial<RawVoiceRegion> {
-	return x;
-};
+export const unwrapVoiceRegionPartial = unwrapVoiceRegion as (x: Partial<VoiceRegion>) => Partial<RawVoiceRegion>;
+
 

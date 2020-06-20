@@ -9,17 +9,14 @@ export interface BulkDeleteMessagesPayload {
 
 export function wrapBulkDeleteMessagesPayload(x: RawBulkDeleteMessagesPayload): BulkDeleteMessagesPayload {
 	return x;
-};
+}
 
 export function unwrapBulkDeleteMessagesPayload(x: BulkDeleteMessagesPayload): RawBulkDeleteMessagesPayload {
 	return x;
-};
+}
 
-export function wrapBulkDeleteMessagesPayloadPartial(x: Partial<RawBulkDeleteMessagesPayload>): Partial<BulkDeleteMessagesPayload> {
-	return x;
-};
+export const wrapBulkDeleteMessagesPayloadPartial = wrapBulkDeleteMessagesPayload as (x: Partial<RawBulkDeleteMessagesPayload>) => Partial<BulkDeleteMessagesPayload>;
 
-export function unwrapBulkDeleteMessagesPayloadPartial(x: Partial<BulkDeleteMessagesPayload>): Partial<RawBulkDeleteMessagesPayload> {
-	return x;
-};
+export const unwrapBulkDeleteMessagesPayloadPartial = unwrapBulkDeleteMessagesPayload as (x: Partial<BulkDeleteMessagesPayload>) => Partial<RawBulkDeleteMessagesPayload>;
+
 

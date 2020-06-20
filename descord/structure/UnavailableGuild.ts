@@ -9,17 +9,14 @@ export interface UnavailableGuild {
 
 export function wrapUnavailableGuild(x: RawUnavailableGuild): UnavailableGuild {
 	return x;
-};
+}
 
 export function unwrapUnavailableGuild(x: UnavailableGuild): RawUnavailableGuild {
 	return x;
-};
+}
 
-export function wrapUnavailableGuildPartial(x: Partial<RawUnavailableGuild>): Partial<UnavailableGuild> {
-	return x;
-};
+export const wrapUnavailableGuildPartial = wrapUnavailableGuild as (x: Partial<RawUnavailableGuild>) => Partial<UnavailableGuild>;
 
-export function unwrapUnavailableGuildPartial(x: Partial<UnavailableGuild>): Partial<RawUnavailableGuild> {
-	return x;
-};
+export const unwrapUnavailableGuildPartial = unwrapUnavailableGuild as (x: Partial<UnavailableGuild>) => Partial<RawUnavailableGuild>;
+
 

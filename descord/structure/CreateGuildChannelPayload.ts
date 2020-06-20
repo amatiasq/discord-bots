@@ -33,26 +33,27 @@ export function wrapCreateGuildChannelPayload(x: RawCreateGuildChannelPayload): 
 		...fromApiCasing(x),
 		permissionOverwrites: x.permission_overwrites.map(wrapOverwrite),
 	};
-};
+}
 
 export function unwrapCreateGuildChannelPayload(x: CreateGuildChannelPayload): RawCreateGuildChannelPayload {
 	return {
 		...toApiCasing(x),
 		permission_overwrites: x.permissionOverwrites.map(unwrapOverwrite),
 	};
-};
+}
 
 export function wrapCreateGuildChannelPayloadPartial(x: Partial<RawCreateGuildChannelPayload>): Partial<CreateGuildChannelPayload> {
 	return {
 		...fromApiCasing(x),
 		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
 	};
-};
+}
 
 export function unwrapCreateGuildChannelPayloadPartial(x: Partial<CreateGuildChannelPayload>): Partial<RawCreateGuildChannelPayload> {
 	return {
 		...toApiCasing(x),
 		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
 	};
-};
+}
+
 

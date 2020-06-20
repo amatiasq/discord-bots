@@ -10,17 +10,14 @@ export interface CreateDmPayload {
 
 export function wrapCreateDmPayload(x: RawCreateDmPayload): CreateDmPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapCreateDmPayload(x: CreateDmPayload): RawCreateDmPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapCreateDmPayloadPartial(x: Partial<RawCreateDmPayload>): Partial<CreateDmPayload> {
-	return fromApiCasing(x);
-};
+export const wrapCreateDmPayloadPartial = wrapCreateDmPayload as (x: Partial<RawCreateDmPayload>) => Partial<CreateDmPayload>;
 
-export function unwrapCreateDmPayloadPartial(x: Partial<CreateDmPayload>): Partial<RawCreateDmPayload> {
-	return toApiCasing(x);
-};
+export const unwrapCreateDmPayloadPartial = unwrapCreateDmPayload as (x: Partial<CreateDmPayload>) => Partial<RawCreateDmPayload>;
+
 

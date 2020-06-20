@@ -13,17 +13,14 @@ export interface EmbedFooter {
 
 export function wrapEmbedFooter(x: RawEmbedFooter): EmbedFooter {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapEmbedFooter(x: EmbedFooter): RawEmbedFooter {
 	return toApiCasing(x);
-};
+}
 
-export function wrapEmbedFooterPartial(x: Partial<RawEmbedFooter>): Partial<EmbedFooter> {
-	return fromApiCasing(x);
-};
+export const wrapEmbedFooterPartial = wrapEmbedFooter as (x: Partial<RawEmbedFooter>) => Partial<EmbedFooter>;
 
-export function unwrapEmbedFooterPartial(x: Partial<EmbedFooter>): Partial<RawEmbedFooter> {
-	return toApiCasing(x);
-};
+export const unwrapEmbedFooterPartial = unwrapEmbedFooter as (x: Partial<EmbedFooter>) => Partial<RawEmbedFooter>;
+
 

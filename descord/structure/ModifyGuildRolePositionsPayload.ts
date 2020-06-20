@@ -11,17 +11,14 @@ export interface ModifyGuildRolePositionsPayload {
 
 export function wrapModifyGuildRolePositionsPayload(x: RawModifyGuildRolePositionsPayload): ModifyGuildRolePositionsPayload {
 	return x;
-};
+}
 
 export function unwrapModifyGuildRolePositionsPayload(x: ModifyGuildRolePositionsPayload): RawModifyGuildRolePositionsPayload {
 	return x;
-};
+}
 
-export function wrapModifyGuildRolePositionsPayloadPartial(x: Partial<RawModifyGuildRolePositionsPayload>): Partial<ModifyGuildRolePositionsPayload> {
-	return x;
-};
+export const wrapModifyGuildRolePositionsPayloadPartial = wrapModifyGuildRolePositionsPayload as (x: Partial<RawModifyGuildRolePositionsPayload>) => Partial<ModifyGuildRolePositionsPayload>;
 
-export function unwrapModifyGuildRolePositionsPayloadPartial(x: Partial<ModifyGuildRolePositionsPayload>): Partial<RawModifyGuildRolePositionsPayload> {
-	return x;
-};
+export const unwrapModifyGuildRolePositionsPayloadPartial = unwrapModifyGuildRolePositionsPayload as (x: Partial<ModifyGuildRolePositionsPayload>) => Partial<RawModifyGuildRolePositionsPayload>;
+
 

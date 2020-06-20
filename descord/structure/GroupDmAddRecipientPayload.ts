@@ -11,17 +11,14 @@ export interface GroupDmAddRecipientPayload {
 
 export function wrapGroupDmAddRecipientPayload(x: RawGroupDmAddRecipientPayload): GroupDmAddRecipientPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapGroupDmAddRecipientPayload(x: GroupDmAddRecipientPayload): RawGroupDmAddRecipientPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapGroupDmAddRecipientPayloadPartial(x: Partial<RawGroupDmAddRecipientPayload>): Partial<GroupDmAddRecipientPayload> {
-	return fromApiCasing(x);
-};
+export const wrapGroupDmAddRecipientPayloadPartial = wrapGroupDmAddRecipientPayload as (x: Partial<RawGroupDmAddRecipientPayload>) => Partial<GroupDmAddRecipientPayload>;
 
-export function unwrapGroupDmAddRecipientPayloadPartial(x: Partial<GroupDmAddRecipientPayload>): Partial<RawGroupDmAddRecipientPayload> {
-	return toApiCasing(x);
-};
+export const unwrapGroupDmAddRecipientPayloadPartial = unwrapGroupDmAddRecipientPayload as (x: Partial<GroupDmAddRecipientPayload>) => Partial<RawGroupDmAddRecipientPayload>;
+
 

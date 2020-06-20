@@ -15,17 +15,14 @@ export interface AllowedMentions {
 
 export function wrapAllowedMentions(x: RawAllowedMentions): AllowedMentions {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapAllowedMentions(x: AllowedMentions): RawAllowedMentions {
 	return toApiCasing(x);
-};
+}
 
-export function wrapAllowedMentionsPartial(x: Partial<RawAllowedMentions>): Partial<AllowedMentions> {
-	return fromApiCasing(x);
-};
+export const wrapAllowedMentionsPartial = wrapAllowedMentions as (x: Partial<RawAllowedMentions>) => Partial<AllowedMentions>;
 
-export function unwrapAllowedMentionsPartial(x: Partial<AllowedMentions>): Partial<RawAllowedMentions> {
-	return toApiCasing(x);
-};
+export const unwrapAllowedMentionsPartial = unwrapAllowedMentions as (x: Partial<AllowedMentions>) => Partial<RawAllowedMentions>;
+
 

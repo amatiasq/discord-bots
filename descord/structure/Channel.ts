@@ -60,7 +60,7 @@ export function wrapChannel(x: RawChannel): Channel {
 		recipients: x.recipients && x.recipients.map(wrapUser),
 		lastPinTimestamp: x.last_pin_timestamp && parseISO8601Timestamp(x.last_pin_timestamp),
 	};
-};
+}
 
 export function unwrapChannel(x: Channel): RawChannel {
 	return {
@@ -69,23 +69,10 @@ export function unwrapChannel(x: Channel): RawChannel {
 		recipients: x.recipients && x.recipients.map(unwrapUser),
 		last_pin_timestamp: x.lastPinTimestamp && unparseISO8601Timestamp(x.lastPinTimestamp),
 	};
-};
+}
 
-export function wrapChannelPartial(x: Partial<RawChannel>): Partial<Channel> {
-	return {
-		...fromApiCasing(x),
-		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
-		recipients: x.recipients && x.recipients.map(wrapUser),
-		lastPinTimestamp: x.last_pin_timestamp && parseISO8601Timestamp(x.last_pin_timestamp),
-	};
-};
+export const wrapChannelPartial = wrapChannel as (x: Partial<RawChannel>) => Partial<Channel>;
 
-export function unwrapChannelPartial(x: Partial<Channel>): Partial<RawChannel> {
-	return {
-		...toApiCasing(x),
-		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
-		recipients: x.recipients && x.recipients.map(unwrapUser),
-		last_pin_timestamp: x.lastPinTimestamp && unparseISO8601Timestamp(x.lastPinTimestamp),
-	};
-};
+export const unwrapChannelPartial = unwrapChannel as (x: Partial<Channel>) => Partial<RawChannel>;
+
 

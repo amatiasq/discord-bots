@@ -15,17 +15,14 @@ export interface ModifyGuildIntegrationPayload {
 
 export function wrapModifyGuildIntegrationPayload(x: RawModifyGuildIntegrationPayload): ModifyGuildIntegrationPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapModifyGuildIntegrationPayload(x: ModifyGuildIntegrationPayload): RawModifyGuildIntegrationPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapModifyGuildIntegrationPayloadPartial(x: Partial<RawModifyGuildIntegrationPayload>): Partial<ModifyGuildIntegrationPayload> {
-	return fromApiCasing(x);
-};
+export const wrapModifyGuildIntegrationPayloadPartial = wrapModifyGuildIntegrationPayload as (x: Partial<RawModifyGuildIntegrationPayload>) => Partial<ModifyGuildIntegrationPayload>;
 
-export function unwrapModifyGuildIntegrationPayloadPartial(x: Partial<ModifyGuildIntegrationPayload>): Partial<RawModifyGuildIntegrationPayload> {
-	return toApiCasing(x);
-};
+export const unwrapModifyGuildIntegrationPayloadPartial = unwrapModifyGuildIntegrationPayload as (x: Partial<ModifyGuildIntegrationPayload>) => Partial<RawModifyGuildIntegrationPayload>;
+
 

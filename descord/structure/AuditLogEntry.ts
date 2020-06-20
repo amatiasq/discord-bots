@@ -29,7 +29,7 @@ export function wrapAuditLogEntry(x: RawAuditLogEntry): AuditLogEntry {
 		changes: x.changes && x.changes.map(wrapAuditLogChange),
 		options: x.options && wrapOptionalAuditEntryInfo(x.options),
 	};
-};
+}
 
 export function unwrapAuditLogEntry(x: AuditLogEntry): RawAuditLogEntry {
 	return {
@@ -37,21 +37,10 @@ export function unwrapAuditLogEntry(x: AuditLogEntry): RawAuditLogEntry {
 		changes: x.changes && x.changes.map(unwrapAuditLogChange),
 		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
 	};
-};
+}
 
-export function wrapAuditLogEntryPartial(x: Partial<RawAuditLogEntry>): Partial<AuditLogEntry> {
-	return {
-		...fromApiCasing(x),
-		changes: x.changes && x.changes.map(wrapAuditLogChange),
-		options: x.options && wrapOptionalAuditEntryInfo(x.options),
-	};
-};
+export const wrapAuditLogEntryPartial = wrapAuditLogEntry as (x: Partial<RawAuditLogEntry>) => Partial<AuditLogEntry>;
 
-export function unwrapAuditLogEntryPartial(x: Partial<AuditLogEntry>): Partial<RawAuditLogEntry> {
-	return {
-		...toApiCasing(x),
-		changes: x.changes && x.changes.map(unwrapAuditLogChange),
-		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
-	};
-};
+export const unwrapAuditLogEntryPartial = unwrapAuditLogEntry as (x: Partial<AuditLogEntry>) => Partial<RawAuditLogEntry>;
+
 

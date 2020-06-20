@@ -18,17 +18,14 @@ export interface MessageApplication {
 
 export function wrapMessageApplication(x: RawMessageApplication): MessageApplication {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapMessageApplication(x: MessageApplication): RawMessageApplication {
 	return toApiCasing(x);
-};
+}
 
-export function wrapMessageApplicationPartial(x: Partial<RawMessageApplication>): Partial<MessageApplication> {
-	return fromApiCasing(x);
-};
+export const wrapMessageApplicationPartial = wrapMessageApplication as (x: Partial<RawMessageApplication>) => Partial<MessageApplication>;
 
-export function unwrapMessageApplicationPartial(x: Partial<MessageApplication>): Partial<RawMessageApplication> {
-	return toApiCasing(x);
-};
+export const unwrapMessageApplicationPartial = unwrapMessageApplication as (x: Partial<MessageApplication>) => Partial<RawMessageApplication>;
+
 

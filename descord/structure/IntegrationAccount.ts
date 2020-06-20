@@ -11,17 +11,14 @@ export interface IntegrationAccount {
 
 export function wrapIntegrationAccount(x: RawIntegrationAccount): IntegrationAccount {
 	return x;
-};
+}
 
 export function unwrapIntegrationAccount(x: IntegrationAccount): RawIntegrationAccount {
 	return x;
-};
+}
 
-export function wrapIntegrationAccountPartial(x: Partial<RawIntegrationAccount>): Partial<IntegrationAccount> {
-	return x;
-};
+export const wrapIntegrationAccountPartial = wrapIntegrationAccount as (x: Partial<RawIntegrationAccount>) => Partial<IntegrationAccount>;
 
-export function unwrapIntegrationAccountPartial(x: Partial<IntegrationAccount>): Partial<RawIntegrationAccount> {
-	return x;
-};
+export const unwrapIntegrationAccountPartial = unwrapIntegrationAccount as (x: Partial<IntegrationAccount>) => Partial<RawIntegrationAccount>;
+
 

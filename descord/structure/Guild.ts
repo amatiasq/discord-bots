@@ -108,7 +108,7 @@ export function wrapGuild(x: RawGuild): Guild {
 		emojis: x.emojis.map(wrapEmoji),
 		systemChannelFlags: parseSystemChannelFlagInteger(x.system_channel_flags),
 	};
-};
+}
 
 export function unwrapGuild(x: Guild): RawGuild {
 	return {
@@ -118,7 +118,7 @@ export function unwrapGuild(x: Guild): RawGuild {
 		emojis: x.emojis.map(unwrapEmoji),
 		system_channel_flags: unparseSystemChannelFlagInteger(x.systemChannelFlags),
 	};
-};
+}
 
 export function wrapGuildPartial(x: Partial<RawGuild>): Partial<Guild> {
 	return {
@@ -128,7 +128,7 @@ export function wrapGuildPartial(x: Partial<RawGuild>): Partial<Guild> {
 		emojis: x.emojis && x.emojis.map(wrapEmoji),
 		systemChannelFlags: x.system_channel_flags && parseSystemChannelFlagInteger(x.system_channel_flags),
 	};
-};
+}
 
 export function unwrapGuildPartial(x: Partial<Guild>): Partial<RawGuild> {
 	return {
@@ -138,5 +138,6 @@ export function unwrapGuildPartial(x: Partial<Guild>): Partial<RawGuild> {
 		emojis: x.emojis && x.emojis.map(unwrapEmoji),
 		system_channel_flags: x.systemChannelFlags && unparseSystemChannelFlagInteger(x.systemChannelFlags),
 	};
-};
+}
+
 

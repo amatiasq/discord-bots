@@ -15,17 +15,14 @@ export interface EmbedAuthor {
 
 export function wrapEmbedAuthor(x: RawEmbedAuthor): EmbedAuthor {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapEmbedAuthor(x: EmbedAuthor): RawEmbedAuthor {
 	return toApiCasing(x);
-};
+}
 
-export function wrapEmbedAuthorPartial(x: Partial<RawEmbedAuthor>): Partial<EmbedAuthor> {
-	return fromApiCasing(x);
-};
+export const wrapEmbedAuthorPartial = wrapEmbedAuthor as (x: Partial<RawEmbedAuthor>) => Partial<EmbedAuthor>;
 
-export function unwrapEmbedAuthorPartial(x: Partial<EmbedAuthor>): Partial<RawEmbedAuthor> {
-	return toApiCasing(x);
-};
+export const unwrapEmbedAuthorPartial = unwrapEmbedAuthor as (x: Partial<EmbedAuthor>) => Partial<RawEmbedAuthor>;
+
 

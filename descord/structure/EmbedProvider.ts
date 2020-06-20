@@ -11,17 +11,14 @@ export interface EmbedProvider {
 
 export function wrapEmbedProvider(x: RawEmbedProvider): EmbedProvider {
 	return x;
-};
+}
 
 export function unwrapEmbedProvider(x: EmbedProvider): RawEmbedProvider {
 	return x;
-};
+}
 
-export function wrapEmbedProviderPartial(x: Partial<RawEmbedProvider>): Partial<EmbedProvider> {
-	return x;
-};
+export const wrapEmbedProviderPartial = wrapEmbedProvider as (x: Partial<RawEmbedProvider>) => Partial<EmbedProvider>;
 
-export function unwrapEmbedProviderPartial(x: Partial<EmbedProvider>): Partial<RawEmbedProvider> {
-	return x;
-};
+export const unwrapEmbedProviderPartial = unwrapEmbedProvider as (x: Partial<EmbedProvider>) => Partial<RawEmbedProvider>;
+
 

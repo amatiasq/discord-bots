@@ -11,17 +11,14 @@ export interface CreateGuildBanParams {
 
 export function wrapCreateGuildBanParams(x: RawCreateGuildBanParams): CreateGuildBanParams {
 	return x;
-};
+}
 
 export function unwrapCreateGuildBanParams(x: CreateGuildBanParams): RawCreateGuildBanParams {
 	return x;
-};
+}
 
-export function wrapCreateGuildBanParamsPartial(x: Partial<RawCreateGuildBanParams>): Partial<CreateGuildBanParams> {
-	return x;
-};
+export const wrapCreateGuildBanParamsPartial = wrapCreateGuildBanParams as (x: Partial<RawCreateGuildBanParams>) => Partial<CreateGuildBanParams>;
 
-export function unwrapCreateGuildBanParamsPartial(x: Partial<CreateGuildBanParams>): Partial<RawCreateGuildBanParams> {
-	return x;
-};
+export const unwrapCreateGuildBanParamsPartial = unwrapCreateGuildBanParams as (x: Partial<CreateGuildBanParams>) => Partial<RawCreateGuildBanParams>;
+
 

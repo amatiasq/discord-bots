@@ -17,7 +17,7 @@ export function wrapEditChannelPermissionsPayload(x: RawEditChannelPermissionsPa
 		allow: parsePermissionInteger(x.allow),
 		deny: parsePermissionInteger(x.deny),
 	};
-};
+}
 
 export function unwrapEditChannelPermissionsPayload(x: EditChannelPermissionsPayload): RawEditChannelPermissionsPayload {
 	return {
@@ -25,7 +25,7 @@ export function unwrapEditChannelPermissionsPayload(x: EditChannelPermissionsPay
 		allow: unparsePermissionInteger(x.allow),
 		deny: unparsePermissionInteger(x.deny),
 	};
-};
+}
 
 export function wrapEditChannelPermissionsPayloadPartial(x: Partial<RawEditChannelPermissionsPayload>): Partial<EditChannelPermissionsPayload> {
 	return {
@@ -33,7 +33,7 @@ export function wrapEditChannelPermissionsPayloadPartial(x: Partial<RawEditChann
 		allow: x.allow && parsePermissionInteger(x.allow),
 		deny: x.deny && parsePermissionInteger(x.deny),
 	};
-};
+}
 
 export function unwrapEditChannelPermissionsPayloadPartial(x: Partial<EditChannelPermissionsPayload>): Partial<RawEditChannelPermissionsPayload> {
 	return {
@@ -41,5 +41,6 @@ export function unwrapEditChannelPermissionsPayloadPartial(x: Partial<EditChanne
 		allow: x.allow && unparsePermissionInteger(x.allow),
 		deny: x.deny && unparsePermissionInteger(x.deny),
 	};
-};
+}
+
 

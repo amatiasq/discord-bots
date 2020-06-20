@@ -9,17 +9,14 @@ export interface ModifyCurrentUserNickPayload {
 
 export function wrapModifyCurrentUserNickPayload(x: RawModifyCurrentUserNickPayload): ModifyCurrentUserNickPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapModifyCurrentUserNickPayload(x: ModifyCurrentUserNickPayload): RawModifyCurrentUserNickPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapModifyCurrentUserNickPayloadPartial(x: Partial<RawModifyCurrentUserNickPayload>): Partial<ModifyCurrentUserNickPayload> {
-	return fromApiCasing(x);
-};
+export const wrapModifyCurrentUserNickPayloadPartial = wrapModifyCurrentUserNickPayload as (x: Partial<RawModifyCurrentUserNickPayload>) => Partial<ModifyCurrentUserNickPayload>;
 
-export function unwrapModifyCurrentUserNickPayloadPartial(x: Partial<ModifyCurrentUserNickPayload>): Partial<RawModifyCurrentUserNickPayload> {
-	return toApiCasing(x);
-};
+export const unwrapModifyCurrentUserNickPayloadPartial = unwrapModifyCurrentUserNickPayload as (x: Partial<ModifyCurrentUserNickPayload>) => Partial<RawModifyCurrentUserNickPayload>;
+
 

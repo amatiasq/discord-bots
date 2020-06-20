@@ -33,26 +33,17 @@ export function wrapModifyChannelPayload(x: RawModifyChannelPayload): ModifyChan
 		...fromApiCasing(x),
 		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
 	};
-};
+}
 
 export function unwrapModifyChannelPayload(x: ModifyChannelPayload): RawModifyChannelPayload {
 	return {
 		...toApiCasing(x),
 		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
 	};
-};
+}
 
-export function wrapModifyChannelPayloadPartial(x: Partial<RawModifyChannelPayload>): Partial<ModifyChannelPayload> {
-	return {
-		...fromApiCasing(x),
-		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
-	};
-};
+export const wrapModifyChannelPayloadPartial = wrapModifyChannelPayload as (x: Partial<RawModifyChannelPayload>) => Partial<ModifyChannelPayload>;
 
-export function unwrapModifyChannelPayloadPartial(x: Partial<ModifyChannelPayload>): Partial<RawModifyChannelPayload> {
-	return {
-		...toApiCasing(x),
-		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
-	};
-};
+export const unwrapModifyChannelPayloadPartial = unwrapModifyChannelPayload as (x: Partial<ModifyChannelPayload>) => Partial<RawModifyChannelPayload>;
+
 

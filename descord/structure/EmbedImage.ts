@@ -16,17 +16,14 @@ export interface EmbedImage {
 
 export function wrapEmbedImage(x: RawEmbedImage): EmbedImage {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapEmbedImage(x: EmbedImage): RawEmbedImage {
 	return toApiCasing(x);
-};
+}
 
-export function wrapEmbedImagePartial(x: Partial<RawEmbedImage>): Partial<EmbedImage> {
-	return fromApiCasing(x);
-};
+export const wrapEmbedImagePartial = wrapEmbedImage as (x: Partial<RawEmbedImage>) => Partial<EmbedImage>;
 
-export function unwrapEmbedImagePartial(x: Partial<EmbedImage>): Partial<RawEmbedImage> {
-	return toApiCasing(x);
-};
+export const unwrapEmbedImagePartial = unwrapEmbedImage as (x: Partial<EmbedImage>) => Partial<RawEmbedImage>;
+
 

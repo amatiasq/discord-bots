@@ -18,17 +18,14 @@ export interface AddGuildMemberPayload {
 
 export function wrapAddGuildMemberPayload(x: RawAddGuildMemberPayload): AddGuildMemberPayload {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapAddGuildMemberPayload(x: AddGuildMemberPayload): RawAddGuildMemberPayload {
 	return toApiCasing(x);
-};
+}
 
-export function wrapAddGuildMemberPayloadPartial(x: Partial<RawAddGuildMemberPayload>): Partial<AddGuildMemberPayload> {
-	return fromApiCasing(x);
-};
+export const wrapAddGuildMemberPayloadPartial = wrapAddGuildMemberPayload as (x: Partial<RawAddGuildMemberPayload>) => Partial<AddGuildMemberPayload>;
 
-export function unwrapAddGuildMemberPayloadPartial(x: Partial<AddGuildMemberPayload>): Partial<RawAddGuildMemberPayload> {
-	return toApiCasing(x);
-};
+export const unwrapAddGuildMemberPayloadPartial = unwrapAddGuildMemberPayload as (x: Partial<AddGuildMemberPayload>) => Partial<RawAddGuildMemberPayload>;
+
 

@@ -34,7 +34,7 @@ export function wrapInvite(x: RawInvite): Invite {
 		inviter: x.inviter && wrapUser(x.inviter),
 		targetUser: x.target_user && wrapUserPartial(x.target_user),
 	};
-};
+}
 
 export function unwrapInvite(x: Invite): RawInvite {
 	return {
@@ -44,7 +44,7 @@ export function unwrapInvite(x: Invite): RawInvite {
 		inviter: x.inviter && unwrapUser(x.inviter),
 		target_user: x.targetUser && unwrapUserPartial(x.targetUser),
 	};
-};
+}
 
 export function wrapInvitePartial(x: Partial<RawInvite>): Partial<Invite> {
 	return {
@@ -54,7 +54,7 @@ export function wrapInvitePartial(x: Partial<RawInvite>): Partial<Invite> {
 		inviter: x.inviter && wrapUser(x.inviter),
 		targetUser: x.target_user && wrapUserPartial(x.target_user),
 	};
-};
+}
 
 export function unwrapInvitePartial(x: Partial<Invite>): Partial<RawInvite> {
 	return {
@@ -64,5 +64,6 @@ export function unwrapInvitePartial(x: Partial<Invite>): Partial<RawInvite> {
 		inviter: x.inviter && unwrapUser(x.inviter),
 		target_user: x.targetUser && unwrapUserPartial(x.targetUser),
 	};
-};
+}
+
 

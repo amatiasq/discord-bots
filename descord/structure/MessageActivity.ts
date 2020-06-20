@@ -12,17 +12,14 @@ export interface MessageActivity {
 
 export function wrapMessageActivity(x: RawMessageActivity): MessageActivity {
 	return fromApiCasing(x);
-};
+}
 
 export function unwrapMessageActivity(x: MessageActivity): RawMessageActivity {
 	return toApiCasing(x);
-};
+}
 
-export function wrapMessageActivityPartial(x: Partial<RawMessageActivity>): Partial<MessageActivity> {
-	return fromApiCasing(x);
-};
+export const wrapMessageActivityPartial = wrapMessageActivity as (x: Partial<RawMessageActivity>) => Partial<MessageActivity>;
 
-export function unwrapMessageActivityPartial(x: Partial<MessageActivity>): Partial<RawMessageActivity> {
-	return toApiCasing(x);
-};
+export const unwrapMessageActivityPartial = unwrapMessageActivity as (x: Partial<MessageActivity>) => Partial<RawMessageActivity>;
+
 

@@ -44,7 +44,7 @@ export function wrapCreateGuildPayload(x: RawCreateGuildPayload): CreateGuildPay
 		roles: x.roles && x.roles.map(wrapRole),
 		channels: x.channels && x.channels.map(wrapChannelPartial),
 	};
-};
+}
 
 export function unwrapCreateGuildPayload(x: CreateGuildPayload): RawCreateGuildPayload {
 	return {
@@ -52,21 +52,10 @@ export function unwrapCreateGuildPayload(x: CreateGuildPayload): RawCreateGuildP
 		roles: x.roles && x.roles.map(unwrapRole),
 		channels: x.channels && x.channels.map(unwrapChannelPartial),
 	};
-};
+}
 
-export function wrapCreateGuildPayloadPartial(x: Partial<RawCreateGuildPayload>): Partial<CreateGuildPayload> {
-	return {
-		...fromApiCasing(x),
-		roles: x.roles && x.roles.map(wrapRole),
-		channels: x.channels && x.channels.map(wrapChannelPartial),
-	};
-};
+export const wrapCreateGuildPayloadPartial = wrapCreateGuildPayload as (x: Partial<RawCreateGuildPayload>) => Partial<CreateGuildPayload>;
 
-export function unwrapCreateGuildPayloadPartial(x: Partial<CreateGuildPayload>): Partial<RawCreateGuildPayload> {
-	return {
-		...toApiCasing(x),
-		roles: x.roles && x.roles.map(unwrapRole),
-		channels: x.channels && x.channels.map(unwrapChannelPartial),
-	};
-};
+export const unwrapCreateGuildPayloadPartial = unwrapCreateGuildPayload as (x: Partial<CreateGuildPayload>) => Partial<RawCreateGuildPayload>;
+
 

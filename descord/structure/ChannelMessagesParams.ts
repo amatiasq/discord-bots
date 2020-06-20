@@ -15,17 +15,14 @@ export interface ChannelMessagesParams {
 
 export function wrapChannelMessagesParams(x: RawChannelMessagesParams): ChannelMessagesParams {
 	return x;
-};
+}
 
 export function unwrapChannelMessagesParams(x: ChannelMessagesParams): RawChannelMessagesParams {
 	return x;
-};
+}
 
-export function wrapChannelMessagesParamsPartial(x: Partial<RawChannelMessagesParams>): Partial<ChannelMessagesParams> {
-	return x;
-};
+export const wrapChannelMessagesParamsPartial = wrapChannelMessagesParams as (x: Partial<RawChannelMessagesParams>) => Partial<ChannelMessagesParams>;
 
-export function unwrapChannelMessagesParamsPartial(x: Partial<ChannelMessagesParams>): Partial<RawChannelMessagesParams> {
-	return x;
-};
+export const unwrapChannelMessagesParamsPartial = unwrapChannelMessagesParams as (x: Partial<ChannelMessagesParams>) => Partial<RawChannelMessagesParams>;
+
 

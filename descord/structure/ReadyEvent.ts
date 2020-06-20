@@ -26,7 +26,7 @@ export function wrapReadyEvent(x: RawReadyEvent): ReadyEvent {
 		user: wrapUser(x.user),
 		guilds: x.guilds.map(wrapUnavailableGuild),
 	};
-};
+}
 
 export function unwrapReadyEvent(x: ReadyEvent): RawReadyEvent {
 	return {
@@ -34,7 +34,7 @@ export function unwrapReadyEvent(x: ReadyEvent): RawReadyEvent {
 		user: unwrapUser(x.user),
 		guilds: x.guilds.map(unwrapUnavailableGuild),
 	};
-};
+}
 
 export function wrapReadyEventPartial(x: Partial<RawReadyEvent>): Partial<ReadyEvent> {
 	return {
@@ -42,7 +42,7 @@ export function wrapReadyEventPartial(x: Partial<RawReadyEvent>): Partial<ReadyE
 		user: x.user && wrapUser(x.user),
 		guilds: x.guilds && x.guilds.map(wrapUnavailableGuild),
 	};
-};
+}
 
 export function unwrapReadyEventPartial(x: Partial<ReadyEvent>): Partial<RawReadyEvent> {
 	return {
@@ -50,5 +50,6 @@ export function unwrapReadyEventPartial(x: Partial<ReadyEvent>): Partial<RawRead
 		user: x.user && unwrapUser(x.user),
 		guilds: x.guilds && x.guilds.map(unwrapUnavailableGuild),
 	};
-};
+}
+
 
