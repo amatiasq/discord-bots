@@ -18,6 +18,7 @@ export type AttachmentId = '%AttachmentId%';
 export type WebhookId = '%WebhookId%';
 export type VoiceRegionId = '%VoiceRegionId%';
 export type AccountId = '%AccountId%';
+export type InviteId = '%InviteId%';
 
 export type ImageData = '%ImageData%';
 export type PermissionInteger = '%PermissionInteger%';
