@@ -28,7 +28,7 @@ export type UserFlagInteger = '%UserFlagInteger%';
 export type ISO8601Timestamp = '%ISO8601Timestamp%';
 export type UnixTimestamp = '%UnixTimestamp%';
 
-export { Permission, SystemChannelFlag };
+export { Permission, SystemChannelFlag, UserFlag };
 
 export const {
 	parse: parsePermissionInteger,

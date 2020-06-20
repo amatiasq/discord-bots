@@ -1,0 +1,43 @@
+import { RawExecuteWebhookPayload } from '../raw/RawExecuteWebhookPayload.ts';
+import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
+import { AllowedMentions, wrapAllowedMentions, unwrapAllowedMentions } from './AllowedMentions.ts';
+import { fromApiCasing, toApiCasing } from '../casing.ts';
+
+export interface ExecuteWebhookPayload {
+	/** the message contents (up to 2000 characters) DEFAULT: one of content, file, embeds */
+	content: string;
+	/** override the default username of the webhook DEFAULT: false */
+	username: string;
+	/** override the default avatar of the webhook DEFAULT: false */
+	avatarUrl: string;
+	/** true if this is a TTS message DEFAULT: false */
+	tts: boolean;
+	/** embedded rich content DEFAULT: one of content, file, embeds */
+	embeds: Embed[];
+	/** allowed mentions for the message DEFAULT: false */
+	allowedMentions: AllowedMentions;
+
+	// TODO: This should only be used if sending FormData
+	// /** the contents of the file being sent DEFAULT: one of content, file, embeds */
+	// file: file contents;
+	// /** See message create DEFAULT: multipart/form-data only */
+	// payloadJson: string;
+}
+
+
+export function wrapExecuteWebhookPayload(x: RawExecuteWebhookPayload): ExecuteWebhookPayload {
+	return {
+		...fromApiCasing(x),
+		embeds: x.embeds.map(wrapEmbed),
+		allowedMentions: wrapAllowedMentions(x.allowed_mentions),
+	};
+};
+
+export function unwrapExecuteWebhookPayload(x: ExecuteWebhookPayload): RawExecuteWebhookPayload {
+	return {
+		...toApiCasing(x),
+		embeds: x.embeds.map(unwrapEmbed),
+		allowed_mentions: unwrapAllowedMentions(x.allowedMentions),
+	};
+};
+

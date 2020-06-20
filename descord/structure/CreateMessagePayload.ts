@@ -10,15 +10,15 @@ export interface CreateMessagePayload {
 	nonce?: number | string;
 	/** true if this is a TTS message */
 	tts?: boolean;
-	/** the contents of the file being sent */
-	file?: string;
 	/** embedded rich content */
 	embed?: Embed;
 	/** allowed mentions for a message */
 	allowedMentions?: AllowedMentions;
 
 	// TODO: This should only be used if sending FormData
-	/** JSON encoded body of any additional request fields. */
+	// /** the contents of the file being sent */
+	// file?: string;
+	// /** JSON encoded body of any additional request fields. */
 	// payloadJson?: string;
 }
 
