@@ -5,9 +5,9 @@ import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
 
 export interface ModifyChannelPayload {
 	/** 2-100 character channel name	All */
-	name: string;
+	name?: string;
 	/** the type of channel; only conversion between text and news is supported and only in guilds with the "NEWS" feature	Text, News */
-	type: ChannelType;
+	type?: ChannelType;
 	/** the position of the channel in the left-hand listing	All */
 	position?: integer;
 	/** 0-1024 character channel topic	Text, News */

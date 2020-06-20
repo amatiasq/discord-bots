@@ -14,8 +14,6 @@ export interface RawCreateMessagePayload {
 	allowed_mentions?: RawAllowedMentions;
 
 	// TODO: This should only be used if sending FormData
-	// /** the contents of the file being sent */
-	// file?: string;
-	// /** JSON encoded body of any additional request fields. */
-	// payload_json?: string;
+	/** the contents of the file being sent */
+	file?: File;
 }

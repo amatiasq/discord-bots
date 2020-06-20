@@ -19,7 +19,7 @@ export type AttachmentId = '%AttachmentId%';
 export type WebhookId = '%WebhookId%';
 export type VoiceRegionId = '%VoiceRegionId%';
 export type AccountId = '%AccountId%';
-export type InviteId = '%InviteId%';
+export type InviteCode = '%InviteId%';
 export type AuditLogEntryId = '%AuditLogEntryId%';
 
 export type ImageData = '%ImageData%';

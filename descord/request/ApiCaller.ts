@@ -1,6 +1,7 @@
 import { RequestMethod } from './RequestMethod.ts';
 
 export type RequestBody = {} | null;
+export type QueryParams = {} | null;
 
 export class ApiCaller {
 	readonly authorization: string;
@@ -22,23 +23,49 @@ export class ApiCaller {
 			return json as T;
 		} catch (err) {
 			console.log(await response.text());
+			throw err;
 		}
 	}
 
-	get<T = any>(url: string) {
-		return this.request<T>(RequestMethod.GET, url);
+	get<T = any>(url: string, params: QueryParams = null) {
+		const fullUrl = params ? addQueryParams(url, params) : url;
+		return this.request<T>(RequestMethod.GET, fullUrl);
 	}
 
-	put<T = any>(url: string, body: RequestBody) {
-		return this.request<T>(RequestMethod.PUT, url, body);
+	patch<T = any>(
+		url: string,
+		body: RequestBody = null,
+		params: QueryParams = null,
+	) {
+		const fullUrl = params ? addQueryParams(url, params) : url;
+		return this.request<T>(RequestMethod.PATCH, fullUrl, body);
 	}
 
-	post<T = any>(url: string, body: RequestBody) {
-		return this.request<T>(RequestMethod.POST, url, body);
+	put<T = any>(
+		url: string,
+		body: RequestBody = null,
+		params: QueryParams = null,
+	) {
+		const fullUrl = params ? addQueryParams(url, params) : url;
+		return this.request<T>(RequestMethod.PUT, fullUrl, body);
 	}
 
-	delete<T = any>(url: string, body: RequestBody) {
-		return this.request<T>(RequestMethod.DELETE, url, body);
+	post<T = any>(
+		url: string,
+		body: RequestBody = null,
+		params: QueryParams = null,
+	) {
+		const fullUrl = params ? addQueryParams(url, params) : url;
+		return this.request<T>(RequestMethod.POST, fullUrl, body);
+	}
+
+	delete<T = any>(
+		url: string,
+		body: RequestBody = null,
+		params: QueryParams = null,
+	) {
+		const fullUrl = params ? addQueryParams(url, params) : url;
+		return this.request<T>(RequestMethod.DELETE, fullUrl);
 	}
 }
 
@@ -57,4 +84,12 @@ function createRequest(
 		},
 		body: body && JSON.stringify(body),
 	});
+}
+
+function addQueryParams(url: string, params: {}) {
+	const serialized = Object.entries(params as { [id: string]: string }).map(
+		([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+	);
+
+	return `${url}?${serialized.join('&')}`;
 }

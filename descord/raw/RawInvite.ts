@@ -1,4 +1,4 @@
-import { InviteId, integer } from '../type-aliases.ts';
+import { InviteCode, integer } from '../type-aliases.ts';
 import { TargetUserType } from '../enum/TargetUserType.ts';
 import { RawGuild } from './RawGuild.ts';
 import { RawChannel } from './RawChannel.ts';
@@ -6,7 +6,7 @@ import { RawUser } from './RawUser.ts';
 
 export interface RawInvite {
 	/** the invite code (unique ID) */
-	code: InviteId;
+	code: InviteCode;
 	/** the guild this invite is for */
 	guild?: Partial<RawGuild>;
 	/** the channel this invite is for */

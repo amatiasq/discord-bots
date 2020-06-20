@@ -15,10 +15,8 @@ export interface CreateMessagePayload {
 	allowedMentions?: AllowedMentions;
 
 	// TODO: This should only be used if sending FormData
-	// /** the contents of the file being sent */
-	// file?: string;
-	// /** JSON encoded body of any additional request fields. */
-	// payloadJson?: string;
+	/** the contents of the file being sent */
+	file?: File;
 }
 
 
@@ -27,7 +25,6 @@ export function wrapCreateMessagePayload(x: RawCreateMessagePayload): CreateMess
 		...x,
 		embed: x.embed && wrapEmbed(x.embed),
 		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
-		// payloadJson: x.payload_json && x.payload_json,
 	};
 }
 
@@ -36,7 +33,6 @@ export function unwrapCreateMessagePayload(x: CreateMessagePayload): RawCreateMe
 		...x,
 		embed: x.embed && unwrapEmbed(x.embed),
 		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
-		// payload_json: x.payloadJson && x.payloadJson,
 	};
 }
 
