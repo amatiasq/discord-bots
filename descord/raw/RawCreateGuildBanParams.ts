@@ -1,4 +1,4 @@
-import { integer } from '../type-aliases';
+import { integer } from '../type-aliases.ts';
 
 export interface RawCreateGuildBanParams {
 	/** number of days to delete messages for (0-7) */

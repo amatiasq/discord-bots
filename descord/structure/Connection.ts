@@ -1,5 +1,5 @@
 import { RawConnection } from '../raw/RawConnection.ts';
-import { Integration, wrapIntegration, unwrapIntegration } from './Integration.ts';
+import { Integration, wrapIntegrationPartial } from './Integration.ts';
 import { VisibilityType } from '../enum/VisibilityType.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
@@ -24,12 +24,15 @@ export interface Connection {
 	visibility: VisibilityType;
 }
 
-
 export function wrapConnection(x: RawConnection): Connection {
-	return fromApiCasing(x);
-};
+	return {
+		...fromApiCasing(x),
+
+		// Ad-hoc
+		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
+	};
+}
 
 export function unwrapConnection(x: Connection): RawConnection {
 	return toApiCasing(x);
-};
-
+}

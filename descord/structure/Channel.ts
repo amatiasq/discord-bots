@@ -6,7 +6,8 @@ import {
 	ChannelId,
 	GuildId,
 	MessageId,
-	parseISO8601Timestamp, unparseISO8601Timestamp,
+	parseISO8601Timestamp,
+	unparseISO8601Timestamp,
 	snowflake,
 } from '../type-aliases.ts';
 import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
@@ -52,22 +53,29 @@ export interface Channel {
 	lastPinTimestamp?: Date;
 }
 
-
 export function wrapChannel(x: RawChannel): Channel {
 	return {
 		...fromApiCasing(x),
-		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
+		permissionOverwrites:
+			x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
 		recipients: x.recipients && x.recipients.map(wrapUser),
-		lastPinTimestamp: x.last_pin_timestamp && parseISO8601Timestamp(x.last_pin_timestamp),
+		lastPinTimestamp:
+			x.last_pin_timestamp && parseISO8601Timestamp(x.last_pin_timestamp),
 	};
-};
+}
 
 export function unwrapChannel(x: Channel): RawChannel {
 	return {
 		...toApiCasing(x),
-		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
+		permission_overwrites:
+			x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
 		recipients: x.recipients && x.recipients.map(unwrapUser),
-		last_pin_timestamp: x.lastPinTimestamp && unparseISO8601Timestamp(x.lastPinTimestamp),
+		last_pin_timestamp:
+			x.lastPinTimestamp && unparseISO8601Timestamp(x.lastPinTimestamp),
 	};
-};
+}
 
+// Ad-hoc
+export const unwrapChannelPartial = unwrapChannel as (
+	x: Partial<Channel>,
+) => Partial<RawChannel>;

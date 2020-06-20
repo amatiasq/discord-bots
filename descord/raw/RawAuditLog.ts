@@ -3,7 +3,7 @@ import { RawUser } from './RawUser.ts';
 import { RawAuditLogEntry } from './RawAuditLogEntry.ts';
 import { RawIntegration } from './RawIntegration.ts';
 
-export interface RawAduditLog {
+export interface RawAuditLog {
 	/** list of webhooks found in the audit log */
 	webhooks: RawWebhook[];
 	/** list of users found in the audit log */

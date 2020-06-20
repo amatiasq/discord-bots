@@ -8,9 +8,9 @@ import {
 import { VerificationLevel } from '../enum/VerificationLevel.ts';
 import { MessageNotificationLevel } from '../enum/MessageNotificationLevel.ts';
 import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.ts';
-import { Role, wrapRole, unwrapRole } from './Role.ts';
-import { Channel, wrapChannel, unwrapChannel } from './Channel.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+import { Role, unwrapRole } from './Role.ts';
+import { Channel, unwrapChannelPartial } from './Channel.ts';
+import { toApiCasing } from '../casing.ts';
 
 export interface CreateGuildPayload {
 	/** name of the guild (2-100 characters) */
@@ -28,7 +28,7 @@ export interface CreateGuildPayload {
 	/** new guild roles */
 	roles?: Role[];
 	/** new guild's channels */
-	channels?: Partial<Channel>;
+	channels?: Array<Partial<Channel>>;
 	/** id for afk channel */
 	afkChannelId?: ChannelId;
 	/** afk timeout in seconds */
@@ -37,18 +37,23 @@ export interface CreateGuildPayload {
 	systemChannelId?: ChannelId;
 }
 
+// export function wrapCreateGuildPayload(
+// 	x: RawCreateGuildPayload,
+// ): CreateGuildPayload {
+// 	return {
+// 		...fromApiCasing(x),
+// 		roles: x.roles && x.roles.map(wrapRole),
+// 	};
+// }
 
-export function wrapCreateGuildPayload(x: RawCreateGuildPayload): CreateGuildPayload {
-	return {
-		...fromApiCasing(x),
-		roles: x.roles && x.roles.map(wrapRole),
-	};
-};
-
-export function unwrapCreateGuildPayload(x: CreateGuildPayload): RawCreateGuildPayload {
+export function unwrapCreateGuildPayload(
+	x: CreateGuildPayload,
+): RawCreateGuildPayload {
 	return {
 		...toApiCasing(x),
 		roles: x.roles && x.roles.map(unwrapRole),
-	};
-};
 
+		// Ad-hoc
+		channels: x.channels && x.channels.map(unwrapChannelPartial),
+	};
+}

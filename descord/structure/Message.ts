@@ -19,8 +19,8 @@ import {
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
 import {
 	GuildMember,
-	wrapGuildMember,
-	unwrapGuildMember,
+	wrapGuildMemberPartial,
+	unwrapGuildMemberPartial,
 } from './GuildMember.ts';
 import {
 	MessageActivity,
@@ -85,7 +85,7 @@ export interface Message {
 	 * field present in MESSAGECREATE and MESSAGEUPDATE events from text-based
 	 * guild channels.
 	 */
-	mentions: Array<User & { member: GuildMember }>;
+	mentions: Array<User & { member: Partial<GuildMember> }>;
 	/** roles specifically mentioned in this message */
 	mentionRoles: RoleId[];
 	/**
@@ -128,11 +128,14 @@ export function wrapMessage(x: RawMessage): Message {
 		author: wrapUser(x.author), // webhook
 		timestamp: parseISO8601Timestamp(x.timestamp),
 		editedTimestamp: parseISO8601Timestamp(x.edited_timestamp),
-		member: x.member && wrapGuildMember(x.member as RawGuildMember),
+
+		// Ad-hoc
+		member: x.member && wrapGuildMemberPartial(x.member),
 		mentions: x.mentions.map(y => ({
 			...wrapUser(y),
-			member: wrapGuildMember(y.member),
+			member: wrapGuildMemberPartial(y.member),
 		})),
+
 		mentionChannels:
 			x.mention_channels && x.mention_channels.map(wrapChannelMention),
 		attachments: x.attachments.map(wrapAttachment),
@@ -151,11 +154,14 @@ export function unwrapMessage(x: Message): RawMessage {
 		author: unwrapUser(x.author), // webhook
 		timestamp: unparseISO8601Timestamp(x.timestamp),
 		edited_timestamp: unparseISO8601Timestamp(x.editedTimestamp),
-		member: x.member && unwrapGuildMember(x.member as GuildMember),
+
+		// Ad-hoc
+		member: x.member && unwrapGuildMemberPartial(x.member),
 		mentions: x.mentions.map(y => ({
 			...unwrapUser(y),
-			member: unwrapGuildMember(y.member),
+			member: unwrapGuildMemberPartial(y.member),
 		})),
+
 		mention_channels:
 			x.mentionChannels && x.mentionChannels.map(unwrapChannelMention),
 		attachments: x.attachments.map(unwrapAttachment),

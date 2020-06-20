@@ -3,11 +3,16 @@ import {
 	IntegrationId,
 	RoleId,
 	integer,
-	parseISO8601Timestamp, unparseISO8601Timestamp,
+	parseISO8601Timestamp,
+	unparseISO8601Timestamp,
 } from '../type-aliases.ts';
 import { IntegrationExpireBehavior } from '../enum/IntegrationExpireBehavior.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
-import { IntegrationAccount, wrapIntegrationAccount, unwrapIntegrationAccount } from './IntegrationAccount.ts';
+import {
+	IntegrationAccount,
+	wrapIntegrationAccount,
+	unwrapIntegrationAccount,
+} from './IntegrationAccount.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Integration {
@@ -37,7 +42,6 @@ export interface Integration {
 	syncedAt: Date;
 }
 
-
 export function wrapIntegration(x: RawIntegration): Integration {
 	return {
 		...fromApiCasing(x),
@@ -45,7 +49,7 @@ export function wrapIntegration(x: RawIntegration): Integration {
 		account: wrapIntegrationAccount(x.account),
 		syncedAt: parseISO8601Timestamp(x.synced_at),
 	};
-};
+}
 
 export function unwrapIntegration(x: Integration): RawIntegration {
 	return {
@@ -54,5 +58,16 @@ export function unwrapIntegration(x: Integration): RawIntegration {
 		account: unwrapIntegrationAccount(x.account),
 		synced_at: unparseISO8601Timestamp(x.syncedAt),
 	};
-};
+}
 
+// Ad-hoc
+export function wrapIntegrationPartial(
+	x: Partial<RawIntegration>,
+): Partial<Integration> {
+	return {
+		...fromApiCasing(x),
+		user: x.user && wrapUser(x.user),
+		account: x.account && wrapIntegrationAccount(x.account),
+		syncedAt: x.synced_at && parseISO8601Timestamp(x.synced_at),
+	};
+}

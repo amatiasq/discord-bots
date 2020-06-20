@@ -1,11 +1,15 @@
-import { RawAduditLog } from '../raw/RawAduditLog.ts';
-import { Webhook, wrapWebhook, unwrapWebhook } from './Webhook.ts';
-import { User, wrapUser, unwrapUser } from './User.ts';
-import { AuditLogEntry, wrapAuditLogEntry, unwrapAuditLogEntry } from './AuditLogEntry.ts';
-import { Integration, wrapIntegration, unwrapIntegration } from './Integration.ts';
 import { fromApiCasing, toApiCasing } from '../casing.ts';
+import { RawAuditLog } from '../raw/RawAuditLog.ts';
+import {
+	AuditLogEntry,
+	unwrapAuditLogEntry,
+	wrapAuditLogEntry,
+} from './AuditLogEntry.ts';
+import { Integration, wrapIntegrationPartial } from './Integration.ts';
+import { unwrapUser, User, wrapUser } from './User.ts';
+import { unwrapWebhook, Webhook, wrapWebhook } from './Webhook.ts';
 
-export interface AduditLog {
+export interface AuditLog {
 	/** list of webhooks found in the audit log */
 	webhooks: Webhook[];
 	/** list of users found in the audit log */
@@ -16,22 +20,23 @@ export interface AduditLog {
 	integrations: Array<Partial<Integration>>;
 }
 
-
-export function wrapAduditLog(x: RawAduditLog): AduditLog {
+export function wrapAuditLog(x: RawAuditLog): AuditLog {
 	return {
 		...fromApiCasing(x),
 		webhooks: x.webhooks.map(wrapWebhook),
 		users: x.users.map(wrapUser),
 		auditLogEntries: x.audit_log_entries.map(wrapAuditLogEntry),
-	};
-};
 
-export function unwrapAduditLog(x: AduditLog): RawAduditLog {
+		// Ad-hoc
+		integrations: x.integrations.map(wrapIntegrationPartial),
+	};
+}
+
+export function unwrapAuditLog(x: AuditLog): RawAuditLog {
 	return {
 		...toApiCasing(x),
 		webhooks: x.webhooks.map(unwrapWebhook),
 		users: x.users.map(unwrapUser),
 		audit_log_entries: x.auditLogEntries.map(unwrapAuditLogEntry),
 	};
-};
-
+}

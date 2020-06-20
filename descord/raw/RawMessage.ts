@@ -61,7 +61,7 @@ export interface RawMessage {
 	 * field present in MESSAGE_CREATE and MESSAGE_UPDATE events from text-based
 	 * guild channels.
 	 */
-	mentions: Array<RawUser & { member: RawGuildMember }>;
+	mentions: Array<RawUser & { member: Partial<RawGuildMember> }>;
 	/** roles specifically mentioned in this message */
 	mention_roles: RoleId[];
 	/**

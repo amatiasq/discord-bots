@@ -1,5 +1,4 @@
-import { RoleId } from '../type-aliases';
-import { integer } from '../type-aliases';
+import { RoleId, integer } from '../type-aliases.ts';
 
 export interface RawBeginGuildPruneParams {
 	/** number of days to prune (1 or more) DEFAULT: 7 */

@@ -10,7 +10,7 @@ import {
 	parsePermissionInteger,
 } from '../type-aliases.ts';
 import { Overwrite, wrapOverwrite } from './Overwrite.ts';
-import { Role, wrapRole } from './Role.ts';
+import { Role, wrapRolePartial } from './Role.ts';
 
 /**
  * Object changed: guild
@@ -537,7 +537,7 @@ export function wrapAuditLogChange(x: RawAuditLogChange): AuditLogChange {
 	switch (x.key) {
 		case AuditLogChangeKey.$ADD:
 		case AuditLogChangeKey.$REMOVE:
-			wrapper = wrapRole;
+			wrapper = wrapRolePartial;
 			break;
 		case AuditLogChangeKey.PERMISSION_OVERWRITES:
 			wrapper = wrapOverwrite;
