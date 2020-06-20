@@ -1,6 +1,5 @@
 import { RawInviteMetadata } from '../raw/RawInviteMetadata.ts';
 import { integer, parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface InviteMetadata {
 	/** number of times this invite has been used */
@@ -18,28 +17,36 @@ export interface InviteMetadata {
 
 export function wrapInviteMetadata(x: RawInviteMetadata): InviteMetadata {
 	return {
-		...fromApiCasing(x),
+		...x,
+		maxUses: x.max_uses,
+		maxAge: x.max_age,
 		createdAt: parseISO8601Timestamp(x.created_at),
 	};
 }
 
 export function unwrapInviteMetadata(x: InviteMetadata): RawInviteMetadata {
 	return {
-		...toApiCasing(x),
+		...x,
+		max_uses: x.maxUses,
+		max_age: x.maxAge,
 		created_at: unparseISO8601Timestamp(x.createdAt),
 	};
 }
 
 export function wrapInviteMetadataPartial(x: Partial<RawInviteMetadata>): Partial<InviteMetadata> {
 	return {
-		...fromApiCasing(x),
+		...x,
+		maxUses: x.max_uses && x.max_uses,
+		maxAge: x.max_age && x.max_age,
 		createdAt: x.created_at && parseISO8601Timestamp(x.created_at),
 	};
 }
 
 export function unwrapInviteMetadataPartial(x: Partial<InviteMetadata>): Partial<RawInviteMetadata> {
 	return {
-		...toApiCasing(x),
+		...x,
+		max_uses: x.maxUses && x.maxUses,
+		max_age: x.maxAge && x.maxAge,
 		created_at: x.createdAt && unparseISO8601Timestamp(x.createdAt),
 	};
 }

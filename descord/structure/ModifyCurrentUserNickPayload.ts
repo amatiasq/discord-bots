@@ -1,5 +1,5 @@
 import { RawModifyCurrentUserNickPayload } from '../raw/RawModifyCurrentUserNickPayload.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface ModifyCurrentUserNickPayload {
 	/** value to set users nickname to (requires permission: CHANGENICKNAME) */
@@ -8,11 +8,11 @@ export interface ModifyCurrentUserNickPayload {
 
 
 export function wrapModifyCurrentUserNickPayload(x: RawModifyCurrentUserNickPayload): ModifyCurrentUserNickPayload {
-	return fromApiCasing(x);
+	return x;
 }
 
 export function unwrapModifyCurrentUserNickPayload(x: ModifyCurrentUserNickPayload): RawModifyCurrentUserNickPayload {
-	return toApiCasing(x);
+	return x;
 }
 
 export const wrapModifyCurrentUserNickPayloadPartial = wrapModifyCurrentUserNickPayload as (x: Partial<RawModifyCurrentUserNickPayload>) => Partial<ModifyCurrentUserNickPayload>;

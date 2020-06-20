@@ -1,5 +1,5 @@
 import { RawGatewaySessionStartLimit } from '../raw/RawGatewaySessionStartLimit.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface GatewaySessionStartLimit {
 	/** The total number of session starts the current user is allowed. */
@@ -12,15 +12,31 @@ export interface GatewaySessionStartLimit {
 
 
 export function wrapGatewaySessionStartLimit(x: RawGatewaySessionStartLimit): GatewaySessionStartLimit {
-	return fromApiCasing(x);
+	return {
+		...x,
+		resetAfter: x.reset_after,
+	};
 }
 
 export function unwrapGatewaySessionStartLimit(x: GatewaySessionStartLimit): RawGatewaySessionStartLimit {
-	return toApiCasing(x);
+	return {
+		...x,
+		reset_after: x.resetAfter,
+	};
 }
 
-export const wrapGatewaySessionStartLimitPartial = wrapGatewaySessionStartLimit as (x: Partial<RawGatewaySessionStartLimit>) => Partial<GatewaySessionStartLimit>;
+export function wrapGatewaySessionStartLimitPartial(x: Partial<RawGatewaySessionStartLimit>): Partial<GatewaySessionStartLimit> {
+	return {
+		...x,
+		resetAfter: x.reset_after && x.reset_after,
+	};
+}
 
-export const unwrapGatewaySessionStartLimitPartial = unwrapGatewaySessionStartLimit as (x: Partial<GatewaySessionStartLimit>) => Partial<RawGatewaySessionStartLimit>;
+export function unwrapGatewaySessionStartLimitPartial(x: Partial<GatewaySessionStartLimit>): Partial<RawGatewaySessionStartLimit> {
+	return {
+		...x,
+		reset_after: x.resetAfter && x.resetAfter,
+	};
+}
 
 

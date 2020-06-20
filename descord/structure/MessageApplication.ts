@@ -1,6 +1,5 @@
 import { RawMessageApplication } from '../raw/RawMessageApplication.ts';
 import { ApplicationId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface MessageApplication {
 	/** id of the application */
@@ -17,11 +16,17 @@ export interface MessageApplication {
 
 
 export function wrapMessageApplication(x: RawMessageApplication): MessageApplication {
-	return fromApiCasing(x);
+	return {
+		...x,
+		coverImage: x.cover_image && x.cover_image,
+	};
 }
 
 export function unwrapMessageApplication(x: MessageApplication): RawMessageApplication {
-	return toApiCasing(x);
+	return {
+		...x,
+		cover_image: x.coverImage && x.coverImage,
+	};
 }
 
 export const wrapMessageApplicationPartial = wrapMessageApplication as (x: Partial<RawMessageApplication>) => Partial<MessageApplication>;

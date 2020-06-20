@@ -1,6 +1,5 @@
 import { RawCreateChannelInvitePayload } from '../raw/RawCreateChannelInvitePayload.ts';
 import { integer } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface CreateChannelInvitePayload {
 	/**
@@ -31,15 +30,43 @@ export interface CreateChannelInvitePayload {
 
 
 export function wrapCreateChannelInvitePayload(x: RawCreateChannelInvitePayload): CreateChannelInvitePayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		maxAge: x.max_age,
+		maxUses: x.max_uses,
+		targetUser: x.target_user && x.target_user,
+		targetUserType: x.target_user_type && x.target_user_type,
+	};
 }
 
 export function unwrapCreateChannelInvitePayload(x: CreateChannelInvitePayload): RawCreateChannelInvitePayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		max_age: x.maxAge,
+		max_uses: x.maxUses,
+		target_user: x.targetUser && x.targetUser,
+		target_user_type: x.targetUserType && x.targetUserType,
+	};
 }
 
-export const wrapCreateChannelInvitePayloadPartial = wrapCreateChannelInvitePayload as (x: Partial<RawCreateChannelInvitePayload>) => Partial<CreateChannelInvitePayload>;
+export function wrapCreateChannelInvitePayloadPartial(x: Partial<RawCreateChannelInvitePayload>): Partial<CreateChannelInvitePayload> {
+	return {
+		...x,
+		maxAge: x.max_age && x.max_age,
+		maxUses: x.max_uses && x.max_uses,
+		targetUser: x.target_user && x.target_user,
+		targetUserType: x.target_user_type && x.target_user_type,
+	};
+}
 
-export const unwrapCreateChannelInvitePayloadPartial = unwrapCreateChannelInvitePayload as (x: Partial<CreateChannelInvitePayload>) => Partial<RawCreateChannelInvitePayload>;
+export function unwrapCreateChannelInvitePayloadPartial(x: Partial<CreateChannelInvitePayload>): Partial<RawCreateChannelInvitePayload> {
+	return {
+		...x,
+		max_age: x.maxAge && x.maxAge,
+		max_uses: x.maxUses && x.maxUses,
+		target_user: x.targetUser && x.targetUser,
+		target_user_type: x.targetUserType && x.targetUserType,
+	};
+}
 
 

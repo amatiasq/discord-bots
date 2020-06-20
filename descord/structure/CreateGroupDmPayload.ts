@@ -1,5 +1,5 @@
 import { RawCreateGroupDmPayload } from '../raw/RawCreateGroupDmPayload.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface CreateGroupDmPayload {
 	/** access tokens of users that have granted your app the gdm.join scope */
@@ -10,15 +10,31 @@ export interface CreateGroupDmPayload {
 
 
 export function wrapCreateGroupDmPayload(x: RawCreateGroupDmPayload): CreateGroupDmPayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		accessTokens: x.access_tokens,
+	};
 }
 
 export function unwrapCreateGroupDmPayload(x: CreateGroupDmPayload): RawCreateGroupDmPayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		access_tokens: x.accessTokens,
+	};
 }
 
-export const wrapCreateGroupDmPayloadPartial = wrapCreateGroupDmPayload as (x: Partial<RawCreateGroupDmPayload>) => Partial<CreateGroupDmPayload>;
+export function wrapCreateGroupDmPayloadPartial(x: Partial<RawCreateGroupDmPayload>): Partial<CreateGroupDmPayload> {
+	return {
+		...x,
+		accessTokens: x.access_tokens && x.access_tokens,
+	};
+}
 
-export const unwrapCreateGroupDmPayloadPartial = unwrapCreateGroupDmPayload as (x: Partial<CreateGroupDmPayload>) => Partial<RawCreateGroupDmPayload>;
+export function unwrapCreateGroupDmPayloadPartial(x: Partial<CreateGroupDmPayload>): Partial<RawCreateGroupDmPayload> {
+	return {
+		...x,
+		access_tokens: x.accessTokens && x.accessTokens,
+	};
+}
 
 

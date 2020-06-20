@@ -1,6 +1,5 @@
 import { RawAttachment } from '../raw/RawAttachment.ts';
 import { AttachmentId, integer } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Attachment {
 	/** attachment id */
@@ -21,15 +20,31 @@ export interface Attachment {
 
 
 export function wrapAttachment(x: RawAttachment): Attachment {
-	return fromApiCasing(x);
+	return {
+		...x,
+		proxyUrl: x.proxy_url,
+	};
 }
 
 export function unwrapAttachment(x: Attachment): RawAttachment {
-	return toApiCasing(x);
+	return {
+		...x,
+		proxy_url: x.proxyUrl,
+	};
 }
 
-export const wrapAttachmentPartial = wrapAttachment as (x: Partial<RawAttachment>) => Partial<Attachment>;
+export function wrapAttachmentPartial(x: Partial<RawAttachment>): Partial<Attachment> {
+	return {
+		...x,
+		proxyUrl: x.proxy_url && x.proxy_url,
+	};
+}
 
-export const unwrapAttachmentPartial = unwrapAttachment as (x: Partial<Attachment>) => Partial<RawAttachment>;
+export function unwrapAttachmentPartial(x: Partial<Attachment>): Partial<RawAttachment> {
+	return {
+		...x,
+		proxy_url: x.proxyUrl && x.proxyUrl,
+	};
+}
 
 

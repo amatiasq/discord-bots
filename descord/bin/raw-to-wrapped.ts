@@ -32,7 +32,7 @@ function transform(content: string) {
 	const { name, parent, imports, properties, partials } = parse(content);
 	const hasCasing = /_/.test(properties);
 
-	const newImports = adaptImports(name, imports, hasCasing, partials);
+	const newImports = adaptImports(name, imports, partials);
 
 	const result = PARSEABLE.reduce(
 		(x, y, i) => x.replace(new RegExp(`: ${y}`, 'g'), `: ${PARSED[i]}`),
@@ -43,25 +43,15 @@ function transform(content: string) {
 
 	return `import { Raw${name} } from '../raw/Raw${name}.ts';
 ${toCamelCase(result)}
-${writeFunctions(name, parent, properties, hasCasing)}
+${writeFunctions(name, parent, properties)}
 `;
 }
 
-function writeFunctions(
-	name: string,
-	parent: string,
-	properties: string,
-	hasCasing: boolean,
-) {
-	const wrapBody = writeWrap(name, parent, properties, hasCasing);
-	const unwrapBody = writeUnwrap(name, parent, properties, hasCasing);
-	const wrapPartialBody = writeWrapPartial(name, parent, properties, hasCasing);
-	const unwrapPartialBody = writeUnwrapPartial(
-		name,
-		parent,
-		properties,
-		hasCasing,
-	);
+function writeFunctions(name: string, parent: string, properties: string) {
+	const wrapBody = writeWrap(parent, properties);
+	const unwrapBody = writeUnwrap(parent, properties);
+	const wrapPartialBody = writeWrapPartial(parent, properties);
+	const unwrapPartialBody = writeUnwrapPartial(parent, properties);
 
 	return `
 export function wrap${name}(x: Raw${name}): ${name} {\n\t${wrapBody}\n}
@@ -82,12 +72,7 @@ export ${
 `;
 }
 
-function adaptImports(
-	name: string,
-	imports: string,
-	hasCasing: boolean,
-	partials: string[],
-) {
+function adaptImports(name: string, imports: string, partials: string[]) {
 	const list = PARSEABLE.reduce(
 		(x, y, i) => x.replace(y, `${PARSEABLE_IMPORT[i]}parse${y}, unparse${y}`),
 		imports,
@@ -95,10 +80,6 @@ function adaptImports(
 		.replace(/import\s*\{\s*Raw(\w+)\s*\}/g, 'import { $1, wrap$1, unwrap$1 }')
 		.split('\n')
 		.filter(Boolean);
-
-	if (hasCasing) {
-		list.push("import { fromApiCasing, toApiCasing } from '../casing.ts';");
-	}
 
 	const finish = partials.reduce(
 		(x, partial) =>
@@ -130,94 +111,42 @@ function parse(content: string) {
 	};
 }
 
-function writeWrap(
-	name: string,
-	parent: string,
-	properties: string,
-	hasCasing: boolean,
-) {
-	const props = serialization(
-		properties,
-		(_, key, opt, value) =>
-			`${toCamelCase(key)}: ${
-				opt ? `x.${key} && ` : ''
-			}parse${value}(x.${key}),`,
-		(_, key, opt, value) =>
-			`${toCamelCase(key)}: ${
-				opt ? `x.${key} && ` : ''
-			}wrap${value}(x.${key}),`,
-	);
-
-	const json = 'x';
-	const child = parent ? `wrap${parent}(${json})` : json;
-	const cased = hasCasing ? `fromApiCasing(${child})` : child;
-	return buildBody(cased, props);
+function writeWrap(parent: string, properties: string) {
+	const casing = conversor(toCamelCase, identity);
+	const parse = wrapConversor('parse', toCamelCase, identity);
+	const wrap = wrapConversor('wrap', toCamelCase, identity);
+	const props = serialization(properties, casing, parse, wrap);
+	const child = parent ? `wrap${parent}(x)` : 'x';
+	return buildBody(child, props);
 }
 
-function writeUnwrap(
-	name: string,
-	parent: string,
-	properties: string,
-	hasCasing: boolean,
-) {
-	const props = serialization(
-		properties,
-		(_, key, opt, value) =>
-			`${key}: ${
-				opt ? `x.${toCamelCase(key)} && ` : ''
-			}unparse${value}(x.${toCamelCase(key)}),`,
-		(_, key, opt, value) =>
-			`${key}: ${
-				opt ? `x.${toCamelCase(key)} && ` : ''
-			}unwrap${value}(x.${toCamelCase(key)}),`,
-	);
-
-	const json = 'x';
-	const child = parent ? `unwrap${parent}(${json})` : json;
-	const cased = hasCasing ? `toApiCasing(${child})` : child;
-	return buildBody(cased, props);
+function writeUnwrap(parent: string, properties: string) {
+	const casing = conversor(identity, toCamelCase);
+	const unparse = wrapConversor('unparse', identity, toCamelCase);
+	const unwrap = wrapConversor('unwrap', identity, toCamelCase);
+	const props = serialization(properties, casing, unparse, unwrap);
+	const child = parent ? `unwrap${parent}(x)` : 'x';
+	return buildBody(child, props);
 }
 
-function writeWrapPartial(
-	name: string,
-	parent: string,
-	properties: string,
-	hasCasing: boolean,
-) {
-	const props = serialization(
-		properties,
-		(_, key, opt, value) =>
-			`${toCamelCase(key)}: x.${key} && parse${value}(x.${key}),`,
-		(_, key, opt, value) =>
-			`${toCamelCase(key)}: x.${key} && wrap${value}(x.${key}),`,
-	);
-
-	const json = 'x';
-	const child = parent ? `wrap${parent}(${json})` : json;
-	const cased = hasCasing ? `fromApiCasing(${child})` : child;
-	return buildBody(cased, props);
+function writeWrapPartial(parent: string, properties: string) {
+	const casing = forceOptional(conversor(toCamelCase, identity));
+	const parse = forceOptional(wrapConversor('parse', toCamelCase, identity));
+	const wrap = forceOptional(wrapConversor('wrap', toCamelCase, identity));
+	const props = serialization(properties, casing, parse, wrap);
+	const child = parent ? `wrap${parent}(x)` : 'x';
+	return buildBody(child, props);
 }
 
-function writeUnwrapPartial(
-	name: string,
-	parent: string,
-	properties: string,
-	hasCasing: boolean,
-) {
-	const props = serialization(
-		properties,
-		(_, key, opt, value) =>
-			`${key}: x.${toCamelCase(key)} && unparse${value}(x.${toCamelCase(
-				key,
-			)}),`,
-		(_, key, opt, value) =>
-			`${key}: x.${toCamelCase(key)} && unwrap${value}(x.${toCamelCase(key)}),`,
+function writeUnwrapPartial(parent: string, properties: string) {
+	const casing = forceOptional(conversor(identity, toCamelCase));
+	const unparse = forceOptional(
+		wrapConversor('unparse', identity, toCamelCase),
 	);
-
-	const json = 'x';
-	const child = parent ? `unwrap${parent}(${json})` : json;
-	const cased = hasCasing ? `toApiCasing(${child})` : child;
-	return buildBody(cased, props);
+	const unwrap = forceOptional(wrapConversor('unwrap', identity, toCamelCase));
+	const props = serialization(properties, casing, unparse, unwrap);
+	const child = parent ? `unwrap${parent}(x)` : 'x';
+	return buildBody(child, props);
 }
 
 function buildBody(base: string, props: string) {
@@ -228,33 +157,81 @@ function buildBody(base: string, props: string) {
 
 function serialization(
 	properties: string,
+	onCasing: Conversor,
 	onSerializable: Conversor,
 	onEntity: Conversor,
 ) {
 	return properties
 		.split('\n')
 		.map(line => {
+			if (/^\s+\/\*\*/.test(line)) {
+				return;
+			}
+
 			if (PARSEABLE.some(x => line.includes(x))) {
 				return line.replace(/((?:\w|_)+)(\??): (\w+);/, onSerializable);
 			}
 
 			if (/: Raw/.test(line)) {
 				return line
-					.replace(/((?:\w|_)+)(\??): Raw(\w+);/g, onEntity)
-					.replace(/((?:\w|_)+)(\??): Raw(\w+)\[\];/g, doArrays(onEntity));
+					.replace(/((?:\w|_)+)(\??): Raw(\w+);/, onEntity)
+					.replace(/((?:\w|_)+)(\??): Raw(\w+)\[\];/, doArrays(onEntity));
 			}
 
 			if (/: Partial<Raw/.test(line)) {
 				return line
-					.replace(/((?:\w|_)+)(\??): Partial<Raw(\w+)>;/g, doPartial(onEntity))
+					.replace(/((?:\w|_)+)(\??): Partial<Raw(\w+)>;/, doPartial(onEntity))
 					.replace(
-						/((?:\w|_)+)(\??): Partial<Raw(\w+)>\[\];/g,
+						/((?:\w|_)+)(\??): Partial<Raw(\w+)>\[\];/,
 						doPartial(doArrays(onEntity)),
 					);
+			}
+
+			if (/(\w+(?:_\w+)+)(\??):/.test(line)) {
+				return line.replace(/((?:\w|_)+)(\??): .*;/, onCasing);
 			}
 		})
 		.filter(Boolean)
 		.join('\n');
+}
+
+// Properties conversors
+
+type Conversor = (
+	_: string,
+	key: string,
+	opt: '?' | '',
+	value: string,
+) => string;
+
+function wrapConversor(
+	prefix: 'parse' | 'unparse' | 'wrap' | 'unwrap',
+	transformResult: (_: string) => string,
+	transformInput: (_: string) => string,
+) {
+	return (_: string, key: string, opt: '?' | '', value: string) =>
+		`${transformResult(key)}: ${
+			opt ? `x.${transformInput(key)} && ` : ''
+		}${prefix}${value}(x.${transformInput(key)}),`;
+}
+
+function conversor(
+	transformResult: (_: string) => string,
+	transformInput: (_: string) => string,
+) {
+	return (_: string, key: string, opt: '?' | '') =>
+		`${transformResult(key)}: ${
+			opt ? `x.${transformInput(key)} && ` : ''
+		}x.${transformInput(key)},`;
+}
+
+function identity<T>(x: T) {
+	return x;
+}
+
+function forceOptional(fn: Conversor): Conversor {
+	return (_: string, key: string, opt: '?' | '', value: string) =>
+		fn(_, key, '?', value);
 }
 
 function doPartial(fn: Conversor): Conversor {
@@ -268,10 +245,3 @@ function doArrays(fn: Conversor): Conversor {
 function toCamelCase(value: string) {
 	return value.replace(/_(\w)/g, (_, x) => x.toUpperCase());
 }
-
-type Conversor = (
-	_: string,
-	key: string,
-	opt: '?' | '',
-	value: string,
-) => string;

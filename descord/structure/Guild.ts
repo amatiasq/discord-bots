@@ -18,7 +18,6 @@ import {
 } from '../type-aliases.ts';
 import { Emoji, wrapEmoji, unwrapEmoji } from './Emoji.ts';
 import { Role, wrapRole, unwrapRole } from './Role.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Guild {
 	/** guild id */
@@ -102,41 +101,141 @@ export interface Guild {
 
 export function wrapGuild(x: RawGuild): Guild {
 	return {
-		...fromApiCasing(x),
+		...x,
+		discoverySplash: x.discovery_splash,
+		ownerId: x.owner_id,
 		permissions: x.permissions && parsePermissionInteger(x.permissions),
+		afkChannelId: x.afk_channel_id,
+		afkTimeout: x.afk_timeout,
+		embedEnabled: x.embed_enabled && x.embed_enabled,
+		embedChannelId: x.embed_channel_id && x.embed_channel_id,
+		verificationLevel: x.verification_level,
+		defaultMessageNotifications: x.default_message_notifications,
+		explicitContentFilter: x.explicit_content_filter,
 		roles: x.roles.map(wrapRole),
 		emojis: x.emojis.map(wrapEmoji),
+		mfaLevel: x.mfa_level,
+		applicationId: x.application_id,
+		widgetEnabled: x.widget_enabled && x.widget_enabled,
+		widgetChannelId: x.widget_channel_id && x.widget_channel_id,
+		systemChannelId: x.system_channel_id,
 		systemChannelFlags: parseSystemChannelFlagInteger(x.system_channel_flags),
+		rulesChannelId: x.rules_channel_id,
+		maxPresences: x.max_presences && x.max_presences,
+		maxMembers: x.max_members && x.max_members,
+		vanityUrlCode: x.vanity_url_code,
+		premiumTier: x.premium_tier,
+		premiumSubscriptionCount: x.premium_subscription_count && x.premium_subscription_count,
+		preferredLocale: x.preferred_locale,
+		publicUpdatesChannelId: x.public_updates_channel_id,
+		maxVideoChannelUsers: x.max_video_channel_users && x.max_video_channel_users,
+		approximateMemberCount: x.approximate_member_count && x.approximate_member_count,
+		approximatePresenceCount: x.approximate_presence_count && x.approximate_presence_count,
 	};
 }
 
 export function unwrapGuild(x: Guild): RawGuild {
 	return {
-		...toApiCasing(x),
+		...x,
+		discovery_splash: x.discoverySplash,
+		owner_id: x.ownerId,
 		permissions: x.permissions && unparsePermissionInteger(x.permissions),
+		afk_channel_id: x.afkChannelId,
+		afk_timeout: x.afkTimeout,
+		embed_enabled: x.embedEnabled && x.embedEnabled,
+		embed_channel_id: x.embedChannelId && x.embedChannelId,
+		verification_level: x.verificationLevel,
+		default_message_notifications: x.defaultMessageNotifications,
+		explicit_content_filter: x.explicitContentFilter,
 		roles: x.roles.map(unwrapRole),
 		emojis: x.emojis.map(unwrapEmoji),
+		mfa_level: x.mfaLevel,
+		application_id: x.applicationId,
+		widget_enabled: x.widgetEnabled && x.widgetEnabled,
+		widget_channel_id: x.widgetChannelId && x.widgetChannelId,
+		system_channel_id: x.systemChannelId,
 		system_channel_flags: unparseSystemChannelFlagInteger(x.systemChannelFlags),
+		rules_channel_id: x.rulesChannelId,
+		max_presences: x.maxPresences && x.maxPresences,
+		max_members: x.maxMembers && x.maxMembers,
+		vanity_url_code: x.vanityUrlCode,
+		premium_tier: x.premiumTier,
+		premium_subscription_count: x.premiumSubscriptionCount && x.premiumSubscriptionCount,
+		preferred_locale: x.preferredLocale,
+		public_updates_channel_id: x.publicUpdatesChannelId,
+		max_video_channel_users: x.maxVideoChannelUsers && x.maxVideoChannelUsers,
+		approximate_member_count: x.approximateMemberCount && x.approximateMemberCount,
+		approximate_presence_count: x.approximatePresenceCount && x.approximatePresenceCount,
 	};
 }
 
 export function wrapGuildPartial(x: Partial<RawGuild>): Partial<Guild> {
 	return {
-		...fromApiCasing(x),
+		...x,
+		discoverySplash: x.discovery_splash && x.discovery_splash,
+		ownerId: x.owner_id && x.owner_id,
 		permissions: x.permissions && parsePermissionInteger(x.permissions),
+		afkChannelId: x.afk_channel_id && x.afk_channel_id,
+		afkTimeout: x.afk_timeout && x.afk_timeout,
+		embedEnabled: x.embed_enabled && x.embed_enabled,
+		embedChannelId: x.embed_channel_id && x.embed_channel_id,
+		verificationLevel: x.verification_level && x.verification_level,
+		defaultMessageNotifications: x.default_message_notifications && x.default_message_notifications,
+		explicitContentFilter: x.explicit_content_filter && x.explicit_content_filter,
 		roles: x.roles && x.roles.map(wrapRole),
 		emojis: x.emojis && x.emojis.map(wrapEmoji),
+		mfaLevel: x.mfa_level && x.mfa_level,
+		applicationId: x.application_id && x.application_id,
+		widgetEnabled: x.widget_enabled && x.widget_enabled,
+		widgetChannelId: x.widget_channel_id && x.widget_channel_id,
+		systemChannelId: x.system_channel_id && x.system_channel_id,
 		systemChannelFlags: x.system_channel_flags && parseSystemChannelFlagInteger(x.system_channel_flags),
+		rulesChannelId: x.rules_channel_id && x.rules_channel_id,
+		maxPresences: x.max_presences && x.max_presences,
+		maxMembers: x.max_members && x.max_members,
+		vanityUrlCode: x.vanity_url_code && x.vanity_url_code,
+		premiumTier: x.premium_tier && x.premium_tier,
+		premiumSubscriptionCount: x.premium_subscription_count && x.premium_subscription_count,
+		preferredLocale: x.preferred_locale && x.preferred_locale,
+		publicUpdatesChannelId: x.public_updates_channel_id && x.public_updates_channel_id,
+		maxVideoChannelUsers: x.max_video_channel_users && x.max_video_channel_users,
+		approximateMemberCount: x.approximate_member_count && x.approximate_member_count,
+		approximatePresenceCount: x.approximate_presence_count && x.approximate_presence_count,
 	};
 }
 
 export function unwrapGuildPartial(x: Partial<Guild>): Partial<RawGuild> {
 	return {
-		...toApiCasing(x),
+		...x,
+		discovery_splash: x.discoverySplash && x.discoverySplash,
+		owner_id: x.ownerId && x.ownerId,
 		permissions: x.permissions && unparsePermissionInteger(x.permissions),
+		afk_channel_id: x.afkChannelId && x.afkChannelId,
+		afk_timeout: x.afkTimeout && x.afkTimeout,
+		embed_enabled: x.embedEnabled && x.embedEnabled,
+		embed_channel_id: x.embedChannelId && x.embedChannelId,
+		verification_level: x.verificationLevel && x.verificationLevel,
+		default_message_notifications: x.defaultMessageNotifications && x.defaultMessageNotifications,
+		explicit_content_filter: x.explicitContentFilter && x.explicitContentFilter,
 		roles: x.roles && x.roles.map(unwrapRole),
 		emojis: x.emojis && x.emojis.map(unwrapEmoji),
+		mfa_level: x.mfaLevel && x.mfaLevel,
+		application_id: x.applicationId && x.applicationId,
+		widget_enabled: x.widgetEnabled && x.widgetEnabled,
+		widget_channel_id: x.widgetChannelId && x.widgetChannelId,
+		system_channel_id: x.systemChannelId && x.systemChannelId,
 		system_channel_flags: x.systemChannelFlags && unparseSystemChannelFlagInteger(x.systemChannelFlags),
+		rules_channel_id: x.rulesChannelId && x.rulesChannelId,
+		max_presences: x.maxPresences && x.maxPresences,
+		max_members: x.maxMembers && x.maxMembers,
+		vanity_url_code: x.vanityUrlCode && x.vanityUrlCode,
+		premium_tier: x.premiumTier && x.premiumTier,
+		premium_subscription_count: x.premiumSubscriptionCount && x.premiumSubscriptionCount,
+		preferred_locale: x.preferredLocale && x.preferredLocale,
+		public_updates_channel_id: x.publicUpdatesChannelId && x.publicUpdatesChannelId,
+		max_video_channel_users: x.maxVideoChannelUsers && x.maxVideoChannelUsers,
+		approximate_member_count: x.approximateMemberCount && x.approximateMemberCount,
+		approximate_presence_count: x.approximatePresenceCount && x.approximatePresenceCount,
 	};
 }
 

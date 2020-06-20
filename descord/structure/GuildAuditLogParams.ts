@@ -1,7 +1,6 @@
 import { RawGuildAuditLogParams } from '../raw/RawGuildAuditLogParams.ts';
 import { UserId, AuditLogEntryId, integer } from '../type-aliases.ts';
 import { AuditLogEvent } from '../enum/AuditLogEvent.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface GuildAuditLogParams {
 	/** filter the log for actions made by a user */
@@ -16,11 +15,19 @@ export interface GuildAuditLogParams {
 
 
 export function wrapGuildAuditLogParams(x: RawGuildAuditLogParams): GuildAuditLogParams {
-	return fromApiCasing(x);
+	return {
+		...x,
+		userId: x.user_id && x.user_id,
+		actionType: x.action_type && x.action_type,
+	};
 }
 
 export function unwrapGuildAuditLogParams(x: GuildAuditLogParams): RawGuildAuditLogParams {
-	return toApiCasing(x);
+	return {
+		...x,
+		user_id: x.userId && x.userId,
+		action_type: x.actionType && x.actionType,
+	};
 }
 
 export const wrapGuildAuditLogParamsPartial = wrapGuildAuditLogParams as (x: Partial<RawGuildAuditLogParams>) => Partial<GuildAuditLogParams>;

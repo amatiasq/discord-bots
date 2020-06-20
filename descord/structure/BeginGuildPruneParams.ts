@@ -1,6 +1,5 @@
 import { RawBeginGuildPruneParams } from '../raw/RawBeginGuildPruneParams.ts';
 import { RoleId, integer } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface BeginGuildPruneParams {
 	/** number of days to prune (1 or more) DEFAULT: 7 */
@@ -13,11 +12,19 @@ export interface BeginGuildPruneParams {
 
 
 export function wrapBeginGuildPruneParams(x: RawBeginGuildPruneParams): BeginGuildPruneParams {
-	return fromApiCasing(x);
+	return {
+		...x,
+		computePruneCount: x.compute_prune_count && x.compute_prune_count,
+		includeRoles: x.include_roles && x.include_roles,
+	};
 }
 
 export function unwrapBeginGuildPruneParams(x: BeginGuildPruneParams): RawBeginGuildPruneParams {
-	return toApiCasing(x);
+	return {
+		...x,
+		compute_prune_count: x.computePruneCount && x.computePruneCount,
+		include_roles: x.includeRoles && x.includeRoles,
+	};
 }
 
 export const wrapBeginGuildPruneParamsPartial = wrapBeginGuildPruneParams as (x: Partial<RawBeginGuildPruneParams>) => Partial<BeginGuildPruneParams>;

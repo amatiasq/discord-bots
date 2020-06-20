@@ -1,7 +1,6 @@
 import { RawCreateMessagePayload } from '../raw/RawCreateMessagePayload.ts';
 import { AllowedMentions, wrapAllowedMentions, unwrapAllowedMentions } from './AllowedMentions.ts';
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface CreateMessagePayload {
 	/** the message contents (up to 2000 characters) */
@@ -25,17 +24,19 @@ export interface CreateMessagePayload {
 
 export function wrapCreateMessagePayload(x: RawCreateMessagePayload): CreateMessagePayload {
 	return {
-		...fromApiCasing(x),
+		...x,
 		embed: x.embed && wrapEmbed(x.embed),
 		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
+		// payloadJson: x.payload_json && x.payload_json,
 	};
 }
 
 export function unwrapCreateMessagePayload(x: CreateMessagePayload): RawCreateMessagePayload {
 	return {
-		...toApiCasing(x),
+		...x,
 		embed: x.embed && unwrapEmbed(x.embed),
 		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
+		// payload_json: x.payloadJson && x.payloadJson,
 	};
 }
 

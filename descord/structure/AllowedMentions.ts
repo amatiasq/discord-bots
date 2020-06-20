@@ -1,7 +1,6 @@
 import { RawAllowedMentions } from '../raw/RawAllowedMentions.ts';
 import { RoleId, UserId } from '../type-aliases.ts';
 import { AllowedMentionType } from '../enum/AllowedMentionType.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface AllowedMentions {
 	/** An array of allowed mention types to parse from the content. */
@@ -14,11 +13,11 @@ export interface AllowedMentions {
 
 
 export function wrapAllowedMentions(x: RawAllowedMentions): AllowedMentions {
-	return fromApiCasing(x);
+	return x;
 }
 
 export function unwrapAllowedMentions(x: AllowedMentions): RawAllowedMentions {
-	return toApiCasing(x);
+	return x;
 }
 
 export const wrapAllowedMentionsPartial = wrapAllowedMentions as (x: Partial<RawAllowedMentions>) => Partial<AllowedMentions>;

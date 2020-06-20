@@ -1,6 +1,5 @@
 import { RawGuildWidget } from '../raw/RawGuildWidget.ts';
 import { ChannelId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface GuildWidget {
 	/** whether the widget is enabled */
@@ -11,11 +10,17 @@ export interface GuildWidget {
 
 
 export function wrapGuildWidget(x: RawGuildWidget): GuildWidget {
-	return fromApiCasing(x);
+	return {
+		...x,
+		channelId: x.channel_id && x.channel_id,
+	};
 }
 
 export function unwrapGuildWidget(x: GuildWidget): RawGuildWidget {
-	return toApiCasing(x);
+	return {
+		...x,
+		channel_id: x.channelId && x.channelId,
+	};
 }
 
 export const wrapGuildWidgetPartial = wrapGuildWidget as (x: Partial<RawGuildWidget>) => Partial<GuildWidget>;

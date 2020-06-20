@@ -1,6 +1,5 @@
 import { RawMessageReference } from '../raw/RawMessageReference.ts';
 import { MessageId, ChannelId, GuildId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface MessageReference {
 	/** id of the originating message */
@@ -13,15 +12,39 @@ export interface MessageReference {
 
 
 export function wrapMessageReference(x: RawMessageReference): MessageReference {
-	return fromApiCasing(x);
+	return {
+		...x,
+		messageId: x.message_id && x.message_id,
+		channelId: x.channel_id,
+		guildId: x.guild_id && x.guild_id,
+	};
 }
 
 export function unwrapMessageReference(x: MessageReference): RawMessageReference {
-	return toApiCasing(x);
+	return {
+		...x,
+		message_id: x.messageId && x.messageId,
+		channel_id: x.channelId,
+		guild_id: x.guildId && x.guildId,
+	};
 }
 
-export const wrapMessageReferencePartial = wrapMessageReference as (x: Partial<RawMessageReference>) => Partial<MessageReference>;
+export function wrapMessageReferencePartial(x: Partial<RawMessageReference>): Partial<MessageReference> {
+	return {
+		...x,
+		messageId: x.message_id && x.message_id,
+		channelId: x.channel_id && x.channel_id,
+		guildId: x.guild_id && x.guild_id,
+	};
+}
 
-export const unwrapMessageReferencePartial = unwrapMessageReference as (x: Partial<MessageReference>) => Partial<RawMessageReference>;
+export function unwrapMessageReferencePartial(x: Partial<MessageReference>): Partial<RawMessageReference> {
+	return {
+		...x,
+		message_id: x.messageId && x.messageId,
+		channel_id: x.channelId && x.channelId,
+		guild_id: x.guildId && x.guildId,
+	};
+}
 
 

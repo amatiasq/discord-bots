@@ -1,5 +1,5 @@
 import { RawGroupDmAddRecipientPayload } from '../raw/RawGroupDmAddRecipientPayload.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface GroupDmAddRecipientPayload {
 	/** access token of a user that has granted your app the gdm.join scope */
@@ -10,15 +10,31 @@ export interface GroupDmAddRecipientPayload {
 
 
 export function wrapGroupDmAddRecipientPayload(x: RawGroupDmAddRecipientPayload): GroupDmAddRecipientPayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		accessToken: x.access_token,
+	};
 }
 
 export function unwrapGroupDmAddRecipientPayload(x: GroupDmAddRecipientPayload): RawGroupDmAddRecipientPayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		access_token: x.accessToken,
+	};
 }
 
-export const wrapGroupDmAddRecipientPayloadPartial = wrapGroupDmAddRecipientPayload as (x: Partial<RawGroupDmAddRecipientPayload>) => Partial<GroupDmAddRecipientPayload>;
+export function wrapGroupDmAddRecipientPayloadPartial(x: Partial<RawGroupDmAddRecipientPayload>): Partial<GroupDmAddRecipientPayload> {
+	return {
+		...x,
+		accessToken: x.access_token && x.access_token,
+	};
+}
 
-export const unwrapGroupDmAddRecipientPayloadPartial = unwrapGroupDmAddRecipientPayload as (x: Partial<GroupDmAddRecipientPayload>) => Partial<RawGroupDmAddRecipientPayload>;
+export function unwrapGroupDmAddRecipientPayloadPartial(x: Partial<GroupDmAddRecipientPayload>): Partial<RawGroupDmAddRecipientPayload> {
+	return {
+		...x,
+		access_token: x.accessToken && x.accessToken,
+	};
+}
 
 

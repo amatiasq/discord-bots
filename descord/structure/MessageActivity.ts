@@ -1,6 +1,5 @@
 import { RawMessageActivity } from '../raw/RawMessageActivity.ts';
 import { MessageActivityType } from '../enum/MessageActivityType.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface MessageActivity {
 	/** type of message activity */
@@ -11,11 +10,17 @@ export interface MessageActivity {
 
 
 export function wrapMessageActivity(x: RawMessageActivity): MessageActivity {
-	return fromApiCasing(x);
+	return {
+		...x,
+		partyId: x.party_id && x.party_id,
+	};
 }
 
 export function unwrapMessageActivity(x: MessageActivity): RawMessageActivity {
-	return toApiCasing(x);
+	return {
+		...x,
+		party_id: x.partyId && x.partyId,
+	};
 }
 
 export const wrapMessageActivityPartial = wrapMessageActivity as (x: Partial<RawMessageActivity>) => Partial<MessageActivity>;

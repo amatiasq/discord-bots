@@ -1,5 +1,5 @@
 import { RawEmbedAuthor } from '../raw/RawEmbedAuthor.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface EmbedAuthor {
 	/** name of author */
@@ -14,11 +14,19 @@ export interface EmbedAuthor {
 
 
 export function wrapEmbedAuthor(x: RawEmbedAuthor): EmbedAuthor {
-	return fromApiCasing(x);
+	return {
+		...x,
+		iconUrl: x.icon_url && x.icon_url,
+		proxyIconUrl: x.proxy_icon_url && x.proxy_icon_url,
+	};
 }
 
 export function unwrapEmbedAuthor(x: EmbedAuthor): RawEmbedAuthor {
-	return toApiCasing(x);
+	return {
+		...x,
+		icon_url: x.iconUrl && x.iconUrl,
+		proxy_icon_url: x.proxyIconUrl && x.proxyIconUrl,
+	};
 }
 
 export const wrapEmbedAuthorPartial = wrapEmbedAuthor as (x: Partial<RawEmbedAuthor>) => Partial<EmbedAuthor>;

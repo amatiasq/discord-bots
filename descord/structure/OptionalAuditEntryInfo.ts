@@ -1,6 +1,5 @@
 import { RawOptionalAuditEntryInfo } from '../raw/RawOptionalAuditEntryInfo.ts';
 import { ChannelId, MessageId, MemberId, RoleId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface OptionalAuditEntryInfo {
 	/** number of days after which inactive members were kicked (Action Type: MEMBERPRUNE) */
@@ -23,15 +22,47 @@ export interface OptionalAuditEntryInfo {
 
 
 export function wrapOptionalAuditEntryInfo(x: RawOptionalAuditEntryInfo): OptionalAuditEntryInfo {
-	return fromApiCasing(x);
+	return {
+		...x,
+		deleteMemberDays: x.delete_member_days,
+		membersRemoved: x.members_removed,
+		channelId: x.channel_id,
+		messageId: x.message_id,
+		roleName: x.role_name,
+	};
 }
 
 export function unwrapOptionalAuditEntryInfo(x: OptionalAuditEntryInfo): RawOptionalAuditEntryInfo {
-	return toApiCasing(x);
+	return {
+		...x,
+		delete_member_days: x.deleteMemberDays,
+		members_removed: x.membersRemoved,
+		channel_id: x.channelId,
+		message_id: x.messageId,
+		role_name: x.roleName,
+	};
 }
 
-export const wrapOptionalAuditEntryInfoPartial = wrapOptionalAuditEntryInfo as (x: Partial<RawOptionalAuditEntryInfo>) => Partial<OptionalAuditEntryInfo>;
+export function wrapOptionalAuditEntryInfoPartial(x: Partial<RawOptionalAuditEntryInfo>): Partial<OptionalAuditEntryInfo> {
+	return {
+		...x,
+		deleteMemberDays: x.delete_member_days && x.delete_member_days,
+		membersRemoved: x.members_removed && x.members_removed,
+		channelId: x.channel_id && x.channel_id,
+		messageId: x.message_id && x.message_id,
+		roleName: x.role_name && x.role_name,
+	};
+}
 
-export const unwrapOptionalAuditEntryInfoPartial = unwrapOptionalAuditEntryInfo as (x: Partial<OptionalAuditEntryInfo>) => Partial<RawOptionalAuditEntryInfo>;
+export function unwrapOptionalAuditEntryInfoPartial(x: Partial<OptionalAuditEntryInfo>): Partial<RawOptionalAuditEntryInfo> {
+	return {
+		...x,
+		delete_member_days: x.deleteMemberDays && x.deleteMemberDays,
+		members_removed: x.membersRemoved && x.membersRemoved,
+		channel_id: x.channelId && x.channelId,
+		message_id: x.messageId && x.messageId,
+		role_name: x.roleName && x.roleName,
+	};
+}
 
 

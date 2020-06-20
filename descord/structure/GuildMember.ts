@@ -1,7 +1,6 @@
 import { RawGuildMember } from '../raw/RawGuildMember.ts';
 import { RoleId, parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface GuildMember {
 	/** the user this guild member represents */
@@ -23,7 +22,7 @@ export interface GuildMember {
 
 export function wrapGuildMember(x: RawGuildMember): GuildMember {
 	return {
-		...fromApiCasing(x),
+		...x,
 		user: x.user && wrapUser(x.user),
 		joinedAt: parseISO8601Timestamp(x.joined_at),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
@@ -32,7 +31,7 @@ export function wrapGuildMember(x: RawGuildMember): GuildMember {
 
 export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 	return {
-		...toApiCasing(x),
+		...x,
 		user: x.user && unwrapUser(x.user),
 		joined_at: unparseISO8601Timestamp(x.joinedAt),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
@@ -41,7 +40,7 @@ export function unwrapGuildMember(x: GuildMember): RawGuildMember {
 
 export function wrapGuildMemberPartial(x: Partial<RawGuildMember>): Partial<GuildMember> {
 	return {
-		...fromApiCasing(x),
+		...x,
 		user: x.user && wrapUser(x.user),
 		joinedAt: x.joined_at && parseISO8601Timestamp(x.joined_at),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
@@ -50,7 +49,7 @@ export function wrapGuildMemberPartial(x: Partial<RawGuildMember>): Partial<Guil
 
 export function unwrapGuildMemberPartial(x: Partial<GuildMember>): Partial<RawGuildMember> {
 	return {
-		...toApiCasing(x),
+		...x,
 		user: x.user && unwrapUser(x.user),
 		joined_at: x.joinedAt && unparseISO8601Timestamp(x.joinedAt),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),

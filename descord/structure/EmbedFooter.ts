@@ -1,5 +1,5 @@
 import { RawEmbedFooter } from '../raw/RawEmbedFooter.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface EmbedFooter {
 	/** footer text */
@@ -12,11 +12,19 @@ export interface EmbedFooter {
 
 
 export function wrapEmbedFooter(x: RawEmbedFooter): EmbedFooter {
-	return fromApiCasing(x);
+	return {
+		...x,
+		iconUrl: x.icon_url && x.icon_url,
+		proxyIconUrl: x.proxy_icon_url && x.proxy_icon_url,
+	};
 }
 
 export function unwrapEmbedFooter(x: EmbedFooter): RawEmbedFooter {
-	return toApiCasing(x);
+	return {
+		...x,
+		icon_url: x.iconUrl && x.iconUrl,
+		proxy_icon_url: x.proxyIconUrl && x.proxyIconUrl,
+	};
 }
 
 export const wrapEmbedFooterPartial = wrapEmbedFooter as (x: Partial<RawEmbedFooter>) => Partial<EmbedFooter>;

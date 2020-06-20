@@ -1,7 +1,6 @@
 import { RawConnection } from '../raw/RawConnection.ts';
 import { Integration, wrapIntegrationPartial, unwrapIntegrationPartial } from './Integration.ts';
 import { VisibilityType } from '../enum/VisibilityType.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Connection {
 	/** id of the connection account */
@@ -27,20 +26,38 @@ export interface Connection {
 
 export function wrapConnection(x: RawConnection): Connection {
 	return {
-		...fromApiCasing(x),
+		...x,
 		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
+		friendSync: x.friend_sync,
+		showActivity: x.show_activity,
 	};
 }
 
 export function unwrapConnection(x: Connection): RawConnection {
 	return {
-		...toApiCasing(x),
+		...x,
 		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
+		friend_sync: x.friendSync,
+		show_activity: x.showActivity,
 	};
 }
 
-export const wrapConnectionPartial = wrapConnection as (x: Partial<RawConnection>) => Partial<Connection>;
+export function wrapConnectionPartial(x: Partial<RawConnection>): Partial<Connection> {
+	return {
+		...x,
+		integrations: x.integrations && x.integrations.map(wrapIntegrationPartial),
+		friendSync: x.friend_sync && x.friend_sync,
+		showActivity: x.show_activity && x.show_activity,
+	};
+}
 
-export const unwrapConnectionPartial = unwrapConnection as (x: Partial<Connection>) => Partial<RawConnection>;
+export function unwrapConnectionPartial(x: Partial<Connection>): Partial<RawConnection> {
+	return {
+		...x,
+		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
+		friend_sync: x.friendSync && x.friendSync,
+		show_activity: x.showActivity && x.showActivity,
+	};
+}
 
 

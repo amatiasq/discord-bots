@@ -10,7 +10,6 @@ import { MessageNotificationLevel } from '../enum/MessageNotificationLevel.ts';
 import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.ts';
 import { Role, wrapRole, unwrapRole } from './Role.ts';
 import { Channel, wrapChannelPartial, unwrapChannelPartial } from './Channel.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface CreateGuildPayload {
 	/** name of the guild (2-100 characters) */
@@ -40,17 +39,29 @@ export interface CreateGuildPayload {
 
 export function wrapCreateGuildPayload(x: RawCreateGuildPayload): CreateGuildPayload {
 	return {
-		...fromApiCasing(x),
+		...x,
+		verificationLevel: x.verification_level && x.verification_level,
+		defaultMessageNotifications: x.default_message_notifications && x.default_message_notifications,
+		explicitContentFilter: x.explicit_content_filter && x.explicit_content_filter,
 		roles: x.roles && x.roles.map(wrapRole),
 		channels: x.channels && x.channels.map(wrapChannelPartial),
+		afkChannelId: x.afk_channel_id && x.afk_channel_id,
+		afkTimeout: x.afk_timeout && x.afk_timeout,
+		systemChannelId: x.system_channel_id && x.system_channel_id,
 	};
 }
 
 export function unwrapCreateGuildPayload(x: CreateGuildPayload): RawCreateGuildPayload {
 	return {
-		...toApiCasing(x),
+		...x,
+		verification_level: x.verificationLevel && x.verificationLevel,
+		default_message_notifications: x.defaultMessageNotifications && x.defaultMessageNotifications,
+		explicit_content_filter: x.explicitContentFilter && x.explicitContentFilter,
 		roles: x.roles && x.roles.map(unwrapRole),
 		channels: x.channels && x.channels.map(unwrapChannelPartial),
+		afk_channel_id: x.afkChannelId && x.afkChannelId,
+		afk_timeout: x.afkTimeout && x.afkTimeout,
+		system_channel_id: x.systemChannelId && x.systemChannelId,
 	};
 }
 

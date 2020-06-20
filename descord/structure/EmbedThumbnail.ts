@@ -1,6 +1,5 @@
 import { RawEmbedThumbnail } from '../raw/RawEmbedThumbnail.ts';
 import { integer } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface EmbedThumbnail {
 	/** source url of thumbnail (only supports http(s) and attachments) */
@@ -15,11 +14,17 @@ export interface EmbedThumbnail {
 
 
 export function wrapEmbedThumbnail(x: RawEmbedThumbnail): EmbedThumbnail {
-	return fromApiCasing(x);
+	return {
+		...x,
+		proxyUrl: x.proxy_url && x.proxy_url,
+	};
 }
 
 export function unwrapEmbedThumbnail(x: EmbedThumbnail): RawEmbedThumbnail {
-	return toApiCasing(x);
+	return {
+		...x,
+		proxy_url: x.proxyUrl && x.proxyUrl,
+	};
 }
 
 export const wrapEmbedThumbnailPartial = wrapEmbedThumbnail as (x: Partial<RawEmbedThumbnail>) => Partial<EmbedThumbnail>;

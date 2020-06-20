@@ -3,7 +3,6 @@ import { AuditLogEvent } from '../enum/AuditLogEvent.ts';
 import { AuditLogEntryId, UserId } from '../type-aliases.ts';
 import { OptionalAuditEntryInfo, wrapOptionalAuditEntryInfo, unwrapOptionalAuditEntryInfo } from './OptionalAuditEntryInfo.ts';
 import { AuditLogChange, wrapAuditLogChange, unwrapAuditLogChange } from './AuditLogChange.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface AuditLogEntry {
 	/** id of the affected entity (webhook, user, role, etc.) */
@@ -25,22 +24,46 @@ export interface AuditLogEntry {
 
 export function wrapAuditLogEntry(x: RawAuditLogEntry): AuditLogEntry {
 	return {
-		...fromApiCasing(x),
+		...x,
+		targetId: x.target_id && x.target_id,
 		changes: x.changes && x.changes.map(wrapAuditLogChange),
+		userId: x.user_id,
+		actionType: x.action_type,
 		options: x.options && wrapOptionalAuditEntryInfo(x.options),
 	};
 }
 
 export function unwrapAuditLogEntry(x: AuditLogEntry): RawAuditLogEntry {
 	return {
-		...toApiCasing(x),
+		...x,
+		target_id: x.targetId && x.targetId,
 		changes: x.changes && x.changes.map(unwrapAuditLogChange),
+		user_id: x.userId,
+		action_type: x.actionType,
 		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
 	};
 }
 
-export const wrapAuditLogEntryPartial = wrapAuditLogEntry as (x: Partial<RawAuditLogEntry>) => Partial<AuditLogEntry>;
+export function wrapAuditLogEntryPartial(x: Partial<RawAuditLogEntry>): Partial<AuditLogEntry> {
+	return {
+		...x,
+		targetId: x.target_id && x.target_id,
+		changes: x.changes && x.changes.map(wrapAuditLogChange),
+		userId: x.user_id && x.user_id,
+		actionType: x.action_type && x.action_type,
+		options: x.options && wrapOptionalAuditEntryInfo(x.options),
+	};
+}
 
-export const unwrapAuditLogEntryPartial = unwrapAuditLogEntry as (x: Partial<AuditLogEntry>) => Partial<RawAuditLogEntry>;
+export function unwrapAuditLogEntryPartial(x: Partial<AuditLogEntry>): Partial<RawAuditLogEntry> {
+	return {
+		...x,
+		target_id: x.targetId && x.targetId,
+		changes: x.changes && x.changes.map(unwrapAuditLogChange),
+		user_id: x.userId && x.userId,
+		action_type: x.actionType && x.actionType,
+		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
+	};
+}
 
 

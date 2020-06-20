@@ -1,5 +1,5 @@
 import { RawGuildParams } from '../raw/RawGuildParams.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface GuildParams {
 	/** when true, will return approximate member and presence counts for the guild	DEFAULT: false */
@@ -8,11 +8,17 @@ export interface GuildParams {
 
 
 export function wrapGuildParams(x: RawGuildParams): GuildParams {
-	return fromApiCasing(x);
+	return {
+		...x,
+		withCounts: x.with_counts && x.with_counts,
+	};
 }
 
 export function unwrapGuildParams(x: GuildParams): RawGuildParams {
-	return toApiCasing(x);
+	return {
+		...x,
+		with_counts: x.withCounts && x.withCounts,
+	};
 }
 
 export const wrapGuildParamsPartial = wrapGuildParams as (x: Partial<RawGuildParams>) => Partial<GuildParams>;

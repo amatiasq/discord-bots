@@ -1,6 +1,5 @@
 import { RawEmbedImage } from '../raw/RawEmbedImage.ts';
 import { integer } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface EmbedImage {
 	/** source url of image (only supports http(s) and attachments) */
@@ -15,11 +14,17 @@ export interface EmbedImage {
 
 
 export function wrapEmbedImage(x: RawEmbedImage): EmbedImage {
-	return fromApiCasing(x);
+	return {
+		...x,
+		proxyUrl: x.proxy_url && x.proxy_url,
+	};
 }
 
 export function unwrapEmbedImage(x: EmbedImage): RawEmbedImage {
-	return toApiCasing(x);
+	return {
+		...x,
+		proxy_url: x.proxyUrl && x.proxyUrl,
+	};
 }
 
 export const wrapEmbedImagePartial = wrapEmbedImage as (x: Partial<RawEmbedImage>) => Partial<EmbedImage>;

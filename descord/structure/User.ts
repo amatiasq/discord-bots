@@ -1,7 +1,6 @@
 import { RawUser } from '../raw/RawUser.ts';
 import { UserId, ImageData, UserFlag, parseUserFlagInteger, unparseUserFlagInteger } from '../type-aliases.ts';
 import { PremiumType } from '../enum/PremiumType.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface User {
 	/** the user's id	identify */
@@ -35,16 +34,20 @@ export interface User {
 
 export function wrapUser(x: RawUser): User {
 	return {
-		...fromApiCasing(x),
+		...x,
+		mfaEnabled: x.mfa_enabled && x.mfa_enabled,
 		flags: x.flags && parseUserFlagInteger(x.flags),
+		premiumType: x.premium_type && x.premium_type,
 		publicFlags: x.public_flags && parseUserFlagInteger(x.public_flags),
 	};
 }
 
 export function unwrapUser(x: User): RawUser {
 	return {
-		...toApiCasing(x),
+		...x,
+		mfa_enabled: x.mfaEnabled && x.mfaEnabled,
 		flags: x.flags && unparseUserFlagInteger(x.flags),
+		premium_type: x.premiumType && x.premiumType,
 		public_flags: x.publicFlags && unparseUserFlagInteger(x.publicFlags),
 	};
 }

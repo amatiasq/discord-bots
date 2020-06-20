@@ -1,7 +1,6 @@
 import { RawExecuteWebhookPayload } from '../raw/RawExecuteWebhookPayload.ts';
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
 import { AllowedMentions, wrapAllowedMentions, unwrapAllowedMentions } from './AllowedMentions.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface ExecuteWebhookPayload {
 	/** the message contents (up to 2000 characters) DEFAULT: one of content, file, embeds */
@@ -27,33 +26,41 @@ export interface ExecuteWebhookPayload {
 
 export function wrapExecuteWebhookPayload(x: RawExecuteWebhookPayload): ExecuteWebhookPayload {
 	return {
-		...fromApiCasing(x),
+		...x,
+		avatarUrl: x.avatar_url,
 		embeds: x.embeds.map(wrapEmbed),
 		allowedMentions: wrapAllowedMentions(x.allowed_mentions),
+		// payloadJson: x.payload_json,
 	};
 }
 
 export function unwrapExecuteWebhookPayload(x: ExecuteWebhookPayload): RawExecuteWebhookPayload {
 	return {
-		...toApiCasing(x),
+		...x,
+		avatar_url: x.avatarUrl,
 		embeds: x.embeds.map(unwrapEmbed),
 		allowed_mentions: unwrapAllowedMentions(x.allowedMentions),
+		// payload_json: x.payloadJson,
 	};
 }
 
 export function wrapExecuteWebhookPayloadPartial(x: Partial<RawExecuteWebhookPayload>): Partial<ExecuteWebhookPayload> {
 	return {
-		...fromApiCasing(x),
+		...x,
+		avatarUrl: x.avatar_url && x.avatar_url,
 		embeds: x.embeds && x.embeds.map(wrapEmbed),
 		allowedMentions: x.allowed_mentions && wrapAllowedMentions(x.allowed_mentions),
+		// payloadJson: x.payload_json && x.payload_json,
 	};
 }
 
 export function unwrapExecuteWebhookPayloadPartial(x: Partial<ExecuteWebhookPayload>): Partial<RawExecuteWebhookPayload> {
 	return {
-		...toApiCasing(x),
+		...x,
+		avatar_url: x.avatarUrl && x.avatarUrl,
 		embeds: x.embeds && x.embeds.map(unwrapEmbed),
 		allowed_mentions: x.allowedMentions && unwrapAllowedMentions(x.allowedMentions),
+		// payload_json: x.payloadJson && x.payloadJson,
 	};
 }
 

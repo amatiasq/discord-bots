@@ -8,7 +8,6 @@ import {
 import { IntegrationExpireBehavior } from '../enum/IntegrationExpireBehavior.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { IntegrationAccount, wrapIntegrationAccount, unwrapIntegrationAccount } from './IntegrationAccount.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Integration {
 	/** integration id */
@@ -40,7 +39,11 @@ export interface Integration {
 
 export function wrapIntegration(x: RawIntegration): Integration {
 	return {
-		...fromApiCasing(x),
+		...x,
+		roleId: x.role_id,
+		enableEmoticons: x.enable_emoticons && x.enable_emoticons,
+		expireBehavior: x.expire_behavior,
+		expireGracePeriod: x.expire_grace_period,
 		user: wrapUser(x.user),
 		account: wrapIntegrationAccount(x.account),
 		syncedAt: parseISO8601Timestamp(x.synced_at),
@@ -49,7 +52,11 @@ export function wrapIntegration(x: RawIntegration): Integration {
 
 export function unwrapIntegration(x: Integration): RawIntegration {
 	return {
-		...toApiCasing(x),
+		...x,
+		role_id: x.roleId,
+		enable_emoticons: x.enableEmoticons && x.enableEmoticons,
+		expire_behavior: x.expireBehavior,
+		expire_grace_period: x.expireGracePeriod,
 		user: unwrapUser(x.user),
 		account: unwrapIntegrationAccount(x.account),
 		synced_at: unparseISO8601Timestamp(x.syncedAt),
@@ -58,7 +65,11 @@ export function unwrapIntegration(x: Integration): RawIntegration {
 
 export function wrapIntegrationPartial(x: Partial<RawIntegration>): Partial<Integration> {
 	return {
-		...fromApiCasing(x),
+		...x,
+		roleId: x.role_id && x.role_id,
+		enableEmoticons: x.enable_emoticons && x.enable_emoticons,
+		expireBehavior: x.expire_behavior && x.expire_behavior,
+		expireGracePeriod: x.expire_grace_period && x.expire_grace_period,
 		user: x.user && wrapUser(x.user),
 		account: x.account && wrapIntegrationAccount(x.account),
 		syncedAt: x.synced_at && parseISO8601Timestamp(x.synced_at),
@@ -67,7 +78,11 @@ export function wrapIntegrationPartial(x: Partial<RawIntegration>): Partial<Inte
 
 export function unwrapIntegrationPartial(x: Partial<Integration>): Partial<RawIntegration> {
 	return {
-		...toApiCasing(x),
+		...x,
+		role_id: x.roleId && x.roleId,
+		enable_emoticons: x.enableEmoticons && x.enableEmoticons,
+		expire_behavior: x.expireBehavior && x.expireBehavior,
+		expire_grace_period: x.expireGracePeriod && x.expireGracePeriod,
 		user: x.user && unwrapUser(x.user),
 		account: x.account && unwrapIntegrationAccount(x.account),
 		synced_at: x.syncedAt && unparseISO8601Timestamp(x.syncedAt),

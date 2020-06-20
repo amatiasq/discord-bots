@@ -1,6 +1,5 @@
 import { RawModifyWebhookPayload } from '../raw/RawModifyWebhookPayload.ts';
 import { ChannelId, ImageData } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface ModifyWebhookPayload {
 	/** the default name of the webhook */
@@ -13,15 +12,31 @@ export interface ModifyWebhookPayload {
 
 
 export function wrapModifyWebhookPayload(x: RawModifyWebhookPayload): ModifyWebhookPayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		channelId: x.channel_id,
+	};
 }
 
 export function unwrapModifyWebhookPayload(x: ModifyWebhookPayload): RawModifyWebhookPayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		channel_id: x.channelId,
+	};
 }
 
-export const wrapModifyWebhookPayloadPartial = wrapModifyWebhookPayload as (x: Partial<RawModifyWebhookPayload>) => Partial<ModifyWebhookPayload>;
+export function wrapModifyWebhookPayloadPartial(x: Partial<RawModifyWebhookPayload>): Partial<ModifyWebhookPayload> {
+	return {
+		...x,
+		channelId: x.channel_id && x.channel_id,
+	};
+}
 
-export const unwrapModifyWebhookPayloadPartial = unwrapModifyWebhookPayload as (x: Partial<ModifyWebhookPayload>) => Partial<RawModifyWebhookPayload>;
+export function unwrapModifyWebhookPayloadPartial(x: Partial<ModifyWebhookPayload>): Partial<RawModifyWebhookPayload> {
+	return {
+		...x,
+		channel_id: x.channelId && x.channelId,
+	};
+}
 
 

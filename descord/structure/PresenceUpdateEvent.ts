@@ -4,7 +4,6 @@ import { PresenceStatus } from '../enum/PresenceStatus.ts';
 import { Activity, wrapActivity, unwrapActivity } from './Activity.ts';
 import { ClientStatus, wrapClientStatus, unwrapClientStatus } from './ClientStatus.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface PresenceUpdateEvent {
 	/** the user presence is being updated for */
@@ -30,9 +29,10 @@ export interface PresenceUpdateEvent {
 
 export function wrapPresenceUpdateEvent(x: RawPresenceUpdateEvent): PresenceUpdateEvent {
 	return {
-		...fromApiCasing(x),
+		...x,
 		user: wrapUser(x.user),
 		game: wrapActivity(x.game),
+		guildId: x.guild_id,
 		activities: x.activities.map(wrapActivity),
 		clientStatus: wrapClientStatus(x.client_status),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
@@ -41,9 +41,10 @@ export function wrapPresenceUpdateEvent(x: RawPresenceUpdateEvent): PresenceUpda
 
 export function unwrapPresenceUpdateEvent(x: PresenceUpdateEvent): RawPresenceUpdateEvent {
 	return {
-		...toApiCasing(x),
+		...x,
 		user: unwrapUser(x.user),
 		game: unwrapActivity(x.game),
+		guild_id: x.guildId,
 		activities: x.activities.map(unwrapActivity),
 		client_status: unwrapClientStatus(x.clientStatus),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
@@ -52,9 +53,10 @@ export function unwrapPresenceUpdateEvent(x: PresenceUpdateEvent): RawPresenceUp
 
 export function wrapPresenceUpdateEventPartial(x: Partial<RawPresenceUpdateEvent>): Partial<PresenceUpdateEvent> {
 	return {
-		...fromApiCasing(x),
+		...x,
 		user: x.user && wrapUser(x.user),
 		game: x.game && wrapActivity(x.game),
+		guildId: x.guild_id && x.guild_id,
 		activities: x.activities && x.activities.map(wrapActivity),
 		clientStatus: x.client_status && wrapClientStatus(x.client_status),
 		premiumSince: x.premium_since && parseISO8601Timestamp(x.premium_since),
@@ -63,9 +65,10 @@ export function wrapPresenceUpdateEventPartial(x: Partial<RawPresenceUpdateEvent
 
 export function unwrapPresenceUpdateEventPartial(x: Partial<PresenceUpdateEvent>): Partial<RawPresenceUpdateEvent> {
 	return {
-		...toApiCasing(x),
+		...x,
 		user: x.user && unwrapUser(x.user),
 		game: x.game && unwrapActivity(x.game),
+		guild_id: x.guildId && x.guildId,
 		activities: x.activities && x.activities.map(unwrapActivity),
 		client_status: x.clientStatus && unwrapClientStatus(x.clientStatus),
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),

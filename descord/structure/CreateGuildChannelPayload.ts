@@ -2,7 +2,6 @@ import { RawCreateGuildChannelPayload } from '../raw/RawCreateGuildChannelPayloa
 import { integer, CategoryId } from '../type-aliases.ts';
 import { ChannelType } from '../enum/ChannelType.ts';
 import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface CreateGuildChannelPayload {
 	/** channel name (2-100 characters) */
@@ -30,29 +29,41 @@ export interface CreateGuildChannelPayload {
 
 export function wrapCreateGuildChannelPayload(x: RawCreateGuildChannelPayload): CreateGuildChannelPayload {
 	return {
-		...fromApiCasing(x),
+		...x,
+		userLimit: x.user_limit,
+		rateLimitPerUser: x.rate_limit_per_user,
 		permissionOverwrites: x.permission_overwrites.map(wrapOverwrite),
+		parentId: x.parent_id,
 	};
 }
 
 export function unwrapCreateGuildChannelPayload(x: CreateGuildChannelPayload): RawCreateGuildChannelPayload {
 	return {
-		...toApiCasing(x),
+		...x,
+		user_limit: x.userLimit,
+		rate_limit_per_user: x.rateLimitPerUser,
 		permission_overwrites: x.permissionOverwrites.map(unwrapOverwrite),
+		parent_id: x.parentId,
 	};
 }
 
 export function wrapCreateGuildChannelPayloadPartial(x: Partial<RawCreateGuildChannelPayload>): Partial<CreateGuildChannelPayload> {
 	return {
-		...fromApiCasing(x),
+		...x,
+		userLimit: x.user_limit && x.user_limit,
+		rateLimitPerUser: x.rate_limit_per_user && x.rate_limit_per_user,
 		permissionOverwrites: x.permission_overwrites && x.permission_overwrites.map(wrapOverwrite),
+		parentId: x.parent_id && x.parent_id,
 	};
 }
 
 export function unwrapCreateGuildChannelPayloadPartial(x: Partial<CreateGuildChannelPayload>): Partial<RawCreateGuildChannelPayload> {
 	return {
-		...toApiCasing(x),
+		...x,
+		user_limit: x.userLimit && x.userLimit,
+		rate_limit_per_user: x.rateLimitPerUser && x.rateLimitPerUser,
 		permission_overwrites: x.permissionOverwrites && x.permissionOverwrites.map(unwrapOverwrite),
+		parent_id: x.parentId && x.parentId,
 	};
 }
 

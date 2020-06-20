@@ -1,5 +1,5 @@
 import { RawHeartbeatPayload } from '../raw/RawHeartbeatPayload.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
+
 
 export interface HeartbeatPayload {
 	/** the interval (in milliseconds) the client should heartbeat with */
@@ -8,15 +8,31 @@ export interface HeartbeatPayload {
 
 
 export function wrapHeartbeatPayload(x: RawHeartbeatPayload): HeartbeatPayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		heartbeatInterval: x.heartbeat_interval,
+	};
 }
 
 export function unwrapHeartbeatPayload(x: HeartbeatPayload): RawHeartbeatPayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		heartbeat_interval: x.heartbeatInterval,
+	};
 }
 
-export const wrapHeartbeatPayloadPartial = wrapHeartbeatPayload as (x: Partial<RawHeartbeatPayload>) => Partial<HeartbeatPayload>;
+export function wrapHeartbeatPayloadPartial(x: Partial<RawHeartbeatPayload>): Partial<HeartbeatPayload> {
+	return {
+		...x,
+		heartbeatInterval: x.heartbeat_interval && x.heartbeat_interval,
+	};
+}
 
-export const unwrapHeartbeatPayloadPartial = unwrapHeartbeatPayload as (x: Partial<HeartbeatPayload>) => Partial<RawHeartbeatPayload>;
+export function unwrapHeartbeatPayloadPartial(x: Partial<HeartbeatPayload>): Partial<RawHeartbeatPayload> {
+	return {
+		...x,
+		heartbeat_interval: x.heartbeatInterval && x.heartbeatInterval,
+	};
+}
 
 

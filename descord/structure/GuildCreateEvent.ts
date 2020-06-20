@@ -5,7 +5,6 @@ import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.t
 import { Guild, wrapGuild, unwrapGuild } from './Guild.ts';
 import { PresenceUpdateEvent, wrapPresenceUpdateEvent, unwrapPresenceUpdateEvent } from './PresenceUpdateEvent.ts';
 import { VoiceState, wrapVoiceState, unwrapVoiceState } from './VoiceState.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface GuildCreateEvent extends Guild {
 	/** when this guild was joined at (ISO8601 timestamp) */
@@ -29,8 +28,9 @@ export interface GuildCreateEvent extends Guild {
 
 export function wrapGuildCreateEvent(x: RawGuildCreateEvent): GuildCreateEvent {
 	return {
-		...fromApiCasing(wrapGuild(x)),
+		...wrapGuild(x),
 		joinedAt: x.joined_at && parseISO8601Timestamp(x.joined_at),
+		memberCount: x.member_count && x.member_count,
 		voiceStates: x.voice_states && x.voice_states.map(wrapVoiceState),
 		members: x.members && x.members.map(wrapGuildMember),
 		channels: x.channels && x.channels.map(wrapChannel),
@@ -40,8 +40,9 @@ export function wrapGuildCreateEvent(x: RawGuildCreateEvent): GuildCreateEvent {
 
 export function unwrapGuildCreateEvent(x: GuildCreateEvent): RawGuildCreateEvent {
 	return {
-		...toApiCasing(unwrapGuild(x)),
+		...unwrapGuild(x),
 		joined_at: x.joinedAt && unparseISO8601Timestamp(x.joinedAt),
+		member_count: x.memberCount && x.memberCount,
 		voice_states: x.voiceStates && x.voiceStates.map(unwrapVoiceState),
 		members: x.members && x.members.map(unwrapGuildMember),
 		channels: x.channels && x.channels.map(unwrapChannel),

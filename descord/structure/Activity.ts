@@ -6,7 +6,6 @@ import { ActivityEmoji, wrapActivityEmoji, unwrapActivityEmoji } from './Activit
 import { ActivityParty, wrapActivityParty, unwrapActivityParty } from './ActivityParty.ts';
 import { ActivitySecrets, wrapActivitySecrets, unwrapActivitySecrets } from './ActivitySecrets.ts';
 import { ActivityTimestamps, wrapActivityTimestamps, unwrapActivityTimestamps } from './ActivityTimestamps.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface Activity {
 	/** the activity's name */
@@ -42,9 +41,10 @@ export interface Activity {
 
 export function wrapActivity(x: RawActivity): Activity {
 	return {
-		...fromApiCasing(x),
+		...x,
 		createdAt: parseUnixTimestamp(x.created_at),
 		timestamps: x.timestamps && wrapActivityTimestamps(x.timestamps),
+		applicationId: x.application_id && x.application_id,
 		emoji: x.emoji && wrapActivityEmoji(x.emoji),
 		party: x.party && wrapActivityParty(x.party),
 		assets: x.assets && wrapActivityAssets(x.assets),
@@ -54,9 +54,10 @@ export function wrapActivity(x: RawActivity): Activity {
 
 export function unwrapActivity(x: Activity): RawActivity {
 	return {
-		...toApiCasing(x),
+		...x,
 		created_at: unparseUnixTimestamp(x.createdAt),
 		timestamps: x.timestamps && unwrapActivityTimestamps(x.timestamps),
+		application_id: x.applicationId && x.applicationId,
 		emoji: x.emoji && unwrapActivityEmoji(x.emoji),
 		party: x.party && unwrapActivityParty(x.party),
 		assets: x.assets && unwrapActivityAssets(x.assets),
@@ -66,9 +67,10 @@ export function unwrapActivity(x: Activity): RawActivity {
 
 export function wrapActivityPartial(x: Partial<RawActivity>): Partial<Activity> {
 	return {
-		...fromApiCasing(x),
+		...x,
 		createdAt: x.created_at && parseUnixTimestamp(x.created_at),
 		timestamps: x.timestamps && wrapActivityTimestamps(x.timestamps),
+		applicationId: x.application_id && x.application_id,
 		emoji: x.emoji && wrapActivityEmoji(x.emoji),
 		party: x.party && wrapActivityParty(x.party),
 		assets: x.assets && wrapActivityAssets(x.assets),
@@ -78,9 +80,10 @@ export function wrapActivityPartial(x: Partial<RawActivity>): Partial<Activity> 
 
 export function unwrapActivityPartial(x: Partial<Activity>): Partial<RawActivity> {
 	return {
-		...toApiCasing(x),
+		...x,
 		created_at: x.createdAt && unparseUnixTimestamp(x.createdAt),
 		timestamps: x.timestamps && unwrapActivityTimestamps(x.timestamps),
+		application_id: x.applicationId && x.applicationId,
 		emoji: x.emoji && unwrapActivityEmoji(x.emoji),
 		party: x.party && unwrapActivityParty(x.party),
 		assets: x.assets && unwrapActivityAssets(x.assets),

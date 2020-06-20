@@ -1,6 +1,5 @@
 import { RawModifyGuildMemberPayload } from '../raw/RawModifyGuildMemberPayload.ts';
 import { RoleId, ChannelId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface ModifyGuildMemberPayload {
 	/** value to set users nickname to (requires permission: MANAGENICKNAMES) */
@@ -17,15 +16,31 @@ export interface ModifyGuildMemberPayload {
 
 
 export function wrapModifyGuildMemberPayload(x: RawModifyGuildMemberPayload): ModifyGuildMemberPayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		channelId: x.channel_id,
+	};
 }
 
 export function unwrapModifyGuildMemberPayload(x: ModifyGuildMemberPayload): RawModifyGuildMemberPayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		channel_id: x.channelId,
+	};
 }
 
-export const wrapModifyGuildMemberPayloadPartial = wrapModifyGuildMemberPayload as (x: Partial<RawModifyGuildMemberPayload>) => Partial<ModifyGuildMemberPayload>;
+export function wrapModifyGuildMemberPayloadPartial(x: Partial<RawModifyGuildMemberPayload>): Partial<ModifyGuildMemberPayload> {
+	return {
+		...x,
+		channelId: x.channel_id && x.channel_id,
+	};
+}
 
-export const unwrapModifyGuildMemberPayloadPartial = unwrapModifyGuildMemberPayload as (x: Partial<ModifyGuildMemberPayload>) => Partial<RawModifyGuildMemberPayload>;
+export function unwrapModifyGuildMemberPayloadPartial(x: Partial<ModifyGuildMemberPayload>): Partial<RawModifyGuildMemberPayload> {
+	return {
+		...x,
+		channel_id: x.channelId && x.channelId,
+	};
+}
 
 

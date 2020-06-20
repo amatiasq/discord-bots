@@ -1,6 +1,5 @@
 import { RawActivityParty } from '../raw/RawActivityParty.ts';
 import { PartyId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface ActivityParty {
 	/** the id of the party */
@@ -11,11 +10,11 @@ export interface ActivityParty {
 
 
 export function wrapActivityParty(x: RawActivityParty): ActivityParty {
-	return fromApiCasing(x);
+	return x;
 }
 
 export function unwrapActivityParty(x: ActivityParty): RawActivityParty {
-	return toApiCasing(x);
+	return x;
 }
 
 export const wrapActivityPartyPartial = wrapActivityParty as (x: Partial<RawActivityParty>) => Partial<ActivityParty>;

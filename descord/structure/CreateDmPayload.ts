@@ -1,6 +1,5 @@
 import { RawCreateDmPayload } from '../raw/RawCreateDmPayload.ts';
 import { UserId } from '../type-aliases.ts';
-import { fromApiCasing, toApiCasing } from '../casing.ts';
 
 export interface CreateDmPayload {
 	/** the recipient to open a DM channel with */
@@ -9,15 +8,31 @@ export interface CreateDmPayload {
 
 
 export function wrapCreateDmPayload(x: RawCreateDmPayload): CreateDmPayload {
-	return fromApiCasing(x);
+	return {
+		...x,
+		recipientId: x.recipient_id,
+	};
 }
 
 export function unwrapCreateDmPayload(x: CreateDmPayload): RawCreateDmPayload {
-	return toApiCasing(x);
+	return {
+		...x,
+		recipient_id: x.recipientId,
+	};
 }
 
-export const wrapCreateDmPayloadPartial = wrapCreateDmPayload as (x: Partial<RawCreateDmPayload>) => Partial<CreateDmPayload>;
+export function wrapCreateDmPayloadPartial(x: Partial<RawCreateDmPayload>): Partial<CreateDmPayload> {
+	return {
+		...x,
+		recipientId: x.recipient_id && x.recipient_id,
+	};
+}
 
-export const unwrapCreateDmPayloadPartial = unwrapCreateDmPayload as (x: Partial<CreateDmPayload>) => Partial<RawCreateDmPayload>;
+export function unwrapCreateDmPayloadPartial(x: Partial<CreateDmPayload>): Partial<RawCreateDmPayload> {
+	return {
+		...x,
+		recipient_id: x.recipientId && x.recipientId,
+	};
+}
 
 
