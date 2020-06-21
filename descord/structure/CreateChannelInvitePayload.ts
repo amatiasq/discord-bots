@@ -6,22 +6,22 @@ export interface CreateChannelInvitePayload {
 	 * duration of invite in seconds before expiry, or 0 for never
 	 * DEFAULT: 86400 (24 hours)
 	 */
-	maxAge: integer;
+	maxAge?: integer;
 	/**
 	 * max number of uses or 0 for unlimited
 	 * DEFAULT: 0
 	 */
-	maxUses: integer;
+	maxUses?: integer;
 	/**
 	 * whether this invite only grants temporary membership
 	 * DEFAULT: false
 	 */
-	temporary: boolean;
+	temporary?: boolean;
 	/**
 	 * if true, don't try to reuse a similar invite (useful for creating many unique one time use invites)
 	 * DEFAULT: false
 	 */
-	unique: boolean;
+	unique?: boolean;
 	/** the target user id for this invite	 */
 	targetUser?: string;
 	/** the type of target user for this invite	 */
@@ -32,8 +32,8 @@ export interface CreateChannelInvitePayload {
 export function wrapCreateChannelInvitePayload(x: RawCreateChannelInvitePayload): CreateChannelInvitePayload {
 	return {
 		...x,
-		maxAge: x.max_age,
-		maxUses: x.max_uses,
+		maxAge: x.max_age && x.max_age,
+		maxUses: x.max_uses && x.max_uses,
 		targetUser: x.target_user && x.target_user,
 		targetUserType: x.target_user_type && x.target_user_type,
 	};
@@ -42,31 +42,15 @@ export function wrapCreateChannelInvitePayload(x: RawCreateChannelInvitePayload)
 export function unwrapCreateChannelInvitePayload(x: CreateChannelInvitePayload): RawCreateChannelInvitePayload {
 	return {
 		...x,
-		max_age: x.maxAge,
-		max_uses: x.maxUses,
-		target_user: x.targetUser && x.targetUser,
-		target_user_type: x.targetUserType && x.targetUserType,
-	};
-}
-
-export function wrapCreateChannelInvitePayloadPartial(x: Partial<RawCreateChannelInvitePayload>): Partial<CreateChannelInvitePayload> {
-	return {
-		...x,
-		maxAge: x.max_age && x.max_age,
-		maxUses: x.max_uses && x.max_uses,
-		targetUser: x.target_user && x.target_user,
-		targetUserType: x.target_user_type && x.target_user_type,
-	};
-}
-
-export function unwrapCreateChannelInvitePayloadPartial(x: Partial<CreateChannelInvitePayload>): Partial<RawCreateChannelInvitePayload> {
-	return {
-		...x,
 		max_age: x.maxAge && x.maxAge,
 		max_uses: x.maxUses && x.maxUses,
 		target_user: x.targetUser && x.targetUser,
 		target_user_type: x.targetUserType && x.targetUserType,
 	};
 }
+
+export const wrapCreateChannelInvitePayloadPartial = wrapCreateChannelInvitePayload as (x: Partial<RawCreateChannelInvitePayload>) => Partial<CreateChannelInvitePayload>;
+
+export const unwrapCreateChannelInvitePayloadPartial = unwrapCreateChannelInvitePayload as (x: Partial<CreateChannelInvitePayload>) => Partial<RawCreateChannelInvitePayload>;
 
 

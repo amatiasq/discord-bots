@@ -1,54 +1,71 @@
+import { RawAuditLog } from '../raw/RawAuditLog.ts';
+import { RawChannel } from '../raw/RawChannel.ts';
+import { RawInvite } from '../raw/RawInvite.ts';
+import { RawMessage } from '../raw/RawMessage.ts';
+import { RawUser } from '../raw/RawUser.ts';
+import { wrapAuditLog } from '../structure/AuditLog.ts';
+import { wrapBotGatewayData } from '../structure/BotGatewayData.ts';
 import {
 	BulkDeleteMessagesPayload,
 	unwrapBulkDeleteMessagesPayload,
 } from '../structure/BulkDeleteMessagesPayload.ts';
+import { wrapChannel } from '../structure/Channel.ts';
 import {
-	EditMessagePayload,
-	unwrapEditMessagePayload,
-} from '../structure/EditMessagePayload.ts';
+	ChannelMessagesParams,
+	unwrapChannelMessagesParams,
+} from '../structure/ChannelMessagesParams.ts';
 import {
-	ReactionsParams,
-	unwrapReactionsParams,
-} from '../structure/ReactionsParams.ts';
+	CreateChannelInvitePayload,
+	unwrapCreateChannelInvitePayload,
+} from '../structure/CreateChannelInvitePayload.ts';
 import {
 	CreateMessagePayload,
 	unwrapCreateMessagePayload,
 } from '../structure/CreateMessagePayload.ts';
-import { RawMessage } from '../raw/RawMessage.ts';
-import { wrapMessage, Message } from '../structure/Message.ts';
-import { RawAuditLog } from '../raw/RawAuditLog.ts';
-import { RawChannel } from '../raw/RawChannel.ts';
-import { wrapAuditLog } from '../structure/AuditLog.ts';
-import { wrapBotGatewayData } from '../structure/BotGatewayData.ts';
-import { wrapChannel, unwrapChannel, Channel } from '../structure/Channel.ts';
+import {
+	EditChannelPermissionsPayload,
+	unwrapEditChannelPermissionsPayload,
+} from '../structure/EditChannelPermissionsPayload.ts';
+import {
+	EditMessagePayload,
+	unwrapEditMessagePayload,
+} from '../structure/EditMessagePayload.ts';
+import { GroupDmAddRecipientPayload } from '../structure/GroupDmAddRecipientPayload.ts';
+import { wrapInvite } from '../structure/Invite.ts';
+import { wrapMessage } from '../structure/Message.ts';
 import {
 	ModifyChannelPayload,
 	unwrapModifyChannelPayload,
 } from '../structure/ModifyChannelPayload.ts';
 import {
+	ReactionsParams,
+	unwrapReactionsParams,
+} from '../structure/ReactionsParams.ts';
+import {
 	ChannelId,
 	GuildId,
-	Permission,
 	MessageId,
+	OverwriteId,
+	Permission,
 	UserId,
 } from '../type-aliases.ts';
 import { ApiCaller } from './ApiCaller.ts';
 import {
 	CHANNEL,
+	CHANNEL_BULK_DELETE,
+	CHANNEL_INVITES,
+	CHANNEL_MESSAGE,
+	CHANNEL_MESSAGE_REACTION,
+	CHANNEL_MESSAGE_REACTION_USER,
+	CHANNEL_MESSAGE_REACTIONS,
+	CHANNEL_MESSAGES,
+	CHANNEL_PERMISSIONS,
+	CHANNEL_PINNED_MESSAGE,
+	CHANNEL_PINS,
+	CHANNEL_TYPING,
 	GATEWAY_BOT,
 	GUILD_AUDIT_LOGS,
-	CHANNEL_MESSAGES,
-	CHANNEL_MESSAGE,
-	CHANNEL_MESSAGE_REACTION_USER,
-	CHANNEL_MESSAGE_REACTION,
-	CHANNEL_MESSAGE_REACTIONS,
-	CHANNEL_BULK_DELETE,
 } from './endpoint-urls.ts';
-import {
-	ChannelMessagesParams,
-	unwrapChannelMessagesParams,
-} from '../structure/ChannelMessagesParams.ts';
-import { RawUser } from '../raw/RawUser.ts';
 
 export class DiscordEndpoints {
 	private readonly api: ApiCaller;
@@ -203,6 +220,60 @@ export class DiscordEndpoints {
 		const raw = payload && unwrapBulkDeleteMessagesPayload(payload);
 		return this.api.post<void>(CHANNEL_BULK_DELETE(id), raw);
 	}
+
+	editChannelPermissions(
+		id: ChannelId,
+		overwriteId: OverwriteId,
+		payload: EditChannelPermissionsPayload,
+	) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		const raw = unwrapEditChannelPermissionsPayload(payload);
+		return this.api.put<void>(CHANNEL_PERMISSIONS(id, overwriteId), raw);
+	}
+
+	getChannelInvites(id: ChannelId) {
+		this.checkPermissions(Permission.MANAGE_CHANNELS);
+		return this.api
+			.get<RawInvite[]>(CHANNEL_INVITES(id))
+			.then(x => x.map(wrapInvite));
+	}
+
+	createChannelInvite(id: ChannelId, payload: CreateChannelInvitePayload = {}) {
+		this.checkPermissions(Permission.CREATE_INSTANT_INVITE);
+		const raw = unwrapCreateChannelInvitePayload(payload);
+		return this.api.post(CHANNEL_INVITES(id), raw);
+	}
+
+	deleteChannelPermission(id: ChannelId, overwriteId: OverwriteId) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		return this.api.delete<void>(CHANNEL_PERMISSIONS(id, overwriteId));
+	}
+
+	triggerTypingIndicator(id: ChannelId) {
+		return this.api.post<void>(CHANNEL_TYPING(id));
+	}
+
+	getPinnedMessage(id: ChannelId) {
+		return this.api
+			.get<RawMessage[]>(CHANNEL_PINS(id))
+			.then(x => x.map(wrapMessage));
+	}
+
+	addPinnedChannelMessage(id: ChannelId, messageId: MessageId) {
+		this.checkPermissions(Permission.MANAGE_MESSAGES);
+		return this.api.put<void>(CHANNEL_PINNED_MESSAGE(id, messageId));
+	}
+
+	deletePinnedChannelMessage(id: ChannelId, messageId: MessageId) {
+		this.checkPermissions(Permission.MANAGE_MESSAGES);
+		return this.api.delete<void>(CHANNEL_PINNED_MESSAGE(id, messageId));
+	}
+
+	groupDmAddRecipient(
+		id: ChannelId,
+		userId: UserId,
+		payload: GroupDmAddRecipientPayload,
+	) {}
 
 	//
 

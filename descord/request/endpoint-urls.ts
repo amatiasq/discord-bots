@@ -9,6 +9,7 @@ import {
 	RoleId,
 	InviteCode,
 	WebhookId,
+	OverwriteId,
 } from '../type-aliases.ts';
 
 /** Although, the version can be defaulted, keep the v6 as it can be changed to test newer versions when necessary. */
@@ -50,10 +51,8 @@ export const CHANNEL_MESSAGE_REACTION_USER = (
 export const CHANNEL_BULK_DELETE = (id: ChannelId) =>
 	`${CHANNEL(id)}/messages/bulk-delete`;
 
-export const CHANNEL_PERMISSIONS = (
-	id: ChannelId,
-	userRoleId: UserId | RoleId,
-) => `${CHANNEL(id)}/permissions/${userRoleId}`;
+export const CHANNEL_PERMISSIONS = (id: ChannelId, overwriteId: OverwriteId) =>
+	`${CHANNEL(id)}/permissions/${overwriteId}`;
 
 export const CHANNEL_INVITES = (id: ChannelId) => `${CHANNEL(id)}/invites`;
 

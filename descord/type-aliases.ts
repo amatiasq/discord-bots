@@ -21,6 +21,7 @@ export type VoiceRegionId = '%VoiceRegionId%';
 export type AccountId = '%AccountId%';
 export type InviteCode = '%InviteId%';
 export type AuditLogEntryId = '%AuditLogEntryId%';
+export type OverwriteId = UserId | RoleId;
 
 export type ImageData = '%ImageData%';
 export type PermissionInteger = '%PermissionInteger%';

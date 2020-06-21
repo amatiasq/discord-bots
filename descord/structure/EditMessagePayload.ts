@@ -11,28 +11,23 @@ export interface EditMessagePayload {
 	flags?: MessageFlag;
 }
 
-export function wrapEditMessagePayload(
-	x: RawEditMessagePayload,
-): EditMessagePayload {
+
+export function wrapEditMessagePayload(x: RawEditMessagePayload): EditMessagePayload {
 	return {
 		...x,
 		embed: x.embed && wrapEmbed(x.embed),
 	};
 }
 
-export function unwrapEditMessagePayload(
-	x: EditMessagePayload,
-): RawEditMessagePayload {
+export function unwrapEditMessagePayload(x: EditMessagePayload): RawEditMessagePayload {
 	return {
 		...x,
 		embed: x.embed && unwrapEmbed(x.embed),
 	};
 }
 
-export const wrapEditMessagePayloadPartial = wrapEditMessagePayload as (
-	x: Partial<RawEditMessagePayload>,
-) => Partial<EditMessagePayload>;
+export const wrapEditMessagePayloadPartial = wrapEditMessagePayload as (x: Partial<RawEditMessagePayload>) => Partial<EditMessagePayload>;
 
-export const unwrapEditMessagePayloadPartial = unwrapEditMessagePayload as (
-	x: Partial<EditMessagePayload>,
-) => Partial<RawEditMessagePayload>;
+export const unwrapEditMessagePayloadPartial = unwrapEditMessagePayload as (x: Partial<EditMessagePayload>) => Partial<RawEditMessagePayload>;
+
+
