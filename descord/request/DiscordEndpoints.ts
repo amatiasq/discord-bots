@@ -1,3 +1,21 @@
+import {
+	ModifyGuildRolePositionsPayload,
+	unwrapModifyGuildRolePositionsPayload,
+} from '../structure/ModifyGuildRolePositionsPayload.ts';
+import {
+	CreateGuildRolePayload,
+	unwrapCreateGuildRolePayload,
+} from '../structure/CreateGuildRolePayload.ts';
+import {
+	CreateGuildBanParams,
+	unwrapCreateGuildBanParams,
+} from '../structure/CreateGuildBanParams.ts';
+import { wrapBan } from '../structure/Ban.ts';
+import { RawBan } from '../raw/RawBan.ts';
+import {
+	ModifyCurrentUserPayload,
+	unwrapModifyCurrentUserPayload,
+} from '../structure/ModifyCurrentUserPayload.ts';
 import { RawAuditLog } from '../raw/RawAuditLog.ts';
 import { RawChannel } from '../raw/RawChannel.ts';
 import { RawEmoji } from '../raw/RawEmoji.ts';
@@ -90,6 +108,7 @@ import {
 	OverwriteId,
 	Permission,
 	UserId,
+	RoleId,
 } from '../type-aliases.ts';
 import { ApiCaller } from './ApiCaller.ts';
 import {
@@ -115,7 +134,14 @@ import {
 	GUILD_MEMBERS,
 	GUILD_PREVIEW,
 	GUILDS,
+	GUILD_CURRENT_USER_NICK,
+	GUILD_MEMBER_ROLE,
+	GUILD_BAN,
+	GUILD_BANS,
+	GUILD_ROLES,
 } from './endpoint-urls.ts';
+import { RawRole } from '../raw/RawRole.ts';
+import { wrapRole } from '../structure/Role.ts';
 
 export class DiscordEndpoints {
 	private readonly api: ApiCaller;
@@ -486,6 +512,79 @@ export class DiscordEndpoints {
 	) {
 		const raw = payload && unwrapModifyGuildMemberPayload(payload);
 		return this.api.patch<void>(GUILD_MEMBER(id, userId), raw);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+	modifyCurrentUserNick(id: GuildId, payload?: ModifyCurrentUserPayload) {
+		const raw = payload && unwrapModifyCurrentUserPayload(payload);
+		return this.api.patch<string>(GUILD_CURRENT_USER_NICK(id), raw);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#add-guild-member-role
+	addGuildMemberRole(id: GuildId, userId: UserId, roleId: RoleId) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		return this.api.put<void>(GUILD_MEMBER_ROLE(id, userId, roleId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#remove-guild-member-role
+	removeGuildMemberRole(id: GuildId, userId: UserId, roleId: RoleId) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		return this.api.delete<void>(GUILD_MEMBER_ROLE(id, userId, roleId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#remove-guild-member
+	removeGuildMember(id: GuildId, userId: UserId) {
+		this.checkPermissions(Permission.KICK_MEMBERS);
+		return this.api.delete<void>(GUILD_MEMBER(id, userId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-bans
+	getGuildBans(id: GuildId) {
+		this.checkPermissions(Permission.BAN_MEMBERS);
+		return this.api.get<RawBan[]>(GUILD_BANS(id)).then(x => x.map(wrapBan));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-ban
+	getGuildBan(id: GuildId, userId: UserId) {
+		this.checkPermissions(Permission.BAN_MEMBERS);
+		return this.api.get<RawBan>(GUILD_BAN(id, userId)).then(wrapBan);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#create-guild-ban
+	createGuildBan(id: GuildId, userId: UserId, payload?: CreateGuildBanParams) {
+		this.checkPermissions(Permission.BAN_MEMBERS);
+		const raw = payload && unwrapCreateGuildBanParams(payload);
+		return this.api.put<void>(GUILD_BAN(id, userId), null, raw);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#remove-guild-ban
+	removeGuildBan(id: GuildId, userId: UserId) {
+		this.checkPermissions(Permission.BAN_MEMBERS);
+		return this.api.delete<void>(GUILD_BAN(id, userId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-roles
+	getGuildRoles(id: GuildId) {
+		return this.api.get<RawRole[]>(GUILD_ROLES(id)).then(x => x.map(wrapRole));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#create-guild-role
+	createGuildRole(id: GuildId, payload?: CreateGuildRolePayload) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		const raw = payload && unwrapCreateGuildRolePayload(payload);
+		return this.api.post<RawRole>(GUILD_ROLES(id), raw);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
+	modifyGuildRolePositions(
+		id: GuildId,
+		payload: ModifyGuildRolePositionsPayload,
+	) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		const raw = payload && unwrapModifyGuildRolePositionsPayload(payload);
+		return this.api
+			.patch<RawRole[]>(GUILD_ROLES(id), raw)
+			.then(x => x.map(wrapRole));
 	}
 
 	// gatewayBot() {
