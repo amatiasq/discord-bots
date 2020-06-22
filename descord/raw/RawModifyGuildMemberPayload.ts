@@ -4,13 +4,13 @@ import { RoleId, ChannelId } from '../type-aliases.ts';
 
 export interface RawModifyGuildMemberPayload {
 	/** value to set users nickname to (requires permission: MANAGE_NICKNAMES) */
-	nick: string;
+	nick?: string;
 	/** array of role ids the member is assigned   (requires permission: MANAGE_ROLES) */
-	roles: RoleId[];
+	roles?: RoleId[];
 	/** whether the user is muted in voice channels. Will throw a 400 if the user is not in a voice channe (requires permission: MUTE_MEMBERS) */
-	mute: boolean;
+	mute?: boolean;
 	/** whether the user is deafened in voice channels. Will throw a 400 if the user is not in a voice channel (requires permission: DEAFEN_MEMBERS) */
-	deaf: boolean;
+	deaf?: boolean;
 	/** id of channel to move user to (if they are connected to voice) (requires permission: MOVE_MEMBERS) */
-	channel_id: ChannelId;
+	channel_id?: ChannelId;
 }

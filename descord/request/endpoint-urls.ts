@@ -89,17 +89,17 @@ export const GUILD_CHANNEL = (id: GuildId) => `${GUILD(id)}/channels/${id}`;
 
 export const GUILD_MEMBERS = (id: GuildId) => `${GUILD(id)}/members`;
 
-export const GUILD_MEMBER = (id: GuildId, memberId: MemberId) =>
-	`${GUILD(id)}/members/${memberId}`;
+export const GUILD_MEMBER = (id: GuildId, userId: UserId) =>
+	`${GUILD(id)}/members/${userId}`;
 
 export const GUILD_CURRENT_USER_NICK = (id: GuildId) =>
 	`${GUILD(id)}/members/@me/nick`;
 
 export const GUILD_MEMBER_ROLE = (
 	id: GuildId,
-	memberId: MemberId,
+	userId: UserId,
 	roleId: string,
-) => `${GUILD_MEMBER(id, memberId)}/roles/${roleId}`;
+) => `${GUILD_MEMBER(id, userId)}/roles/${roleId}`;
 
 export const GUILD_BANS = (id: GuildId) => `${GUILD(id)}/bans`;
 

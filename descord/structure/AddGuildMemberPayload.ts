@@ -7,13 +7,13 @@ export interface AddGuildMemberPayload {
 	/** an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild	 */
 	accessToken: string;
 	/** value to set users nickname to (requires permission: MANAGENICKNAMES) */
-	nick: string;
+	nick?: string;
 	/** array of role ids the member is assigned   (requires permission: MANAGEROLES) */
-	roles: RoleId[];
+	roles?: RoleId[];
 	/** whether the user is muted in voice channel (requires permission: MUTEMEMBERS) */
-	mute: boolean;
+	mute?: boolean;
 	/** whether the user is deafened in voice channels (requires permission: DEAFENMEMBERS) */
-	deaf: boolean;
+	deaf?: boolean;
 }
 
 

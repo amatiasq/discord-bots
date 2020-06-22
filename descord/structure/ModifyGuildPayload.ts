@@ -8,7 +8,7 @@ import { ChannelId, integer, ImageData, UserId } from '../type-aliases.ts';
 
 export interface ModifyGuildPayload {
 	/** guild name */
-	name: string;
+	name?: string;
 	/** guild voice region id */
 	region?: string;
 	/** verification level */
@@ -20,7 +20,7 @@ export interface ModifyGuildPayload {
 	/** id for afk channel */
 	afkChannelId?: ChannelId;
 	/** afk timeout in seconds */
-	afkTimeout: integer;
+	afkTimeout?: integer;
 	/** base64 1024x1024 png/jpeg/gif image for the guild icon (can be animated gif when the server has ANIMATEDICON feature) */
 	icon?: ImageData;
 	/** user id to transfer guild ownership to (must be owner) */
@@ -47,7 +47,7 @@ export function wrapModifyGuildPayload(x: RawModifyGuildPayload): ModifyGuildPay
 		defaultMessageNotifications: x.default_message_notifications && x.default_message_notifications,
 		explicitContentFilter: x.explicit_content_filter && x.explicit_content_filter,
 		afkChannelId: x.afk_channel_id && x.afk_channel_id,
-		afkTimeout: x.afk_timeout,
+		afkTimeout: x.afk_timeout && x.afk_timeout,
 		ownerId: x.owner_id,
 		systemChannelId: x.system_channel_id && x.system_channel_id,
 		rulesChannelId: x.rules_channel_id && x.rules_channel_id,
@@ -63,7 +63,7 @@ export function unwrapModifyGuildPayload(x: ModifyGuildPayload): RawModifyGuildP
 		default_message_notifications: x.defaultMessageNotifications && x.defaultMessageNotifications,
 		explicit_content_filter: x.explicitContentFilter && x.explicitContentFilter,
 		afk_channel_id: x.afkChannelId && x.afkChannelId,
-		afk_timeout: x.afkTimeout,
+		afk_timeout: x.afkTimeout && x.afkTimeout,
 		owner_id: x.ownerId,
 		system_channel_id: x.systemChannelId && x.systemChannelId,
 		rules_channel_id: x.rulesChannelId && x.rulesChannelId,

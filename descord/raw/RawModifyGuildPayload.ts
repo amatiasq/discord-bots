@@ -7,7 +7,7 @@ import { ChannelId, integer, ImageData, UserId } from '../type-aliases.ts';
 
 export interface RawModifyGuildPayload {
 	/** guild name */
-	name: string;
+	name?: string;
 	/** guild voice region id */
 	region?: string;
 	/** verification level */
@@ -19,7 +19,7 @@ export interface RawModifyGuildPayload {
 	/** id for afk channel */
 	afk_channel_id?: ChannelId;
 	/** afk timeout in seconds */
-	afk_timeout: integer;
+	afk_timeout?: integer;
 	/** base64 1024x1024 png/jpeg/gif image for the guild icon (can be animated gif when the server has ANIMATED_ICON feature) */
 	icon?: ImageData;
 	/** user id to transfer guild ownership to (must be owner) */
