@@ -1,35 +1,27 @@
-import {
-	ModifyGuildRolePositionsPayload,
-	unwrapModifyGuildRolePositionsPayload,
-} from '../structure/ModifyGuildRolePositionsPayload.ts';
-import {
-	CreateGuildRolePayload,
-	unwrapCreateGuildRolePayload,
-} from '../structure/CreateGuildRolePayload.ts';
-import {
-	CreateGuildBanParams,
-	unwrapCreateGuildBanParams,
-} from '../structure/CreateGuildBanParams.ts';
-import { wrapBan } from '../structure/Ban.ts';
-import { RawBan } from '../raw/RawBan.ts';
-import {
-	ModifyCurrentUserPayload,
-	unwrapModifyCurrentUserPayload,
-} from '../structure/ModifyCurrentUserPayload.ts';
 import { RawAuditLog } from '../raw/RawAuditLog.ts';
+import { RawBan } from '../raw/RawBan.ts';
 import { RawChannel } from '../raw/RawChannel.ts';
 import { RawEmoji } from '../raw/RawEmoji.ts';
 import { RawGuild } from '../raw/RawGuild.ts';
 import { RawGuildMember } from '../raw/RawGuildMember.ts';
 import { RawGuildPreview } from '../raw/RawGuildPreview.ts';
+import { RawGuildWidget } from '../raw/RawGuildWidget.ts';
+import { RawIntegration } from '../raw/RawIntegration.ts';
 import { RawInvite } from '../raw/RawInvite.ts';
 import { RawMessage } from '../raw/RawMessage.ts';
+import { RawRole } from '../raw/RawRole.ts';
 import { RawUser } from '../raw/RawUser.ts';
+import { RawVoiceRegion } from '../raw/RawVoiceRegion.ts';
 import {
 	AddGuildMemberPayload,
 	unwrapAddGuildMemberPayload,
 } from '../structure/AddGuildMemberPayload.ts';
 import { wrapAuditLog } from '../structure/AuditLog.ts';
+import { wrapBan } from '../structure/Ban.ts';
+import {
+	BeginGuildPruneParams,
+	unwrapBeginGuildPruneParams,
+} from '../structure/BeginGuildPruneParams.ts';
 import {
 	BulkDeleteMessagesPayload,
 	unwrapBulkDeleteMessagesPayload,
@@ -44,6 +36,10 @@ import {
 	unwrapCreateChannelInvitePayload,
 } from '../structure/CreateChannelInvitePayload.ts';
 import {
+	CreateGuildBanParams,
+	unwrapCreateGuildBanParams,
+} from '../structure/CreateGuildBanParams.ts';
+import {
 	CreateGuildChannelPayload,
 	unwrapCreateGuildChannelPayload,
 } from '../structure/CreateGuildChannelPayload.ts';
@@ -52,9 +48,17 @@ import {
 	unwrapCreateGuildEmojiPayload,
 } from '../structure/CreateGuildEmojiPayload.ts';
 import {
+	CreateGuildIntegrationPayload,
+	unwrapCreateGuildIntegrationPayload,
+} from '../structure/CreateGuildIntegrationPayload.ts';
+import {
 	CreateGuildPayload,
 	unwrapCreateGuildPayload,
 } from '../structure/CreateGuildPayload.ts';
+import {
+	CreateGuildRolePayload,
+	unwrapCreateGuildRolePayload,
+} from '../structure/CreateGuildRolePayload.ts';
 import {
 	CreateMessagePayload,
 	unwrapCreateMessagePayload,
@@ -77,12 +81,30 @@ import { wrapGuildMember } from '../structure/GuildMember.ts';
 import { GuildMembersParams } from '../structure/GuildMembersParams.ts';
 import { GuildParams, unwrapGuildParams } from '../structure/GuildParams.ts';
 import { wrapGuildPreview } from '../structure/GuildPreview.ts';
-import { wrapInvite } from '../structure/Invite.ts';
+import {
+	GuildPruneCountParams,
+	unwrapGuildPruneCountParams,
+} from '../structure/GuildPruneCountParams.ts';
+import {
+	GuildWidget,
+	unwrapGuildWidgetPartial,
+	wrapGuildWidget,
+} from '../structure/GuildWidget.ts';
+import {
+	GuildWidgetImageParams,
+	unwrapGuildWidgetImageParams,
+} from '../structure/GuildWidgetImageParams.ts';
+import { wrapIntegration } from '../structure/Integration.ts';
+import { wrapInvite, wrapInvitePartial } from '../structure/Invite.ts';
 import { wrapMessage } from '../structure/Message.ts';
 import {
 	ModifyChannelPayload,
 	unwrapModifyChannelPayload,
 } from '../structure/ModifyChannelPayload.ts';
+import {
+	ModifyCurrentUserPayload,
+	unwrapModifyCurrentUserPayload,
+} from '../structure/ModifyCurrentUserPayload.ts';
 import {
 	ModifyGuildChannelPositionsPayload,
 	unwrapModifyGuildChannelPositionsPayload,
@@ -92,23 +114,38 @@ import {
 	unwrapModifyGuildEmojiPayload,
 } from '../structure/ModifyGuildEmojiPayload.ts';
 import {
+	ModifyGuildIntegrationPayload,
+	unwrapModifyGuildIntegrationPayload,
+} from '../structure/ModifyGuildIntegrationPayload.ts';
+import {
 	ModifyGuildMemberPayload,
 	unwrapModifyGuildMemberPayload,
 } from '../structure/ModifyGuildMemberPayload.ts';
 import { ModifyGuildPayload } from '../structure/ModifyGuildPayload.ts';
 import {
+	ModifyGuildRolePayload,
+	unwrapModifyGuildRolePayload,
+} from '../structure/ModifyGuildRolePayload.ts';
+import {
+	ModifyGuildRolePositionsPayload,
+	unwrapModifyGuildRolePositionsPayload,
+} from '../structure/ModifyGuildRolePositionsPayload.ts';
+import {
 	ReactionsParams,
 	unwrapReactionsParams,
 } from '../structure/ReactionsParams.ts';
+import { wrapRole } from '../structure/Role.ts';
+import { wrapVoiceRegion } from '../structure/VoiceRegion.ts';
 import {
 	ChannelId,
 	EmojiId,
 	GuildId,
+	IntegrationId,
 	MessageId,
 	OverwriteId,
 	Permission,
-	UserId,
 	RoleId,
+	UserId,
 } from '../type-aliases.ts';
 import { ApiCaller } from './ApiCaller.ts';
 import {
@@ -127,21 +164,30 @@ import {
 	CHANNEL_TYPING,
 	GUILD,
 	GUILD_AUDIT_LOGS,
-	GUILD_CHANNELS,
-	GUILD_EMOJI,
-	GUILD_EMOJIS,
-	GUILD_MEMBER,
-	GUILD_MEMBERS,
-	GUILD_PREVIEW,
-	GUILDS,
-	GUILD_CURRENT_USER_NICK,
-	GUILD_MEMBER_ROLE,
 	GUILD_BAN,
 	GUILD_BANS,
+	GUILD_CHANNELS,
+	GUILD_CURRENT_USER_NICK,
+	GUILD_EMBED,
+	GUILD_EMOJI,
+	GUILD_EMOJIS,
+	GUILD_INTEGRATION,
+	GUILD_INTEGRATION_SYNC,
+	GUILD_INTEGRATIONS,
+	GUILD_INVITES,
+	GUILD_MEMBER,
+	GUILD_MEMBER_ROLE,
+	GUILD_MEMBERS,
+	GUILD_PREVIEW,
+	GUILD_PRUNE,
+	GUILD_REGIONS,
+	GUILD_ROLE,
 	GUILD_ROLES,
+	GUILD_VANITY_URL,
+	GUILD_WIDGET,
+	GUILD_WIDGET_IMAGE,
+	GUILDS,
 } from './endpoint-urls.ts';
-import { RawRole } from '../raw/RawRole.ts';
-import { wrapRole } from '../structure/Role.ts';
 
 export class DiscordEndpoints {
 	private readonly api: ApiCaller;
@@ -585,6 +631,118 @@ export class DiscordEndpoints {
 		return this.api
 			.patch<RawRole[]>(GUILD_ROLES(id), raw)
 			.then(x => x.map(wrapRole));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#modify-guild-role
+	modifyGuildRole(
+		id: GuildId,
+		roleId: RoleId,
+		payload?: ModifyGuildRolePayload,
+	) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		const raw = payload && unwrapModifyGuildRolePayload(payload);
+		return this.api.patch<RawRole>(GUILD_ROLE(id, roleId), raw).then(wrapRole);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#delete-guild-role
+	deleteGuildRole(id: GuildId, roleId: RoleId) {
+		this.checkPermissions(Permission.MANAGE_ROLES);
+		return this.api.delete<void>(GUILD_ROLE(id, roleId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-prune-count
+	getGuildProneCount(id: GuildId, params?: GuildPruneCountParams) {
+		this.checkPermissions(Permission.KICK_MEMBERS);
+		const raw = params && unwrapGuildPruneCountParams(params);
+		return this.api.get<{ pruned: number }>(GUILD_PRUNE(id), params);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#begin-guild-prune
+	beginGuildProne(id: GuildId, params?: BeginGuildPruneParams) {
+		this.checkPermissions(Permission.KICK_MEMBERS);
+		const raw = params && unwrapBeginGuildPruneParams(params);
+		return this.api.get<{ pruned: number }>(GUILD_PRUNE(id), raw);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+	getGuildVoiceRegions(id: GuildId) {
+		return this.api
+			.get<RawVoiceRegion[]>(GUILD_REGIONS(id))
+			.then(x => x.map(wrapVoiceRegion));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-invites
+	getGuildInvites(id: GuildId) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		return this.api
+			.get<RawInvite[]>(GUILD_INVITES(id))
+			.then(x => x.map(wrapInvite));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-integrations
+	getGuildIntegrations(id: GuildId) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		return this.api
+			.get<RawIntegration[]>(GUILD_INTEGRATIONS(id))
+			.then(x => x.map(wrapIntegration));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#create-guild-integration
+	createGuildIntegration(id: GuildId, payload: CreateGuildIntegrationPayload) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		const raw = unwrapCreateGuildIntegrationPayload(payload);
+		return this.api.post<void>(GUILD_INTEGRATIONS(id));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#modify-guild-integration
+	modifyGuildIntegration(
+		id: GuildId,
+		integrationId: IntegrationId,
+		payload: ModifyGuildIntegrationPayload,
+	) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		const raw = unwrapModifyGuildIntegrationPayload(payload);
+		return this.api.patch(GUILD_INTEGRATION(id, integrationId), raw);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#delete-guild-integration
+	deleteGuildIntegration(id: GuildId, integrationId: IntegrationId) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		return this.api.delete<void>(GUILD_INTEGRATION(id, integrationId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#sync-guild-integration
+	syncGuildIntegration(id: GuildId, integrationId: IntegrationId) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		return this.api.post<void>(GUILD_INTEGRATION_SYNC(id, integrationId));
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-widget
+	getGuildWidget(id: GuildId) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		return this.api.get<RawGuildWidget>(GUILD_WIDGET(id)).then(wrapGuildWidget);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#modify-guild-widget
+	modifyGuildWidget(id: GuildId, payload: Partial<GuildWidget>) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		const raw = unwrapGuildWidgetPartial(payload);
+		return this.api.patch<RawGuildWidget>(GUILD(id), raw).then(wrapGuildWidget);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-vanity-url
+	getGuildVanityUrl(id: GuildId) {
+		this.checkPermissions(Permission.MANAGE_GUILD);
+		return this.api
+			.get<Partial<RawInvite>>(GUILD_VANITY_URL(id))
+			.then(wrapInvitePartial);
+	}
+
+	// https://discord.com/developers/docs/resources/guild#get-guild-widget-image
+	getGuildWidgeteImageUrl(id: GuildId, params?: GuildWidgetImageParams) {
+		const raw = unwrapGuildWidgetImageParams(params);
+		const url = GUILD_WIDGET_IMAGE(id);
+		return this.api.addQueryParams(url, raw);
 	}
 
 	// gatewayBot() {

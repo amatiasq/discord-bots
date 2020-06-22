@@ -37,7 +37,7 @@ export class ApiCaller {
 		body: RequestBody = null,
 		params: QueryParams = null,
 	) {
-		const fullUrl = params ? addQueryParams(url, params) : url;
+		const fullUrl = params ? this.addQueryParams(url, params) : url;
 		return this.request<T>(RequestMethod.PATCH, fullUrl, body);
 	}
 
@@ -46,7 +46,7 @@ export class ApiCaller {
 		body: RequestBody = null,
 		params: QueryParams = null,
 	) {
-		const fullUrl = params ? addQueryParams(url, params) : url;
+		const fullUrl = params ? this.addQueryParams(url, params) : url;
 		return this.request<T>(RequestMethod.PUT, fullUrl, body);
 	}
 
@@ -55,7 +55,7 @@ export class ApiCaller {
 		body: RequestBody = null,
 		params: QueryParams = null,
 	) {
-		const fullUrl = params ? addQueryParams(url, params) : url;
+		const fullUrl = params ? this.addQueryParams(url, params) : url;
 		return this.request<T>(RequestMethod.POST, fullUrl, body);
 	}
 
@@ -64,8 +64,17 @@ export class ApiCaller {
 		body: RequestBody = null,
 		params: QueryParams = null,
 	) {
-		const fullUrl = params ? addQueryParams(url, params) : url;
+		const fullUrl = params ? this.addQueryParams(url, params) : url;
 		return this.request<T>(RequestMethod.DELETE, fullUrl);
+	}
+
+	addQueryParams(url: string, params: {}) {
+		const serialized = Object.entries(params as { [id: string]: string }).map(
+			([key, value]) =>
+				`${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+		);
+
+		return `${url}?${serialized.join('&')}`;
 	}
 }
 
@@ -84,12 +93,4 @@ function createRequest(
 		},
 		body: body && JSON.stringify(body),
 	});
-}
-
-function addQueryParams(url: string, params: {}) {
-	const serialized = Object.entries(params as { [id: string]: string }).map(
-		([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
-	);
-
-	return `${url}?${serialized.join('&')}`;
 }
