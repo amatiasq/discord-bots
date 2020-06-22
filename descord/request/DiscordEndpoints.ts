@@ -1,10 +1,23 @@
+import { RawGuildPreview } from '../raw/RawGuildPreview.ts';
+import { GuildParams, unwrapGuildParams } from '../structure/GuildParams.ts';
+import {
+	CreateGuildPayload,
+	unwrapCreateGuildPayload,
+} from '../structure/CreateGuildPayload.ts';
+import {
+	ModifyGuildEmojiPayload,
+	unwrapModifyGuildEmojiPayload,
+} from '../structure/ModifyGuildEmojiPayload.ts';
+import {
+	CreateGuildEmojiPayload,
+	unwrapCreateGuildEmojiPayload,
+} from '../structure/CreateGuildEmojiPayload.ts';
 import { RawAuditLog } from '../raw/RawAuditLog.ts';
 import { RawChannel } from '../raw/RawChannel.ts';
 import { RawInvite } from '../raw/RawInvite.ts';
 import { RawMessage } from '../raw/RawMessage.ts';
 import { RawUser } from '../raw/RawUser.ts';
 import { wrapAuditLog } from '../structure/AuditLog.ts';
-import { wrapBotGatewayData } from '../structure/BotGatewayData.ts';
 import {
 	BulkDeleteMessagesPayload,
 	unwrapBulkDeleteMessagesPayload,
@@ -30,7 +43,10 @@ import {
 	EditMessagePayload,
 	unwrapEditMessagePayload,
 } from '../structure/EditMessagePayload.ts';
-import { GroupDmAddRecipientPayload } from '../structure/GroupDmAddRecipientPayload.ts';
+import {
+	GroupDmAddRecipientPayload,
+	unwrapGroupDmAddRecipientPayload,
+} from '../structure/GroupDmAddRecipientPayload.ts';
 import { wrapInvite } from '../structure/Invite.ts';
 import { wrapMessage } from '../structure/Message.ts';
 import {
@@ -48,6 +64,7 @@ import {
 	OverwriteId,
 	Permission,
 	UserId,
+	EmojiId,
 } from '../type-aliases.ts';
 import { ApiCaller } from './ApiCaller.ts';
 import {
@@ -63,9 +80,17 @@ import {
 	CHANNEL_PINNED_MESSAGE,
 	CHANNEL_PINS,
 	CHANNEL_TYPING,
-	GATEWAY_BOT,
 	GUILD_AUDIT_LOGS,
+	CHANNEL_RECIPIENT,
+	GUILD_EMOJIS,
+	GUILD_EMOJI,
+	GUILDS,
+	GUILD,
 } from './endpoint-urls.ts';
+import { RawEmoji } from '../raw/RawEmoji.ts';
+import { wrapEmoji } from '../structure/Emoji.ts';
+import { wrapGuild } from '../structure/Guild.ts';
+import { RawGuild } from '../raw/RawGuild.ts';
 
 export class DiscordEndpoints {
 	private readonly api: ApiCaller;
@@ -102,10 +127,7 @@ export class DiscordEndpoints {
 		return this.api.delete<RawChannel>(CHANNEL(id)).then(wrapChannel);
 	}
 
-	getChannelMessages(
-		id: ChannelId,
-		params: ChannelMessagesParams | null = null,
-	) {
+	getChannelMessages(id: ChannelId, params?: ChannelMessagesParams) {
 		this.checkPermissions(Permission.VIEW_CHANNEL);
 		const raw = params && unwrapChannelMessagesParams(params);
 		return this.api
@@ -171,7 +193,7 @@ export class DiscordEndpoints {
 		id: ChannelId,
 		messageId: MessageId,
 		emoji: string,
-		params: ReactionsParams | null = null,
+		params?: ReactionsParams,
 	) {
 		this.checkPermissions(Permission.MANAGE_MESSAGES);
 		const raw = params && unwrapReactionsParams(params);
@@ -212,10 +234,7 @@ export class DiscordEndpoints {
 		return this.api.delete<void>(CHANNEL_MESSAGE(id, messageId));
 	}
 
-	bulkDeleteMessages(
-		id: ChannelId,
-		payload: BulkDeleteMessagesPayload | null = null,
-	) {
+	bulkDeleteMessages(id: ChannelId, payload?: BulkDeleteMessagesPayload) {
 		this.checkPermissions(Permission.MANAGE_MESSAGES);
 		const raw = payload && unwrapBulkDeleteMessagesPayload(payload);
 		return this.api.post<void>(CHANNEL_BULK_DELETE(id), raw);
@@ -273,17 +292,65 @@ export class DiscordEndpoints {
 		id: ChannelId,
 		userId: UserId,
 		payload: GroupDmAddRecipientPayload,
-	) {}
-
-	//
-
-	gatewayBot() {
-		return this.api.get(GATEWAY_BOT()).then(wrapBotGatewayData);
+	) {
+		const raw = unwrapGroupDmAddRecipientPayload(payload);
+		return this.api.put<void>(CHANNEL_RECIPIENT(id, userId), raw);
 	}
 
-	// async sendMessage(channel: Channel, message: CreateMessagePayload) {
-	// 	return this.api.post(CHANNEL_MESSAGES(channel.id), message);
+	groupDmRemoveRecipient(id: ChannelId, userId: UserId) {
+		return this.api.delete<void>(CHANNEL_RECIPIENT(id, userId));
+	}
+
+	// https://discord.com/developers/docs/resources/emoji
+
+	listGuildEmojis(id: GuildId) {
+		return this.api
+			.get<RawEmoji[]>(GUILD_EMOJIS(id))
+			.then(x => x.map(wrapEmoji));
+	}
+
+	getGuildEmoji(id: GuildId, emoji: EmojiId) {
+		return this.api.get<RawEmoji>(GUILD_EMOJI(id, emoji)).then(wrapEmoji);
+	}
+
+	createGuildEmoji(id: GuildId, payload: CreateGuildEmojiPayload) {
+		this.checkPermissions(Permission.MANAGE_EMOJIS);
+		const raw = unwrapCreateGuildEmojiPayload(payload);
+		return this.api.post<RawEmoji>(GUILD_EMOJIS(id), raw);
+	}
+
+	modifyGuildEmoji(
+		id: GuildId,
+		emoji: EmojiId,
+		payload?: ModifyGuildEmojiPayload,
+	) {
+		this.checkPermissions(Permission.MANAGE_EMOJIS);
+		const raw = payload && unwrapModifyGuildEmojiPayload(payload);
+		return this.api.get<RawEmoji>(GUILD_EMOJI(id, emoji), raw).then(wrapEmoji);
+	}
+
+	deleteGuildEmoji(id: GuildId, emoji: EmojiId) {
+		this.checkPermissions(Permission.MANAGE_EMOJIS);
+		this.api.delete<void>(GUILD_EMOJI(id, emoji));
+	}
+
+	// https://discord.com/developers/docs/resources/guild
+
+	createGuild(payload: CreateGuildPayload) {
+		const raw = unwrapCreateGuildPayload(payload);
+		return this.api.post<RawGuild>(GUILDS(), raw).then(wrapGuild);
+	}
+
+	getGuild(id: GuildId, params?: GuildParams) {
+		const raw = params && unwrapGuildParams(params);
+		return this.api.get<RawGuild>(GUILD(id), raw).then(wrapGuild);
+	}
+
+	getGuildPreview(id: GuildId) {
+		// return this.api.get<RawGuildPreview>
+	}
+
+	// gatewayBot() {
+	// 	return this.api.get(GATEWAY_BOT()).then(wrapBotGatewayData);
 	// }
 }
-
-type Id<T> = { id: T };

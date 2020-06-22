@@ -13,7 +13,6 @@ export interface ChannelMention {
 	name: string;
 }
 
-
 export function wrapChannelMention(x: RawChannelMention): ChannelMention {
 	return {
 		...x,
@@ -28,18 +27,20 @@ export function unwrapChannelMention(x: ChannelMention): RawChannelMention {
 	};
 }
 
-export function wrapChannelMentionPartial(x: Partial<RawChannelMention>): Partial<ChannelMention> {
+export function wrapChannelMentionPartial(
+	x: Partial<RawChannelMention>,
+): Partial<ChannelMention> {
 	return {
 		...x,
 		guildId: x.guild_id && x.guild_id,
 	};
 }
 
-export function unwrapChannelMentionPartial(x: Partial<ChannelMention>): Partial<RawChannelMention> {
+export function unwrapChannelMentionPartial(
+	x: Partial<ChannelMention>,
+): Partial<RawChannelMention> {
 	return {
 		...x,
 		guild_id: x.guildId && x.guildId,
 	};
 }
-
-
