@@ -1,6 +1,8 @@
 import { RawIntegration } from './RawIntegration.ts';
 import { VisibilityType } from '../enum/VisibilityType.ts';
 
+// https://discord.com/developers/docs/resources/user#connection-object-connection-structure
+
 export interface RawConnection {
 	/** id of the connection account */
 	id: string;

@@ -18,5 +18,3 @@ export function unwrapUnavailableGuild(x: UnavailableGuild): RawUnavailableGuild
 export const wrapUnavailableGuildPartial = wrapUnavailableGuild as (x: Partial<RawUnavailableGuild>) => Partial<UnavailableGuild>;
 
 export const unwrapUnavailableGuildPartial = unwrapUnavailableGuild as (x: Partial<UnavailableGuild>) => Partial<RawUnavailableGuild>;
-
-

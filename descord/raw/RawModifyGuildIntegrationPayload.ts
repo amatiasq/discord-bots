@@ -1,6 +1,8 @@
 import { integer } from '../type-aliases.ts';
 import { IntegrationExpireBehavior } from '../enum/IntegrationExpireBehavior.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-integration-json-params
+
 export interface RawModifyGuildIntegrationPayload {
 	/** the behavior when an integration subscription lapses (see the integration expire behaviors documentation) */
 	expire_behavior: IntegrationExpireBehavior;

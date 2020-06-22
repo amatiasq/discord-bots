@@ -1,5 +1,6 @@
 import { ChannelId, MessageId, MemberId, RoleId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info
 export interface RawOptionalAuditEntryInfo {
 	/** number of days after which inactive members were kicked (Action Type: MEMBER_PRUNE) */
 	delete_member_days: string;

@@ -1,5 +1,6 @@
 import { RawEmbedFooter } from '../raw/RawEmbedFooter.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
 
 export interface EmbedFooter {
 	/** footer text */
@@ -30,5 +31,3 @@ export function unwrapEmbedFooter(x: EmbedFooter): RawEmbedFooter {
 export const wrapEmbedFooterPartial = wrapEmbedFooter as (x: Partial<RawEmbedFooter>) => Partial<EmbedFooter>;
 
 export const unwrapEmbedFooterPartial = unwrapEmbedFooter as (x: Partial<EmbedFooter>) => Partial<RawEmbedFooter>;
-
-

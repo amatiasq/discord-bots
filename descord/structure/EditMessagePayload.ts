@@ -2,6 +2,8 @@ import { RawEditMessagePayload } from '../raw/RawEditMessagePayload.ts';
 import { MessageFlag } from '../enum/MessageFlag.ts';
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
 
+// https://discord.com/developers/docs/resources/channel#edit-message-json-params
+
 export interface EditMessagePayload {
 	/** the new message contents (up to 2000 characters) */
 	content?: string;
@@ -29,5 +31,3 @@ export function unwrapEditMessagePayload(x: EditMessagePayload): RawEditMessageP
 export const wrapEditMessagePayloadPartial = wrapEditMessagePayload as (x: Partial<RawEditMessagePayload>) => Partial<EditMessagePayload>;
 
 export const unwrapEditMessagePayloadPartial = unwrapEditMessagePayload as (x: Partial<EditMessagePayload>) => Partial<RawEditMessagePayload>;
-
-

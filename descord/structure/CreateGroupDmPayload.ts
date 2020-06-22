@@ -1,5 +1,6 @@
 import { RawCreateGroupDmPayload } from '../raw/RawCreateGroupDmPayload.ts';
 
+// https://discord.com/developers/docs/resources/user#create-group-dm-json-params
 
 export interface CreateGroupDmPayload {
 	/** access tokens of users that have granted your app the gdm.join scope */
@@ -36,5 +37,3 @@ export function unwrapCreateGroupDmPayloadPartial(x: Partial<CreateGroupDmPayloa
 		access_tokens: x.accessTokens && x.accessTokens,
 	};
 }
-
-

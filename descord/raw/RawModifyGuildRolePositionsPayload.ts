@@ -1,5 +1,7 @@
 import { RoleId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-role-positions-json-params
+
 export interface RawModifyGuildRolePositionsPayload {
 	/** role */
 	id: RoleId;

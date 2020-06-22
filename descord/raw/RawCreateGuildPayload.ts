@@ -10,6 +10,8 @@ import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.t
 import { RawRole } from './RawRole.ts';
 import { RawChannel } from './RawChannel.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-json-params
+
 export interface RawCreateGuildPayload {
 	/** name of the guild (2-100 characters) */
 	name: string;

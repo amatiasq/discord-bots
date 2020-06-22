@@ -1,5 +1,7 @@
 import { MessageId, ChannelId, GuildId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure
+
 export interface RawMessageReference {
 	/** id of the originating message */
 	message_id?: MessageId;

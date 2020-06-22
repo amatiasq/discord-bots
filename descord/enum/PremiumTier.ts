@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/guild#guild-object-premium-tier
+
 export enum PremiumTier {
 	NONE = 0,
 	TIER_1 = 1,

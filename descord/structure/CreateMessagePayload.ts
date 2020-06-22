@@ -2,6 +2,8 @@ import { RawCreateMessagePayload } from '../raw/RawCreateMessagePayload.ts';
 import { AllowedMentions, wrapAllowedMentions, unwrapAllowedMentions } from './AllowedMentions.ts';
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
 
+// https://discord.com/developers/docs/resources/channel#create-message-params
+
 export interface CreateMessagePayload {
 	/** the message contents (up to 2000 characters) */
 	content: string;
@@ -39,5 +41,3 @@ export function unwrapCreateMessagePayload(x: CreateMessagePayload): RawCreateMe
 export const wrapCreateMessagePayloadPartial = wrapCreateMessagePayload as (x: Partial<RawCreateMessagePayload>) => Partial<CreateMessagePayload>;
 
 export const unwrapCreateMessagePayloadPartial = unwrapCreateMessagePayload as (x: Partial<CreateMessagePayload>) => Partial<RawCreateMessagePayload>;
-
-

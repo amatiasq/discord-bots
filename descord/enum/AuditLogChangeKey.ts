@@ -1,3 +1,4 @@
+// https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key
 export enum AuditLogChangeKey {
 	NAME = 'name',
 	ICON_HASH = 'icon_hash',

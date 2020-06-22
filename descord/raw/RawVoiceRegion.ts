@@ -1,5 +1,7 @@
 import { VoiceRegionId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure
+
 export interface RawVoiceRegion {
 	/** unique ID for the region */
 	id: VoiceRegionId;

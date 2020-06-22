@@ -38,5 +38,3 @@ export function unwrapGatewaySessionStartLimitPartial(x: Partial<GatewaySessionS
 		reset_after: x.resetAfter && x.resetAfter,
 	};
 }
-
-

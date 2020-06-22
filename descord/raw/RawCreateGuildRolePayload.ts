@@ -1,5 +1,7 @@
 import { integer, PermissionInteger } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-role-json-params
+
 export interface RawCreateGuildRolePayload {
 	/** name of the role DEFAULT: "new role" */
 	name?: string;

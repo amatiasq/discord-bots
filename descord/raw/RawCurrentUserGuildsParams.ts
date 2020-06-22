@@ -1,5 +1,7 @@
 import { GuildId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/user#get-current-user-guilds-query-string-params
+
 export interface RawCurrentUserGuildsParams {
 	/** get guilds before this guild ID DEFAULT: absent */
 	before?: GuildId;

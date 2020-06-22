@@ -1,5 +1,6 @@
 import { RawEmbedAuthor } from '../raw/RawEmbedAuthor.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
 
 export interface EmbedAuthor {
 	/** name of author */
@@ -32,5 +33,3 @@ export function unwrapEmbedAuthor(x: EmbedAuthor): RawEmbedAuthor {
 export const wrapEmbedAuthorPartial = wrapEmbedAuthor as (x: Partial<RawEmbedAuthor>) => Partial<EmbedAuthor>;
 
 export const unwrapEmbedAuthorPartial = unwrapEmbedAuthor as (x: Partial<EmbedAuthor>) => Partial<RawEmbedAuthor>;
-
-

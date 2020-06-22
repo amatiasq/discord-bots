@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/channel#message-object-message-flags
+
 export enum MessageFlag {
 	/** this message has been published to subscribed channels (via Channel Following) */
 	CROSSPOSTED = 1 << 0,

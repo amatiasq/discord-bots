@@ -18,6 +18,8 @@ import { RawMessageReference } from './RawMessageReference.ts';
 import { RawReaction } from './RawReaction.ts';
 import { RawUser } from './RawUser.ts';
 
+// https://discord.com/developers/docs/resources/channel#message-object-message-structure
+
 export interface RawMessage {
 	/** id of the message */
 	id: MessageId;

@@ -1,6 +1,8 @@
 import { RawModifyGuildChannelPositionsPayload } from '../raw/RawModifyGuildChannelPositionsPayload.ts';
 import { ChannelId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions-json-params
+
 export interface ModifyGuildChannelPositionsPayload {
 	/** channel id */
 	id: ChannelId;
@@ -20,5 +22,3 @@ export function unwrapModifyGuildChannelPositionsPayload(x: ModifyGuildChannelPo
 export const wrapModifyGuildChannelPositionsPayloadPartial = wrapModifyGuildChannelPositionsPayload as (x: Partial<RawModifyGuildChannelPositionsPayload>) => Partial<ModifyGuildChannelPositionsPayload>;
 
 export const unwrapModifyGuildChannelPositionsPayloadPartial = unwrapModifyGuildChannelPositionsPayload as (x: Partial<ModifyGuildChannelPositionsPayload>) => Partial<RawModifyGuildChannelPositionsPayload>;
-
-

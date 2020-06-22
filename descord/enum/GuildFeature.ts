@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/guild#guild-object-guild-features
+
 export enum GuildFeature {
 	/** guild has access to set an invite splash background */
 	INVITE_SPLASH = 'INVITE_SPLASH',

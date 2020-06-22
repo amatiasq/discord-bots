@@ -74,5 +74,3 @@ export function unwrapPresenceUpdateEventPartial(x: Partial<PresenceUpdateEvent>
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
 }
-
-

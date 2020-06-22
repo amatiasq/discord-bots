@@ -3,6 +3,8 @@ import { WebhookId, GuildId, ChannelId } from '../type-aliases.ts';
 import { WebhookType } from '../enum/WebhookType.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 
+// https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure
+
 export interface Webhook {
 	/** the id of the webhook */
 	id: WebhookId;
@@ -58,5 +60,3 @@ export function unwrapWebhookPartial(x: Partial<Webhook>): Partial<RawWebhook> {
 		user: x.user && unwrapUser(x.user),
 	};
 }
-
-

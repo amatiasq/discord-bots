@@ -1,6 +1,8 @@
 import { RawChannelMessagesParams } from '../raw/RawChannelMessagesParams.ts';
 import { MessageId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#get-channel-messages-query-string-params
+
 export interface ChannelMessagesParams {
 	/** get messages around this message ID DEFAULT: absent */
 	around?: MessageId;
@@ -24,5 +26,3 @@ export function unwrapChannelMessagesParams(x: ChannelMessagesParams): RawChanne
 export const wrapChannelMessagesParamsPartial = wrapChannelMessagesParams as (x: Partial<RawChannelMessagesParams>) => Partial<ChannelMessagesParams>;
 
 export const unwrapChannelMessagesParamsPartial = unwrapChannelMessagesParams as (x: Partial<ChannelMessagesParams>) => Partial<RawChannelMessagesParams>;
-
-

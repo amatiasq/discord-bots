@@ -1,5 +1,7 @@
 import { ChannelId, ImageData } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/webhook#modify-webhook-json-params
+
 export interface RawModifyWebhookPayload {
 	/** the default name of the webhook */
 	name: string;

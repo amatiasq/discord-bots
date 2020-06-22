@@ -5,6 +5,8 @@ import { Guild, wrapGuildPartial, unwrapGuildPartial } from './Guild.ts';
 import { Channel, wrapChannelPartial, unwrapChannelPartial } from './Channel.ts';
 import { User, wrapUserPartial, unwrapUserPartial } from './User.ts';
 
+// https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
+
 export interface Invite {
 	/** the invite code (unique ID) */
 	code: InviteCode;
@@ -76,5 +78,3 @@ export function unwrapInvitePartial(x: Partial<Invite>): Partial<RawInvite> {
 		approximate_member_count: x.approximateMemberCount && x.approximateMemberCount,
 	};
 }
-
-

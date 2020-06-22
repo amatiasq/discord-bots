@@ -1,6 +1,8 @@
 import { RawEditChannelPermissionsPayload } from '../raw/RawEditChannelPermissionsPayload.ts';
 import { Permission, parsePermissionInteger, unparsePermissionInteger } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#edit-channel-permissions-json-params
+
 export interface EditChannelPermissionsPayload {
 	/** "member" for a user or "role" for a role */
 	type: 'member' | 'role';
@@ -42,5 +44,3 @@ export function unwrapEditChannelPermissionsPayloadPartial(x: Partial<EditChanne
 		deny: x.deny && unparsePermissionInteger(x.deny),
 	};
 }
-
-

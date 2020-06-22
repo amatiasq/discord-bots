@@ -2,6 +2,8 @@ import { RawGuildMember } from '../raw/RawGuildMember.ts';
 import { RoleId, parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
+
 export interface GuildMember {
 	/** the user this guild member represents */
 	user?: User;
@@ -55,5 +57,3 @@ export function unwrapGuildMemberPartial(x: Partial<GuildMember>): Partial<RawGu
 		premium_since: x.premiumSince && unparseISO8601Timestamp(x.premiumSince),
 	};
 }
-
-

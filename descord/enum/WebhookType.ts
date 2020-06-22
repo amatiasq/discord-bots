@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types
+
 export enum WebhookType {
 	/** Incoming Webhooks can post messages to channels with a generated token */
 	Incoming = 1,

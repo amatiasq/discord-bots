@@ -38,5 +38,3 @@ export function unwrapBotGatewayDataPartial(x: Partial<BotGatewayData>): Partial
 		session_start_limit: x.sessionStartLimit && unwrapGatewaySessionStartLimit(x.sessionStartLimit),
 	};
 }
-
-

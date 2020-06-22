@@ -1,5 +1,7 @@
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#create-channel-invite-json-params
+
 export interface RawCreateChannelInvitePayload {
 	/**
 	 * duration of invite in seconds before expiry, or 0 for never

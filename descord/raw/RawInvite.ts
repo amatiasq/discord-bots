@@ -4,6 +4,8 @@ import { RawGuild } from './RawGuild.ts';
 import { RawChannel } from './RawChannel.ts';
 import { RawUser } from './RawUser.ts';
 
+// https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
+
 export interface RawInvite {
 	/** the invite code (unique ID) */
 	code: InviteCode;

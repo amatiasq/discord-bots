@@ -1,5 +1,7 @@
 import { PermissionInteger, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-role-json-params
+
 export interface RawModifyGuildRolePayload {
 	/** name of the role */
 	name?: string;

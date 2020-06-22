@@ -1,6 +1,8 @@
 import { RawRole } from '../raw/RawRole.ts';
 import { RoleId, Permission, parsePermissionInteger, unparsePermissionInteger } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/topics/permissions#role-object-role-structure
+
 export interface Role {
 	/** role id */
 	id: RoleId;
@@ -48,5 +50,3 @@ export function unwrapRolePartial(x: Partial<Role>): Partial<RawRole> {
 		permissions: x.permissions && unparsePermissionInteger(x.permissions),
 	};
 }
-
-

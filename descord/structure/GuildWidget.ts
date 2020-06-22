@@ -1,6 +1,8 @@
 import { RawGuildWidget } from '../raw/RawGuildWidget.ts';
 import { ChannelId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure
+
 export interface GuildWidget {
 	/** whether the widget is enabled */
 	enabled: boolean;
@@ -26,5 +28,3 @@ export function unwrapGuildWidget(x: GuildWidget): RawGuildWidget {
 export const wrapGuildWidgetPartial = wrapGuildWidget as (x: Partial<RawGuildWidget>) => Partial<GuildWidget>;
 
 export const unwrapGuildWidgetPartial = unwrapGuildWidget as (x: Partial<GuildWidget>) => Partial<RawGuildWidget>;
-
-

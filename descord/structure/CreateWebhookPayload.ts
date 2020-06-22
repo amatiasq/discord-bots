@@ -1,6 +1,8 @@
 import { RawCreateWebhookPayload } from '../raw/RawCreateWebhookPayload.ts';
 import { ImageData } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/webhook#create-webhook-json-params
+
 export interface CreateWebhookPayload {
 	/** name of the webhook (1-80 characters) */
 	name: string;
@@ -20,5 +22,3 @@ export function unwrapCreateWebhookPayload(x: CreateWebhookPayload): RawCreateWe
 export const wrapCreateWebhookPayloadPartial = wrapCreateWebhookPayload as (x: Partial<RawCreateWebhookPayload>) => Partial<CreateWebhookPayload>;
 
 export const unwrapCreateWebhookPayloadPartial = unwrapCreateWebhookPayload as (x: Partial<CreateWebhookPayload>) => Partial<RawCreateWebhookPayload>;
-
-

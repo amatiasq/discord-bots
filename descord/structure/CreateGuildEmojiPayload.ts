@@ -1,6 +1,8 @@
 import { RawCreateGuildEmojiPayload } from '../raw/RawCreateGuildEmojiPayload.ts';
 import { RoleId, ImageData } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/emoji#create-guild-emoji-json-params
+
 export interface CreateGuildEmojiPayload {
 	/** name of the emoji */
 	name: string;
@@ -22,5 +24,3 @@ export function unwrapCreateGuildEmojiPayload(x: CreateGuildEmojiPayload): RawCr
 export const wrapCreateGuildEmojiPayloadPartial = wrapCreateGuildEmojiPayload as (x: Partial<RawCreateGuildEmojiPayload>) => Partial<CreateGuildEmojiPayload>;
 
 export const unwrapCreateGuildEmojiPayloadPartial = unwrapCreateGuildEmojiPayload as (x: Partial<CreateGuildEmojiPayload>) => Partial<RawCreateGuildEmojiPayload>;
-
-

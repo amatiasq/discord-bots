@@ -1,5 +1,6 @@
 import { RawGuildParams } from '../raw/RawGuildParams.ts';
 
+// https://discord.com/developers/docs/resources/guild#get-guild-query-string-params
 
 export interface GuildParams {
 	/** when true, will return approximate member and presence counts for the guild	DEFAULT: false */
@@ -24,5 +25,3 @@ export function unwrapGuildParams(x: GuildParams): RawGuildParams {
 export const wrapGuildParamsPartial = wrapGuildParams as (x: Partial<RawGuildParams>) => Partial<GuildParams>;
 
 export const unwrapGuildParamsPartial = unwrapGuildParams as (x: Partial<GuildParams>) => Partial<RawGuildParams>;
-
-

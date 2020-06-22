@@ -1,5 +1,6 @@
 import { RawEmbedField } from '../raw/RawEmbedField.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
 
 export interface EmbedField {
 	/** name of the field */
@@ -22,5 +23,3 @@ export function unwrapEmbedField(x: EmbedField): RawEmbedField {
 export const wrapEmbedFieldPartial = wrapEmbedField as (x: Partial<RawEmbedField>) => Partial<EmbedField>;
 
 export const unwrapEmbedFieldPartial = unwrapEmbedField as (x: Partial<EmbedField>) => Partial<RawEmbedField>;
-
-

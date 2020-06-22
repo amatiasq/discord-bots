@@ -1,6 +1,8 @@
 import { GuildId, ChannelId, UserId } from '../type-aliases.ts';
 import { RawGuildMember } from './RawGuildMember.ts';
 
+// https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure
+
 export interface RawVoiceState {
 	/** the guild id this voice state is for */
 	guild_id?: GuildId;

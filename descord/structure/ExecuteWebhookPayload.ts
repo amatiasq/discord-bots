@@ -2,6 +2,8 @@ import { RawExecuteWebhookPayload } from '../raw/RawExecuteWebhookPayload.ts';
 import { Embed, wrapEmbed, unwrapEmbed } from './Embed.ts';
 import { AllowedMentions, wrapAllowedMentions, unwrapAllowedMentions } from './AllowedMentions.ts';
 
+// https://discord.com/developers/docs/resources/webhook#execute-webhook-jsonform-params
+
 export interface ExecuteWebhookPayload {
 	/** the message contents (up to 2000 characters) DEFAULT: one of content, file, embeds */
 	content: string;
@@ -63,5 +65,3 @@ export function unwrapExecuteWebhookPayloadPartial(x: Partial<ExecuteWebhookPayl
 		// payload_json: x.payloadJson && x.payloadJson,
 	};
 }
-
-

@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
+
 export interface RawEmbedFooter {
 	/** footer text */
 	text: string;

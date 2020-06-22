@@ -1,6 +1,8 @@
 import { RoleId, UserId } from '../type-aliases.ts';
 import { AllowedMentionType } from '../enum/AllowedMentionType.ts';
 
+// https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure
+
 export interface RawAllowedMentions {
 	/** An array of allowed mention types to parse from the content. */
 	parse: AllowedMentionType[];

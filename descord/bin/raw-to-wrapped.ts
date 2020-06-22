@@ -43,8 +43,7 @@ function transform(content: string) {
 
 	return `import { Raw${name} } from '../raw/Raw${name}.ts';
 ${toCamelCase(result)}
-${writeFunctions(name, parent, properties)}
-`;
+${writeFunctions(name, parent, properties)}`;
 }
 
 function writeFunctions(name: string, parent: string, properties: string) {
@@ -68,8 +67,7 @@ export ${
 		unwrapPartialBody === unwrapBody
 			? `const unwrap${name}Partial = unwrap${name} as (x: Partial<${name}>) => Partial<Raw${name}>;`
 			: `function unwrap${name}Partial(x: Partial<${name}>): Partial<Raw${name}> {\n\t${unwrapPartialBody}\n}`
-	}
-`;
+	}`;
 }
 
 function adaptImports(name: string, imports: string, partials: string[]) {
@@ -87,7 +85,7 @@ function adaptImports(name: string, imports: string, partials: string[]) {
 		list.join('\n'),
 	);
 
-	return `${finish}\n\n`;
+	return `${finish.replace('// https:', '\n// https:')}\n\n`;
 }
 
 function parse(content: string) {

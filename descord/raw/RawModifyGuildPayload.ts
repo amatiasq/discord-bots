@@ -3,6 +3,8 @@ import { MessageNotificationLevel } from '../enum/MessageNotificationLevel.ts';
 import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.ts';
 import { ChannelId, integer, ImageData, UserId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-json-params
+
 export interface RawModifyGuildPayload {
 	/** guild name */
 	name: string;

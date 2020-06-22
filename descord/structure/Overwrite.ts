@@ -7,6 +7,8 @@ import {
 	UserId,
 } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure
+
 interface Overwrite_Role {
 	/** role or user id */
 	id: RoleId;

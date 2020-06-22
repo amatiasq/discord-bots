@@ -1,6 +1,8 @@
 import { RawCreateChannelInvitePayload } from '../raw/RawCreateChannelInvitePayload.ts';
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#create-channel-invite-json-params
+
 export interface CreateChannelInvitePayload {
 	/**
 	 * duration of invite in seconds before expiry, or 0 for never
@@ -52,5 +54,3 @@ export function unwrapCreateChannelInvitePayload(x: CreateChannelInvitePayload):
 export const wrapCreateChannelInvitePayloadPartial = wrapCreateChannelInvitePayload as (x: Partial<RawCreateChannelInvitePayload>) => Partial<CreateChannelInvitePayload>;
 
 export const unwrapCreateChannelInvitePayloadPartial = unwrapCreateChannelInvitePayload as (x: Partial<CreateChannelInvitePayload>) => Partial<RawCreateChannelInvitePayload>;
-
-

@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+
 export enum ChannelType {
 	/** a text channel within a server */
 	GUILD_TEXT = 0,

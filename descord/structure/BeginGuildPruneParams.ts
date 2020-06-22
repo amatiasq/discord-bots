@@ -1,6 +1,8 @@
 import { RawBeginGuildPruneParams } from '../raw/RawBeginGuildPruneParams.ts';
 import { RoleId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#begin-guild-prune-query-string-params
+
 export interface BeginGuildPruneParams {
 	/** number of days to prune (1 or more) DEFAULT: 7 */
 	days?: integer;
@@ -30,5 +32,3 @@ export function unwrapBeginGuildPruneParams(x: BeginGuildPruneParams): RawBeginG
 export const wrapBeginGuildPruneParamsPartial = wrapBeginGuildPruneParams as (x: Partial<RawBeginGuildPruneParams>) => Partial<BeginGuildPruneParams>;
 
 export const unwrapBeginGuildPruneParamsPartial = unwrapBeginGuildPruneParams as (x: Partial<BeginGuildPruneParams>) => Partial<RawBeginGuildPruneParams>;
-
-

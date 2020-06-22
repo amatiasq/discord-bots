@@ -1,5 +1,7 @@
 import { PermissionInteger } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#edit-channel-permissions-json-params
+
 export interface RawEditChannelPermissionsPayload {
 	/** "member" for a user or "role" for a role */
 	type: 'member' | 'role';

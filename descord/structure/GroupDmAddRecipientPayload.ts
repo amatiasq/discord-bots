@@ -1,5 +1,6 @@
 import { RawGroupDmAddRecipientPayload } from '../raw/RawGroupDmAddRecipientPayload.ts';
 
+// https://discord.com/developers/docs/resources/channel#group-dm-add-recipient-json-params
 
 export interface GroupDmAddRecipientPayload {
 	/** access token of a user that has granted your app the gdm.join scope */
@@ -36,5 +37,3 @@ export function unwrapGroupDmAddRecipientPayloadPartial(x: Partial<GroupDmAddRec
 		access_token: x.accessToken && x.accessToken,
 	};
 }
-
-

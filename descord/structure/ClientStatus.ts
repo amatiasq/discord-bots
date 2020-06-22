@@ -22,5 +22,3 @@ export function unwrapClientStatus(x: ClientStatus): RawClientStatus {
 export const wrapClientStatusPartial = wrapClientStatus as (x: Partial<RawClientStatus>) => Partial<ClientStatus>;
 
 export const unwrapClientStatusPartial = unwrapClientStatus as (x: Partial<ClientStatus>) => Partial<RawClientStatus>;
-
-

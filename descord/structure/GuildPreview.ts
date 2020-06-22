@@ -3,6 +3,8 @@ import { GuildFeature } from '../enum/GuildFeature.ts';
 import { GuildId, ImageData, integer } from '../type-aliases.ts';
 import { Emoji, wrapEmoji, unwrapEmoji } from './Emoji.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-preview-object-guild-preview-structure
+
 export interface GuildPreview {
 	/** guild id */
 	id: GuildId;
@@ -66,5 +68,3 @@ export function unwrapGuildPreviewPartial(x: Partial<GuildPreview>): Partial<Raw
 		approximate_presence_count: x.approximatePresenceCount && x.approximatePresenceCount,
 	};
 }
-
-

@@ -2,6 +2,8 @@ import { WebhookId, GuildId, ChannelId } from '../type-aliases.ts';
 import { WebhookType } from '../enum/WebhookType.ts';
 import { RawUser } from './RawUser.ts';
 
+// https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure
+
 export interface RawWebhook {
 	/** the id of the webhook */
 	id: WebhookId;

@@ -1,6 +1,8 @@
 import { ChannelId, GuildId } from '../type-aliases.ts';
 import { ChannelType } from '../enum/ChannelType.ts';
 
+// https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure
+
 export interface RawChannelMention {
 	/** id of the channel */
 	id: ChannelId;

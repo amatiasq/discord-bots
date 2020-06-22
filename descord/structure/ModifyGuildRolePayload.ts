@@ -1,6 +1,8 @@
 import { RawModifyGuildRolePayload } from '../raw/RawModifyGuildRolePayload.ts';
 import { Permission, parsePermissionInteger, unparsePermissionInteger, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-role-json-params
+
 export interface ModifyGuildRolePayload {
 	/** name of the role */
 	name?: string;
@@ -32,5 +34,3 @@ export function unwrapModifyGuildRolePayload(x: ModifyGuildRolePayload): RawModi
 export const wrapModifyGuildRolePayloadPartial = wrapModifyGuildRolePayload as (x: Partial<RawModifyGuildRolePayload>) => Partial<ModifyGuildRolePayload>;
 
 export const unwrapModifyGuildRolePayloadPartial = unwrapModifyGuildRolePayload as (x: Partial<ModifyGuildRolePayload>) => Partial<RawModifyGuildRolePayload>;
-
-

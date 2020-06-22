@@ -1,5 +1,7 @@
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
+
 export interface RawEmbedVideo {
 	/** source url of video */
 	url?: string;

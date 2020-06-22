@@ -1,6 +1,8 @@
 import { RawModifyGuildMemberPayload } from '../raw/RawModifyGuildMemberPayload.ts';
 import { RoleId, ChannelId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-member-json-params
+
 export interface ModifyGuildMemberPayload {
 	/** value to set users nickname to (requires permission: MANAGENICKNAMES) */
 	nick: string;
@@ -42,5 +44,3 @@ export function unwrapModifyGuildMemberPayloadPartial(x: Partial<ModifyGuildMemb
 		channel_id: x.channelId && x.channelId,
 	};
 }
-
-

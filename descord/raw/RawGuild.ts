@@ -18,6 +18,8 @@ import {
 import { RawEmoji } from './RawEmoji.ts';
 import { RawRole } from './RawRole.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-object-guild-structure
+
 export interface RawGuild {
 	/** guild id */
 	id: GuildId;

@@ -1,6 +1,8 @@
 import { RawMessageReference } from '../raw/RawMessageReference.ts';
 import { MessageId, ChannelId, GuildId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure
+
 export interface MessageReference {
 	/** id of the originating message */
 	messageId?: MessageId;
@@ -46,5 +48,3 @@ export function unwrapMessageReferencePartial(x: Partial<MessageReference>): Par
 		guild_id: x.guildId && x.guildId,
 	};
 }
-
-

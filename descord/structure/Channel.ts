@@ -12,6 +12,8 @@ import {
 import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 
+// https://discord.com/developers/docs/resources/channel#channel-object-channel-structure
+
 export interface Channel {
 	/** the id of this channel */
 	id: ChannelId;
@@ -87,5 +89,3 @@ export function unwrapChannel(x: Channel): RawChannel {
 export const wrapChannelPartial = wrapChannel as (x: Partial<RawChannel>) => Partial<Channel>;
 
 export const unwrapChannelPartial = unwrapChannel as (x: Partial<Channel>) => Partial<RawChannel>;
-
-

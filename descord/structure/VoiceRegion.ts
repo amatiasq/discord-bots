@@ -1,6 +1,8 @@
 import { RawVoiceRegion } from '../raw/RawVoiceRegion.ts';
 import { VoiceRegionId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure
+
 export interface VoiceRegion {
 	/** unique ID for the region */
 	id: VoiceRegionId;
@@ -28,5 +30,3 @@ export function unwrapVoiceRegion(x: VoiceRegion): RawVoiceRegion {
 export const wrapVoiceRegionPartial = wrapVoiceRegion as (x: Partial<RawVoiceRegion>) => Partial<VoiceRegion>;
 
 export const unwrapVoiceRegionPartial = unwrapVoiceRegion as (x: Partial<VoiceRegion>) => Partial<RawVoiceRegion>;
-
-

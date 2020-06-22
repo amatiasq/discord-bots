@@ -1,6 +1,8 @@
 import { MessageFlag } from '../enum/MessageFlag.ts';
 import { RawEmbed } from './RawEmbed.ts';
 
+// https://discord.com/developers/docs/resources/channel#edit-message-json-params
+
 export interface RawEditMessagePayload {
 	/** the new message contents (up to 2000 characters) */
 	content?: string;

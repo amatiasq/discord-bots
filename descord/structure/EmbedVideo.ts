@@ -1,6 +1,8 @@
 import { RawEmbedVideo } from '../raw/RawEmbedVideo.ts';
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
+
 export interface EmbedVideo {
 	/** source url of video */
 	url?: string;
@@ -22,5 +24,3 @@ export function unwrapEmbedVideo(x: EmbedVideo): RawEmbedVideo {
 export const wrapEmbedVideoPartial = wrapEmbedVideo as (x: Partial<RawEmbedVideo>) => Partial<EmbedVideo>;
 
 export const unwrapEmbedVideoPartial = unwrapEmbedVideo as (x: Partial<EmbedVideo>) => Partial<RawEmbedVideo>;
-
-

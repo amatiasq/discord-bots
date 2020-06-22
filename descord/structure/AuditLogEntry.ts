@@ -4,6 +4,8 @@ import { AuditLogEntryId, UserId } from '../type-aliases.ts';
 import { OptionalAuditEntryInfo, wrapOptionalAuditEntryInfo, unwrapOptionalAuditEntryInfo } from './OptionalAuditEntryInfo.ts';
 import { AuditLogChange, wrapAuditLogChange, unwrapAuditLogChange } from './AuditLogChange.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure
+
 export interface AuditLogEntry {
 	/** id of the affected entity (webhook, user, role, etc.) */
 	targetId?: string;
@@ -65,5 +67,3 @@ export function unwrapAuditLogEntryPartial(x: Partial<AuditLogEntry>): Partial<R
 		options: x.options && unwrapOptionalAuditEntryInfo(x.options),
 	};
 }
-
-

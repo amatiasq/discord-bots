@@ -12,6 +12,8 @@ import {
 import { Overwrite, wrapOverwrite } from './Overwrite.ts';
 import { Role, wrapRolePartial } from './Role.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
+
 /**
  * Object changed: guild
  * name changed

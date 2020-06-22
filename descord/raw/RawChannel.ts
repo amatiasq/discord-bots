@@ -11,6 +11,7 @@ import {
 import { RawOverwrite } from './RawOverwrite.ts';
 import { RawUser } from './RawUser.ts';
 
+// https://discord.com/developers/docs/resources/channel#channel-object-channel-structure
 export interface RawChannel {
 	/** the id of this channel */
 	id: ChannelId;

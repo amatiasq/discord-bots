@@ -8,6 +8,8 @@ import { IntegrationExpireBehavior } from '../enum/IntegrationExpireBehavior.ts'
 import { RawUser } from './RawUser.ts';
 import { RawIntegrationAccount } from './RawIntegrationAccount.ts';
 
+// https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
+
 export interface RawIntegration {
 	/** integration id */
 	id: IntegrationId;

@@ -2,6 +2,8 @@ import { RawUser } from '../raw/RawUser.ts';
 import { UserId, ImageData, UserFlag, parseUserFlagInteger, unparseUserFlagInteger } from '../type-aliases.ts';
 import { PremiumType } from '../enum/PremiumType.ts';
 
+// https://discord.com/developers/docs/resources/user#user-object-user-structure
+
 export interface User {
 	/** the user's id	identify */
 	id: UserId;
@@ -55,5 +57,3 @@ export function unwrapUser(x: User): RawUser {
 export const wrapUserPartial = wrapUser as (x: Partial<RawUser>) => Partial<User>;
 
 export const unwrapUserPartial = unwrapUser as (x: Partial<User>) => Partial<RawUser>;
-
-

@@ -1,6 +1,8 @@
 import { RawCurrentUserGuildsParams } from '../raw/RawCurrentUserGuildsParams.ts';
 import { GuildId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/user#get-current-user-guilds-query-string-params
+
 export interface CurrentUserGuildsParams {
 	/** get guilds before this guild ID DEFAULT: absent */
 	before?: GuildId;
@@ -22,5 +24,3 @@ export function unwrapCurrentUserGuildsParams(x: CurrentUserGuildsParams): RawCu
 export const wrapCurrentUserGuildsParamsPartial = wrapCurrentUserGuildsParams as (x: Partial<RawCurrentUserGuildsParams>) => Partial<CurrentUserGuildsParams>;
 
 export const unwrapCurrentUserGuildsParamsPartial = unwrapCurrentUserGuildsParams as (x: Partial<CurrentUserGuildsParams>) => Partial<RawCurrentUserGuildsParams>;
-
-

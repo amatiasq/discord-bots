@@ -3,6 +3,8 @@ import { integer, CategoryId } from '../type-aliases.ts';
 import { ChannelType } from '../enum/ChannelType.ts';
 import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params
+
 export interface CreateGuildChannelPayload {
 	/** channel name (2-100 characters) */
 	name: string;
@@ -66,5 +68,3 @@ export function unwrapCreateGuildChannelPayloadPartial(x: Partial<CreateGuildCha
 		parent_id: x.parentId && x.parentId,
 	};
 }
-
-

@@ -4,6 +4,8 @@ import { User, wrapUser, unwrapUser } from './User.ts';
 import { AuditLogEntry, wrapAuditLogEntry, unwrapAuditLogEntry } from './AuditLogEntry.ts';
 import { Integration, wrapIntegrationPartial, unwrapIntegrationPartial } from './Integration.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure
+
 export interface AuditLog {
 	/** list of webhooks found in the audit log */
 	webhooks: Webhook[];
@@ -55,5 +57,3 @@ export function unwrapAuditLogPartial(x: Partial<AuditLog>): Partial<RawAuditLog
 		integrations: x.integrations && x.integrations.map(unwrapIntegrationPartial),
 	};
 }
-
-

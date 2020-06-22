@@ -1,6 +1,8 @@
 import { RoleId, ISO8601Timestamp } from '../type-aliases.ts';
 import { RawUser } from './RawUser.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
+
 export interface RawGuildMember {
 	/** the user this guild member represents */
 	user?: RawUser;

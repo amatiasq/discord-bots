@@ -9,6 +9,8 @@ import { IntegrationExpireBehavior } from '../enum/IntegrationExpireBehavior.ts'
 import { User, wrapUser, unwrapUser } from './User.ts';
 import { IntegrationAccount, wrapIntegrationAccount, unwrapIntegrationAccount } from './IntegrationAccount.ts';
 
+// https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
+
 export interface Integration {
 	/** integration id */
 	id: IntegrationId;
@@ -88,5 +90,3 @@ export function unwrapIntegrationPartial(x: Partial<Integration>): Partial<RawIn
 		synced_at: x.syncedAt && unparseISO8601Timestamp(x.syncedAt),
 	};
 }
-
-

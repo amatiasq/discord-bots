@@ -2,6 +2,8 @@ import { integer, CategoryId } from '../type-aliases.ts';
 import { ChannelType } from '../enum/ChannelType.ts';
 import { RawOverwrite } from './RawOverwrite.ts';
 
+// https://discord.com/developers/docs/resources/channel#modify-channel-json-params
+
 export interface RawModifyChannelPayload {
 	/** 2-100 character channel name	All */
 	name?: string;

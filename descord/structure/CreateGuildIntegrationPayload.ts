@@ -1,6 +1,8 @@
 import { RawCreateGuildIntegrationPayload } from '../raw/RawCreateGuildIntegrationPayload.ts';
 import { IntegrationId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-integration-json-params
+
 export interface CreateGuildIntegrationPayload {
 	/** the integration type */
 	type: string;
@@ -20,5 +22,3 @@ export function unwrapCreateGuildIntegrationPayload(x: CreateGuildIntegrationPay
 export const wrapCreateGuildIntegrationPayloadPartial = wrapCreateGuildIntegrationPayload as (x: Partial<RawCreateGuildIntegrationPayload>) => Partial<CreateGuildIntegrationPayload>;
 
 export const unwrapCreateGuildIntegrationPayloadPartial = unwrapCreateGuildIntegrationPayload as (x: Partial<CreateGuildIntegrationPayload>) => Partial<RawCreateGuildIntegrationPayload>;
-
-

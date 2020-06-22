@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
+
 export interface RawEmbedField {
 	/** name of the field */
 	name: string;

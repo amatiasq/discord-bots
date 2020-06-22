@@ -1,6 +1,8 @@
 import { RawGuildPruneCountParams } from '../raw/RawGuildPruneCountParams.ts';
 import { RoleId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#get-guild-prune-count-query-string-params
+
 export interface GuildPruneCountParams {
 	/** number of days to count prune for (1 or more) DEFAULT: 7 */
 	days?: integer;
@@ -26,5 +28,3 @@ export function unwrapGuildPruneCountParams(x: GuildPruneCountParams): RawGuildP
 export const wrapGuildPruneCountParamsPartial = wrapGuildPruneCountParams as (x: Partial<RawGuildPruneCountParams>) => Partial<GuildPruneCountParams>;
 
 export const unwrapGuildPruneCountParamsPartial = unwrapGuildPruneCountParams as (x: Partial<GuildPruneCountParams>) => Partial<RawGuildPruneCountParams>;
-
-

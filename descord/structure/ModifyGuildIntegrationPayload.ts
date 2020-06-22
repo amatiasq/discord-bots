@@ -2,6 +2,8 @@ import { RawModifyGuildIntegrationPayload } from '../raw/RawModifyGuildIntegrati
 import { integer } from '../type-aliases.ts';
 import { IntegrationExpireBehavior } from '../enum/IntegrationExpireBehavior.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-integration-json-params
+
 export interface ModifyGuildIntegrationPayload {
 	/** the behavior when an integration subscription lapses (see the integration expire behaviors documentation) */
 	expireBehavior: IntegrationExpireBehavior;
@@ -47,5 +49,3 @@ export function unwrapModifyGuildIntegrationPayloadPartial(x: Partial<ModifyGuil
 		enable_emoticons: x.enableEmoticons && x.enableEmoticons,
 	};
 }
-
-

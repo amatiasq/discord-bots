@@ -1,6 +1,8 @@
 import { RawInviteMetadata } from '../raw/RawInviteMetadata.ts';
 import { integer, parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure
+
 export interface InviteMetadata {
 	/** number of times this invite has been used */
 	uses: integer;
@@ -50,5 +52,3 @@ export function unwrapInviteMetadataPartial(x: Partial<InviteMetadata>): Partial
 		created_at: x.createdAt && unparseISO8601Timestamp(x.createdAt),
 	};
 }
-
-

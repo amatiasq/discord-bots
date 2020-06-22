@@ -1,6 +1,8 @@
 import { RawAttachment } from '../raw/RawAttachment.ts';
 import { AttachmentId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure
+
 export interface Attachment {
 	/** attachment id */
 	id: AttachmentId;
@@ -46,5 +48,3 @@ export function unwrapAttachmentPartial(x: Partial<Attachment>): Partial<RawAtta
 		proxy_url: x.proxyUrl && x.proxyUrl,
 	};
 }
-
-

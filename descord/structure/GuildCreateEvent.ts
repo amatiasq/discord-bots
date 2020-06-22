@@ -53,5 +53,3 @@ export function unwrapGuildCreateEvent(x: GuildCreateEvent): RawGuildCreateEvent
 export const wrapGuildCreateEventPartial = wrapGuildCreateEvent as (x: Partial<RawGuildCreateEvent>) => Partial<GuildCreateEvent>;
 
 export const unwrapGuildCreateEventPartial = unwrapGuildCreateEvent as (x: Partial<GuildCreateEvent>) => Partial<RawGuildCreateEvent>;
-
-

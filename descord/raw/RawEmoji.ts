@@ -1,6 +1,8 @@
 import { EmojiId, RoleId } from '../type-aliases.ts';
 import { RawUser } from './RawUser.ts';
 
+// https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure
+
 export interface RawEmoji {
 	/** emoji id */
 	id?: EmojiId;

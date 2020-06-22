@@ -22,5 +22,3 @@ export function unwrapActivitySecrets(x: ActivitySecrets): RawActivitySecrets {
 export const wrapActivitySecretsPartial = wrapActivitySecrets as (x: Partial<RawActivitySecrets>) => Partial<ActivitySecrets>;
 
 export const unwrapActivitySecretsPartial = unwrapActivitySecrets as (x: Partial<ActivitySecrets>) => Partial<RawActivitySecrets>;
-
-

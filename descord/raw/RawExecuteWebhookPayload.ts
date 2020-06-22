@@ -1,6 +1,8 @@
 import { RawEmbed } from './RawEmbed.ts';
 import { RawAllowedMentions } from './RawAllowedMentions.ts';
 
+// https://discord.com/developers/docs/resources/webhook#execute-webhook-jsonform-params
+
 export interface RawExecuteWebhookPayload {
 	/** the message contents (up to 2000 characters) DEFAULT: one of content, file, embeds */
 	content: string;

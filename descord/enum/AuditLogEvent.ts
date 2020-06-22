@@ -1,3 +1,4 @@
+// https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
 export enum AuditLogEvent {
 	GUILD_UPDATE = 1,
 	CHANNEL_CREATE = 10,

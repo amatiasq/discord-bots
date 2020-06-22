@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
+
 export interface RawEmbedAuthor {
 	/** name of author */
 	name?: string;

@@ -1,5 +1,7 @@
 import { IntegrationId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-integration-json-params
+
 export interface RawCreateGuildIntegrationPayload {
 	/** the integration type */
 	type: string;

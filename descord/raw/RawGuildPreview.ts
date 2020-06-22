@@ -2,6 +2,8 @@ import { GuildFeature } from '../enum/GuildFeature.ts';
 import { GuildId, ImageData, integer } from '../type-aliases.ts';
 import { RawEmoji } from './RawEmoji.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-preview-object-guild-preview-structure
+
 export interface RawGuildPreview {
 	/** guild id */
 	id: GuildId;

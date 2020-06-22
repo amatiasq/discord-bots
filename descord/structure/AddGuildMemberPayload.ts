@@ -1,6 +1,8 @@
 import { RawAddGuildMemberPayload } from '../raw/RawAddGuildMemberPayload.ts';
 import { RoleId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#add-guild-member-json-params
+
 export interface AddGuildMemberPayload {
 	/** an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild	 */
 	accessToken: string;
@@ -42,5 +44,3 @@ export function unwrapAddGuildMemberPayloadPartial(x: Partial<AddGuildMemberPayl
 		access_token: x.accessToken && x.accessToken,
 	};
 }
-
-

@@ -1,6 +1,8 @@
 import { RawMessageApplication } from '../raw/RawMessageApplication.ts';
 import { ApplicationId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#message-object-message-application-structure
+
 export interface MessageApplication {
 	/** id of the application */
 	id: ApplicationId;
@@ -32,5 +34,3 @@ export function unwrapMessageApplication(x: MessageApplication): RawMessageAppli
 export const wrapMessageApplicationPartial = wrapMessageApplication as (x: Partial<RawMessageApplication>) => Partial<MessageApplication>;
 
 export const unwrapMessageApplicationPartial = unwrapMessageApplication as (x: Partial<MessageApplication>) => Partial<RawMessageApplication>;
-
-

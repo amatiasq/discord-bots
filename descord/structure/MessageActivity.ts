@@ -1,6 +1,8 @@
 import { RawMessageActivity } from '../raw/RawMessageActivity.ts';
 import { MessageActivityType } from '../enum/MessageActivityType.ts';
 
+// https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
+
 export interface MessageActivity {
 	/** type of message activity */
 	type: MessageActivityType;
@@ -26,5 +28,3 @@ export function unwrapMessageActivity(x: MessageActivity): RawMessageActivity {
 export const wrapMessageActivityPartial = wrapMessageActivity as (x: Partial<RawMessageActivity>) => Partial<MessageActivity>;
 
 export const unwrapMessageActivityPartial = unwrapMessageActivity as (x: Partial<MessageActivity>) => Partial<RawMessageActivity>;
-
-

@@ -1,6 +1,8 @@
 import { UserId, ImageData, UserFlagInteger } from '../type-aliases.ts';
 import { PremiumType } from '../enum/PremiumType.ts';
 
+// https://discord.com/developers/docs/resources/user#user-object-user-structure
+
 export interface RawUser {
 	/** the user's id	identify */
 	id: UserId;

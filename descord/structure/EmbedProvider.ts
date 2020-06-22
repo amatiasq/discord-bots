@@ -1,5 +1,6 @@
 import { RawEmbedProvider } from '../raw/RawEmbedProvider.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
 
 export interface EmbedProvider {
 	/** name of provider */
@@ -20,5 +21,3 @@ export function unwrapEmbedProvider(x: EmbedProvider): RawEmbedProvider {
 export const wrapEmbedProviderPartial = wrapEmbedProvider as (x: Partial<RawEmbedProvider>) => Partial<EmbedProvider>;
 
 export const unwrapEmbedProviderPartial = unwrapEmbedProvider as (x: Partial<EmbedProvider>) => Partial<RawEmbedProvider>;
-
-

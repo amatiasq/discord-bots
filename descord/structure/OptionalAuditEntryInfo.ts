@@ -1,6 +1,8 @@
 import { RawOptionalAuditEntryInfo } from '../raw/RawOptionalAuditEntryInfo.ts';
 import { ChannelId, MessageId, MemberId, RoleId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info
+
 export interface OptionalAuditEntryInfo {
 	/** number of days after which inactive members were kicked (Action Type: MEMBERPRUNE) */
 	deleteMemberDays: string;
@@ -64,5 +66,3 @@ export function unwrapOptionalAuditEntryInfoPartial(x: Partial<OptionalAuditEntr
 		role_name: x.roleName && x.roleName,
 	};
 }
-
-

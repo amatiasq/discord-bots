@@ -1,6 +1,8 @@
 import { RawEmbedImage } from '../raw/RawEmbedImage.ts';
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
+
 export interface EmbedImage {
 	/** source url of image (only supports http(s) and attachments) */
 	url?: string;
@@ -30,5 +32,3 @@ export function unwrapEmbedImage(x: EmbedImage): RawEmbedImage {
 export const wrapEmbedImagePartial = wrapEmbedImage as (x: Partial<RawEmbedImage>) => Partial<EmbedImage>;
 
 export const unwrapEmbedImagePartial = unwrapEmbedImage as (x: Partial<EmbedImage>) => Partial<RawEmbedImage>;
-
-

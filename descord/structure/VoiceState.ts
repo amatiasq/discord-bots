@@ -2,6 +2,8 @@ import { RawVoiceState } from '../raw/RawVoiceState.ts';
 import { GuildId, ChannelId, UserId } from '../type-aliases.ts';
 import { GuildMember, wrapGuildMember, unwrapGuildMember } from './GuildMember.ts';
 
+// https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure
+
 export interface VoiceState {
 	/** the guild id this voice state is for */
 	guildId?: GuildId;
@@ -83,5 +85,3 @@ export function unwrapVoiceStatePartial(x: Partial<VoiceState>): Partial<RawVoic
 		self_stream: x.selfStream && x.selfStream,
 	};
 }
-
-

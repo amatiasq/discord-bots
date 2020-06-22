@@ -1,6 +1,8 @@
 import { RawCreateDmPayload } from '../raw/RawCreateDmPayload.ts';
 import { UserId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/user#create-dm-json-params
+
 export interface CreateDmPayload {
 	/** the recipient to open a DM channel with */
 	recipientId: UserId;
@@ -34,5 +36,3 @@ export function unwrapCreateDmPayloadPartial(x: Partial<CreateDmPayload>): Parti
 		recipient_id: x.recipientId && x.recipientId,
 	};
 }
-
-

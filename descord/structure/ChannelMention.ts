@@ -2,6 +2,8 @@ import { RawChannelMention } from '../raw/RawChannelMention.ts';
 import { ChannelId, GuildId } from '../type-aliases.ts';
 import { ChannelType } from '../enum/ChannelType.ts';
 
+// https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure
+
 export interface ChannelMention {
 	/** id of the channel */
 	id: ChannelId;
@@ -12,6 +14,7 @@ export interface ChannelMention {
 	/** the name of the channel */
 	name: string;
 }
+
 
 export function wrapChannelMention(x: RawChannelMention): ChannelMention {
 	return {
@@ -27,18 +30,14 @@ export function unwrapChannelMention(x: ChannelMention): RawChannelMention {
 	};
 }
 
-export function wrapChannelMentionPartial(
-	x: Partial<RawChannelMention>,
-): Partial<ChannelMention> {
+export function wrapChannelMentionPartial(x: Partial<RawChannelMention>): Partial<ChannelMention> {
 	return {
 		...x,
 		guildId: x.guild_id && x.guild_id,
 	};
 }
 
-export function unwrapChannelMentionPartial(
-	x: Partial<ChannelMention>,
-): Partial<RawChannelMention> {
+export function unwrapChannelMentionPartial(x: Partial<ChannelMention>): Partial<RawChannelMention> {
 	return {
 		...x,
 		guild_id: x.guildId && x.guildId,

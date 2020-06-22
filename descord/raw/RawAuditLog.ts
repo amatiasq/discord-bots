@@ -3,6 +3,7 @@ import { RawUser } from './RawUser.ts';
 import { RawAuditLogEntry } from './RawAuditLogEntry.ts';
 import { RawIntegration } from './RawIntegration.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure
 export interface RawAuditLog {
 	/** list of webhooks found in the audit log */
 	webhooks: RawWebhook[];

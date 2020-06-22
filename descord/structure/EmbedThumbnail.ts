@@ -1,6 +1,8 @@
 import { RawEmbedThumbnail } from '../raw/RawEmbedThumbnail.ts';
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
+
 export interface EmbedThumbnail {
 	/** source url of thumbnail (only supports http(s) and attachments) */
 	url?: string;
@@ -30,5 +32,3 @@ export function unwrapEmbedThumbnail(x: EmbedThumbnail): RawEmbedThumbnail {
 export const wrapEmbedThumbnailPartial = wrapEmbedThumbnail as (x: Partial<RawEmbedThumbnail>) => Partial<EmbedThumbnail>;
 
 export const unwrapEmbedThumbnailPartial = unwrapEmbedThumbnail as (x: Partial<EmbedThumbnail>) => Partial<RawEmbedThumbnail>;
-
-

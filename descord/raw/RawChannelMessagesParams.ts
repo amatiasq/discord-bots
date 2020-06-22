@@ -1,5 +1,7 @@
 import { MessageId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#get-channel-messages-query-string-params
+
 export interface RawChannelMessagesParams {
 	/** get messages around this message ID DEFAULT: absent */
 	around?: MessageId;

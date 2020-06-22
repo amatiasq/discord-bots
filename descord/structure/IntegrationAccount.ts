@@ -1,6 +1,8 @@
 import { RawIntegrationAccount } from '../raw/RawIntegrationAccount.ts';
 import { AccountId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#integration-account-object-integration-account-structure
+
 export interface IntegrationAccount {
 	/** id of the account */
 	id: AccountId;
@@ -20,5 +22,3 @@ export function unwrapIntegrationAccount(x: IntegrationAccount): RawIntegrationA
 export const wrapIntegrationAccountPartial = wrapIntegrationAccount as (x: Partial<RawIntegrationAccount>) => Partial<IntegrationAccount>;
 
 export const unwrapIntegrationAccountPartial = unwrapIntegrationAccount as (x: Partial<IntegrationAccount>) => Partial<RawIntegrationAccount>;
-
-

@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/guild#guild-object-verification-level
+
 export enum VerificationLevel {
 	/** unrestricted */
 	NONE = 0,

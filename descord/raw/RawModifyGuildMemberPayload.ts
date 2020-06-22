@@ -1,5 +1,7 @@
 import { RoleId, ChannelId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#modify-guild-member-json-params
+
 export interface RawModifyGuildMemberPayload {
 	/** value to set users nickname to (requires permission: MANAGE_NICKNAMES) */
 	nick: string;

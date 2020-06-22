@@ -1,5 +1,7 @@
 import { PermissionInteger, UserId, RoleId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure
+
 interface RawOverwrite_Role {
 	/** role or user id */
 	id: RoleId;

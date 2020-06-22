@@ -3,6 +3,7 @@ import { AuditLogEntryId, UserId } from '../type-aliases.ts';
 import { RawOptionalAuditEntryInfo } from './RawOptionalAuditEntryInfo.ts';
 import { RawAuditLogChange } from './RawAuditLogChange.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure
 export interface RawAuditLogEntry {
 	/** id of the affected entity (webhook, user, role, etc.) */
 	target_id?: string;

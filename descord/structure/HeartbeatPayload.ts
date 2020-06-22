@@ -34,5 +34,3 @@ export function unwrapHeartbeatPayloadPartial(x: Partial<HeartbeatPayload>): Par
 		heartbeat_interval: x.heartbeatInterval && x.heartbeatInterval,
 	};
 }
-
-

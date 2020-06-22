@@ -10,6 +10,8 @@ import { AuditLogChangeKey } from '../enum/AuditLogChangeKey.ts';
 import { RawRole } from './RawRole.ts';
 import { RawOverwrite } from './RawOverwrite.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
+
 /**
  * Object changed: guild
  * name changed

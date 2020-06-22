@@ -11,6 +11,8 @@ import { ExplicitContentFilterLevel } from '../enum/ExplicitContentFilterLevel.t
 import { Role, wrapRole, unwrapRole } from './Role.ts';
 import { Channel, wrapChannelPartial, unwrapChannelPartial } from './Channel.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-json-params
+
 export interface CreateGuildPayload {
 	/** name of the guild (2-100 characters) */
 	name: string;
@@ -68,5 +70,3 @@ export function unwrapCreateGuildPayload(x: CreateGuildPayload): RawCreateGuildP
 export const wrapCreateGuildPayloadPartial = wrapCreateGuildPayload as (x: Partial<RawCreateGuildPayload>) => Partial<CreateGuildPayload>;
 
 export const unwrapCreateGuildPayloadPartial = unwrapCreateGuildPayload as (x: Partial<CreateGuildPayload>) => Partial<RawCreateGuildPayload>;
-
-

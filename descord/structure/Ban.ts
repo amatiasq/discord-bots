@@ -1,6 +1,8 @@
 import { RawBan } from '../raw/RawBan.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 
+// https://discord.com/developers/docs/resources/guild#ban-object-ban-structure
+
 export interface Ban {
 	/** the reason for the ban */
 	reason?: string;
@@ -36,5 +38,3 @@ export function unwrapBanPartial(x: Partial<Ban>): Partial<RawBan> {
 		user: x.user && unwrapUser(x.user),
 	};
 }
-
-

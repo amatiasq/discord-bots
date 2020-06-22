@@ -2,6 +2,8 @@ import { RawAllowedMentions } from '../raw/RawAllowedMentions.ts';
 import { RoleId, UserId } from '../type-aliases.ts';
 import { AllowedMentionType } from '../enum/AllowedMentionType.ts';
 
+// https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure
+
 export interface AllowedMentions {
 	/** An array of allowed mention types to parse from the content. */
 	parse: AllowedMentionType[];
@@ -23,5 +25,3 @@ export function unwrapAllowedMentions(x: AllowedMentions): RawAllowedMentions {
 export const wrapAllowedMentionsPartial = wrapAllowedMentions as (x: Partial<RawAllowedMentions>) => Partial<AllowedMentions>;
 
 export const unwrapAllowedMentionsPartial = unwrapAllowedMentions as (x: Partial<AllowedMentions>) => Partial<RawAllowedMentions>;
-
-

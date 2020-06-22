@@ -1,5 +1,7 @@
 import { ApplicationId } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#message-object-message-application-structure
+
 export interface RawMessageApplication {
 	/** id of the application */
 	id: ApplicationId;

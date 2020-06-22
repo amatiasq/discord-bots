@@ -1,6 +1,8 @@
 import { RawCreateGuildRolePayload } from '../raw/RawCreateGuildRolePayload.ts';
 import { integer, Permission, parsePermissionInteger, unparsePermissionInteger } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#create-guild-role-json-params
+
 export interface CreateGuildRolePayload {
 	/** name of the role DEFAULT: "new role" */
 	name?: string;
@@ -32,5 +34,3 @@ export function unwrapCreateGuildRolePayload(x: CreateGuildRolePayload): RawCrea
 export const wrapCreateGuildRolePayloadPartial = wrapCreateGuildRolePayload as (x: Partial<RawCreateGuildRolePayload>) => Partial<CreateGuildRolePayload>;
 
 export const unwrapCreateGuildRolePayloadPartial = unwrapCreateGuildRolePayload as (x: Partial<CreateGuildRolePayload>) => Partial<RawCreateGuildRolePayload>;
-
-

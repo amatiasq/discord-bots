@@ -36,5 +36,3 @@ export function unwrapActivityAssets(x: ActivityAssets): RawActivityAssets {
 export const wrapActivityAssetsPartial = wrapActivityAssets as (x: Partial<RawActivityAssets>) => Partial<ActivityAssets>;
 
 export const unwrapActivityAssetsPartial = unwrapActivityAssets as (x: Partial<ActivityAssets>) => Partial<RawActivityAssets>;
-
-

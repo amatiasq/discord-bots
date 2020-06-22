@@ -3,6 +3,8 @@ import { integer, CategoryId } from '../type-aliases.ts';
 import { ChannelType } from '../enum/ChannelType.ts';
 import { Overwrite, wrapOverwrite, unwrapOverwrite } from './Overwrite.ts';
 
+// https://discord.com/developers/docs/resources/channel#modify-channel-json-params
+
 export interface ModifyChannelPayload {
 	/** 2-100 character channel name	All */
 	name?: string;
@@ -50,5 +52,3 @@ export function unwrapModifyChannelPayload(x: ModifyChannelPayload): RawModifyCh
 export const wrapModifyChannelPayloadPartial = wrapModifyChannelPayload as (x: Partial<RawModifyChannelPayload>) => Partial<ModifyChannelPayload>;
 
 export const unwrapModifyChannelPayloadPartial = unwrapModifyChannelPayload as (x: Partial<ModifyChannelPayload>) => Partial<RawModifyChannelPayload>;
-
-

@@ -90,5 +90,3 @@ export function unwrapActivityPartial(x: Partial<Activity>): Partial<RawActivity
 		secrets: x.secrets && unwrapActivitySecrets(x.secrets),
 	};
 }
-
-

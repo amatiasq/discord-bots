@@ -1,5 +1,7 @@
 import { RoleId, ImageData } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/emoji#create-guild-emoji-json-params
+
 export interface RawCreateGuildEmojiPayload {
 	/** name of the emoji */
 	name: string;

@@ -1,5 +1,7 @@
 import { RoleId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/guild#begin-guild-prune-query-string-params
+
 export interface RawBeginGuildPruneParams {
 	/** number of days to prune (1 or more) DEFAULT: 7 */
 	days?: integer;

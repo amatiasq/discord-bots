@@ -2,6 +2,8 @@ import { RawReaction } from '../raw/RawReaction.ts';
 import { integer } from '../type-aliases.ts';
 import { Emoji, wrapEmoji, unwrapEmoji } from './Emoji.ts';
 
+// https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure
+
 export interface Reaction {
 	/** times this emoji has been used to react */
 	count: integer;
@@ -39,5 +41,3 @@ export function unwrapReactionPartial(x: Partial<Reaction>): Partial<RawReaction
 		emoji: x.emoji && unwrapEmoji(x.emoji),
 	};
 }
-
-

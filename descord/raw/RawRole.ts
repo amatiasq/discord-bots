@@ -1,5 +1,7 @@
 import { RoleId, PermissionInteger } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/topics/permissions#role-object-role-structure
+
 export interface RawRole {
 	/** role id */
 	id: RoleId;

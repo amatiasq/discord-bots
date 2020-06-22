@@ -2,6 +2,8 @@ import { RawGuildAuditLogParams } from '../raw/RawGuildAuditLogParams.ts';
 import { UserId, AuditLogEntryId, integer } from '../type-aliases.ts';
 import { AuditLogEvent } from '../enum/AuditLogEvent.ts';
 
+// https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key
+
 export interface GuildAuditLogParams {
 	/** filter the log for actions made by a user */
 	userId?: UserId;
@@ -33,5 +35,3 @@ export function unwrapGuildAuditLogParams(x: GuildAuditLogParams): RawGuildAudit
 export const wrapGuildAuditLogParamsPartial = wrapGuildAuditLogParams as (x: Partial<RawGuildAuditLogParams>) => Partial<GuildAuditLogParams>;
 
 export const unwrapGuildAuditLogParamsPartial = unwrapGuildAuditLogParams as (x: Partial<GuildAuditLogParams>) => Partial<RawGuildAuditLogParams>;
-
-

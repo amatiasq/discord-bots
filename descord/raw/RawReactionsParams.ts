@@ -1,5 +1,7 @@
 import { UserId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#get-reactions-query-string-params
+
 export interface RawReactionsParams {
 	/** get users before this user ID DEFAULT: absent */
 	before?: UserId;

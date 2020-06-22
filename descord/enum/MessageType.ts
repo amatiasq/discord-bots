@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/channel#message-object-message-types
+
 export enum MessageType {
 	DEFAULT = 0,
 	RECIPIENT_ADD = 1,

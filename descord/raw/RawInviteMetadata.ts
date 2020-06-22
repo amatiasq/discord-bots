@@ -1,5 +1,7 @@
 import { integer, ISO8601Timestamp } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure
+
 export interface RawInviteMetadata {
 	/** number of times this invite has been used */
 	uses: integer;

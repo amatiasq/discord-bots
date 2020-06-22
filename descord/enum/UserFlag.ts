@@ -1,3 +1,5 @@
+// https://discord.com/developers/docs/resources/user#user-object-user-flags
+
 export enum UserFlag {
 	None = 0,
 	DiscordEmployee = 1 << 0,

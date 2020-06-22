@@ -20,5 +20,3 @@ export function unwrapActivityParty(x: ActivityParty): RawActivityParty {
 export const wrapActivityPartyPartial = wrapActivityParty as (x: Partial<RawActivityParty>) => Partial<ActivityParty>;
 
 export const unwrapActivityPartyPartial = unwrapActivityParty as (x: Partial<ActivityParty>) => Partial<RawActivityParty>;
-
-

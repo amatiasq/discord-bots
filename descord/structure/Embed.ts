@@ -1,4 +1,5 @@
 import { RawEmbed } from '../raw/RawEmbed.ts';
+import { EmbedType } from '../enum/EmbedType.ts';
 import { parseISO8601Timestamp, unparseISO8601Timestamp } from '../type-aliases.ts';
 import { EmbedAuthor, wrapEmbedAuthor, unwrapEmbedAuthor } from './EmbedAuthor.ts';
 import { EmbedField, wrapEmbedField, unwrapEmbedField } from './EmbedField.ts';
@@ -8,11 +9,14 @@ import { EmbedProvider, wrapEmbedProvider, unwrapEmbedProvider } from './EmbedPr
 import { EmbedThumbnail, wrapEmbedThumbnail, unwrapEmbedThumbnail } from './EmbedThumbnail.ts';
 import { EmbedVideo, wrapEmbedVideo, unwrapEmbedVideo } from './EmbedVideo.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-structure
+// TODO: make multi interface type
+
 export interface Embed {
 	/** title of embed */
 	title?: string;
 	/** type of embed (always "rich" for webhook embeds) */
-	type?: string;
+	type?: EmbedType;
 	/** description of embed */
 	description?: string;
 	/** url of embed */
@@ -69,5 +73,3 @@ export function unwrapEmbed(x: Embed): RawEmbed {
 export const wrapEmbedPartial = wrapEmbed as (x: Partial<RawEmbed>) => Partial<Embed>;
 
 export const unwrapEmbedPartial = unwrapEmbed as (x: Partial<Embed>) => Partial<RawEmbed>;
-
-

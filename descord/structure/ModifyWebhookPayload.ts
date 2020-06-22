@@ -1,6 +1,8 @@
 import { RawModifyWebhookPayload } from '../raw/RawModifyWebhookPayload.ts';
 import { ChannelId, ImageData } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/webhook#modify-webhook-json-params
+
 export interface ModifyWebhookPayload {
 	/** the default name of the webhook */
 	name: string;
@@ -38,5 +40,3 @@ export function unwrapModifyWebhookPayloadPartial(x: Partial<ModifyWebhookPayloa
 		channel_id: x.channelId && x.channelId,
 	};
 }
-
-

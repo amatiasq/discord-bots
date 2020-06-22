@@ -1,6 +1,8 @@
 import { RawReactionsParams } from '../raw/RawReactionsParams.ts';
 import { UserId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#get-reactions-query-string-params
+
 export interface ReactionsParams {
 	/** get users before this user ID DEFAULT: absent */
 	before?: UserId;
@@ -22,5 +24,3 @@ export function unwrapReactionsParams(x: ReactionsParams): RawReactionsParams {
 export const wrapReactionsParamsPartial = wrapReactionsParams as (x: Partial<RawReactionsParams>) => Partial<ReactionsParams>;
 
 export const unwrapReactionsParamsPartial = unwrapReactionsParams as (x: Partial<ReactionsParams>) => Partial<RawReactionsParams>;
-
-

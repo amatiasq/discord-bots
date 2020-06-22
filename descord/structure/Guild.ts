@@ -19,6 +19,8 @@ import {
 import { Emoji, wrapEmoji, unwrapEmoji } from './Emoji.ts';
 import { Role, wrapRole, unwrapRole } from './Role.ts';
 
+// https://discord.com/developers/docs/resources/guild#guild-object-guild-structure
+
 export interface Guild {
 	/** guild id */
 	id: GuildId;
@@ -238,5 +240,3 @@ export function unwrapGuildPartial(x: Partial<Guild>): Partial<RawGuild> {
 		approximate_presence_count: x.approximatePresenceCount && x.approximatePresenceCount,
 	};
 }
-
-

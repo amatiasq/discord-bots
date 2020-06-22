@@ -28,5 +28,3 @@ export function unwrapActivityTimestamps(x: ActivityTimestamps): RawActivityTime
 export const wrapActivityTimestampsPartial = wrapActivityTimestamps as (x: Partial<RawActivityTimestamps>) => Partial<ActivityTimestamps>;
 
 export const unwrapActivityTimestampsPartial = unwrapActivityTimestamps as (x: Partial<ActivityTimestamps>) => Partial<RawActivityTimestamps>;
-
-

@@ -1,5 +1,7 @@
 import { AttachmentId, integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure
+
 export interface RawAttachment {
 	/** attachment id */
 	id: AttachmentId;

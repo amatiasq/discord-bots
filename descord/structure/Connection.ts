@@ -2,6 +2,8 @@ import { RawConnection } from '../raw/RawConnection.ts';
 import { Integration, wrapIntegrationPartial, unwrapIntegrationPartial } from './Integration.ts';
 import { VisibilityType } from '../enum/VisibilityType.ts';
 
+// https://discord.com/developers/docs/resources/user#connection-object-connection-structure
+
 export interface Connection {
 	/** id of the connection account */
 	id: string;
@@ -59,5 +61,3 @@ export function unwrapConnectionPartial(x: Partial<Connection>): Partial<RawConn
 		show_activity: x.showActivity && x.showActivity,
 	};
 }
-
-

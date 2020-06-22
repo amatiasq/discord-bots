@@ -2,6 +2,8 @@ import { RawEmoji } from '../raw/RawEmoji.ts';
 import { EmojiId, RoleId } from '../type-aliases.ts';
 import { User, wrapUser, unwrapUser } from './User.ts';
 
+// https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure
+
 export interface Emoji {
 	/** emoji id */
 	id?: EmojiId;
@@ -41,5 +43,3 @@ export function unwrapEmoji(x: Emoji): RawEmoji {
 export const wrapEmojiPartial = wrapEmoji as (x: Partial<RawEmoji>) => Partial<Emoji>;
 
 export const unwrapEmojiPartial = unwrapEmoji as (x: Partial<Emoji>) => Partial<RawEmoji>;
-
-

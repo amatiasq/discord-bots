@@ -58,5 +58,3 @@ export function unwrapReadyEventPartial(x: Partial<ReadyEvent>): Partial<RawRead
 		session_id: x.sessionId && x.sessionId,
 	};
 }
-
-

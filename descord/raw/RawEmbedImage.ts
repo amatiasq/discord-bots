@@ -1,5 +1,7 @@
 import { integer } from '../type-aliases.ts';
 
+// https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
+
 export interface RawEmbedImage {
 	/** source url of image (only supports http(s) and attachments) */
 	url?: string;

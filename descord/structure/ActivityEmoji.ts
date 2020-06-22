@@ -22,5 +22,3 @@ export function unwrapActivityEmoji(x: ActivityEmoji): RawActivityEmoji {
 export const wrapActivityEmojiPartial = wrapActivityEmoji as (x: Partial<RawActivityEmoji>) => Partial<ActivityEmoji>;
 
 export const unwrapActivityEmojiPartial = unwrapActivityEmoji as (x: Partial<ActivityEmoji>) => Partial<RawActivityEmoji>;
-
-
